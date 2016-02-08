@@ -9,7 +9,7 @@
         <h1 class="bord groot">{{ record.haltenummer }}</h1>
         <h3 style="margin-bottom: 0">{{ record.locatie }}</h3>
         <h2>{{ record.straat }}</h2>
-        <a href="{{ record.mapsUrl }}"><i class="fa fa-map-marker"></i>
+        <a href="{{ record.mapsUrl }}" class="kaart-link"><i class="fa fa-map-marker"></i>
  Toon op kaart</a>
     </header>
   
@@ -31,7 +31,7 @@
         <h3>Bestemmingen in de buurt</h3>
         {% for bestemming in bestemmingen|slice(1,5) %}
         <a href="/bestemmingen/{{ bestemming.id }}" class="halte group">
-            {{ bestemming.naam }}  <span class="afstand">Afstand: {{ bestemming.afstand }}m</span>
+            <img src="/image/fit/100/65?src={{ bestemming.media[0].url }}" class="bestemming-thumbnail"> {{ bestemming.naam }}  <span class="afstand">Afstand: {{ bestemming.afstand }}m</span>
         </a>
         {% endfor %}
     </section>
