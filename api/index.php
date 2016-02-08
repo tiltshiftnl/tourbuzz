@@ -15,6 +15,9 @@ echo json_encode([
 			"origineel" => "http://www.qcommerz.nl/parkeerplaatsen/",
 			"uri" => "http://api.qcommerz.nl/parkeerplaatsen/"
 		],
+		"poi" => [
+			"uri" => "http://api.qcommerz.nl/poi/"
+		],
 		"afstanden" => [
 			"uri" => "http://api.qcommerz.nl/distance/"
 		]
