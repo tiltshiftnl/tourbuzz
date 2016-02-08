@@ -109,7 +109,16 @@ h3 {
     right: 0px;
     bottom: 5px;
     position: absolute;
-    width: 120px;   
+    width: 140px;   
+}
+
+.gerelateerde-haltes,
+.gerelateerde-bestemmingen {
+    margin-bottom: 40px;
+    h3 {
+        font-size: 20px;
+        margin-top: 20px;
+    }   
 }
 
 // Syntax cheatsheet
