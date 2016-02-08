@@ -97,6 +97,27 @@ $app->get('/bestemmingen/:trcid', function ($trcid) use ($apiRoot) {
     render($data['template'], $data);
 })->name("haltes");
 
+/**
+ * Map
+ */
+/*$app->get('/map', function () use ($apiRoot) {
+    
+    $json = @file_get_contents($apiRoot . 'attracties/');
+        
+    if ( !empty($json) ) {
+        $bestemmingen = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    } 
+    
+    $data = [
+        //"haltes" => $haltes['haltes'],
+        //"parkeerplaatsen" => $parkeerplaatsen['parkeerplaatsen'],
+        "bestemmingen" => $bestemmingen['attracties'],       
+        "template" => "bestemmingen.twig",
+    ];
+    render($data['template'], $data);
+})->name("bestemmingen");*/
 
 function halteAfstand($lat1, $lng1, $lat2, $lng2 ) {
     
