@@ -1,0 +1,19 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+<main class="wrapper app-wrapper">
+    
+    <section class="bestemmingen">
+        <h1>Kies je bestemming</h1>
+        {% for record in bestemmingen if record.top %}
+            <div class="bestemming">
+                <a href="/bestemmingen/{{ record.id }}">
+                    <h3>{{ record.naam }}</h3>
+                    <img src="/image/fit/120/65?src={{ record.media[0].url }}">
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+
+</main>
+{% endblock %}

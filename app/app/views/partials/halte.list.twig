@@ -1,0 +1,12 @@
+     <section class="haltes">
+    {% for record in haltes %}
+        <div class="halte">
+            <span class="borden">
+                <h2>{{ record.naam }}</h2>
+            </span>
+            <div class="info">
+                <p>{{ record.adres }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </section>   

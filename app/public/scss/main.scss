@@ -1,0 +1,115 @@
+/////////////////////
+// Main Styles
+/////////////////////
+
+@import "foundation.scss";
+@import "grid.scss";
+@import "util.scss";
+
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 10px 0 20px;
+}
+
+h2 {
+       
+}
+
+h3 {
+    font-size: 20px;
+    margin: 10px 0 20px;    
+}
+
+.huidige-locatie {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 20px 0;
+    @extend .group;
+    padding: 5px;
+}
+
+.bord {
+    background: #3669ac;
+    padding: 3px 10px;
+    color: #fff; 
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    min-width: 50px;
+    text-align: center;
+         @include linearGradient(#3A5495, #3669ac );
+    &.groot {
+      font-size: 40px;
+      padding: 20px;  
+    }
+}
+
+.afstand {
+    color: #555;
+    display: block;
+    font-size: 12px;  
+}
+
+.start {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    display: inline-block;   
+}
+
+.halte {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;      
+}
+
+.bestemming {
+    background: #eee;
+    @extend .group;
+    margin-bottom: 5px;
+    a {
+        @extend .group;
+    }
+    h3 {
+        float: left;
+        width: 75%;
+        padding: 20px;
+        margin: 0;
+        line-height: 40px;  
+    }
+    img {
+        width: 25%;
+        float: right;
+    }   
+}
+
+.app-wrapper {
+    max-width: 600px;
+    margin: 0 auto;   
+}
+
+// Syntax cheatsheet
+
+// .sectionclass {
+//     background: $rood; // variabelen
+//     @extend .group; // clearfix
+// 
+//     @include grid-row; // nieuwe row voor subcols 
+//     @include grid-row(20px); // nieuwe row voor subcols en gutter 20px 
+//     
+//     @include grid-col(3,5); // col-3-5
+//     @include grid-col(3,5,20px); // col-3-5 met gutter 20px
+// 
+//     @include medium { // media query
+//         @include grid-col(1,1);
+//     }
+// }

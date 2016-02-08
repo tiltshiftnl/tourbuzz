@@ -1,0 +1,10 @@
+    <section class="hotspots">
+    {% for record in hotspots %}
+        <div class="hotspot">
+            <h2>{{ record.naam }}</h2>
+            <div class="info">
+                <p>{{ record.adres }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </section> 

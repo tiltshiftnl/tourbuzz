@@ -1,0 +1,70 @@
+// Wrapper
+
+.wrapper {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1480px;
+    @extend .group;
+}
+
+// Borderbox
+
+html {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+    -moz-box-sizing: inherit;   
+}
+
+// Grid cols & rows
+
+@mixin grid-col($cols, $total, $gutter: 10px) {
+    width: $cols/$total * 100%;
+    float: left;
+    padding-left: $gutter;
+    padding-right: $gutter;
+}
+
+@mixin grid-row($gutter: 10px) {
+    clear: both;
+    margin-left: -$gutter;
+    margin-right: -$gutter;
+}
+
+// Grid overlay
+
+.grid-overlay {
+    width: 100%;    
+    pointer-events: none;
+    position: fixed;
+    z-index: 999;
+    .bar {
+        background: rgba(255, 125, 125, 0.4);
+        height: 2000px;
+        padding-top: 20px;
+    }      
+}
+
+@for $i from 1 through 24 {   
+    .col-1-#{$i} {
+        @include grid-col(1,$i);        
+    }
+}
+
+// Clearfix
+
+.group:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.group { display: inline-block; }
+/* start commented backslash hack \*/
+* html .group { height: 1%; }
+.group { display: block; }
+/* close commented backslash hack */

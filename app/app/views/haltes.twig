@@ -1,0 +1,42 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+<main class="wrapper">
+
+    {#<header>
+        <nav class="terug"><a href="#">Terug</a></nav>
+        <h1>H1</h1>
+        <p>De Ruyterkade t/o 5<span>Riviercruise</span></p>
+        <span class="capaciteit">4</span>
+    </header>#}
+ 
+ 
+    
+   <section class="attracties">
+    <h3>Attracties!</h3>
+        <ul>
+     {% for record in attracties if record.top %}
+        <li>
+        {% if record.media[0].url is not empty %}
+            <img src="/image/fit/80/80?src={{ record.media[0].url }}" style="border-radius: 50%">
+        {% endif %}
+        {{ record.naam }}
+        </li>
+    {% endfor %}
+        </ul>
+    </section> 
+     
+ <section class="haltes">
+    {% for record in haltes %}
+        <div class="halte">    
+            <h2 class="bord">{{ record.haltenummer }} ({{ record.capaciteit }} plaatsen)</h2>
+            <div class="info">
+                <p>{{ record.straat }} - {{ record.locatie }} Afstand: {{ record.afstand }}m</p>
+            </div>
+        </div>
+    {% endfor %}
+    </section>  
+    
+       
+</main>
+{% endblock %}

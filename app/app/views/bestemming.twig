@@ -1,0 +1,26 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+<main class="wrapper app-wrapper">
+
+    <a href="/" class="start">&laquo; Kies een andere bestemming</a>
+    
+    <header class="huidige-locatie">
+        <h1 class="bord groot">{{ record.haltenummer }}</h1>
+        <h3 style="margin-bottom: 0">{{ record.naam }}</h3>
+        <h2>{{ record.straat }}</h2>
+    </header>
+    
+    <img src="/image/fit/600/300?src={{ record.media[0].url }}">
+    
+    <section class="gerelateerde-haltes">
+        <h3>Halte mogelijkheden</h3>
+        {% for halte in haltes|slice(0,5) %}
+        <a href="/haltes/{{ halte.haltenummer }}" class="halte group">
+            <span class="bord">{{ halte.haltenummer }}</span> {{ halte.straat }}  <span class="afstand">Afstand: {{ halte.afstand }}m</span>
+        </a>
+        {% endfor %}
+    </section>    
+
+</main>
+{% endblock %}
