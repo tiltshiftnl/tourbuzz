@@ -9,6 +9,8 @@ foreach ($jsonData->parkeerplaatsen as $data) {
 	$data = $data->parkeerplaats;
 	$titleParts = explode(":", $data->title);
 	$geoJson = json_decode($data->Lokatie);
+	$mapsImageUrl = "https://maps.googleapis.com/maps/api/staticmap?center={$geoJson->coordinates[1]},{$geoJson->coordinates[0]}&zoom=16&size=600x300&maptype=roadmap&markers={$geoJson->coordinates[1]},{$geoJson->coordinates[0]}&key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU";
+	$mapsUrl = "https://www.google.com/maps/?q=loc:{$geoJson->coordinates[1]},{$geoJson->coordinates[0]}";
 	$halte = (object) [
 		"nummer" => array_shift($titleParts),
 		"naam" => trim(array_shift($titleParts)),
@@ -17,6 +19,8 @@ foreach ($jsonData->parkeerplaatsen as $data) {
 			"lat" => $geoJson->coordinates[1],
 			"lng" => $geoJson->coordinates[0]
 		],
+		"mapsImageUrl" => $mapsImageUrl,
+		"mapsUrl" => $mapsUrl,
 		"_origineel" => $data
 	];
 	$haltes[] = $halte;
