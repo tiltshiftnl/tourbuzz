@@ -15,6 +15,7 @@ foreach ($jsonData->in_uitstaphaltes as $data) {
 	$data = $data->in_uitstaphalte;
 	$titleParts = explode(":", $data->title);
 	$haltenummer = array_shift($titleParts);
+	if (!preg_match('/^H[0-9]{1,2}$/', $haltenummer)) continue;
 	$straat = trim(array_shift($titleParts));
 	$geoJson = json_decode($data->Lokatie);
 	$locatie = trim($data->Bijzonderheden);
