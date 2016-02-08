@@ -10,7 +10,10 @@
         <h2>{{ record.straat }}</h2>
     </header>
     
-    <img src="/image/fit/600/300?src={{ record.media[0].url }}">
+    <div class="picture-in-picture-wrapper">
+        <img src="{{ record.mapsImageUrl }}">
+        <img src="/image/fit/600/300?src={{ record.media[0].url }}" class="picture-in-picture">
+    </div>
     
     <section class="gerelateerde-haltes">
         <h3>Halte mogelijkheden</h3>
