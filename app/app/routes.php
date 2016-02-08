@@ -156,6 +156,13 @@ $app->get('/haltes/:slug', function ($slug) use ($apiRoot) {
         die('Geen JSON');
     }
 
+    $json = @file_get_contents($apiRoot . 'attracties/'); // 37.97.150.147
+        
+    if ( !empty($json) ) {
+        $attracties = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    }
     
     $haltenummer = strtoupper($slug);
 
@@ -167,10 +174,6 @@ $app->get('/haltes/:slug', function ($slug) use ($apiRoot) {
         die('Geen JSON');
     }
     
-    // Amsterdam CS
-    //$lat1 = 52.378087;
-    //$lng1 = 4.901169;
-    
     foreach ($haltes['haltes'] as &$halte) {
         $lat1 = $record['halte']['coordinaten']['lat'];
         $lng1 = $record['halte']['coordinaten']['lng'];
@@ -181,16 +184,31 @@ $app->get('/haltes/:slug', function ($slug) use ($apiRoot) {
         $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
         $halte['afstand'] = $afstand;
     } 
-    
-    // Sorteer op afstand
-    
+        
     
     // Sort and print the resulting array
     uasort($haltes['haltes'], 'cmpdistance');
+
+    foreach ($attracties['attracties'] as &$attractie) {
+        $lat1 = $record['halte']['coordinaten']['lat'];
+        $lng1 = $record['halte']['coordinaten']['lng'];
+        
+        $lat2 = $attractie['coordinaten']['lat'];
+        $lng2 = $attractie['coordinaten']['lng'];
+        
+        $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
+        $attractie['afstand'] = $afstand;
+    } 
+    
+    // Sorteer op afstand
+    
+    // Sort and print the resulting array
+    uasort($attracties['attracties'], 'cmpdistance');    
     
     $data = [
         "record" => $record['halte'],
         "haltes" => $haltes['haltes'],
+        "bestemmingen" => $attracties['attracties'],       
         "template" => "halte.twig",
     ];
     render($data['template'], $data);
