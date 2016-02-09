@@ -3,7 +3,7 @@
 {% block main %}
 <main class="wrapper app-wrapper">
 
-    <a href="/" class="start"><i class="fa fa-home"></i> Kies een andere bestemming</a>
+    <a href="/" class="start"><i class="fa fa-home"></i> {{ __('Kies een bestemming') }}</a>
 
     <header class="huidige-locatie">
         <h1 class="bord groot">{{ record.haltenummer }}</h1>
@@ -17,6 +17,10 @@
         <img src="{{ record.mapsImageUrl }}">
         <img src="/image/fit/600/300/img/halte-foto{{ random([1,2,3,4])}}.jpg" class="picture-in-picture">
     </div>
+    
+    <section class="faciliteiten">
+        {# faciliteiten iconen #}
+    </section>
     
     <section class="gerelateerde-haltes">
         <h3>Alternatieve haltes</h3>

@@ -13,6 +13,11 @@ $view = $app->view();
 $view->setTemplatesDirectory("../app/views");
 $view->parserExtensions = [new \Slim\Views\TwigExtension()];
 
+function translate($msg) {
+    return 'translate('.$msg.')';
+}
+$twig = $app->view()->getEnvironment();
+$twig->addFunction('__', new Twig_Function_Function('translate'));
 
 require_once "routes.php"; // System routes
 
