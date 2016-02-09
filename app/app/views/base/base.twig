@@ -15,14 +15,19 @@
 	    {% include 'partials/grid.twig' %}
 		
 		{% block header %}
-		    <header>
-		        <nav class="taal">
-		            <a href="?lang=nl">NL</a>
-		            <a href="?lang=en">EN</a>
-		            <a href="?lang=fr">FR</a>
-		        </nav>
+		    <header class="main-header">
+		        <div class="app-wrapper group">
+    		        <a href="/" class="home"><i class="fa fa-bus"></i></a>
+    		        <h2>Halte Coach</h2>
+    		        <nav class="taal">
+    		            <a href="?lang=nl">nl</a>
+    		            <a href="?lang=en">en</a>
+    		            <a href="?lang=fr">fr</a>
+    		        </nav>
+		        </div>
 		    </header>
 		{% endblock %}
+		
 		{% block main %}{% endblock %}
 	</body>
 </html>

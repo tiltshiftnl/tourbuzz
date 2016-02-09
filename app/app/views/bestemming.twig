@@ -3,7 +3,7 @@
 {% block main %}
 <main class="wrapper app-wrapper">
 
-    <a href="/" class="start"><i class="fa fa-home"></i> Kies een andere bestemming</a>
+    <a href="/" class="start"><i class="fa fa-map-signs"></i> {{ __('Kies een andere bestemming') }}</a>
     
     <header class="huidige-locatie">
         <h3 style="margin-bottom: 10px; padding-left: 10px">{{ record.naam }}</h3>
@@ -15,10 +15,10 @@
     </div>
     
     <section class="gerelateerde-haltes">
-        <h3>Halte mogelijkheden</h3>
+        <h3>{{ __('Haltes in de buurt') }}</h3>
         {% for halte in haltes|slice(0,5) %}
         <a href="/haltes/{{ halte.haltenummer }}" class="halte group">
-            <span class="bord">{{ halte.haltenummer }}</span> {{ halte.straat }}  <span class="afstand">Afstand: {{ halte.afstand }}m</span>
+            <span class="bord">{{ halte.haltenummer }}</span> {{ halte.straat }}  <span class="afstand">{{ __('Afstand') }}: {{ halte.afstand }}m</span>
         </a>
         {% endfor %}
     </section>    
