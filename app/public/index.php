@@ -14,7 +14,11 @@ $view->setTemplatesDirectory("../app/views");
 $view->parserExtensions = [new \Slim\Views\TwigExtension()];
 
 function translate($msg) {
-    return 'translate('.$msg.')';
+    $translationsJson = file_get_contents("../app/translations/translations.json");
+    $translations = json_decode($translationsJson);
+    return !empty($translations->translations->$msg) && !empty($translations->translations->$msg->{$_SESSION['lang']}) ?
+        $translations->translations->$msg->{$_SESSION['lang']} :
+        $msg;
 }
 $twig = $app->view()->getEnvironment();
 $twig->addFunction('__', new Twig_Function_Function('translate'));

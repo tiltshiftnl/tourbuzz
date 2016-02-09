@@ -1,8 +1,8 @@
 {
-  "translations": {
-    "Kies een bestemming" => {
-      "en" => "Choose your destination",
-      "fr" => "Peuple poople pas"
+  "translations" : {
+    "Kies een bestemming" : {
+      "en" : "Choose your destination",
+      "fr" : "Peuple poople pas"
     }
   }
 }
