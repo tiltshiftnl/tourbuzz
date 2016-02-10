@@ -17,6 +17,7 @@ echo json_encode([
 		],
 		"poi" => [
 			"uri" => "http://api.qcommerz.nl/poi/",
+			"ov2" => "http://api.qcommerz.nl/ov2/",
 			"maps" => "https://www.google.com/maps/d/viewer?mid=z2EXMMBPPl7c.kKS6guMeeUaI"
 		],
 		"afstanden" => [
