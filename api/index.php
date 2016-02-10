@@ -22,6 +22,9 @@ echo json_encode([
 		],
 		"afstanden" => [
 			"uri" => "http://api.qcommerz.nl/distance/"
+		],
+		"pta" => [
+			"uri" => "http://api.qcommerz.nl/pta/?m=1"
 		]
 	]
 ]);
