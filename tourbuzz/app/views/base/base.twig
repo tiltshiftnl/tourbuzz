@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="nl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+        <!--<link href="/favicon.ico" rel="icon" type="image/x-icon">-->	
+		<title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">		
+		<link href="/css/scss/main.scss" rel="stylesheet">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="/js/pico-ui.js"></script>			
+	</head>
+	<body>
+	    {% include 'partials/grid.twig' %}
+		
+		{% block header %}
+		    <header class="main-header">
+		        <div class="app-wrapper group">
+    		        <a href="/" class="home"><i class="fa fa-bus"></i></a>
+    		        <h2>Tour Buzz</h2>
+    		        <nav class="taal">
+    		            <a href="?lang=nl">nl</a>
+    		            <a href="?lang=en">en</a>
+    		            <a href="?lang=fr">fr</a>
+    		        </nav>
+		        </div>
+		    </header>
+		{% endblock %}
+		
+		{% block main %}{% endblock %}
+	</body>
+</html>

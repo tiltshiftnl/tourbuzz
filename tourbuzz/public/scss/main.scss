@@ -27,11 +27,6 @@ h3 {
     margin: 10px 0 20px;    
 }
 
-.buzzmap {
-    width: 100%;
-    
-}
-
 .huidige-locatie {
     border: 1px solid #eee;
     border-radius: 5px;
@@ -144,7 +139,7 @@ h3 {
 .main-header {
     float: left;
     width: 100%;
-    background: #000;
+    background: #f00;
     color: #fff;
     height: 70px;
     padding: 10px 0;
@@ -153,7 +148,7 @@ h3 {
         @include grid-col(1,4);
         
         i {        
-            border: 1px solid #444;
+            //border: 1px solid #444;
             border-radius: 5px;  
             display: inline-block;
             padding: 10px 10px; 
