@@ -17,3 +17,13 @@
     background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 }
+
+@mixin grayscale { 
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  //filter: url(grayscale.svg); /* Firefox 4+ */
+  //filter: gray; /* IE 6-9 */
+}
