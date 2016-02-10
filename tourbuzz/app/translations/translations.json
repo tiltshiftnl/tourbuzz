@@ -1,0 +1,32 @@
+{
+  "translations" : {
+    "Kies een bestemming" : {
+      "en" : "Choose your destination",
+      "fr" : "Choisissez votre destination"
+    },
+    "Kies een andere bestemming" : {
+      "en" : "Choose a different destination",
+      "fr" : "Choisissez une autre destination"        
+    },
+    "Toon op kaart" : {
+      "en" : "Show on map",
+      "fr" : "Montrer sur la carte"        
+    },
+    "Alternatieve haltes" : {
+      "en" : "Alternative stops",
+      "fr" : "Alternatif arrêt"        
+    },
+    "Haltes in de buurt" : {
+      "en" : "Nearby stops",
+      "fr" : "Arrêts à proximité"        
+    },            
+    "Afstand" : {
+      "en" : "Distance",
+      "fr" : "Distance"        
+    },
+    "Bestemmingen in de buurt" : {
+      "en" : "Nearby destinations",
+      "fr" : "Les destinations proches"        
+    }     
+  }
+}

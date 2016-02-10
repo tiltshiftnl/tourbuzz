@@ -1,0 +1,11 @@
+{% if grid %}
+<div class="grid-overlay">
+    <div class="wrapper">
+        {% for i in range(1, grid) %}
+            <div class="col-1-{{ grid }}">
+                <div class="bar"></div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,212 @@
+/////////////////////
+// Main Styles
+/////////////////////
+
+@import "foundation.scss";
+@import "grid.scss";
+@import "util.scss";
+
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 20px 0 20px;
+    margin-top: 0;
+}
+
+h2 {
+       
+}
+
+h3 {
+    font-size: 20px;
+    margin: 10px 0 20px;    
+}
+
+.buzzmap {
+    width: 100%;    
+    @include grayscale;   
+}
+
+.huidige-locatie {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 20px 0;
+    @extend .group;
+    padding: 5px;
+}
+.buzz {
+    li {
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+        margin-top: 10px;   
+    } 
+    margin-bottom: 20px;  
+}
+.bord {
+    background: #3669ac;
+    padding: 3px 10px;
+    color: #fff; 
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    min-width: 50px;
+    margin-top: 5px;
+    text-align: center;
+         @include linearGradient(#3A5495, #3669ac );
+    &.groot {
+      font-size: 32px;
+      padding: 15px;  
+    }
+}
+
+.afstand {
+    color: #555;
+    display: block;
+    font-size: 12px;  
+}
+
+.kaart-link {
+    color: #5393b8;
+    font-size: 14px;
+}
+
+.start {
+    /*border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 5px 10px;*/
+    margin-top: 10px;
+    display: inline-block; 
+    color: #5393b8;
+    font-size: 14px;      
+}
+
+.halte {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;      
+}
+
+.bestemming {
+    background: #eee;
+    @extend .group;
+    margin-bottom: 5px;
+    a {
+        @extend .group;
+    }
+    h3 {
+        float: left;
+        width: 75%;
+        padding: 5px;
+        margin: 0;
+        line-height: 40px;
+        font-size: 14px;
+        line-height: 1.4em;  
+    }
+    img {
+        width: 25%;
+        float: right;
+        display: none;        
+    }
+}
+
+.app-wrapper {
+    max-width: 600px;
+    margin: 0 auto;   
+}
+
+.picture-in-picture-wrapper {
+    position: relative;   
+}
+
+.picture-in-picture {
+    border: 2px solid #fff;
+    right: 0px;
+    bottom: 5px;
+    position: absolute;
+    width: 140px;   
+}
+
+.gerelateerde-haltes,
+.gerelateerde-bestemmingen {
+    margin-bottom: 40px;
+    h3 {
+        font-size: 20px;
+        margin-top: 20px;
+    }   
+}
+
+.bestemming-thumbnail {
+    float: left;
+    margin-right: 15px;
+    display: block;
+}
+
+.main-header {
+    float: left;
+    width: 100%;
+    background: #f00;
+    color: #fff;
+    height: 70px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    .home {
+        @include grid-col(1,4);
+        
+        i {        
+            //border: 1px solid #444;
+            border-radius: 5px;  
+            display: inline-block;
+            padding: 10px 10px; 
+            font-size: 30px;  
+        }
+    }
+    h2 {
+        @include grid-col(1,2);
+        text-align: center;
+            font-size: 28px;
+            line-height: 1em; 
+            margin: 0;  
+        span {
+            display: block;
+            font-size: 16px;
+            font-weight: normal;   
+        }
+        i {
+            font-size: 15px;
+            padding: 0 10px;
+            color:rgba(255, 255, 255, 0.5);   
+        }
+    }
+    .taal {
+        @include grid-col(1,4);
+        text-align: right;  
+        a {
+            font-size: 15px;
+            line-height: 50px;   
+        } 
+    }
+}
+
+// Syntax cheatsheet
+
+// .sectionclass {
+//     background: $rood; // variabelen
+//     @extend .group; // clearfix
+// 
+//     @include grid-row; // nieuwe row voor subcols 
+//     @include grid-row(20px); // nieuwe row voor subcols en gutter 20px 
+//     
+//     @include grid-col(3,5); // col-3-5
+//     @include grid-col(3,5,20px); // col-3-5 met gutter 20px
+// 
+//     @include medium { // media query
+//         @include grid-col(1,1);
+//     }
+// }
