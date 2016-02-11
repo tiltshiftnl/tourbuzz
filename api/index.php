@@ -25,7 +25,7 @@ echo json_encode([
 		],
 		"pta" => [
 			"uri" => "http://api.qcommerz.nl/pta/?m=1",
-			"arrivals" => "http://api.qcommerz.nl/actueel/2016/03/31"
+			"arrivals" => "http://api.qcommerz.nl/cruisekalender/2016/03/31"
 		]
 	]
 ]);
