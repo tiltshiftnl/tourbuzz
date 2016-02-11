@@ -25,5 +25,5 @@ $items = array_filter($contents->items, function ($data) use ($day, $month, $yea
 
 header("Content-type: application/json");
 echo json_encode([
-	"items" => $items
+	"items" => array_values($items)
 ]);
