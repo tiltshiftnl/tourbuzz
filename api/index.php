@@ -24,7 +24,8 @@ echo json_encode([
 			"uri" => "http://api.qcommerz.nl/distance/"
 		],
 		"pta" => [
-			"uri" => "http://api.qcommerz.nl/pta/?m=1"
+			"uri" => "http://api.qcommerz.nl/pta/?m=1",
+			"arrivals" => "http://api.qcommerz.nl/actueel/2016/03/31"
 		]
 	]
 ]);
