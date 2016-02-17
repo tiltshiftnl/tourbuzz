@@ -1,14 +1,20 @@
 <?php
 
 $sourceUrl = "http://www.amsterdamopendata.nl/files/ivv/touringcar/in_uitstaphaltes.json";
-$fileContents = file_get_contents($sourceUrl);
+$tries = 0;
+do {
+	$tries++;
+	$fileContents = file_get_contents($sourceUrl);
+	if (!$fileContents) usleep(mt_rand(0, 10000));
+} while (!$fileContents);
 $jsonData = json_decode($fileContents);
 
 $uriParts = array_values(array_filter(explode("/", $_SERVER["REQUEST_URI"])));
 
 $result = [
 	"_uri" => $uriParts,
-	"_bron" => $sourceUrl
+	"_bron" => $sourceUrl,
+	"_pogingen" => $tries
 ];
 
 foreach ($jsonData->in_uitstaphaltes as $data) {
