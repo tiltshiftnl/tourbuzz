@@ -82,8 +82,31 @@ $app->get('/dashboard/login', function () use ($apiRoot) {
  */ 
 $app->get('/dashboard/berichten', function () use ($apiRoot) {
     
+    $json = @file_get_contents($apiRoot . 'berichten/');
+          
+    if ( !empty($json) ) {
+        $berichten = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    }
+    
     $data = [
-        "test" => "world",       
+        "test" => "world",
+        "berichten" => $berichten['messages'],      
+        "template" => "dashboard/berichten.twig",
+    ];
+
+    render($data['template'], $data);
+})->name("berichten");
+
+/**
+ * Berichten
+ */ 
+$app->post('/dashboard/berichten/', function () use ($apiRoot) {
+
+    $data = [
+        "test" => "world",
+        "berichten" => $berichten,      
         "template" => "dashboard/berichten.twig",
     ];
     render($data['template'], $data);
