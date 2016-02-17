@@ -102,11 +102,46 @@ $app->get('/dashboard/berichten', function () use ($apiRoot) {
 /**
  * Berichten
  */ 
-$app->post('/dashboard/berichten/', function () use ($apiRoot) {
+$app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
 
+    //extract data from the post
+    //set POST variables
+    $url = $apiRoot . 'berichten/';
+    
+    $fields = array(
+    	'title' => $app->request->post('title'),
+    );
+    
+    //url-ify the data for the POST
+    $fields_string = '';
+    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    rtrim($fields_string, '&');
+
+    //open connection
+    $ch = curl_init();
+    
+    //set the url, number of POST vars, POST data
+    curl_setopt($ch,CURLOPT_URL, $url);
+    curl_setopt($ch,CURLOPT_POST, count($fields));
+    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+    
+    //execute post
+    $result = curl_exec($ch);
+    
+    //close connection
+    curl_close($ch);
+
+    $json = @file_get_contents($apiRoot . 'berichten/');
+          
+    if ( !empty($json) ) {
+        $berichten = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    }
+    
     $data = [
         "test" => "world",
-        "berichten" => $berichten,      
+        "berichten" => $berichten['messages'],      
         "template" => "dashboard/berichten.twig",
     ];
     render($data['template'], $data);
