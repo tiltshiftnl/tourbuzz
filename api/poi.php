@@ -1,6 +1,8 @@
 <?php
 
-header("Content-type: text/plain");
+header("Content-type: application/x-download");
+header("Content-Disposition: attachment; filename=touringcar.csv");
+header("Content-Transfer-Encoding: binary");
 
 $json = file_get_contents("http://api.qcommerz.nl/haltes/");
 $rs = json_decode($json);
