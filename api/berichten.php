@@ -40,12 +40,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		exit;
 
 	case "DELETE":
-		$uriParts = array_values(array_filter(explode("/", $_SERVER["REQUEST_URI"])));
+		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$id = $uriParts[1];
+		$ids = $id ? [$id] : $_GET["ids"];
 		$messagesJson = file_get_contents($filePath);
 		$messages = json_decode($messagesJson);
-		$messages = array_filter($messages, function ($message) use ($id) {
-			return $message->id !== $id;
+		$messages = array_filter($messages, function ($message) use ($ids) {
+			return !in_array($message->id, $ids);
 		});
 		file_put_contents($filePath, json_encode($messages));
 		exit;	
