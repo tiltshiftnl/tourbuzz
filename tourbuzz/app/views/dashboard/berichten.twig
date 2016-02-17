@@ -6,12 +6,23 @@
     <form class="form-styles" method="post">
         {{ feedback }}
         <h3>Nieuw bericht</h3>
+        <div class="grid-row">
+            <select>
+                <option>Evenement</option>
+                <option>Wegwerkzaamheden</option>
+                <option>Nieuws</option>
+            </select>
+        </div>
         <input type="text" name="title">
         <textarea name="body"></textarea>
         <span class="maxchars">Max 200 karakters</span>
         <div class="grid-row">
         start <input type="datetime" placeholder="dd/mm/jjjj" name="startdate">&nbsp;&nbsp;
         eind <input type="datetime" placeholder="dd/mm/jjjj" name="enddate">
+        </div>
+        <div class="grid-row">
+            <h4>Bijlage</h4>
+            <input type="file">
         </div>
         <button type="submit">Toevoegen</button>        
     </form>
