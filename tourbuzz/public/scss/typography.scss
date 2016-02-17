@@ -1,0 +1,56 @@
+$margin-medium: 25px;
+$margin-small: 10px;
+
+.text-h1 {
+    font-size: 27px;
+    line-height: 1.3em;
+    margin: 0 0 $margin-medium;
+}
+
+.text-intro {
+    font-size: 20px;
+    color: #888;
+    line-height: 1.4em;  
+}
+
+.text-body {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.4em;   
+}
+
+.p-text {
+    margin-bottom: $margin-medium;
+}
+
+.article-text {
+    
+    h1 {
+        @extend .text-h1;   
+    }
+
+    p {
+        @extend .p-text;   
+    }
+    
+    .inleiding {
+        @extend .text-intro;   
+    }
+    
+    ul {
+        padding-left: 20px;   
+    }
+    
+    li {
+        display: list-item;
+        list-style: decimal;
+        margin-bottom: $margin-small;   
+    }
+    
+    figure, img {
+        margin-bottom: $margin-medium;
+        display: block;
+        background: green;
+    }
+    
+}

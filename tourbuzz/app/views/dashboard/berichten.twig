@@ -1,0 +1,34 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+<main class="wrapper app-wrapper"> 
+ 
+    <form class="form-styles">
+        <h3>Nieuw bericht</h3>
+        <textarea></textarea>
+        <span class="maxchars">Max 200 karakters</span>
+        <div class="grid-row">
+        start <input type="datetime" placeholder="dd/mm/jjjj">&nbsp;&nbsp;
+        eind <input type="datetime" placeholder="dd/mm/jjjj">
+        </div>
+        <button>Toevoegen</button>        
+    </form>
+    
+    <section class="buzz">
+        <span class="verwijder"> x verwijderen</span>
+        <h2>Berichten</h2>
+        <ol>
+            <li><input type="checkbox"><span class="nr">1</span> Willemsbrug vanaf 10 februari afgesloten <span class="dagen">8 dgn</span></li>
+            <li><input type="checkbox"><span class="nr">2</span> <b>H11</b> Kattenburgerstraat niet beschikbaar</li>
+            <li><input type="checkbox"><span class="nr">3</span> Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat</li>
+            <li><input type="checkbox"><span class="nr">4</span> <b>P9</b> opgeheven, ga naar <b>P10</b> <span class="dagen">2 dgn</span></li>
+            <li><input type="checkbox"><span class="nr">5</span> Aankomst cruise "Braemar" (930 passagiers) PTA 10:00 uur - Parkeren niet mogelijk</li>
+            <li><input type="checkbox"><span class="nr">6</span> <b>H11</b> Kattenburgerstraat niet beschikbaar</li>
+            <li><input type="checkbox"><span class="nr">7</span> Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat</li>
+            <li><input type="checkbox"><span class="nr">8</span> <b>P9</b> opgeheven, ga naar <b>P10</b></li>
+        </ol>
+    </section>
+    
+    
+</main>
+{% endblock %} 
