@@ -110,27 +110,37 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
     
     $fields = array(
     	'title' => $app->request->post('title'),
+    	'body' => $app->request->post('body'),
+    	'startdate' => $app->request->post('startdate'),
+    	'enddate' => $app->request->post('enddate'),
     );
     
-    //url-ify the data for the POST
-    $fields_string = '';
-    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-    rtrim($fields_string, '&');
-
-    //open connection
-    $ch = curl_init();
+    if ( empty ($fields['title']) ) {
+        $feedback = 'Je hebt geen titel ingevuld';
+    } else {
     
-    //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_URL, $url);
-    curl_setopt($ch,CURLOPT_POST, count($fields));
-    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        //url-ify the data for the POST
+        $fields_string = '';
+        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
     
-    //execute post
-    $result = curl_exec($ch);
+        //open connection
+        $ch = curl_init();
+        
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, count($fields));
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        
+        //execute post
+        $result = curl_exec($ch);
+        
+        //close connection
+        curl_close($ch);
+        
+        $feedback = 'Bericht toegevoegd';
+    }
     
-    //close connection
-    curl_close($ch);
-
     $json = @file_get_contents($apiRoot . 'berichten/');
           
     if ( !empty($json) ) {
@@ -141,6 +151,7 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
     
     $data = [
         "test" => "world",
+        "feedback" => $feedback,
         "berichten" => $berichten['messages'],      
         "template" => "dashboard/berichten.twig",
     ];

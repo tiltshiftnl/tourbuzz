@@ -4,12 +4,14 @@
 <main class="wrapper app-wrapper"> 
  
     <form class="form-styles" method="post">
+        {{ feedback }}
         <h3>Nieuw bericht</h3>
-        <textarea name="title"></textarea>
+        <input type="text" name="title">
+        <textarea name="body"></textarea>
         <span class="maxchars">Max 200 karakters</span>
         <div class="grid-row">
-        start <input type="datetime" placeholder="dd/mm/jjjj">&nbsp;&nbsp;
-        eind <input type="datetime" placeholder="dd/mm/jjjj">
+        start <input type="datetime" placeholder="dd/mm/jjjj" name="startdate">&nbsp;&nbsp;
+        eind <input type="datetime" placeholder="dd/mm/jjjj" name="enddate">
         </div>
         <button type="submit">Toevoegen</button>        
     </form>
