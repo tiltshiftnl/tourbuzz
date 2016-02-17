@@ -5,18 +5,51 @@
 <main class="wrapper app-wrapper">
     
     <img src="/img/tourbuzzkaart.png" class="buzzmap">
+ 
+    {# include 'partials/article.twig' #}
     
     <section class="buzz">
         <h3>Vandaag</h3>
         <ul>
+            <li>Willemsbrug vanaf 10 februari afgesloten</li>
+            <li>Inspraak milieuzone touringcars</li>
             <li>Aankomst cruise "Braemar" (930 passagiers) PTA 10:00 uur - Parkeren niet mogelijk</li>
             <li><b>H11</b> Kattenburgerstraat niet beschikbaar</li>
             <li>Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat</li>
             <li><b>P9</b> opgeheven, ga naar <b>P10</b></li>
-            {#<li>Algemeen: nieuwe halte Amsterstation</li>
-            <li>Algemeen: nieuw bord Sloterdijk</li>#}
         </ul>
     </section>
+    
+    <section class="cruiseschepen">
+        <h3><i class="fa fa-ship"></i> Passengers Terminal Amsterdam</h3>
+        <ul>
+        {% for record in cruisekalender %}
+            <li>
+            {{ record.name }} ({{ record.passagiers}} passagiers) - {{ record.aanvang }}
+            </li>
+        {% endfor %}
+        </ul>
+    </section>
+    
+   {#<section class="wegwerkzaamheden article-text">
+        <h3>Wegwerkzaamheden</h3>
+        <ul>
+        {% for record in werkzaamheden %}
+            <li>{{ record.locatiewerkzaamheden }} - {{ record.soortwerkzaamheden }}</li>
+        {% endfor %}
+        </ul>
+    </section>
+    
+   <section class="evenementen article-text">
+        <h3>Evenementen</h3>
+        <ul>
+        {% for record in evenementen %}
+            <li>{{ record.title }} - <span style="color: #aaa; font-size: 12px">{{ record.dates.startdate }} t/m {{ record.dates.enddate }} </span></li>
+        {% endfor %}
+        </ul>
+    </section>#}
+
+    
 </main>
 
 {% endblock %}
