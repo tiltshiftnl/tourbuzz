@@ -6,7 +6,7 @@ do {
 	$tries++;
 	$fileContents = file_get_contents($sourceUrl);
 	if (!$fileContents) usleep(mt_rand(0, 10000));
-} while (!$fileContents);
+} while (!$fileContents && $tries < 20);
 $jsonData = json_decode($fileContents);
 
 $parkeerplaatsen = [];

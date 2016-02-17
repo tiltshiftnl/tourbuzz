@@ -86,17 +86,21 @@ $app->get('/bestemmingen/:trcid', function ($trcid) use ($apiRoot) {
     } else {
         die('Geen JSON');
     }
-            
-    foreach ($haltes['haltes'] as &$halte) {
-        $lat1 = $record['attractie']['coordinaten']['lat'];
-        $lng1 = $record['attractie']['coordinaten']['lng'];
 
-        $lat2 = $halte['coordinaten']['lat'];
-        $lng2 = $halte['coordinaten']['lng'];
-
-        $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
-        $halte['afstand'] = $afstand;
-    } 
+    if ( !empty($haltes['haltes']) ) {
+        foreach ($haltes['haltes'] as &$halte) {
+            $lat1 = $record['attractie']['coordinaten']['lat'];
+            $lng1 = $record['attractie']['coordinaten']['lng'];
+    
+            $lat2 = $halte['coordinaten']['lat'];
+            $lng2 = $halte['coordinaten']['lng'];
+    
+            $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
+            $halte['afstand'] = $afstand;
+        }
+    } else {
+        $haltes['haltes'] = NULL;
+    }
     
     // Sorteer op afstand
     

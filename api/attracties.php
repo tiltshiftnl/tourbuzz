@@ -29,8 +29,15 @@ $cacheFilepath = "cache/attracties.json";
 if (is_file($cacheFilepath) && time() - filemtime($cacheFilepath) < 24 * 3600) {
 	$fileContents = file_get_contents($cacheFilepath);
 } else {
-	$fileContents = file_get_contents($sourceUrl);
-	file_put_contents($cacheFilepath, $fileContents);
+	$tries = 0;
+	do {
+		$tries++;
+		$fileContents = file_get_contents($sourceUrl);
+		if (!$fileContents) usleep(mt_rand(0, 10000));
+	} while (!$fileContents && $tries < 20);
+	if ($fileContents) {
+		file_put_contents($cacheFilepath, $fileContents);
+	}
 }
 $jsonData = json_decode($fileContents);
 
@@ -38,7 +45,8 @@ $uriParts = array_values(array_filter(explode("/", $_SERVER["REQUEST_URI"])));
 
 $result = [
 	"_uri" => $uriParts,
-	"_bron" => $sourceUrl
+	"_bron" => $sourceUrl,
+	"_pogingen" => $tries
 ];
 
 $attractieId = !empty($uriParts[1]) ? $uriParts[1] : null;
