@@ -35,7 +35,8 @@
         <h3>{{ __('Bestemmingen in de buurt') }}</h3>
         {% for bestemming in bestemmingen|slice(1,5) %}
         <a href="/bestemmingen/{{ bestemming.id }}" class="halte group">
-            <img src="/image/fit/100/65?src={{ bestemming.media[0].url }}" class="bestemming-thumbnail"> {{ bestemming.naam }}  <span class="afstand">Afstand: {{ bestemming.afstand }}m</span>
+            {#<img src="/image/fit/100/65?src={{ bestemming.media[0].url }}" class="bestemming-thumbnail"> {{ bestemming.naam }}  <span class="afstand">Afstand: {{ bestemming.afstand }}m</span>#}
+            <img src="{{ bestemming.media[0].url }}" class="bestemming-thumbnail" style="width:100px; height: 65px;"> {{ bestemming.naam }}  <span class="afstand">Afstand: {{ bestemming.afstand }}m</span>
         </a>
         {% endfor %}
     </section>
