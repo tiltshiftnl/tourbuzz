@@ -6,7 +6,7 @@ $apiRoot = "http://api.qcommerz.nl/";
 /**
  * Before
  */
-$app->hook('slim.before.dispatch', function() use ($app) { 
+$app->hook('slim.before', function() use ($app) { 
     session_start();
     if (empty($_SESSION['lang'])) {
         $_SESSION['lang'] = 'nl';
