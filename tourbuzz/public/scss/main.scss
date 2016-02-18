@@ -18,7 +18,7 @@ body {
 .buzzmap {
     width: 100%;
     margin-bottom: 15px;    
-    //@include grayscale;   
+    @include grayscale;   
 }
 
 .huidige-locatie {
@@ -217,10 +217,24 @@ ol {
     }
 }
 
+    .meta {
+        font-size: 14px;
+        color: #888;   
+    }
+    
+    .meta-link {
+        font-size: 14px;
+        color:#637b95;
+        display: block;
+    }
+    
 .cruiseschepen, .evenementen, .wegwerkzaamheden {
     h3 {
-        font-size: 20px;   
+       // font-size: 20px;
+       color: #333;
+       margin-bottom: $margin-small;   
     }
+
     ul {
         margin-top: 20px;   
     }
@@ -242,7 +256,10 @@ ol {
         font-size: 18px;  
     }
     input[type=text], textarea {
-        width: 100%;   
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #aaa;
+        @extend .text-body;                     
     }
     textarea {
         padding: 10px;
@@ -255,7 +272,9 @@ ol {
     input + button {
         margin-top: $margin-small;   
     }
-    
+    select {
+        margin-bottom: $margin-small;       
+    }    
     button {
         margin-top: 10px;
         @extend .button;

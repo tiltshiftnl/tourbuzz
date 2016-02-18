@@ -12,11 +12,10 @@
         <h3>Vandaag</h3>
         <ul>
             <li>Willemsbrug vanaf 10 februari afgesloten</li>
-            <li>Inspraak milieuzone touringcars</li>
             <li>Aankomst cruise "Braemar" (930 passagiers) PTA 10:00 uur - Parkeren niet mogelijk</li>
             <li><b>H11</b> Kattenburgerstraat niet beschikbaar</li>
-            <li>Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat</li>
-            <li><b>P9</b> opgeheven, ga naar <b>P10</b></li>
+            <li>Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat <span class="meta-link">bekijk omleiding</span></li>
+            <li><b>P9</b> opgeheven, ga naar <b>P10</b> <span class="meta-link">bekijk op kaart</span></li>
         </ul>
     </section>
     
@@ -25,7 +24,7 @@
         <ul>
         {% for record in cruisekalender %}
             <li>
-            {{ record.name }} ({{ record.passagiers}} passagiers) - {{ record.aanvang }}
+            {{ record.name }} <span class="meta">({{ record.passagiers}} passagiers) - {{ record.aanvang }}</span>
             </li>
         {% endfor %}
         </ul>

@@ -8,13 +8,16 @@
         <h3>Nieuw bericht</h3>
         <div class="grid-row">
             <select>
-                <option>Evenement</option>
-                <option>Wegwerkzaamheden</option>
                 <option>Nieuws</option>
+                <option>Evenement</option>
+                <option>Demonstratie</option>
+                <option>Calamiteit / ongeluk</option>
+                <option>Wegwerkzaamheden</option>
+                <option>Overig</option>                
             </select>
         </div>
-        <input type="text" name="title">
-        <textarea name="body"></textarea>
+        <input type="text" name="title" placeholder="Bericht">
+        <textarea name="body" placeholder="Toelichting (optioneel)"></textarea>
         <span class="maxchars">Max 200 karakters</span>
         <div class="grid-row">
         start <input type="datetime" placeholder="dd/mm/jjjj" name="startdate">&nbsp;&nbsp;
@@ -28,11 +31,13 @@
     </form>
     
     <section class="buzz">
-        <span class="verwijder"> x verwijderen</span>
+        <form method="post" action="berichten/verwijderen">
+        <button type="submit">Verwijderen</button>
+        {#<a href="#" class="verwijder"> x verwijderen</a>#}
         <h2>Berichten</h2>
         <ol>
             {% for record in berichten %}
-            <li><input type="checkbox"><span class="nr">{{ loop.index }}</span> {{ record.title }}</li>
+            <li><input type="checkbox" name="ids[]" value="{{ record.id }}"><span class="nr">{{ loop.index }}</span> {{ record.title }}</li>
             {% endfor %}
             
             {#<li><input type="checkbox"><span class="nr">1</span> Willemsbrug vanaf 10 februari afgesloten <span class="dagen">8 dgn</span></li>
@@ -44,6 +49,7 @@
             <li><input type="checkbox"><span class="nr">7</span> Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat</li>
             <li><input type="checkbox"><span class="nr">8</span> <b>P9</b> opgeheven, ga naar <b>P10</b></li>#}
         </ol>
+        </form>
     </section>
     
     
