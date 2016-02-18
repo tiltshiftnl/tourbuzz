@@ -34,6 +34,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		$messagesJson = file_get_contents($filePath);
 		$messages = json_decode($messagesJson);
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
+		$date = date("Y-m-d");
 		if (!empty($uriParts[1])) {
 			$date = "{$uriParts[1]}-{$uriParts[2]}-{$uriParts[3]}";
 			$messages = array_values(array_filter($messages, function ($message) use ($date) {
@@ -43,6 +44,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		}
 		header("Content-type: application/json");
 		echo json_encode([
+			"_date" => $date,
+			"_nextDate" => date("Y-m-d", strtotime("+1 day", strtotime($date))), 
+			"_prevDate" => date("Y-m-d", strtotime("-1 day", strtotime($date))), 
 			"messages" => $messages
 		]);
 		exit;
