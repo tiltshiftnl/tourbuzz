@@ -42,6 +42,9 @@ echo json_encode([
 		"evenementen" => [
 			"origineel" => "http://www.amsterdamopendata.nl/files/Evenementen.json",
 			"uri" => "http://api.qcommerz.nl/evenementen/2016/03/02"
+		],
+		"berichten" => [
+			"uri" => "http://api.qcommerz.nl/berichten/2016/03/02"
 		]
 	]
 ]);

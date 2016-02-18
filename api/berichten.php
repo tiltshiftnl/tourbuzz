@@ -33,6 +33,14 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 	case "GET":
 		$messagesJson = file_get_contents($filePath);
 		$messages = json_decode($messagesJson);
+		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
+		if (!empty($uriParts[1])) {
+			$date = "{$uriParts[1]}-{$uriParts[2]}-{$uriParts[3]}";
+			$messages = array_values(array_filter($messages, function ($message) use ($date) {
+				return $message->startdate <= $date &&
+				       $message->enddate >= $date;
+			}));
+		}
 		header("Content-type: application/json");
 		echo json_encode([
 			"messages" => $messages
@@ -45,9 +53,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		$ids = $id ? [$id] : $_GET["ids"];
 		$messagesJson = file_get_contents($filePath);
 		$messages = json_decode($messagesJson);
-		$messages = array_filter($messages, function ($message) use ($ids) {
+		$messages = array_values(array_filter($messages, function ($message) use ($ids) {
 			return !in_array($message->id, $ids);
-		});
+		}));
 		file_put_contents($filePath, json_encode($messages));
 		exit;	
 }
