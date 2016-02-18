@@ -22,10 +22,29 @@ $app->hook('slim.before.dispatch', function() use ($app) {
 /**
  * Home
  */
-$app->get('/', function () use ($apiRoot) {
+$app->get('/', function () use ($app, $apiRoot) {
+   $app->redirect(date('/Y/m/d'));
+});
+
+
+/**
+ * Dag
+ */
+$app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
+
+    $json = @file_get_contents($apiRoot . "berichten/{$y}/{$m}/{$d}");
+          
+    if ( !empty($json) ) {
+        $berichten = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    }
+    
+    $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
+    $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
         
     //$json = @file_get_contents($apiRoot . 'cruisekalender/'.date('Y').'/'.date('m').'/'.date('d'));    
-    $json = @file_get_contents($apiRoot . 'cruisekalender/2016/02/17');
+    $json = @file_get_contents($apiRoot . "cruisekalender/{$y}/{$m}/{$d}");
           
     if ( !empty($json) ) {
         $cruisekalender = json_decode($json, true);
@@ -33,28 +52,37 @@ $app->get('/', function () use ($apiRoot) {
         die('Geen JSON');
     }
     
-    $json = @file_get_contents($apiRoot . 'wegwerkzaamheden/2016/03/02');
+    /*
+    $json = @file_get_contents($apiRoot . "wegwerkzaamheden/{$y}/{$m}/{$d}");
     
     if ( !empty($json) ) {
         $wegwerkzaamheden = json_decode($json, true);
     } else {
         die('Geen JSON');
-    }
+    }*/
      
    //$json = @file_get_contents($apiRoot . 'cruisekalender/'.date('Y').'/'.date('m').'/'.date('d'));    
-    $json = @file_get_contents($apiRoot . 'evenementen/2016/02/17');
-          
+    /*$json = @file_get_contents($apiRoot . "evenementen/{$y}/{$m}/{$d}");
+       
+      
     if ( !empty($json) ) {
         $evenementen = json_decode($json, true);
     } else {
         die('Geen JSON');
-    }     
+    } */    
+      
         
     $data = [
         "test" => "world",
+        "berichten" => $berichten['messages'],
+        "volgende" => $volgende,
+        "vorige" => $vorige,
+        "d" => $d,
+        "m" => $m,
+        "y" => $y,
         "cruisekalender" => $cruisekalender['items'],
-        "werkzaamheden" => $wegwerkzaamheden['werkzaamheden'],
-        "evenementen" => $evenementen['evenementen'],            
+        //"werkzaamheden" => $wegwerkzaamheden['werkzaamheden'],
+        //"evenementen" => $evenementen['evenementen'],            
         "template" => "home.twig",
     ];
     render($data['template'], $data);
@@ -122,7 +150,7 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
         //url-ify the data for the POST
         $fields_string = '';
         foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-        rtrim($fields_string, '&');
+        $fields_string = rtrim($fields_string, '&');
     
         //open connection
         $ch = curl_init();
@@ -167,54 +195,26 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) 
     //set POST variables
     $url = $apiRoot . 'berichten/';
     
-    die (print_r($app->request));
+    //die (print_r($app->request));
+    $ids = $app->request->post('ids');
     
-    $fields = array(
-    	'title' => $app->request->post('title'),
-    	'body' => $app->request->post('body'),
-    	'startdate' => $app->request->post('startdate'),
-    	'enddate' => $app->request->post('enddate'),
-    );
+    //url-ify the data for the POST
+    $fields_string = '';
+    foreach($ids as $id) { $fields_string .= 'ids[]='.$id.'&'; }
+    $fields_string = rtrim($fields_string, '&');
+
+    $ch = curl_init();
     
-    if ( empty ($fields['title']) ) {
-        $feedback = 'Je hebt geen titel ingevuld';
-    } else {
+    //set the url, number of POST vars, POST data
+    curl_setopt($ch,CURLOPT_URL, $url . "?" . $fields_string);
+    curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "DELETE");
     
-        //url-ify the data for the POST
-        $fields_string = '';
-        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-        rtrim($fields_string, '&');
+    //execute post
+    $result = curl_exec($ch);
     
-        //open connection
-        $ch = curl_init();
+    //close connection
+    curl_close($ch);
         
-        //set the url, number of POST vars, POST data
-        curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_POST, count($fields));
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-        
-        //execute post
-        $result = curl_exec($ch);
-        
-        //close connection
-        curl_close($ch);
-        
-        $feedback = 'Bericht toegevoegd';
-    }
+    $app->redirect("/dashboard/berichten");
     
-    $json = @file_get_contents($apiRoot . 'berichten/');
-          
-    if ( !empty($json) ) {
-        $berichten = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }
-    
-    $data = [
-        "test" => "world",
-        "feedback" => $feedback,
-        "berichten" => $berichten['messages'],      
-        "template" => "dashboard/berichten.twig",
-    ];
-    render($data['template'], $data);
-})->name("berichten");
+});

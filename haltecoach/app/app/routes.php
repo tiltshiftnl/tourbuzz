@@ -145,7 +145,7 @@ function halteAfstand($lat1, $lng1, $lat2, $lng2 ) {
     global $apiRoot;
     
     $json = @file_get_contents($apiRoot . 'distance/?lat1='.$lat1.'&lng1='.$lng1.'&lat2='.$lat2.'&lng2='.$lng2);
-
+ 
     if ( !empty($json) ) {
         $afstand = json_decode($json, true);
         $afstand = round($afstand['distance'] * 1000);

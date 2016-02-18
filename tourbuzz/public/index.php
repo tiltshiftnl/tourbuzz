@@ -20,8 +20,33 @@ function translate($msg) {
         $translations->translations->$msg->{$_SESSION['lang']} :
         $msg;
 }
+
+function maand($m) {
+
+    if ( empty($m) ) {
+        return "Geen datum";   
+    }
+    $month = array (
+        'januari',
+        'februari',
+        'maart',
+        'april',
+        'mei',
+        'juni',
+        'juli',
+        'augustus',
+        'september',
+        'oktober',
+        'november',
+        'december'
+    );
+    
+    return $month[(int)$m - 1];
+}
+
 $twig = $app->view()->getEnvironment();
 $twig->addFunction('__', new Twig_Function_Function('translate'));
+$twig->addFunction('maand', new Twig_Function_Function('maand'));
 
 require_once "routes.php"; // System routes
 

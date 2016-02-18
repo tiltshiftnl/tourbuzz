@@ -11,12 +11,18 @@
     <section class="buzz">
         <h3>Vandaag</h3>
         <ul>
+            {% for record in berichten %}
+            <li>{{ record.title }} <span class="toelichting">{{ record.body }}</span></li>        
+            {% endfor %}
+        </ul>
+        
+       {# <ul>
             <li>Willemsbrug vanaf 10 februari afgesloten</li>
             <li>Aankomst cruise "Braemar" (930 passagiers) PTA 10:00 uur - Parkeren niet mogelijk</li>
             <li><b>H11</b> Kattenburgerstraat niet beschikbaar</li>
             <li>Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat <span class="meta-link">bekijk omleiding</span></li>
             <li><b>P9</b> opgeheven, ga naar <b>P10</b> <span class="meta-link">bekijk op kaart</span></li>
-        </ul>
+        </ul>#}
     </section>
     
     <section class="cruiseschepen">
