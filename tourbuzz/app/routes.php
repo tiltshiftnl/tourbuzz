@@ -68,14 +68,22 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
         $evenementen = json_decode($json, true);
     } else {
         die('Geen JSON');
-    } */    
-      
+    } */
         
+    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
+    
+    $day = array (
+        'ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'
+    );
+    
+    $dag = $day[(int)$N - 1];    
+
     $data = [
         "test" => "world",
         "berichten" => $berichten['messages'],
         "volgende" => $volgende,
         "vorige" => $vorige,
+        "dag" => $dag,
         "d" => $d,
         "m" => $m,
         "y" => $y,
