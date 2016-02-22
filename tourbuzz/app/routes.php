@@ -136,11 +136,14 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
     $url = $apiRoot . 'berichten/';
     
     $fields = array(
+        'category' => $app->request->post('category'),
     	'title' => $app->request->post('title'),
     	'body' => $app->request->post('body'),
     	'startdate' => $app->request->post('startdate'),
     	'enddate' => $app->request->post('enddate'),
     );
+    
+    //die(print_r($fields));
     
     if ( empty ($fields['title']) ) {
         $feedback = 'Je hebt geen titel ingevuld';
