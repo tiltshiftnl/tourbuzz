@@ -1,4 +1,8 @@
 <?php
+
+ini_set("error_reporting", 1);
+ini_set("display_errors", E_ALL);
+
 $filePath = "files/messages.json";
 
 function randomHash() {
@@ -10,6 +14,28 @@ function randomHash() {
 	return $hash;
 }
 
+function loadMessages() {
+	global $filePath;
+	$messagesJson = file_get_contents($filePath);
+	$messages = json_decode($messagesJson);
+	if (!$messages) $messages = []; // FIXME backup here?
+	return $messages;
+}
+
+function backupMessagesFile() {
+	global $filePath;
+	$backupFilePath = $filePath . ".backup." . date("Y-m-d");
+	if (!file_exists($backupFilePath)) {
+		copy($filePath, $backupFilePath);
+	}
+}
+
+function saveMessages($messages) {
+	global $filePath;
+	backupMessagesFile();
+	file_put_contents($filePath, json_encode($messages));
+}
+
 $messageFields = [
 	"id",
 	"title",
@@ -19,34 +45,31 @@ $messageFields = [
 	"category"
 ];
 
+$messages = loadMessages();
+
 switch ($_SERVER["REQUEST_METHOD"]) {
 	case "POST":
-		$title = $_POST["title"];
-		$body = $_POST["body"];
-		$startdate = $_POST["startdate"];
-		$enddate = $_POST["enddate"];
-		$category = $_POST["category"];
-		$message = [
-			"id" => randomHash(),
-			"title" => $title,
-			"body" => $body,
-			"startdate" => $startdate,
-			"enddate" => $enddate,
-			"category" => $category
-		];
-		$messagesJson = file_get_contents($filePath);
-		$messages = json_decode($messagesJson);
-		if (!$messages) $messages = [];
+		$message = [];
+		foreach ($messageFields as $messageField) {
+			$message[$messageField] = !empty($_POST[$messageField]) ?
+				$_POST[$messageField] : "";
+		}
+		if (empty($message["id"])) {
+			$message["id"] = randomHash();
+		}
 		$messages[] = $message;
-		file_put_contents($filePath, json_encode($messages));
+		saveMessages($messages);
+		header("Content-type: application/json");
+		echo json_encode($message);
 		exit;
 
 	case "GET":
-		$messagesJson = file_get_contents($filePath);
-		$messages = json_decode($messagesJson);
-		$messages = array_map(function ($message) {
-			if (!isset($message->category)) {
-				$message->category = "";
+		$messages = loadMessages();
+		$messages = array_map(function ($message) use ($messageFields) {
+			foreach ($messageFields as $messageField) {
+				if (!isset($message->{$messageField})) {
+					$message->{$messageField} = "";
+				}
 			}
 			return $message;
 		}, $messages);
@@ -69,15 +92,14 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		exit;
 
 	case "DELETE":
+		$messages = loadMessages();
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$id = $uriParts[1];
 		$ids = $id ? [$id] : $_GET["ids"];
-		$messagesJson = file_get_contents($filePath);
-		$messages = json_decode($messagesJson);
 		$messages = array_values(array_filter($messages, function ($message) use ($ids) {
 			return !in_array($message->id, $ids);
 		}));
-		file_put_contents($filePath, json_encode($messages));
-		exit;	
+		saveMessages($messages);
+		exit;
 }
 
