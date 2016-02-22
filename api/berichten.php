@@ -82,12 +82,22 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		});
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$date = date("Y-m-d");
-		if (!empty($uriParts[1])) {
+		if (!empty($uriParts[1]) && strlen($uriParts[1]) === 4) {
 			$date = "{$uriParts[1]}-{$uriParts[2]}-{$uriParts[3]}";
 			$messages = array_values(array_filter($messages, function ($message) use ($date) {
 				return $message->startdate <= $date &&
 				       $message->enddate >= $date;
 			}));
+		} else if (!empty($uriParts[1]) && strlen($uriParts[1]) === 40) {
+			$id = $uriParts[1];
+			foreach ($messages as $message) {
+				if ($message->id !== $id) continue;
+				header("Content-type: application/json");
+				echo json_encode([
+					"message" => $message
+				]);
+				exit;
+			}
 		}
 		header("Content-type: application/json");
 		echo json_encode([
