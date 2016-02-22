@@ -61,7 +61,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		if (empty($message["id"])) {
 			$message["id"] = randomHash();
 		}
-		$messages[] = $message;
+		$update = false;
+		foreach ($messages as &$existingMessage) {
+			if ($existingMessage->id === $message["id"]) {
+				$existingMessage = $message;
+				$update = true;
+				break;
+			}
+		}
+		if (!$update) $messages[] = $message;
 		saveMessages($messages);
 		header("Content-type: application/json");
 		echo json_encode($message);
