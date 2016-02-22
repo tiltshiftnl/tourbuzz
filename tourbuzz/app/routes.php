@@ -9,7 +9,7 @@ if (file_exists($localConfigFilePath)) {
 /**
  * Before
  */
-$app->hook('slim.before.dispatch', function() use ($app) { 
+$app->hook('slim.before', function() use ($app) { 
     session_start();
     if (empty($_SESSION['lang'])) {
         $_SESSION['lang'] = 'nl';
@@ -141,7 +141,7 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
  */ 
 $app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app) {
   $json = @file_get_contents($apiRoot . 'berichten/'.$id);
-          
+            
     if ( !empty($json) ) {
         $berichten = json_decode($json, true);
     } else {
@@ -150,7 +150,7 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app) {
     
     $data = [
         "test" => "world",
-        "berichten" => $berichten,      
+        "bericht" => $berichten['message'],      
         "template" => "dashboard/berichten.twig",
     ];
 

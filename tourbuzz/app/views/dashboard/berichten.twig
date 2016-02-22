@@ -17,8 +17,8 @@
             </select>
         </div>
         
-        <input type="text" name="title" placeholder="Bericht">
-        <textarea name="body" placeholder="Toelichting (optioneel)"></textarea>
+        <input type="text" name="title" placeholder="Bericht" value="{% if bericht.title %}{{ bericht.title }}{% endif %}">
+        <textarea name="body" placeholder="Toelichting (optioneel)">{% if bericht.body %}{{ bericht.body }}{% endif %}</textarea>
         
         <input type="text" name="title_en" placeholder="Bericht (engels)">
         <textarea name="body_en" placeholder="Toelichting (engels)"></textarea>
@@ -32,7 +32,7 @@
             <div class="datepicker"><input type="text" name="startdate" id="startdate" placeholder="Start"></div>
             <div class="datepicker"><input type="text" name="enddate" id="enddate" placeholder="Einde"></div>
         </div>
-        <button type="submit">Toevoegen</button>        
+        <button type="submit">Opslaan</button>        
     </form>
     
     <section class="buzz">
