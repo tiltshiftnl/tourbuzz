@@ -16,7 +16,20 @@
         
         <ul>
             {% for record in berichten %}
-            <li>{{ record.title }} <span class="toelichting">{{ record.body }}</span></li>        
+            
+                {% set title %}
+                    {% if lang == 'nl' %}{{ record.title }}{% endif %}
+                    {% if lang == 'en' %}{{ record.title_en }}{% endif %}
+                    {% if lang == 'fr' %}{{ record.title_fr }}{% endif %}                
+                {% endset %}
+     
+                 {% set body %}
+                    {% if lang == 'nl' %}{{ record.body }}{% endif %}
+                    {% if lang == 'en' %}{{ record.body_en }}{% endif %}
+                    {% if lang == 'fr' %}{{ record.body_fr }}{% endif %}                
+                {% endset %}
+            
+                <li>{{ title }} <span class="toelichting">{{ body }}</span></li>        
             {% endfor %}
         </ul>
     </section>

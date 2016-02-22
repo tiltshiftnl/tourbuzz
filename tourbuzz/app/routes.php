@@ -73,6 +73,8 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
         die('Geen JSON');
     } */
         
+    
+
     $N = date('N', strtotime("{$y}-{$m}-{$d}"));
     
     $day = array (
@@ -82,7 +84,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
     $dag = translate($day[(int)$N - 1]);    
 
     $data = [
-        "test" => "world",
+        "lang" => $_SESSION['lang'],
         "berichten" => $berichten['messages'],
         "volgende" => $volgende,
         "vorige" => $vorige,
@@ -91,6 +93,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
         "d" => $d,
         "m" => $m,
         "y" => $y,
+        "api" => $apiRoot,
         "cruisekalender" => $cruisekalender['items'],
         //"werkzaamheden" => $wegwerkzaamheden['werkzaamheden'],
         //"evenementen" => $evenementen['evenementen'],            
