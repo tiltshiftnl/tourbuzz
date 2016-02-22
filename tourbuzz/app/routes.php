@@ -1,7 +1,6 @@
 <?php 
    
-$apiRoot = "http://api.qcommerz.nl/";
- 
+require_once("config.php"); 
  
 /**
  * Before
