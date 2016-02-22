@@ -40,6 +40,10 @@ $messageFields = [
 	"id",
 	"title",
 	"body",
+	"title_en",
+	"body_en",
+	"title_fr",
+	"body_fr",
 	"startdate",
 	"enddate",
 	"category"
