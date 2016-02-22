@@ -32,10 +32,6 @@
             <div class="datepicker"><input type="text" name="startdate" id="startdate" placeholder="Start"></div>
             <div class="datepicker"><input type="text" name="enddate" id="enddate" placeholder="Einde"></div>
         </div>
-        {#<div class="grid-row">
-            <h4>Bijlage</h4>
-            <input type="file">
-        </div>#}
         <button type="submit">Toevoegen</button>        
     </form>
     
@@ -46,17 +42,12 @@
         <h2>Berichten</h2>
         <ol>
             {% for record in berichten %}
-            <li><input type="checkbox" name="ids[]" value="{{ record.id }}"><span class="nr">{{ loop.index }}</span> {{ record.title }} <span class="meta">{{ record.category }}</span></li>
+            <li>
+                <input type="checkbox" name="ids[]" value="{{ record.id }}">
+                <span class="nr">{{ loop.index }}</span>
+                <a href="berichten/{{ record.id }}">{{ record.title }}</a> <span class="meta">{{ record.category }}</span>
+            </li>
             {% endfor %}
-            
-            {#<li><input type="checkbox"><span class="nr">1</span> Willemsbrug vanaf 10 februari afgesloten <span class="dagen">8 dgn</span></li>
-            <li><input type="checkbox"><span class="nr">2</span> <b>H11</b> Kattenburgerstraat niet beschikbaar</li>
-            <li><input type="checkbox"><span class="nr">3</span> Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat</li>
-            <li><input type="checkbox"><span class="nr">4</span> <b>P9</b> opgeheven, ga naar <b>P10</b> <span class="dagen">2 dgn</span></li>
-            <li><input type="checkbox"><span class="nr">5</span> Aankomst cruise "Braemar" (930 passagiers) PTA 10:00 uur - Parkeren niet mogelijk</li>
-            <li><input type="checkbox"><span class="nr">6</span> <b>H11</b> Kattenburgerstraat niet beschikbaar</li>
-            <li><input type="checkbox"><span class="nr">7</span> Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat</li>
-            <li><input type="checkbox"><span class="nr">8</span> <b>P9</b> opgeheven, ga naar <b>P10</b></li>#}
         </ol>
         </form>
     </section>

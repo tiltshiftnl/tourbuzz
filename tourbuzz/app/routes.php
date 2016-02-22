@@ -29,80 +29,6 @@ $app->get('/', function () use ($app, $apiRoot) {
 });
 
 
-/**
- * Dag
- */
-$app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
-
-    $json = @file_get_contents($apiRoot . "berichten/{$y}/{$m}/{$d}");
-          
-    if ( !empty($json) ) {
-        $berichten = json_decode($json, true);
-    } else {
-       die('Geen JSON');
-    }
-    
-    $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
-    $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
-        
-    //$json = @file_get_contents($apiRoot . 'cruisekalender/'.date('Y').'/'.date('m').'/'.date('d'));    
-    $json = @file_get_contents($apiRoot . "cruisekalender/{$y}/{$m}/{$d}");
-          
-    if ( !empty($json) ) {
-        $cruisekalender = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }
-    
-    /*
-    $json = @file_get_contents($apiRoot . "wegwerkzaamheden/{$y}/{$m}/{$d}");
-    
-    if ( !empty($json) ) {
-        $wegwerkzaamheden = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }*/
-     
-   //$json = @file_get_contents($apiRoot . 'cruisekalender/'.date('Y').'/'.date('m').'/'.date('d'));    
-    /*$json = @file_get_contents($apiRoot . "evenementen/{$y}/{$m}/{$d}");
-       
-      
-    if ( !empty($json) ) {
-        $evenementen = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    } */
-        
-    
-
-    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
-    
-    $day = array (
-        'ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'
-    );
-    
-    $dag = translate($day[(int)$N - 1]);    
-
-    $data = [
-        "lang" => $_SESSION['lang'],
-        "berichten" => $berichten['messages'],
-        "volgende" => $volgende,
-        "vorige" => $vorige,
-        "datestring" => "{$y}-{$m}-{$d}",
-        "dag" => $dag,
-        "d" => $d,
-        "m" => $m,
-        "y" => $y,
-        "api" => $apiRoot,
-        "cruisekalender" => $cruisekalender['items'],
-        //"werkzaamheden" => $wegwerkzaamheden['werkzaamheden'],
-        //"evenementen" => $evenementen['evenementen'],            
-        "template" => "home.twig",
-    ];
-    render($data['template'], $data);
-})->name("home");
-
-
 /*****************
 /* Admin Routes
  ****************/
@@ -208,8 +134,31 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
     render($data['template'], $data);
 })->name("berichten");
 
+
 /**
- * Berichten
+ * Berichten bewerken
+ */ 
+$app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app) {
+  $json = @file_get_contents($apiRoot . 'berichten/'.$id);
+          
+    if ( !empty($json) ) {
+        $berichten = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    }
+    
+    $data = [
+        "test" => "world",
+        "berichten" => $berichten,      
+        "template" => "dashboard/berichten.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Berichten verwijderen
  */ 
 $app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) {
 
@@ -240,3 +189,77 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) 
     $app->redirect("/dashboard/berichten");
     
 });
+
+/**
+ * Dag
+ */
+$app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
+
+    $json = @file_get_contents($apiRoot . "berichten/{$y}/{$m}/{$d}");
+          
+    if ( !empty($json) ) {
+        $berichten = json_decode($json, true);
+    } else {
+       die('Geen JSON');
+    }
+    
+    $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
+    $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
+        
+    //$json = @file_get_contents($apiRoot . 'cruisekalender/'.date('Y').'/'.date('m').'/'.date('d'));    
+    $json = @file_get_contents($apiRoot . "cruisekalender/{$y}/{$m}/{$d}");
+          
+    if ( !empty($json) ) {
+        $cruisekalender = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    }
+    
+    /*
+    $json = @file_get_contents($apiRoot . "wegwerkzaamheden/{$y}/{$m}/{$d}");
+    
+    if ( !empty($json) ) {
+        $wegwerkzaamheden = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    }*/
+     
+   //$json = @file_get_contents($apiRoot . 'cruisekalender/'.date('Y').'/'.date('m').'/'.date('d'));    
+    /*$json = @file_get_contents($apiRoot . "evenementen/{$y}/{$m}/{$d}");
+       
+      
+    if ( !empty($json) ) {
+        $evenementen = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    } */
+        
+    
+
+    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
+    
+    $day = array (
+        'ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'
+    );
+    
+    $dag = translate($day[(int)$N - 1]);    
+
+    $data = [
+        "lang" => $_SESSION['lang'],
+        "berichten" => $berichten['messages'],
+        "volgende" => $volgende,
+        "vorige" => $vorige,
+        "datestring" => "{$y}-{$m}-{$d}",
+        "dag" => $dag,
+        "d" => $d,
+        "m" => $m,
+        "y" => $y,
+        "api" => $apiRoot,
+        "cruisekalender" => $cruisekalender['items'],
+        //"werkzaamheden" => $wegwerkzaamheden['werkzaamheden'],
+        //"evenementen" => $evenementen['evenementen'],            
+        "template" => "home.twig",
+    ];
+    render($data['template'], $data);
+})->name("home");
+
