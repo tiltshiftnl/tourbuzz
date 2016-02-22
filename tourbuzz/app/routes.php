@@ -148,6 +148,10 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
         'category' => $app->request->post('category'),
     	'title' => $app->request->post('title'),
     	'body' => $app->request->post('body'),
+    	'title_en' => $app->request->post('title_en'),
+    	'body_en' => $app->request->post('body_en'),
+    	'title_fr' => $app->request->post('title_fr'),
+    	'body_fr' => $app->request->post('body_fr'),    	    	
     	'startdate' => $app->request->post('startdate'),
     	'enddate' => $app->request->post('enddate'),
     );
