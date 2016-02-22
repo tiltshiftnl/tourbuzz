@@ -10,18 +10,29 @@ function randomHash() {
 	return $hash;
 }
 
+$messageFields = [
+	"id",
+	"title",
+	"body",
+	"startdate",
+	"enddate",
+	"category"
+];
+
 switch ($_SERVER["REQUEST_METHOD"]) {
 	case "POST":
 		$title = $_POST["title"];
 		$body = $_POST["body"];
 		$startdate = $_POST["startdate"];
 		$enddate = $_POST["enddate"];
+		$category = $_POST["category"];
 		$message = [
 			"id" => randomHash(),
 			"title" => $title,
 			"body" => $body,
 			"startdate" => $startdate,
-			"enddate" => $enddate
+			"enddate" => $enddate,
+			"category" => $category
 		];
 		$messagesJson = file_get_contents($filePath);
 		$messages = json_decode($messagesJson);
@@ -33,6 +44,12 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 	case "GET":
 		$messagesJson = file_get_contents($filePath);
 		$messages = json_decode($messagesJson);
+		$messages = array_map(function ($message) {
+			if (!isset($message->category)) {
+				$message->category = "";
+			}
+			return $message;
+		}, $messages);
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$date = date("Y-m-d");
 		if (!empty($uriParts[1])) {
