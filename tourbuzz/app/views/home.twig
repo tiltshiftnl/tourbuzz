@@ -9,7 +9,7 @@
     <section class="buzz">
             
         {% if now|date('y-m-d') == datestring|date('y-m-d') %}
-            <h3>Vandaag</h3>
+            <h3>{{ __('Vandaag') }}</h3>
         {% else %}
             <h3>{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
         {% endif %}

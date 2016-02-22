@@ -1,5 +1,89 @@
 {
   "translations" : {
+    "ma": {
+    	"en": "mon",
+    	"fr": "Lu"
+    },
+    "di": {
+    	"en": "tue",
+    	"fr": "Ma"
+    },
+    "wo": {
+    	"en": "wed",
+    	"fr": "Me"
+    },
+    "do": {
+    	"en": "thu",
+    	"fr": "Jeu"
+    },
+    "vr": {
+    	"en": "fri",
+    	"fr": "Ve"
+    },
+    "za": {
+    	"en": "sat",
+    	"fr": "Sa"
+    },
+    "zo": {
+    	"en": "sun",
+    	"fr": "mD"
+    },
+    "jan" : {
+      "en" : "jan",
+      "fr" : "jan"       
+    },
+    "feb" : {
+      "en" : "feb",
+      "fr" : "fév"        
+    },
+    "mrt" : {
+      "en" : "mar",
+      "fr" : "mar"        
+    },
+    "apr" : {
+      "en" : "apr",
+      "fr" : "avr"        
+    },
+    "mei" : {
+      "en" : "may",
+      "fr" : "mai"
+    },
+    "jun" : {
+      "en" : "jun",
+      "fr" : "jun"        
+    },
+    "jul" : {
+      "en" : "jul",
+      "fr" : "jul"        
+    },
+    "aug" : {
+      "en" : "aug",
+      "fr" : "aoû"        
+    },
+    "sep" : {
+      "en" : "sep",
+      "fr" : "sep"        
+    },
+    "okt" : {
+      "en" : "oct",
+      "fr" : "oct"        
+    },
+    "nov" : {
+      "en" : "nov",
+      "fr" : "nov"        
+    },
+    "dec" : {
+      "en" : "dec",
+      "fr" : "déc"        
+    },
+    "Kijk op" : {
+      "en" : "Check our website ",
+      "fr" : "Consultez le site "   
+    },
+    "Vandaag" : {
+      "en" : "Today",
+      "fr" : "Aujourd'hui"      
+    },
     "Kies een bestemming" : {
       "en" : "Choose your destination",
       "fr" : "Choisissez votre destination"

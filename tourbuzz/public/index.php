@@ -41,7 +41,7 @@ function maand($m) {
         'dec'
     );
     
-    return $month[(int)$m - 1];
+    return translate($month[(int)$m - 1]);
 }
 
 $twig = $app->view()->getEnvironment();

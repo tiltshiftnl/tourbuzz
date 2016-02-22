@@ -14,7 +14,7 @@ $app->hook('slim.before.dispatch', function() use ($app) {
     if (isset($lang) && in_array($lang, array('nl', 'fr', 'en'))) {
         $_SESSION['lang'] = $lang;
     }
-    
+    //$app->view->setData($lang);
 });
 
 
@@ -76,7 +76,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
         'ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'
     );
     
-    $dag = $day[(int)$N - 1];    
+    $dag = translate($day[(int)$N - 1]);    
 
     $data = [
         "test" => "world",
