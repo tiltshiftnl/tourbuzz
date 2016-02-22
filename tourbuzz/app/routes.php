@@ -143,7 +143,7 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
     	'enddate' => $app->request->post('enddate'),
     );
     
-    die(print_r($fields));
+    //die(print_r($fields));
     
     if ( empty ($fields['title']) ) {
         $feedback = 'Je hebt geen titel ingevuld';

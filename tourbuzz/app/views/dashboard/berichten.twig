@@ -37,7 +37,7 @@
         <h2>Berichten</h2>
         <ol>
             {% for record in berichten %}
-            <li><input type="checkbox" name="ids[]" value="{{ record.id }}"><span class="nr">{{ loop.index }}</span> {{ record.title }}</li>
+            <li><input type="checkbox" name="ids[]" value="{{ record.id }}"><span class="nr">{{ loop.index }}</span> {{ record.title }} <span class="meta">{{ record.category }}</span></li>
             {% endfor %}
             
             {#<li><input type="checkbox"><span class="nr">1</span> Willemsbrug vanaf 10 februari afgesloten <span class="dagen">8 dgn</span></li>
