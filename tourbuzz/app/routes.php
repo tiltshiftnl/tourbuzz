@@ -36,7 +36,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
     if ( !empty($json) ) {
         $berichten = json_decode($json, true);
     } else {
-        die('Geen JSON');
+       die('Geen JSON');
     }
     
     $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
@@ -83,6 +83,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
         "berichten" => $berichten['messages'],
         "volgende" => $volgende,
         "vorige" => $vorige,
+        "datestring" => "{$y}-{$m}-{$d}",
         "dag" => $dag,
         "d" => $d,
         "m" => $m,
