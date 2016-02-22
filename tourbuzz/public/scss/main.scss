@@ -328,6 +328,58 @@ ol {
     text-transform: lowercase;  
 }
 
+.tab-navigation {
+  margin-bottom: 20px;
+}
+.tab-navigation .tabselect {
+  border-bottom: 1px solid #ccc;
+}
+.tab-navigation .tabselect li {
+  list-style: none;
+  float: left;
+  margin-right: 2px;
+}
+.tab-navigation .tabselect a {
+  background-color: #dee2e8;
+  font-size: 12px;
+  padding: 8px;
+}
+.tab-navigation .tabselect a:hover,
+.tab-navigation .tabselect a.active {
+  color: #fff;
+  background-color: #6F8397;
+}
+.tab-navigation .tabselect a:hover .count,
+.tab-navigation .tabselect a.active .count {
+  color: #fff;
+}
+.tab-navigation .tabselect .selected {
+  background-color: #333;
+  color: #fff;
+}
+.tab-navigation .tabselect .count {
+  font-size: 11px;
+  color: #7D7D7D;
+}
+.tab-navigation .tabselect .zero a {
+  color: #ccc;
+  background: #eee;
+  cursor: inherit;
+}
+.tab-navigation .tabselect .zero .count {
+  display: none;
+}
+.tab-navigation .tab {
+  display: none;
+}
+.tab-navigation .tab.active {
+  display: block;
+}
+.tab-navigation .tab .record a {
+  clear: left;
+  display: block;
+}
+
 footer {
     p {
         font-size: 14px;
