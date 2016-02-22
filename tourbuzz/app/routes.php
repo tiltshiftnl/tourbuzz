@@ -87,6 +87,7 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
     	'body_fr' => $app->request->post('body_fr'),    	    	
     	'startdate' => $app->request->post('startdate'),
     	'enddate' => $app->request->post('enddate'),
+    	'id' => $app->request->post('id'),
     );
     
     //die(print_r($fields));

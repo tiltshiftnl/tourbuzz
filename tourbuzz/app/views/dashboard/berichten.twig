@@ -3,7 +3,8 @@
 {% block main %}
 <main class="wrapper app-wrapper"> 
  
-    <form class="form-styles" method="post">
+    <form class="form-styles" method="post" action="/dashboard/berichten">
+        <input type="hidden" name="id" value="{{ bericht.id }}">
         {{ feedback }}
         <h3>Nieuw bericht</h3>
         <div class="grid-row">
