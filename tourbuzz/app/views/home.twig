@@ -4,27 +4,24 @@
 
 <main class="wrapper app-wrapper">
     
-    <img src="/img/tourbuzzkaart.png" class="buzzmap">
- 
-    {# include 'partials/article.twig' #}
-    
+    {#<img src="/img/tourbuzzkaart.png" class="buzzmap">#}
+     
     <section class="buzz">
-        <h3>Vandaag</h3>
+            
+        {% if now|date('y-m-d') == datestring|date('y-m-d') %}
+            <h3>{{ __('Vandaag') }}</h3>
+        {% else %}
+            <h3>{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
+        {% endif %}
+        
         <ul>
             {% for record in berichten %}
             <li>{{ record.title }} <span class="toelichting">{{ record.body }}</span></li>        
             {% endfor %}
         </ul>
-        
-       {# <ul>
-            <li>Willemsbrug vanaf 10 februari afgesloten</li>
-            <li>Aankomst cruise "Braemar" (930 passagiers) PTA 10:00 uur - Parkeren niet mogelijk</li>
-            <li><b>H11</b> Kattenburgerstraat niet beschikbaar</li>
-            <li>Werkzaamheden Houtmankade, omleiding via Spaarndammerstraat <span class="meta-link">bekijk omleiding</span></li>
-            <li><b>P9</b> opgeheven, ga naar <b>P10</b> <span class="meta-link">bekijk op kaart</span></li>
-        </ul>#}
     </section>
     
+    {% if cruisekalender is not empty %}
     <section class="cruiseschepen">
         <h3><i class="fa fa-ship"></i> Passengers Terminal Amsterdam</h3>
         <ul>
@@ -35,25 +32,7 @@
         {% endfor %}
         </ul>
     </section>
-    
-   {#<section class="wegwerkzaamheden article-text">
-        <h3>Wegwerkzaamheden</h3>
-        <ul>
-        {% for record in werkzaamheden %}
-            <li>{{ record.locatiewerkzaamheden }} - {{ record.soortwerkzaamheden }}</li>
-        {% endfor %}
-        </ul>
-    </section>
-    
-   <section class="evenementen article-text">
-        <h3>Evenementen</h3>
-        <ul>
-        {% for record in evenementen %}
-            <li>{{ record.title }} - <span style="color: #aaa; font-size: 12px">{{ record.dates.startdate }} t/m {{ record.dates.enddate }} </span></li>
-        {% endfor %}
-        </ul>
-    </section>#}
-
+    {% endif %}
     
 </main>
 

@@ -5,11 +5,14 @@
 		<meta name="viewport" content="initial-scale=1">
         <meta name="mobile-web-app-capable" content="yes">
         <!--<link href="/favicon.ico" rel="icon" type="image/x-icon">-->	
-		<title></title>
+		<title>TourBuzz</title>
+		<meta name="description" content="TourBuzz for coach drivers">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">		
 		<link href="/css/scss/main.scss" rel="stylesheet">
+		<link href="/js/pikaday/css/pikaday.css" rel="stylesheet">		
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="/js/pico-ui.js"></script>			
+		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>        
+        <script src="/js/pico-ui.js"></script>     			
 	</head>
 	<body>
 	    {% include 'partials/grid.twig' %}
@@ -29,5 +32,23 @@
 		{% endblock %}
 		
 		{% block main %}{% endblock %}
+		
+		{% block footer %}
+		    <footer class="wrapper app-wrapper">
+		        <p>{{ __('Kijk op') }} <a href="//www.amsterdam.nl/touringcars">www.amsterdam.nl/touringcars</a></p>
+		    </footer>
+		{% endblock %}
+		
+        <script src="/js/pikaday/pikaday.js"></script>
+        <script>
+            var startdate = new Pikaday({ 
+                field: document.getElementById('startdate'),
+                format: 'YYYY-MM-DD'
+            });
+            var enddate = new Pikaday({ 
+                field: document.getElementById('enddate'),
+                format: 'YYYY-MM-DD'
+            });
+        </script>   
 	</body>
 </html>

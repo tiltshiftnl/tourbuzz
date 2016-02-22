@@ -14,7 +14,7 @@ $app->hook('slim.before.dispatch', function() use ($app) {
     if (isset($lang) && in_array($lang, array('nl', 'fr', 'en'))) {
         $_SESSION['lang'] = $lang;
     }
-    
+    //$app->view->setData($lang);
 });
 
 
@@ -36,7 +36,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
     if ( !empty($json) ) {
         $berichten = json_decode($json, true);
     } else {
-        die('Geen JSON');
+       die('Geen JSON');
     }
     
     $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
@@ -76,13 +76,14 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
         'ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'
     );
     
-    $dag = $day[(int)$N - 1];    
+    $dag = translate($day[(int)$N - 1]);    
 
     $data = [
         "test" => "world",
         "berichten" => $berichten['messages'],
         "volgende" => $volgende,
         "vorige" => $vorige,
+        "datestring" => "{$y}-{$m}-{$d}",
         "dag" => $dag,
         "d" => $d,
         "m" => $m,
@@ -147,6 +148,10 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
         'category' => $app->request->post('category'),
     	'title' => $app->request->post('title'),
     	'body' => $app->request->post('body'),
+    	'title_en' => $app->request->post('title_en'),
+    	'body_en' => $app->request->post('body_en'),
+    	'title_fr' => $app->request->post('title_fr'),
+    	'body_fr' => $app->request->post('body_fr'),    	    	
     	'startdate' => $app->request->post('startdate'),
     	'enddate' => $app->request->post('enddate'),
     );
@@ -166,6 +171,7 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
         $ch = curl_init();
         
         //set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);        
         curl_setopt($ch,CURLOPT_URL, $url);
         curl_setopt($ch,CURLOPT_POST, count($fields));
         curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);

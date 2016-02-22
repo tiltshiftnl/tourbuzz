@@ -27,21 +27,21 @@ function maand($m) {
         return "Geen datum";   
     }
     $month = array (
-        'januari',
-        'februari',
-        'maart',
-        'april',
+        'jan',
+        'feb',
+        'mrt',
+        'apr',
         'mei',
-        'juni',
-        'juli',
-        'augustus',
-        'september',
-        'oktober',
-        'november',
-        'december'
+        'jun',
+        'jul',
+        'aug',
+        'sep',
+        'okt',
+        'nov',
+        'dec'
     );
     
-    return $month[(int)$m - 1];
+    return translate($month[(int)$m - 1]);
 }
 
 $twig = $app->view()->getEnvironment();

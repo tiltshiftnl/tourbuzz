@@ -270,9 +270,14 @@ ol {
     textarea {
         padding: 10px;
         border: 1px solid #aaa;
-        @extend .text-body;   
+        @extend .text-body;
+        overflow: auto;
+        resize: vertical;   
     }
-    input, textarea {
+    select {
+         @extend .text-body;                            
+    }
+    input {
         margin-bottom: $margin-small;   
     }
     input + button {
@@ -285,6 +290,12 @@ ol {
         margin-top: 10px;
         @extend .button;
     }   
+}
+
+.datepicker {
+    width: 30%;
+    float: left;
+    margin-right: 10%;   
 }
 
 .maxchars, .verwijder {
@@ -308,10 +319,21 @@ ol {
     border: 0;
     background: $rood;
     color: #fff;
-    padding: 5px 10px; 
+    padding: 10px 20px; 
     font-size: 16px;
     font-weight: bold;
     text-transform: lowercase;  
+}
+
+footer {
+    p {
+        font-size: 14px;
+        color: #888;
+        text-align: center;
+    }
+    a {
+        text-decoration: underline;
+    }
 }
 
 // Syntax cheatsheet
