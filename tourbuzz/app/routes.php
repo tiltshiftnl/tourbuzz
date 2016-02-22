@@ -141,17 +141,28 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
  * Berichten bewerken
  */ 
 $app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app) {
-  $json = @file_get_contents($apiRoot . 'berichten/'.$id);
+    
+    $json = @file_get_contents($apiRoot . 'berichten/'.$id);
             
+    if ( !empty($json) ) {
+        $bericht = json_decode($json, true);
+    } else {
+        die('Geen JSON');
+    }
+
+    $json = @file_get_contents($apiRoot . 'berichten/');
+          
     if ( !empty($json) ) {
         $berichten = json_decode($json, true);
     } else {
         die('Geen JSON');
     }
     
+    
     $data = [
         "test" => "world",
-        "bericht" => $berichten['message'],      
+        "bericht" => $bericht['message'],
+        "berichten" => $berichten['messages'],      
         "template" => "dashboard/berichten.twig",
     ];
 

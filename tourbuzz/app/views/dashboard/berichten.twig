@@ -18,20 +18,25 @@
             </select>
         </div>
         
-        <input type="text" name="title" placeholder="Bericht" value="{% if bericht.title %}{{ bericht.title }}{% endif %}">
-        <textarea name="body" placeholder="Toelichting (optioneel)">{% if bericht.body %}{{ bericht.body }}{% endif %}</textarea>
+        <input type="text" name="title" placeholder="Bericht" value="{{ bericht.title }}">
+        <textarea name="body" placeholder="Toelichting (optioneel)">{{ bericht.body }}</textarea>
         
-        <input type="text" name="title_en" placeholder="Bericht (engels)">
-        <textarea name="body_en" placeholder="Toelichting (engels)"></textarea>
+        <input type="text" name="title_en" placeholder="Bericht (engels)" value="{{ bericht_en.title  }}">
+        <textarea name="body_en" placeholder="Toelichting (engels)">{{ bericht_en.body  }}</textarea>
         
-        <input type="text" name="title_fr" placeholder="Bericht (frans)">
-        <textarea name="body_fr" placeholder="Toelichting (frans)"></textarea>        
+        <input type="text" name="title_fr" placeholder="Bericht (frans)" value="{{ bericht_fr.title  }}">
+        <textarea name="body_fr" placeholder="Toelichting (frans)" value="{{ bericht_fr.body  }}"></textarea>        
         
         <span class="maxchars">Max 200 karakters</span>
+        
         <div class="grid-row group">
             <h3 style="margin-top: 20px">Publicatiedatum</h3>
-            <div class="datepicker"><input type="text" name="startdate" id="startdate" placeholder="Start"></div>
-            <div class="datepicker"><input type="text" name="enddate" id="enddate" placeholder="Einde"></div>
+            <div class="datepicker">
+                <input type="text" name="startdate" id="startdate" placeholder="Start" value="{{ bericht.startdate }}">
+            </div>
+            <div class="datepicker">
+                <input type="text" name="enddate" id="enddate" placeholder="Einde" value="{{ bericht.enddate }}">
+            </div>
         </div>
         <button type="submit">Opslaan</button>        
     </form>
@@ -46,7 +51,7 @@
             <li>
                 <input type="checkbox" name="ids[]" value="{{ record.id }}">
                 <span class="nr">{{ loop.index }}</span>
-                <a href="berichten/{{ record.id }}">{{ record.title }}</a> <span class="meta">{{ record.category }}</span>
+                <a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a> <span class="meta">{{ record.category }}</span>
             </li>
             {% endfor %}
         </ol>
