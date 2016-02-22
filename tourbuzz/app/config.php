@@ -1,3 +1,3 @@
 <?php 
    
-$apiRoot = "http://api.fixxx.nl/";
+$apiRoot = "http://api.dev.fixxx.nl/";

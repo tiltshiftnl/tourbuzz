@@ -19,9 +19,10 @@
         <input type="text" name="title" placeholder="Bericht">
         <textarea name="body" placeholder="Toelichting (optioneel)"></textarea>
         <span class="maxchars">Max 200 karakters</span>
-        <div class="grid-row">
-        start <input type="datetime" placeholder="jjjj-mm-dd" name="startdate">&nbsp;&nbsp;
-        eind <input type="datetime" placeholder="jjjj-mm-dd" name="enddate">
+        <div class="grid-row group">
+            <h3 style="margin-top: 20px">Publicatiedatum</h3>
+            <div class="datepicker"><input type="text" name="startdate" id="startdate" placeholder="Start"></div>
+            <div class="datepicker"><input type="text" name="enddate" id="enddate" placeholder="Einde"></div>
         </div>
         {#<div class="grid-row">
             <h4>Bijlage</h4>
