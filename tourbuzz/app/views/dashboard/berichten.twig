@@ -6,16 +6,16 @@
     <form class="form-styles" method="post">
         {{ feedback }}
         <h3>Nieuw bericht</h3>
-        {#<div class="grid-row">
-            <select>
-                <option>Nieuws</option>
-                <option>Evenement</option>
-                <option>Demonstratie</option>
-                <option>Calamiteit / ongeluk</option>
-                <option>Wegwerkzaamheden</option>
-                <option>Overig</option>                
+        <div class="grid-row">
+            <select name="category">
+                <option value="nieuws">Nieuws</option>
+                <option value="evenement">Evenement</option>
+                <option value="drukte">Drukte</option>
+                <option value="calamiteit">Calamiteit / ongeluk</option>
+                <option value="wegwerkzaamheden">Wegwerkzaamheden</option>
+                <option value="overig">Overig</option>                
             </select>
-        </div>#}
+        </div>
         <input type="text" name="title" placeholder="Bericht">
         <textarea name="body" placeholder="Toelichting (optioneel)"></textarea>
         <span class="maxchars">Max 200 karakters</span>
