@@ -314,6 +314,17 @@ ol {
     text-transform: lowercase;  
 }
 
+footer {
+    p {
+        font-size: 14px;
+        color: #888;
+        text-align: center;
+    }
+    a {
+        text-decoration: underline;
+    }
+}
+
 // Syntax cheatsheet
 
 // .sectionclass {
