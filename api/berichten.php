@@ -77,6 +77,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			}
 			return $message;
 		}, $messages);
+		uasort($messages, function ($messageA, $messageB) {
+			return $messageA->startdate < $messageB->startdate;
+		});
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$date = date("Y-m-d");
 		if (!empty($uriParts[1])) {

@@ -1,8 +1,9 @@
 <?php 
    
 require_once("config/config.php");
-if (file_exists("config/config_local.php")) { 
-	require_once("config/config_local.php");
+$localConfigFilePath = __DIR__ . "/config/config_local.php";
+if (file_exists($localConfigFilePath)) {
+	require_once($localConfigFilePath);
 }
  
 /**
