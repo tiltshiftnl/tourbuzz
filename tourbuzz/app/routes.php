@@ -1,6 +1,9 @@
 <?php 
    
-require_once("config.php"); 
+require_once("config/config.php");
+if (file_exists("config/config_local.php")) { 
+	require_once("config/config_local.php");
+}
  
 /**
  * Before
