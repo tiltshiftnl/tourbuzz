@@ -23,9 +23,9 @@
     		        <a href="/" class="home"><i class="fa fa-bus"></i></a>
     		        <h2>Tour Buzz<span><a href="{{ vorige }}"><i class="fa fa-chevron-left"></i></a>{{ dag }} {{ d }} {{ maand(m) }} {{ y }} <a href="{{ volgende }}"><i class="fa fa-chevron-right"></i></a></span></h2>
     		        <nav class="taal">
-    		            <a href="?lang=nl">nl</a>
-    		            <a href="?lang=en">en</a>
-    		            <a href="?lang=fr">fr</a>
+    		            <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}>nl</a>
+    		            <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}>en</a>
+    		            <a href="?lang=fr" {% if lang =='fr' %}class="active"{% endif %}>fr</a>
     		        </nav>
 		        </div>
 		    </header>

@@ -213,7 +213,10 @@ ol {
         a {
             font-size: 15px;
             line-height: 50px;   
-        } 
+        }
+        .active {
+            font-weight: bold;       
+        }
     }
 }
 
