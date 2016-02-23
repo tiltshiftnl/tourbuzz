@@ -415,6 +415,18 @@ ol {
     }   
 }
 
+.halte-link {
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #3a5495 0%, #3669ac 100%) repeat scroll 0 0;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 5px;
+    min-width: 35px;
+    padding: 0 9px;
+    text-align: center;    
+}
+
 footer {
     p {
         font-size: 14px;
