@@ -40,16 +40,14 @@ $app->get('/', function () use ($app, $apiRoot) {
 $app->get('/dashboard/login', function () use ($apiRoot) {
     
     $data = [
-        "test" => "world",       
         "template" => "dashboard/login.twig",
     ];
     render($data['template'], $data);
 })->name("login");
 
-/**
- * Berichten
- */ 
-$app->get('/dashboard/berichten', function () use ($apiRoot) {
+function renderMessages($fields = array()) {
+    
+    global $apiRoot;
     
     $json = @file_get_contents($apiRoot . 'berichten/');
           
@@ -60,18 +58,26 @@ $app->get('/dashboard/berichten', function () use ($apiRoot) {
     }
     
     $data = [
-        "test" => "world",
-        "berichten" => $berichten['messages'],      
+        "berichten" => $berichten['messages'], 
+        "bericht" => $fields,     
         "template" => "dashboard/berichten.twig",
     ];
+    
+    render($data['template'], $data);   
+}
 
-    render($data['template'], $data);
+
+/**
+ * Berichten get
+ */ 
+$app->get('/dashboard/berichten', function () use ($app, $apiRoot) {    
+    renderMessages();
 })->name("berichten");
 
 /**
- * Berichten
+ * Berichten post
  */ 
-$app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
+$app->post('/dashboard/berichten', function () use ($apiRoot, $app) {
 
     //extract data from the post
     //set POST variables
@@ -92,7 +98,8 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
     );
         
     if ( empty ($fields['title']) ) {
-        $feedback = 'Je hebt geen titel ingevuld';
+        $app->flashNow('error', 'Titel is niet ingevuld');    
+        renderMessages($fields);
     } else {
     
         //url-ify the data for the POST
@@ -115,7 +122,9 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
 
         //close connection
         curl_close($ch);
-        $app->redirect("/dashboard/berichten/".$message->id);    
+        
+        $app->flash('info', 'Your credit card is expired');
+        $app->redirect("/dashboard/berichten");    
         
     }
         
