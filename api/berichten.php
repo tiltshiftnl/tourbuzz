@@ -121,7 +121,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 				$message->{$field} = preg_replace(
 					"/(H[0-9]+)/",
 					"<a href=\"{$coachUri}/haltes/$1\" class=\"halte-link\">$1</a>",
-					$message->body
+					$message->{$field}
 				);
 				$message->{$field} = preg_replace(
 					"/(P[0-9]+)/",
