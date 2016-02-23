@@ -24,9 +24,9 @@
                 {% endset %}
      
                  {% set body %}
-                    {% if lang == 'nl' %}{{ record.body }}{% endif %}
-                    {% if lang == 'en' %}{{ record.body_en }}{% endif %}
-                    {% if lang == 'fr' %}{{ record.body_fr }}{% endif %}                
+                    {% if lang == 'nl' %}{{ record.body|raw }}{% endif %}
+                    {% if lang == 'en' %}{{ record.body_en|raw }}{% endif %}
+                    {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}                
                 {% endset %}
             
                 <li>{{ title }} <span class="toelichting">{{ body }}</span></li>        
