@@ -18,7 +18,10 @@ function loadMessages() {
 	global $filePath;
 	$messagesJson = file_get_contents($filePath);
 	$messages = json_decode($messagesJson);
-	if (!$messages) $messages = []; // FIXME backup here?
+	if (!$messages) {
+		$messages = []; // FIXME backup here?
+	}
+	$messages = (array) $messages;
 	return $messages;
 }
 
@@ -33,6 +36,12 @@ function backupMessagesFile() {
 function saveMessages($messages) {
 	global $filePath;
 	backupMessagesFile();
+	$messages = array_combine(
+		array_map(function ($message) {
+			return $message->id;
+		}, $messages),
+		array_values($messages)
+	);
 	file_put_contents($filePath, json_encode($messages));
 }
 
@@ -46,7 +55,8 @@ $messageFields = [
 	"body_fr",
 	"startdate",
 	"enddate",
-	"category"
+	"category",
+	"link"
 ];
 
 $messages = loadMessages();
@@ -61,15 +71,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		if (empty($message["id"])) {
 			$message["id"] = randomHash();
 		}
-		$update = false;
-		foreach ($messages as &$existingMessage) {
-			if ($existingMessage->id === $message["id"]) {
-				$existingMessage = $message;
-				$update = true;
-				break;
-			}
-		}
-		if (!$update) $messages[] = $message;
+		$messages[$message["id"]] = $message;
 		saveMessages($messages);
 		header("Content-type: application/json");
 		echo json_encode($message);
@@ -98,14 +100,12 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			}));
 		} else if (!empty($uriParts[1]) && strlen($uriParts[1]) === 40) {
 			$id = $uriParts[1];
-			foreach ($messages as $message) {
-				if ($message->id !== $id) continue;
-				header("Content-type: application/json");
-				echo json_encode([
-					"message" => $message
-				]);
-				exit;
-			}
+			$message = $messages[$id];
+			header("Content-type: application/json");
+			echo json_encode([
+				"message" => $message
+			]);
+			exit;
 		}
 		header("Content-type: application/json");
 		echo json_encode([
@@ -121,9 +121,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$id = $uriParts[1];
 		$ids = $id ? [$id] : $_GET["ids"];
-		$messages = array_values(array_filter($messages, function ($message) use ($ids) {
-			return !in_array($message->id, $ids);
-		}));
+		$messages = array_diff_key($messages, array_flip($ids));
 		saveMessages($messages);
 		exit;
 }
