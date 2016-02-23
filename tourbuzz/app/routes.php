@@ -10,7 +10,6 @@ if (file_exists($localConfigFilePath)) {
  * Before
  */
 $app->hook('slim.before', function() use ($app) { 
-    session_start();
     if (empty($_SESSION['lang'])) {
         $_SESSION['lang'] = 'nl';
     }
@@ -18,7 +17,6 @@ $app->hook('slim.before', function() use ($app) {
     if (isset($lang) && in_array($lang, array('nl', 'fr', 'en'))) {
         $_SESSION['lang'] = $lang;
     }
-    //$app->view->setData($lang);
 });
 
 
@@ -70,7 +68,7 @@ function renderMessages($fields = array()) {
 /**
  * Berichten get
  */ 
-$app->get('/dashboard/berichten', function () use ($app, $apiRoot) {    
+$app->get('/dashboard/berichten', function () use ($app, $apiRoot) {
     renderMessages();
 })->name("berichten");
 
@@ -123,7 +121,7 @@ $app->post('/dashboard/berichten', function () use ($apiRoot, $app) {
         //close connection
         curl_close($ch);
         
-        $app->flash('info', 'Your credit card is expired');
+        $app->flash('success', 'Bericht toegevoegd');    
         $app->redirect("/dashboard/berichten");    
         
     }

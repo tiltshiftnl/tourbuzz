@@ -392,6 +392,29 @@ ol {
   display: block;
 }
 
+.flashmessages {
+    clear: both;
+    @extend .group;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    .error {
+        //border: 1px solid #f38686;
+        background: #fcdede;
+        color: #DA4C4C;
+        text-align: center;
+        padding: 5px;
+        font-weight: bold;                
+    }
+    .success {
+        //border: 1px solid #7b9879;
+        background: #c6dac5;
+        color: #5c6f5b;
+        text-align: center;
+        padding: 5px;
+        font-weight: bold;        
+    }   
+}
+
 footer {
     p {
         font-size: 14px;
