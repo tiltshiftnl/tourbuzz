@@ -278,7 +278,16 @@ ol {
         resize: vertical;   
     }
     select {
-         @extend .text-body;                            
+        @extend .text-body;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+        background: url('/img/down.png') no-repeat 95% 50%;
+        background-size: 16px;
+        border-radius: 0;
+        background-color: #fff;
+        padding: 10px;
+        border: 1px solid #aaa;
     }
     input {
         margin-bottom: $margin-small;   
@@ -329,10 +338,13 @@ ol {
 }
 
 .tab-navigation {
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
 }
 .tab-navigation .tabselect {
-  border-bottom: 1px solid #ccc;
+  @extend .group;    
+  border-bottom: 1px solid #dee2e8;
+  margin: 10px 0;
+  padding: 0 0 2px;
 }
 .tab-navigation .tabselect li {
   list-style: none;
