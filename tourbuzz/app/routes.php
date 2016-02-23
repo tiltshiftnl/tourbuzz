@@ -90,9 +90,7 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
     	'id' => $app->request->post('id'),
     	'link' => $app->request->post('link'),
     );
-    
-    //die(print_r($fields));
-    
+        
     if ( empty ($fields['title']) ) {
         $feedback = 'Je hebt geen titel ingevuld';
     } else {
@@ -113,28 +111,14 @@ $app->post('/dashboard/berichten/', function () use ($apiRoot, $app) {
         
         //execute post
         $result = curl_exec($ch);
-        
+        $message = json_decode($result);
+
         //close connection
         curl_close($ch);
+        $app->redirect("/dashboard/berichten/".$message->id);    
         
-        $feedback = 'Bericht toegevoegd';
     }
-    
-    $json = @file_get_contents($apiRoot . 'berichten/');
-          
-    if ( !empty($json) ) {
-        $berichten = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }
-    
-    $data = [
-        "test" => "world",
-        "feedback" => $feedback,
-        "berichten" => $berichten['messages'],      
-        "template" => "dashboard/berichten.twig",
-    ];
-    render($data['template'], $data);
+        
 })->name("berichten");
 
 
@@ -220,7 +204,6 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
     $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
     $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
         
-    //$json = @file_get_contents($apiRoot . 'cruisekalender/'.date('Y').'/'.date('m').'/'.date('d'));    
     $json = @file_get_contents($apiRoot . "cruisekalender/{$y}/{$m}/{$d}");
           
     if ( !empty($json) ) {
@@ -228,26 +211,6 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
     } else {
         die('Geen JSON');
     }
-    
-    /*
-    $json = @file_get_contents($apiRoot . "wegwerkzaamheden/{$y}/{$m}/{$d}");
-    
-    if ( !empty($json) ) {
-        $wegwerkzaamheden = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }*/
-     
-   //$json = @file_get_contents($apiRoot . 'cruisekalender/'.date('Y').'/'.date('m').'/'.date('d'));    
-    /*$json = @file_get_contents($apiRoot . "evenementen/{$y}/{$m}/{$d}");
-       
-      
-    if ( !empty($json) ) {
-        $evenementen = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    } */
-        
     
 
     $N = date('N', strtotime("{$y}-{$m}-{$d}"));

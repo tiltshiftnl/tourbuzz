@@ -1,6 +1,10 @@
 <?php 
    
-$apiRoot = "http://api.qcommerz.nl/";
+require_once("config/config.php");
+$localConfigFilePath = __DIR__ . "/config/config_local.php";
+if (file_exists($localConfigFilePath)) {
+	require_once($localConfigFilePath);
+}
  
  
 /**
@@ -25,7 +29,7 @@ $app->hook('slim.before', function() use ($app) {
 $app->get('/', function () use ($apiRoot) {
     
     $json = @file_get_contents($apiRoot . 'attracties/');
-        
+       
     if ( !empty($json) ) {
         $bestemmingen = json_decode($json, true);
     } else {
