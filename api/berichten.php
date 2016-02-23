@@ -4,6 +4,7 @@ ini_set("error_reporting", 1);
 ini_set("display_errors", E_ALL);
 
 $filePath = "files/messages.json";
+$coachUri = "http://coach.fixxx.nl";
 
 function randomHash() {
 	$alphabet = "0123456789abcdefg";
@@ -96,13 +97,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		});
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$date = date("Y-m-d");
-		if (!empty($uriParts[1]) && strlen($uriParts[1]) === 4) {
-			$date = "{$uriParts[1]}-{$uriParts[2]}-{$uriParts[3]}";
-			$messages = array_values(array_filter($messages, function ($message) use ($date) {
-				return $message->startdate <= $date &&
-				       $message->enddate >= $date;
-			}));
-		} else if (!empty($uriParts[1]) && strlen($uriParts[1]) === 40) {
+		// Get One and Exit.
+		if (!empty($uriParts[1]) && strlen($uriParts[1]) === 40) {
 			$id = $uriParts[1];
 			$message = $messages[$id];
 			header("Content-type: application/json");
@@ -111,6 +107,28 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			]);
 			exit;
 		}
+		// Filter by date.
+		if (!empty($uriParts[1]) && strlen($uriParts[1]) === 4) {
+			$date = "{$uriParts[1]}-{$uriParts[2]}-{$uriParts[3]}";
+			$messages = array_values(array_filter($messages, function ($message) use ($date) {
+				return $message->startdate <= $date &&
+				       $message->enddate >= $date;
+			}));
+		}
+		// Links to halte
+		$messages = array_map(function ($message) {
+			$message->body = preg_replace(
+				"/(H[0-9]+)/",
+				"<a href=\"{$coachUri}/haltes/$1\" class=\"halte\">$1</a>",
+				$message->body
+			);
+			$message->body = preg_replace(
+				"/(P[0-9]+)/",
+				"<a href=\"{$coachUri}/parkeerplaatsen/$1\" class=\"parkeerplaats\">$1</a>",
+				$message->body
+			);
+			return $message;
+		}, $messages);
 		header("Content-type: application/json");
 		echo json_encode([
 			"_date" => $date,
