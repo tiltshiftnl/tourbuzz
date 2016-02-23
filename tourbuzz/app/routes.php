@@ -190,7 +190,8 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) 
     
     //close connection
     curl_close($ch);
-        
+
+    $app->flash('success', 'Bericht(en) verwijderd');        
     $app->redirect("/dashboard/berichten");
     
 });
