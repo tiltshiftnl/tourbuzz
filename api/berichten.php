@@ -117,16 +117,18 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		}
 		// Links to halte
 		$messages = array_map(function ($message) {
-			$message->body = preg_replace(
-				"/(H[0-9]+)/",
-				"<a href=\"{$coachUri}/haltes/$1\" class=\"halte\">$1</a>",
-				$message->body
-			);
-			$message->body = preg_replace(
-				"/(P[0-9]+)/",
-				"<a href=\"{$coachUri}/parkeerplaatsen/$1\" class=\"parkeerplaats\">$1</a>",
-				$message->body
-			);
+			foreach (['body', 'body_en', 'body_fr'] as $field) { //FIXME magic array
+				$message->{$field} = preg_replace(
+					"/(H[0-9]+)/",
+					"<a href=\"{$coachUri}/haltes/$1\" class=\"halte\">$1</a>",
+					$message->body
+				);
+				$message->{$field} = preg_replace(
+					"/(P[0-9]+)/",
+					"<a href=\"{$coachUri}/parkeerplaatsen/$1\" class=\"parkeerplaats\">$1</a>",
+					$message->{$field}
+				);
+			}
 			return $message;
 		}, $messages);
 		header("Content-type: application/json");
