@@ -33,15 +33,19 @@ function backupMessagesFile() {
 	}
 }
 
-function saveMessages($messages) {
-	global $filePath;
-	backupMessagesFile();
-	$messages = array_combine(
+function indexMessages($messages) {
+	return array_combine(
 		array_map(function ($message) {
 			return $message->id;
 		}, $messages),
 		array_values($messages)
 	);
+}
+
+function saveMessages($messages) {
+	global $filePath;
+	backupMessagesFile();
+	$messages = indexMessages($messages); //FIXME remove this later.
 	file_put_contents($filePath, json_encode($messages));
 }
 
