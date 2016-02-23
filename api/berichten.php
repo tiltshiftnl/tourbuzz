@@ -63,15 +63,15 @@ $messages = loadMessages();
 
 switch ($_SERVER["REQUEST_METHOD"]) {
 	case "POST":
-		$message = [];
+		$message = (object) [];
 		foreach ($messageFields as $messageField) {
-			$message[$messageField] = !empty($_POST[$messageField]) ?
+			$message->{$messageField} = !empty($_POST[$messageField]) ?
 				$_POST[$messageField] : "";
 		}
-		if (empty($message["id"])) {
-			$message["id"] = randomHash();
+		if (empty($message->id)) {
+			$message->id = randomHash();
 		}
-		$messages[$message["id"]] = $message;
+		$messages[$message->id] = $message;
 		saveMessages($messages);
 		header("Content-type: application/json");
 		echo json_encode($message);
