@@ -3,6 +3,9 @@
 ini_set("error_reporting", E_ALL);
 ini_set("display_errors", 1);
 
+session_cache_limiter(false);
+session_start();
+
 require "../vendor/autoload.php";
 
 /**
