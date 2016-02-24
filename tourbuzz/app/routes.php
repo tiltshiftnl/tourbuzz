@@ -175,6 +175,7 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) 
     
     //die (print_r($app->request));
     $ids = $app->request->post('ids');
+    $ids = $ids ? $ids : [];
     
     //url-ify the data for the POST
     $fields_string = '';
