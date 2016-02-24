@@ -46,6 +46,9 @@ function indexMessages($messages) {
 function saveMessages($messages) {
 	global $filePath;
 	backupMessagesFile();
+	if (!is_array($messages)) {
+		throw new Exception("Cannot store messages; Format invalid (needs to be an array).");
+	}
 	$messages = indexMessages($messages); //FIXME remove this later.
 	file_put_contents($filePath, json_encode($messages));
 }
