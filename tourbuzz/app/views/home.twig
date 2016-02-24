@@ -3,9 +3,7 @@
 {% block main %}
 
 <main class="wrapper app-wrapper">
-    
-    {#<img src="/img/tourbuzzkaart.png" class="buzzmap">#}
-     
+         
     <section class="buzz">
             
         {% if now|date('y-m-d') == datestring|date('y-m-d') %}
@@ -14,7 +12,7 @@
             <h3>{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
         {% endif %}
         
-        <ul>
+        <ol>
             {% for record in berichten %}
             
                 {% set title %}
@@ -23,15 +21,29 @@
                     {% if lang == 'fr' %}{{ record.title_fr }}{% endif %}                
                 {% endset %}
      
-                 {% set body %}
+                {% set body %}
                     {% if lang == 'nl' %}{{ record.body|raw }}{% endif %}
                     {% if lang == 'en' %}{{ record.body_en|raw }}{% endif %}
                     {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}                
                 {% endset %}
             
-                <li>{{ title }} <span class="toelichting">{{ body }}</span></li>        
+                <li><a href="#"><span class="nr">{{ loop.index }}</span>{{ title }}</a>{#<span class="toelichting">{{ body }}</span>#}</li>        
             {% endfor %}
-        </ul>
+        </ol>
+    </section>
+    
+    <a href="#" pico-toggle-class="hide" pico-target-id="slider" style="float:right">x</a>
+    
+    <section class="slider" style="padding: 20px" pico-id="slider">
+        <div id="owl-example" class="owl-carousel">
+            {% for record in berichten %}    
+            <div>
+                <h3 style="margin-bottom: 15px; color: #888; font-size: 20px"><span class="nr">{{ loop.index }}</span> {{ record.title }}</h3>
+                <p style="margin-bottom: 10px">{{ record.body|raw }}</p>
+                <img src="/img/kaart{{ loop.index }}.png" style="border:1px solid #eee; padding: 10px;">
+            </div>
+            {% endfor %}
+        </div>
     </section>
     
     {% if cruisekalender is not empty %}

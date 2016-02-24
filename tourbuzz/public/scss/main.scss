@@ -97,22 +97,31 @@ ol {
     left: 60px; 
     width: 90%;
     .nr {
-        display: inline-block;
-        width: 28px;
-        height: 28px;
-        text-align: center;
-        line-height: 28px;
-        background: $rood;
-        color: #fff;
-        border-radius: 50%;
         position: absolute;
         left: -40px;
-        font-weight: bold;
     }
     input[type=checkbox] {
         position: absolute;
         left: -70px;   
     }
+}
+
+.nr {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    background: $rood;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.hide {
+    display: none;   
 }
 
 .bestemming {
@@ -428,6 +437,7 @@ ol {
 }
 
 footer {
+    background: #eee;
     p {
         font-size: 14px;
         color: #888;
