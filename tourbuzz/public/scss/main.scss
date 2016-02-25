@@ -68,7 +68,7 @@ body {
     min-width: 50px;
     margin-top: 5px;
     text-align: center;
-         @include linearGradient(#3A5495, #3669ac );
+    //@include linearGradient(#3A5495, #3669ac );
     &.groot {
       font-size: 32px;
       padding: 15px;  
