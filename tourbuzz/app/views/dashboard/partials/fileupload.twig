@@ -25,7 +25,7 @@
 			var hiddenInputElement = document.createElement("input");
 			hiddenInputElement.setAttribute("type", "hidden");
 			hiddenInputElement.setAttribute("name", "imageId");
-			hiddenInputElement.setAttribute("value", uri + imageId);
+			hiddenInputElement.setAttribute("value", imageId);
 			container.appendChild(hiddenInputElement);
 			fileInputElement.parentNode.replaceChild(container, fileInputElement);
 		}

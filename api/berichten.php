@@ -64,7 +64,8 @@ $messageFields = [
 	"startdate",
 	"enddate",
 	"category",
-	"link"
+	"link",
+	"imageId"
 ];
 
 $messages = loadMessages();
