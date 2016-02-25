@@ -10,6 +10,18 @@
 $rood: #E01D1D;
 
 body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  background: green;
+  padding: 10px 0;
+}
+
+body {
     font-family: sans-serif;
     font-size: 16px;
     line-height: 1.5em;
@@ -126,11 +138,6 @@ ol {
     display: none;   
 }
 
-slider {
-    background: #fff;
-    box-shadow: 1px 1px 3px #eee;
-}
-
 .bestemming {
     background: #eee;
     @extend .group;
@@ -157,7 +164,6 @@ slider {
 .app-wrapper {
     max-width: 600px;
     margin: 0 auto;
-    position: relative;   
 }
 
 .picture-in-picture-wrapper {
@@ -188,15 +194,13 @@ slider {
 }
 
 .main-header {
-    float: left;
     width: 100%;
     //background: #f00;
     background: $rood;
     color: #fff;
-    height: 80px;
     border-bottom: 1px solid #902a17;
     padding: 15px 0;
-    margin-bottom: 20px;
+    @extend .group;
     .home {
         @include grid-col(1,4);
         
@@ -439,9 +443,6 @@ slider {
     }   
 }
 
-.slider {
-    background: #fff;   
-}
 
 .halte-link {
     background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #3a5495 0%, #3669ac 100%) repeat scroll 0 0;
