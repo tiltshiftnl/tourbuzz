@@ -17,7 +17,6 @@
                 <option value="overig" {% if bericht.category == 'overig' %}selected{% endif %}>Overig</option>                
             </select>
         </div>
-        
 
         <nav pico-reset-class-container class="tab-navigation">
             <ul class="tabselect">
@@ -36,12 +35,12 @@
                 <textarea name="body" placeholder="Toelichting (optioneel)">{{ bericht.body }}</textarea>
             </div>
             <div class="tab" pico-id="tab-en">
-                <input type="text" name="title_en" placeholder="Bericht (engels)" value="{{ bericht.title_en  }}">
-                <textarea name="body_en" placeholder="Toelichting (engels)">{{ bericht.body_en  }}</textarea>
+                <input type="text" name="title_en" placeholder="Bericht (engels)" value="{{ bericht.title_en }}">
+                <textarea name="body_en" placeholder="Toelichting (engels)">{{ bericht.body_en }}</textarea>
             </div>
             <div class="tab" pico-id="tab-fr">
-                <input type="text" name="title_fr" placeholder="Bericht (frans)" value="{{ bericht.title_fr  }}">
-                <textarea name="body_fr" placeholder="Toelichting (frans)" value="{{ bericht.body_fr  }}"></textarea>        
+                <input type="text" name="title_fr" placeholder="Bericht (frans)" value="{{ bericht.title_fr }}">
+                <textarea name="body_fr" placeholder="Toelichting (frans)">{{ bericht.body_fr }}</textarea>        
             </div>
         </nav>
         

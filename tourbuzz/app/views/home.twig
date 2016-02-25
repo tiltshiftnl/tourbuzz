@@ -5,20 +5,21 @@
 <main class="wrapper app-wrapper">
   
      {% if now|date('y-m-d') == datestring|date('y-m-d') %}
-        <h3>{{ __('Vandaag') }}</h3>
+        <h3 class="dag">{{ __('Vandaag') }}</h3>
     {% else %}
-        <h3>{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
+        <h3 class="dag">{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
     {% endif %} 
   
     <section class="slider hide" pico-id="slider">
         <a href="#" class="close" data-close><i class="fa fa-close"></i></a>
         <div id="owl-example" class="owl-carousel">
             {% for record in berichten %}    
-            <div>
+            <article>
                 <h3><span class="nr">{{ loop.index }}</span> {{ record.title }}</h3>
                 <p>{{ record.body|raw }}</p>
+                <a href="extern" target="_blank">{{ record.link }}</a>
                 <img src="//api.dev.fixxx.nl/afbeeldingen/{{ record.image_id }}">
-            </div>{{ record.link }}
+            </article>
             {% endfor %}
         </div>
     </section>  

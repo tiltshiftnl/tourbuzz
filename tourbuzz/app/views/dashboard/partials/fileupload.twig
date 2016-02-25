@@ -1,3 +1,7 @@
+{% if record.image_id is not empty %}
+<img src="//api.dev.fixxx.nl/afbeeldingen/{{ record.image_id }}">
+<input type="hidden" name="image_id" value="{{ record.image_id }}">
+{% else %}
 <input type="file" onchange="asyncImageUpload(this)">
 <script>
 	var uri = "//api.dev.fixxx.nl/afbeeldingen/";
@@ -31,3 +35,5 @@
 		}
 	}
 </script>
+
+{% endif %}
