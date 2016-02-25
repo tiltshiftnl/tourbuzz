@@ -18,9 +18,22 @@
         <script src="/js/pico-ui.js"></script>
         <script>
             $(document).ready(function() {
+                
                 $("#owl-example").owlCarousel({
-                    singleItem: true
+                    singleItem: true,
+                    navigation: true
                 });
+                
+                $('[data-item]').on('click', function(e)  {
+                    $(".slider").toggleClass("hide");
+                    $(".buzz").toggleClass("hide");                    
+                });
+                
+                $('[data-close]').on('click', function(e)  {
+                    $(".slider").toggleClass("hide");
+                    $(".buzz").toggleClass("hide");                    
+                });               
+                
             });   
         </script>
     	<script>

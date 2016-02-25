@@ -10,8 +10,8 @@
         <h3>{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
     {% endif %} 
   
-    <section class="slider" pico-id="slider">
-        <a href="#" pico-toggle-class="hide" pico-target-id="slider" class="close">x</a>
+    <section class="slider hide" pico-id="slider">
+        <a href="#" class="close" data-close><i class="fa fa-close"></i></a>
         <div id="owl-example" class="owl-carousel">
             {% for record in berichten %}    
             <div>
@@ -40,7 +40,7 @@
                     {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}                
                 {% endset %}
             
-                <li><a href="#"><span class="nr">{{ loop.index }}</span>{{ title }}</a>{#<span class="toelichting">{{ body }}</span>#}</li>        
+                <li><a href="#" data-item="{{ loop.index }}"><span class="nr">{{ loop.index }}</span>{{ title }}</a></li>        
             {% endfor %}
         </ol>
     </section>
