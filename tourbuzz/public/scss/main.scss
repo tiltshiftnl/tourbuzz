@@ -23,7 +23,15 @@ main {
 .slider {
     border: 1px solid #eee;
     padding: 20px;
-    box-shadow: 1px 1px 3px #ddd;   
+    box-shadow: 1px 1px 3px #ddd;
+    article {
+        padding: 10px;   
+    }  
+}
+
+.extern {
+    color: #647b9e;
+    text-decoration: underline;   
 }
 
 body {

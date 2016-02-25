@@ -1,39 +1,39 @@
-{% if record.image_id is not empty %}
-<img src="//api.dev.fixxx.nl/afbeeldingen/{{ record.image_id }}">
-<input type="hidden" name="image_id" value="{{ record.image_id }}">
+{% if bericht.image_id is not empty %}
+    <img src="//api.dev.fixxx.nl/afbeeldingen/{{ bericht.image_id }}">
+    <input type="hidden" name="image_id" value="{{ bericht.image_id }}">
 {% else %}
-<input type="file" onchange="asyncImageUpload(this)">
-<script>
-	var uri = "//api.dev.fixxx.nl/afbeeldingen/";
-	function asyncImageUpload(fileInputElement) {
-		var file = fileInputElement.files[0];
-		if (file.type !== "image/jpeg" &&
-		    file.type !== "image/png") {
-			fileInputElement.value = "";
-			return;
-		}
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", uri, true);
-		xhr.setRequestHeader("X_FILENAME", file.name);
-		xhr.send(file);
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState !== XMLHttpRequest.DONE) {
-				return;
-			}
-			var image_id = xhr.responseText;
-			var container = document.createElement("div");
-			var imgElement = document.createElement("img");
-			imgElement.setAttribute("class", "async-image-upload-preview");
-			imgElement.setAttribute("src", uri + image_id);
-			container.appendChild(imgElement);
-			var hiddenInputElement = document.createElement("input");
-			hiddenInputElement.setAttribute("type", "hidden");
-			hiddenInputElement.setAttribute("name", "image_id");
-			hiddenInputElement.setAttribute("value", image_id);
-			container.appendChild(hiddenInputElement);
-			fileInputElement.parentNode.replaceChild(container, fileInputElement);
-		}
-	}
-</script>
+    <input type="file" onchange="asyncImageUpload(this)">
+    <script>
+    	var uri = "//api.dev.fixxx.nl/afbeeldingen/";
+    	function asyncImageUpload(fileInputElement) {
+    		var file = fileInputElement.files[0];
+    		if (file.type !== "image/jpeg" &&
+    		    file.type !== "image/png") {
+    			fileInputElement.value = "";
+    			return;
+    		}
+    		var xhr = new XMLHttpRequest();
+    		xhr.open("POST", uri, true);
+    		xhr.setRequestHeader("X_FILENAME", file.name);
+    		xhr.send(file);
+    		xhr.onreadystatechange = function () {
+    			if (xhr.readyState !== XMLHttpRequest.DONE) {
+    				return;
+    			}
+    			var image_id = xhr.responseText;
+    			var container = document.createElement("div");
+    			var imgElement = document.createElement("img");
+    			imgElement.setAttribute("class", "async-image-upload-preview");
+    			imgElement.setAttribute("src", uri + image_id);
+    			container.appendChild(imgElement);
+    			var hiddenInputElement = document.createElement("input");
+    			hiddenInputElement.setAttribute("type", "hidden");
+    			hiddenInputElement.setAttribute("name", "image_id");
+    			hiddenInputElement.setAttribute("value", image_id);
+    			container.appendChild(hiddenInputElement);
+    			fileInputElement.parentNode.replaceChild(container, fileInputElement);
+    		}
+    	}
+    </script>
 
 {% endif %}
