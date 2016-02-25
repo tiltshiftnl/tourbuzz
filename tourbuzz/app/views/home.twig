@@ -3,6 +3,20 @@
 {% block main %}
 
 <main class="wrapper app-wrapper">
+  
+ 
+    <section class="slider" style="padding: 20px" pico-id="slider">
+        <a href="#" pico-toggle-class="hide" pico-target-id="slider" class="close">x</a>
+        <div id="owl-example" class="owl-carousel">
+            {% for record in berichten %}    
+            <div>
+                <h3 style="margin-bottom: 15px; color: #888; font-size: 20px"><span class="nr">{{ loop.index }}</span> {{ record.title }}</h3>
+                <p style="margin-bottom: 10px">{{ record.body|raw }}</p>
+                <img src="/img/kaart{{ loop.index }}.png" style="border:1px solid #eee; padding: 10px;">
+            </div>
+            {% endfor %}
+        </div>
+    </section>  
          
     <section class="buzz">
             
@@ -31,20 +45,7 @@
             {% endfor %}
         </ol>
     </section>
-    
-    <a href="#" pico-toggle-class="hide" pico-target-id="slider" style="float:right">x</a>
-    
-    <section class="slider" style="padding: 20px" pico-id="slider">
-        <div id="owl-example" class="owl-carousel">
-            {% for record in berichten %}    
-            <div>
-                <h3 style="margin-bottom: 15px; color: #888; font-size: 20px"><span class="nr">{{ loop.index }}</span> {{ record.title }}</h3>
-                <p style="margin-bottom: 10px">{{ record.body|raw }}</p>
-                <img src="/img/kaart{{ loop.index }}.png" style="border:1px solid #eee; padding: 10px;">
-            </div>
-            {% endfor %}
-        </div>
-    </section>
+
     
     {% if cruisekalender is not empty %}
     <section class="cruiseschepen">

@@ -5,7 +5,7 @@
  
     <form class="form-styles" method="post" action="/dashboard/berichten">
         <input type="hidden" name="id" value="{{ bericht.id }}">
-        {{ feedback }}
+
         <h3>Nieuw bericht</h3>
         <div class="grid-row">
             <select name="category">
@@ -57,9 +57,14 @@
             </div>
         </div>
         
-         <div class="grid-row group">
+        <div class="grid-row group">
             <h3 style="margin-top: 20px">Link</h3>
             <input type="text" name="link" value="{{ bericht.link }}">
+        </div>
+ 
+        <div class="grid-row group">
+            <h3 style="margin-top: 20px">Afbeelding</h3>             
+            {% include 'dashboard/partials/fileupload.twig' %}
         </div>
                
         <button type="submit">Opslaan</button>        

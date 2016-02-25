@@ -118,10 +118,17 @@ ol {
     font-weight: bold;
     font-size: 15px;
     margin-right: 10px;
+    border-bottom: 1px solid #902a17;
+    border-right: 1px solid #902a17;    
 }
 
 .hide {
     display: none;   
+}
+
+slider {
+    background: #fff;
+    box-shadow: 1px 1px 3px #eee;
 }
 
 .bestemming {
@@ -149,7 +156,8 @@ ol {
 
 .app-wrapper {
     max-width: 600px;
-    margin: 0 auto;   
+    margin: 0 auto;
+    position: relative;   
 }
 
 .picture-in-picture-wrapper {
@@ -185,8 +193,9 @@ ol {
     //background: #f00;
     background: $rood;
     color: #fff;
-    height: 70px;
-    padding: 10px 0;
+    height: 80px;
+    border-bottom: 1px solid #902a17;
+    padding: 15px 0;
     margin-bottom: 20px;
     .home {
         @include grid-col(1,4);
@@ -346,6 +355,12 @@ ol {
     text-transform: lowercase;  
 }
 
+.close {
+    float: right;
+    position: relative;
+    right: -20px;   
+}
+
 .tab-navigation {
   //margin-bottom: 20px;
 }
@@ -422,6 +437,10 @@ ol {
         padding: 5px;
         font-weight: bold;        
     }   
+}
+
+.slider {
+    background: #fff;   
 }
 
 .halte-link {
