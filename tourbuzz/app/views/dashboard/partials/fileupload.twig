@@ -1,29 +1,33 @@
-<form>
-
-	<input onchange="upload(this)" type="file" name="image">
-		<script>
-			var uri = "//api.dev.fixxx.nl/afbeeldingen/";
-			function upload(fileElement) {
-				var file = fileElement.files[0];
-				var placeholderElement = document.createElement("p");
-				if (file.type === "image/jpeg" || file.type === "image/png") {
-					placeholderElement.appendChild(document.createTextNode("uploading..."));
-					fileElement.parentNode.replaceChild(placeholderElement, fileElement);
-					var xhr = new XMLHttpRequest();
-					xhr.open("POST", uri, true);
-					xhr.setRequestHeader("X_FILENAME", file.name);
-					xhr.send(file);
-					xhr.onreadystatechange = function () {
-						if (xhr.readyState === XMLHttpRequest.DONE) {
-							placeholderElement.appendChild(document.createTextNode("upload ready"));
-							var imgElement = document.createElement("img");
-							imgElement.setAttribute("height", "200px");
-							imgElement.setAttribute("src", uri + xhr.responseText);
-							placeholderElement.appendChild(imgElement);
-						}
-					}
-				}
+<input type="file" onchange="asyncImageUpload(this)">
+<script>
+	var uri = "//api.dev.fixxx.nl/afbeeldingen/";
+	function asyncImageUpload(fileInputElement) {
+		var file = fileInputElement.files[0];
+		if (file.type !== "image/jpeg" &&
+		    file.type !== "image/png") {
+			fileInputElement.value = "";
+			return;
+		}
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", uri, true);
+		xhr.setRequestHeader("X_FILENAME", file.name);
+		xhr.send(file);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState !== XMLHttpRequest.DONE) {
+				return;
 			}
-		</script>
-		
-</form>
+			var imageId = xhr.responseText;
+			var container = document.createElement("div");
+			var imgElement = document.createElement("img");
+			imgElement.setAttribute("class", "async-image-upload-preview");
+			imgElement.setAttribute("src", uri + imageId);
+			container.appendChild(imgElement);
+			var hiddenInputElement = document.createElement("input");
+			hiddenInputElement.setAttribute("type", "hidden");
+			hiddenInputElement.setAttribute("name", "imageId");
+			hiddenInputElement.setAttribute("value", uri + imageId);
+			container.appendChild(hiddenInputElement);
+			fileInputElement.parentNode.replaceChild(container, fileInputElement);
+		}
+	}
+</script>
