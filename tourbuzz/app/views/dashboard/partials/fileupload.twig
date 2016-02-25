@@ -16,16 +16,16 @@
 			if (xhr.readyState !== XMLHttpRequest.DONE) {
 				return;
 			}
-			var imageId = xhr.responseText;
+			var image_id = xhr.responseText;
 			var container = document.createElement("div");
 			var imgElement = document.createElement("img");
 			imgElement.setAttribute("class", "async-image-upload-preview");
-			imgElement.setAttribute("src", uri + imageId);
+			imgElement.setAttribute("src", uri + image_id);
 			container.appendChild(imgElement);
 			var hiddenInputElement = document.createElement("input");
 			hiddenInputElement.setAttribute("type", "hidden");
-			hiddenInputElement.setAttribute("name", "imageId");
-			hiddenInputElement.setAttribute("value", imageId);
+			hiddenInputElement.setAttribute("name", "image_id");
+			hiddenInputElement.setAttribute("value", image_id);
 			container.appendChild(hiddenInputElement);
 			fileInputElement.parentNode.replaceChild(container, fileInputElement);
 		}
