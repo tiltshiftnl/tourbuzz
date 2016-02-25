@@ -31,7 +31,10 @@ main {
 
 .extern {
     color: #647b9e;
-    text-decoration: underline;   
+    display: block;
+    font-size: 13px;
+    line-height: 1.3em;
+    margin-bottom: $margin-medium;   
 }
 
 body {
@@ -387,11 +390,14 @@ ol {
 
 article {
     h3 {
+        color: #333;
         font-size: 20px;
+        margin-bottom: $margin-small;
     }
     p {
         margin-bottom: 16px;   
     }
+    
 }
 
 .tab-navigation {
@@ -487,16 +493,21 @@ article {
 
 footer {
     background: #eee;
+    padding: 10px 0;
     p {
-        font-size: 14px;
+        font-size: 15px;
         color: #888;
         text-align: center;
+        font-weight: bold;
     }
     a {
         text-decoration: underline;
     }
     .debug {
-        display: block;   
+        display: block;
+        font-size: 12px;
+        color: #aaa;
+        font-weight: normal; 
     }
 }
 
