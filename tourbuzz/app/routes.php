@@ -93,7 +93,7 @@ $app->post('/dashboard/berichten', function () use ($apiRoot, $app) {
     	'enddate' => $app->request->post('enddate'),
     	'id' => $app->request->post('id'),
     	'link' => $app->request->post('link'),
-        'imageId' => $app->request->post('imageId'),
+        'image_id' => $app->request->post('image_id'),
     );
         
     if ( empty ($fields['title']) ) {
