@@ -10,7 +10,7 @@ $todayString = "{$year}-{$month}-{$day}";
 $todayDate = strtotime($todayString);
 
 $sourceUrl = "http://www.amsterdamopendata.nl/files/Evenementen.json";
-$cacheFilepath = "cache/evenementen.json";
+$cacheFilepath = "../cache/evenementen.json";
 if (is_file($cacheFilepath) && time() - filemtime($cacheFilepath) < 24 * 3600) {
 	$fileContents = file_get_contents($cacheFilepath);
 } else {

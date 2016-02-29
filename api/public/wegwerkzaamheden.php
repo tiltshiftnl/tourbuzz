@@ -9,7 +9,7 @@ $day = $uriParts[3];
 $todayString = "{$year}{$month}{$day}000000";
 
 $sourceUrl = "http://www.amsterdamopendata.nl/files/Projecten_Amsterdam_GeoJson.json";
-$cacheFilepath = "cache/wegwerkzaamheden.json";
+$cacheFilepath = "../cache/wegwerkzaamheden.json";
 if (is_file($cacheFilepath) && time() - filemtime($cacheFilepath) < 24 * 3600) {
 	$fileContents = file_get_contents($cacheFilepath);
 } else {

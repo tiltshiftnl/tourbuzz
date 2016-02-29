@@ -1,14 +1,19 @@
 <?php
 
-$fileDir = __DIR__ . "/images/";
+require '../vendor/autoload.php';
+
+use Intervention\Image\ImageManager;
+
+$fileDir = __DIR__ . "/../images/";
 
 switch ($_SERVER["REQUEST_METHOD"]) {
 	case "GET":
 		$fileName = array_values(array_filter(explode("/", $_SERVER["REQUEST_URI"])))[1];
 		$filePath = $fileDir . $fileName;
 		if (file_exists($filePath)) {
-			header("Content-type: image/jpeg");
-			readfile($filePath);
+			$manager = new ImageManager(['driver' => 'imagick']);
+			$image = $manager->make($filePath)->resize(200, 200);
+			exit($image->response('jpg'));
 		}
 		exit;
 
