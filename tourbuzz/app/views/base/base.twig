@@ -11,7 +11,8 @@
 		<link rel="stylesheet" href="/css/scss/main.scss">
         <link rel="stylesheet" href="/js/owl-carousel/owl.carousel.css">
         <link rel="stylesheet" href="/js/owl-carousel/owl.theme.css">        
-		<link rel="stylesheet" href="/js/pikaday/css/pikaday.css">		
+		<link rel="stylesheet" href="/js/pikaday/css/pikaday.css">
+		<link rel="stylesheet" href="/css/pikaday/buzz-theme.css">				
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="/js/owl-carousel/owl.carousel.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>        
@@ -109,11 +110,13 @@
         
             var startdate = new Pikaday({ 
                 field: document.getElementById('startdate'),
-                format: 'YYYY-MM-DD'
+                format: 'YYYY-MM-DD',
+                theme: 'buzz-theme'
             });
             var enddate = new Pikaday({ 
                 field: document.getElementById('enddate'),
-                format: 'YYYY-MM-DD'
+                format: 'YYYY-MM-DD',
+                theme: 'buzz-theme'
             });
         </script>   
 	</body>

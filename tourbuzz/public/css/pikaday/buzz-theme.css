@@ -1,0 +1,17 @@
+/**
+ * This theme is an example to show how you can create your own.
+ */
+
+.buzz-theme .pika-label {
+    background: #fafafa;
+}
+
+.buzz-theme .pika-button {
+    background: #fafafa; 
+}
+
+.buzz-theme .pika-button:hover {
+    color: #fff !important;
+    background: #E01D1D !important;
+    border-radius: 0;
+}
