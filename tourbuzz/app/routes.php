@@ -201,7 +201,7 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) 
 /**
  * Dag
  */
-$app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
+$app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot, $analytics) {
 
     $json = @file_get_contents($apiRoot . "berichten/{$y}/{$m}/{$d}");
           
@@ -242,6 +242,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot) {
         "m" => $m,
         "y" => $y,
         "api" => $apiRoot,
+        "analytics" => $analytics,
         "cruisekalender" => $cruisekalender['items'],
         //"werkzaamheden" => $wegwerkzaamheden['werkzaamheden'],
         //"evenementen" => $evenementen['evenementen'],            

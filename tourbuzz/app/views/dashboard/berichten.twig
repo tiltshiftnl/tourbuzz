@@ -26,9 +26,9 @@
                 <li>
                     <a pico-toggle-class pico-id="tab-en" href="#tab-en">en</a>
                 </li>
-                <li>
+                {#<li>
                     <a pico-toggle-class pico-id="tab-fr" href="#tab-fr">fr</a>
-                </li>
+                </li>#}
             </ul>
             <div class="tab active" pico-id="tab-nl">
                 <input type="text" name="title" placeholder="Bericht" value="{{ bericht.title }}">
@@ -38,10 +38,10 @@
                 <input type="text" name="title_en" placeholder="Bericht (engels)" value="{{ bericht.title_en }}">
                 <textarea name="body_en" placeholder="Toelichting (engels)">{{ bericht.body_en }}</textarea>
             </div>
-            <div class="tab" pico-id="tab-fr">
+            {#<div class="tab" pico-id="tab-fr">
                 <input type="text" name="title_fr" placeholder="Bericht (frans)" value="{{ bericht.title_fr }}">
                 <textarea name="body_fr" placeholder="Toelichting (frans)">{{ bericht.body_fr }}</textarea>        
-            </div>
+            </div>#}
         </nav>
         
         <span class="maxchars">Max 200 karakters</span>
