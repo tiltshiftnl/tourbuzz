@@ -253,14 +253,16 @@ ol {
         }
     }
     .taal {
+        color:rgba(255, 255, 255, 0.5);        
         @include grid-col(1,4);
-        text-align: right;  
+        text-align: right;
         a {
             font-size: 15px;
-            line-height: 50px;   
+            line-height: 50px;
         }
         .active {
-            font-weight: bold;       
+            font-weight: bold;
+            color: #fff;                   
         }
     }
 }
