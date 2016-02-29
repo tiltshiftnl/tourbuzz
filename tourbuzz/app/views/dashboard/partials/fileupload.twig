@@ -1,40 +1,40 @@
-{% if bericht.image_url is not empty %}
-    <img src="{{ bericht.image_url }}"><a href="#" class="close" data-close><i class="fa fa-close"></i></a>
+<div id="asyncImageUpload">
+  {% if bericht.image_url is not empty %}
+      <img src="{{ bericht.image_url }}">
+      <a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>
+      <input type="hidden" name="image_url" value="{{ bericht.image_url }}">
+  {% else %}
+      <input type="file" onchange="asyncImageUpload(this)">
+  {% endif %}
+</div>
 
-    <input type="hidden" name="image_url" value="{{ bericht.image_url }}">
-{% else %}
-    <input type="file" onchange="asyncImageUpload(this)">
-    <script>
-    	var uri = "{{ image_api }}";
-    	function asyncImageUpload(fileInputElement) {
-    		var file = fileInputElement.files[0];
-    		if (file.type !== "image/jpeg" &&
-    		    file.type !== "image/png") {
-    			fileInputElement.value = "";
-    			return;
-    		}
-    		var xhr = new XMLHttpRequest();
-    		xhr.open("POST", uri, true);
-    		xhr.setRequestHeader("X_FILENAME", file.name);
-    		xhr.send(file);
-    		xhr.onreadystatechange = function () {
-    			if (xhr.readyState !== XMLHttpRequest.DONE) {
-    				return;
-    			}
-    			var image_id = xhr.responseText;
-    			var container = document.createElement("div");
-    			var imgElement = document.createElement("img");
-    			imgElement.setAttribute("class", "async-image-upload-preview");
-    			imgElement.setAttribute("src", uri + image_id);
-    			container.appendChild(imgElement);
-    			var hiddenInputElement = document.createElement("input");
-    			hiddenInputElement.setAttribute("type", "hidden");
-    			hiddenInputElement.setAttribute("name", "image_url");
-    			hiddenInputElement.setAttribute("value", uri + image_id);
-    			container.appendChild(hiddenInputElement);
-    			fileInputElement.parentNode.replaceChild(container, fileInputElement);
-    		}
-    	}
-    </script>
+<script>
+	var uri = "{{ image_api }}";
+  var el = document.getElementById("asyncImageUpload");
+	
+	function asyncImageUpload(fileInputElement) {
+		var file = fileInputElement.files[0];
+		if (file.type !== "image/jpeg" &&
+		    file.type !== "image/png") {
+			fileInputElement.value = "";
+			return;
+		}
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", uri, true);
+		xhr.send(file);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState !== XMLHttpRequest.DONE) {
+				return;
+			}
+		  el.innerHTML =
+		    '<img src="' + uri + xhr.responseText + '">' +
+        '<a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>' +
+        '<input type="hidden" name="image_url" value="' + uri + xhr.responseText + '">';
+		}
+	}
+	
+	function asyncImageUploadReset() {
+	  el.innerHTML = '<input type="file" onchange="asyncImageUpload(this)">';
+	}
+</script>
 
-{% endif %}
