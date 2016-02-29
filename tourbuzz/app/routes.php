@@ -133,7 +133,7 @@ $app->post('/dashboard/berichten', function () use ($apiRoot, $app) {
 /**
  * Berichten bewerken
  */ 
-$app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app) {
+$app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app, $image_api) {
     
     $json = @file_get_contents($apiRoot . 'berichten/'.$id);
             
@@ -155,7 +155,8 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app) {
     $data = [
         "test" => "world",
         "bericht" => $bericht['message'],
-        "berichten" => $berichten['messages'],      
+        "berichten" => $berichten['messages'],
+        "image_api" => $image_api,   
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -201,7 +202,7 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) 
 /**
  * Dag
  */
-$app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot, $analytics) {
+$app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot, $analytics, $image_api) {
 
     $json = @file_get_contents($apiRoot . "berichten/{$y}/{$m}/{$d}");
           
@@ -242,6 +243,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot, $analytics) {
         "m" => $m,
         "y" => $y,
         "api" => $apiRoot,
+        "image_api" => $image_api,        
         "analytics" => $analytics,
         "cruisekalender" => $cruisekalender['items'],
         //"werkzaamheden" => $wegwerkzaamheden['werkzaamheden'],

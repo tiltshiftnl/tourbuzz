@@ -1,5 +1,5 @@
 {% if bericht.image_id is not empty %}
-    <img src="//api.dev.fixxx.nl/afbeeldingen/{{ bericht.image_id }}">
+    <img src="{{ image_api }}{{ bericht.image_id }}">
     <input type="hidden" name="image_id" value="{{ bericht.image_id }}">
 {% else %}
     <input type="file" onchange="asyncImageUpload(this)">

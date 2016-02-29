@@ -18,7 +18,7 @@
                 <h3><span class="nr">{{ loop.index }}</span> {{ record.title }}</h3>
                 <p>{{ record.body|raw }}</p>
                 <a href="{{ record.link }}" class="extern" target="_blank">{{ record.link }}</a>
-                <img src="{{ api }}/afbeeldingen/{{ record.image_id }}">
+                <img src="{{ image_api }}{{ record.image_id }}">
             </article>
             {% endfor %}
         </div>
