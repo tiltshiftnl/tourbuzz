@@ -25,7 +25,7 @@ $topAttracties = [
 
 $sourceUrl = "http://www.amsterdamopendata.nl/files/Attracties.json";
 
-$cacheFilepath = "cache/attracties.json";
+$cacheFilepath = "../cache/attracties.json";
 if (is_file($cacheFilepath) && time() - filemtime($cacheFilepath) < 24 * 3600) {
 	$fileContents = file_get_contents($cacheFilepath);
 } else {

@@ -1,3 +1,5 @@
 cache
 files
 images
+vendor
+composer.phar

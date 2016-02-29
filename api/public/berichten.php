@@ -3,7 +3,7 @@
 ini_set("error_reporting", 1);
 ini_set("display_errors", E_ALL);
 
-$filePath = "files/messages.json";
+$filePath = "../files/messages.json";
 $coachUri = "http://coach.fixxx.nl";
 
 function randomHash() {

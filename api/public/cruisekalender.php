@@ -8,7 +8,7 @@ $day = $uriParts[3];
 
 $sourceUrl = "http://api.qcommerz.nl/pta/?y={$year}";
 
-$cacheFilepath = "cache/pta_{$year}.json";
+$cacheFilepath = "../cache/pta_{$year}.json";
 if (is_file($cacheFilepath) && time() - filemtime($cacheFilepath) < 24 * 3600) {
 	$fileContents = file_get_contents($cacheFilepath);
 } else {
