@@ -1,5 +1,6 @@
 {% if bericht.image_url is not empty %}
-    <img src="{{ bericht.image_url }}">
+    <img src="{{ bericht.image_url }}"><a href="#" class="close" data-close><i class="fa fa-close"></i></a>
+
     <input type="hidden" name="image_url" value="{{ bericht.image_url }}">
 {% else %}
     <input type="file" onchange="asyncImageUpload(this)">

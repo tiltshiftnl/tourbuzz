@@ -353,7 +353,15 @@ ol {
     button {
         margin-top: 10px;
         @extend .button;
-    }   
+    }
+    img {
+        vertical-align: top;   
+    }
+    .close {
+        float: none;
+        top: 0;
+        right: -15px;
+    }
 }
 
 .datepicker {
