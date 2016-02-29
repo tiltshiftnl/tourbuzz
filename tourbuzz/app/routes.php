@@ -26,7 +26,19 @@ $app->hook('slim.before', function() use ($app) {
  * Home
  */
 $app->get('/', function () use ($app, $apiRoot) {
-   $app->redirect(date('/Y/m/d'));
+    
+    if ( !empty($_SESSION['firstvisit']) ) {
+        $app->redirect(date('/Y/m/d'));
+    }
+    
+    $_SESSION['firstvisit'] = true;
+    
+    $data = [
+        "redirect" => date('/Y/m/d'),
+        "template" => "splash.twig",
+    ];
+    
+    render($data['template'], $data); 
 });
 
 
