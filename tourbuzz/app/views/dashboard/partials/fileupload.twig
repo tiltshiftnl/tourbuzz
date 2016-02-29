@@ -4,7 +4,7 @@
 {% else %}
     <input type="file" onchange="asyncImageUpload(this)">
     <script>
-    	var uri = "//api.dev.fixxx.nl/afbeeldingen/";
+    	var uri = "{{ image_api }}";
     	function asyncImageUpload(fileInputElement) {
     		var file = fileInputElement.files[0];
     		if (file.type !== "image/jpeg" &&
