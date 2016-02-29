@@ -4,6 +4,7 @@
 		"slim/views": "0.1.*",
 		"twig/twig": "1.18.*",
 		"intervention/image": "^2.3",
-		"leafo/scssphp": "0.0.*"
+		"leafo/scssphp": "0.0.*",
+		"guzzlehttp/guzzle": "^6.1"
 	}
 }
