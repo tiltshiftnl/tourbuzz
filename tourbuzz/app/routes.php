@@ -6,7 +6,29 @@ if (file_exists($localConfigFilePath)) {
 	require_once($localConfigFilePath);
 }
 
-//$guzzle = new \GuzzleHttp\Psr7\Client();
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Request;
+use GuzzleHttp\Message\Response;
+
+class ApiWrapper {
+    private $_guzzle;
+    private $_apiRoot;
+    
+    public function __construct($url) {
+            $this->_guzzle = new \GuzzleHttp\Client();
+            $this->_apiRoot = $url;
+    }
+    
+    public function get($uri) {
+        $res = $this->_guzzle->request('GET', $this->_apiRoot . "{$uri}/");
+        return json_decode($res->getBody(), true);
+    }
+        
+    public function post($uri) {
+    }
+}
+
+$api = new ApiWrapper($apiRoot);
  
 /**
  * Before
@@ -26,7 +48,19 @@ $app->hook('slim.before', function() use ($app) {
  * Home
  */
 $app->get('/', function () use ($app, $apiRoot) {
-   $app->redirect(date('/Y/m/d'));
+    
+    if ( !empty($_SESSION['firstvisit']) ) {
+        $app->redirect(date('/Y/m/d'));
+    }
+    
+    $_SESSION['firstvisit'] = true;
+    
+    $data = [
+        "redirect" => date('/Y/m/d'),
+        "template" => "splash.twig",
+    ];
+    
+    render($data['template'], $data); 
 });
 
 
@@ -45,45 +79,27 @@ $app->get('/dashboard/login', function () use ($apiRoot) {
     render($data['template'], $data);
 })->name("login");
 
-function renderMessages($fields = array()) {
-    
-    global $apiRoot;
-    global $image_api;
-    
-    $json = @file_get_contents($apiRoot . 'berichten/');
-          
-    if ( !empty($json) ) {
-        $berichten = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }
-    
-    $data = [
-        "berichten" => $berichten['messages'], 
-        "bericht" => $fields,
-        "image_api" => $image_api,     
-        "template" => "dashboard/berichten.twig",
-    ];
-    
-    render($data['template'], $data);   
-}
-
 
 /**
  * Berichten get
  */ 
-$app->get('/dashboard/berichten', function () use ($app, $apiRoot) {
-        
-    /*$res = $guzzle->request('GET', $apiRoot . 'berichten/');
-    var_dump($res);*/
+$app->get('/dashboard/berichten', function () use ($app, $apiRoot, $image_api, $api) {  
     
-    renderMessages();
+    $berichten = $api->get("berichten");
+    
+    $data = [
+        "berichten" => $berichten['messages'], 
+        "image_api" => $image_api,     
+        "template" => "dashboard/berichten.twig",
+    ];
+    
+    render($data['template'], $data);
 })->name("berichten");
 
 /**
  * Berichten post
  */ 
-$app->post('/dashboard/berichten', function () use ($apiRoot, $app) {
+$app->post('/dashboard/berichten', function () use ($apiRoot, $app, $image_api, $api) {
 
     //extract data from the post
     //set POST variables
@@ -106,7 +122,20 @@ $app->post('/dashboard/berichten', function () use ($apiRoot, $app) {
         
     if ( empty ($fields['title']) ) {
         $app->flashNow('error', 'Titel is niet ingevuld');    
-        renderMessages($fields);
+        //global $image_api;
+        //global $api;
+        
+        $berichten = $api->get("berichten");
+        
+        $data = [
+            "berichten" => $berichten['messages'], 
+            "bericht" => $fields,
+            "image_api" => $image_api,     
+            "template" => "dashboard/berichten.twig",
+        ];
+        
+        render($data['template'], $data);
+
     } else {
     
         //url-ify the data for the POST
