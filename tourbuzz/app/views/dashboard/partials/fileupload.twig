@@ -1,6 +1,6 @@
 {% if bericht.image_id is not empty %}
     <img src="{{ image_api }}{{ bericht.image_id }}">
-    <input type="hidden" name="image_id" value="{{ bericht.image_id }}">
+    <input type="hidden" name="image_url" value="{{ bericht.image_url }}">
 {% else %}
     <input type="file" onchange="asyncImageUpload(this)">
     <script>
@@ -28,8 +28,8 @@
     			container.appendChild(imgElement);
     			var hiddenInputElement = document.createElement("input");
     			hiddenInputElement.setAttribute("type", "hidden");
-    			hiddenInputElement.setAttribute("name", "image_id");
-    			hiddenInputElement.setAttribute("value", image_id);
+    			hiddenInputElement.setAttribute("name", "image_url");
+    			hiddenInputElement.setAttribute("value", uri + image_id);
     			container.appendChild(hiddenInputElement);
     			fileInputElement.parentNode.replaceChild(container, fileInputElement);
     		}

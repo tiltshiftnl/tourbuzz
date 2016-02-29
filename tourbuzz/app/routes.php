@@ -5,6 +5,8 @@ $localConfigFilePath = __DIR__ . "/config/config_local.php";
 if (file_exists($localConfigFilePath)) {
 	require_once($localConfigFilePath);
 }
+
+//$guzzle = new \GuzzleHttp\Psr7\Client();
  
 /**
  * Before
@@ -69,6 +71,10 @@ function renderMessages($fields = array()) {
  * Berichten get
  */ 
 $app->get('/dashboard/berichten', function () use ($app, $apiRoot) {
+        
+    /*$res = $guzzle->request('GET', $apiRoot . 'berichten/');
+    var_dump($res);*/
+    
     renderMessages();
 })->name("berichten");
 
@@ -93,7 +99,7 @@ $app->post('/dashboard/berichten', function () use ($apiRoot, $app) {
     	'enddate' => $app->request->post('enddate'),
     	'id' => $app->request->post('id'),
     	'link' => $app->request->post('link'),
-        'image_id' => $app->request->post('image_id'),
+        'image_url' => $app->request->post('image_url'),
     );
         
     if ( empty ($fields['title']) ) {
