@@ -10,13 +10,18 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
 
-class ApiWrapper {
+//FIXME move this class to own file.
+class ApiClient {
     private $_guzzle;
     private $_apiRoot;
     
     public function __construct($url) {
-            $this->_guzzle = new \GuzzleHttp\Client();
-            $this->_apiRoot = $url;
+        $this->_guzzle = new \GuzzleHttp\Client();
+        $this->_apiRoot = $url;
+    }
+    
+    public function getApiRoot() {
+        return $this->_apiRoot;
     }
     
     public function get($uri) {
@@ -24,11 +29,54 @@ class ApiWrapper {
         return json_decode($res->getBody(), true);
     }
         
-    public function post($uri) {
+    public function post($uri, $fields) {
+        //FIXME use Guzzle here!
+    
+        //url-ify the data for the POST
+        $fields_string = '';
+        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        $fields_string = rtrim($fields_string, '&');
+    
+        //open connection
+        $ch = curl_init();
+        
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);        
+        curl_setopt($ch,CURLOPT_URL, $this->_apiRoot . "{$uri}/");
+        curl_setopt($ch,CURLOPT_POST, count($fields));
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        
+        //execute post
+        $result = curl_exec($ch);
+        $message = json_decode($result);
+
+        //close connection
+        curl_close($ch);
+    }
+    
+    public function delete($uri, $ids) {
+        $ids = $ids ? $ids : [];
+        
+        //url-ify the data for the POST
+        $fields_string = '';
+        foreach($ids as $id) { $fields_string .= 'ids[]='.$id.'&'; }
+        $fields_string = rtrim($fields_string, '&');
+
+        $ch = curl_init();
+        
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $this->_apiRoot . "{$uri}/" . "?" . $fields_string);
+        curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "DELETE");
+        
+        //execute post
+        $result = curl_exec($ch);
+        
+        //close connection
+        curl_close($ch);
     }
 }
 
-$api = new ApiWrapper($apiRoot);
+$app->container->set('apiClient', new ApiClient($apiRoot));
  
 /**
  * Before
@@ -83,13 +131,14 @@ $app->get('/dashboard/login', function () use ($apiRoot) {
 /**
  * Berichten get
  */ 
-$app->get('/dashboard/berichten', function () use ($app, $apiRoot, $image_api, $api) {  
+$app->get('/dashboard/berichten', function () use ($app, $image_api) {  
     
-    $berichten = $api->get("berichten");
+    $berichten = $app->container->get('apiClient')->get("berichten/");
     
     $data = [
         "berichten" => $berichten['messages'], 
-        "image_api" => $image_api,     
+        "image_api" => $image_api,
+        "api" => $app->container->get('apiClient')->getApiRoot(),
         "template" => "dashboard/berichten.twig",
     ];
     
@@ -99,38 +148,33 @@ $app->get('/dashboard/berichten', function () use ($app, $apiRoot, $image_api, $
 /**
  * Berichten post
  */ 
-$app->post('/dashboard/berichten', function () use ($apiRoot, $app, $image_api, $api) {
-
-    //extract data from the post
-    //set POST variables
-    $url = $apiRoot . 'berichten/';
+$app->post('/dashboard/berichten', function () use ($app, $image_api) {
     
     $fields = array(
         'category' => $app->request->post('category'),
-    	'title' => $app->request->post('title'),
-    	'body' => $app->request->post('body'),
-    	'title_en' => $app->request->post('title_en'),
-    	'body_en' => $app->request->post('body_en'),
-    	'title_fr' => $app->request->post('title_fr'),
-    	'body_fr' => $app->request->post('body_fr'),    	    	
-    	'startdate' => $app->request->post('startdate'),
-    	'enddate' => $app->request->post('enddate'),
-    	'id' => $app->request->post('id'),
-    	'link' => $app->request->post('link'),
+      	'title' => $app->request->post('title'),
+      	'body' => $app->request->post('body'),
+      	'title_en' => $app->request->post('title_en'),
+      	'body_en' => $app->request->post('body_en'),
+      	'title_fr' => $app->request->post('title_fr'),
+      	'body_fr' => $app->request->post('body_fr'),    	    	
+      	'startdate' => $app->request->post('startdate'),
+      	'enddate' => $app->request->post('enddate'),
+      	'id' => $app->request->post('id'),
+        'link' => $app->request->post('link'),
         'image_url' => $app->request->post('image_url'),
     );
         
     if ( empty ($fields['title']) ) {
-        $app->flashNow('error', 'Titel is niet ingevuld');    
-        //global $image_api;
-        //global $api;
-        
-        $berichten = $api->get("berichten");
+        $app->flashNow('error', 'Titel is niet ingevuld');
+    
+        $berichten = $app->container->get('apiClient')->get("berichten/");
         
         $data = [
             "berichten" => $berichten['messages'], 
             "bericht" => $fields,
             "image_api" => $image_api,     
+            "api" => $app->container->get('apiClient')->getApiRoot(),
             "template" => "dashboard/berichten.twig",
         ];
         
@@ -138,26 +182,7 @@ $app->post('/dashboard/berichten', function () use ($apiRoot, $app, $image_api, 
 
     } else {
     
-        //url-ify the data for the POST
-        $fields_string = '';
-        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-        $fields_string = rtrim($fields_string, '&');
-    
-        //open connection
-        $ch = curl_init();
-        
-        //set the url, number of POST vars, POST data
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);        
-        curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_POST, count($fields));
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-        
-        //execute post
-        $result = curl_exec($ch);
-        $message = json_decode($result);
-
-        //close connection
-        curl_close($ch);
+        $app->container->get('apiClient')->post("berichten/", $fields);
         
         $app->flash('success', 'Bericht toegevoegd');    
         $app->redirect("/dashboard/berichten");    
@@ -170,30 +195,16 @@ $app->post('/dashboard/berichten', function () use ($apiRoot, $app, $image_api, 
 /**
  * Berichten bewerken
  */ 
-$app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app, $image_api) {
+$app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
     
-    $json = @file_get_contents($apiRoot . 'berichten/'.$id);
-            
-    if ( !empty($json) ) {
-        $bericht = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }
-
-    $json = @file_get_contents($apiRoot . 'berichten/');
-          
-    if ( !empty($json) ) {
-        $berichten = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }
-    
+    $berichten = $app->container->get('apiClient')->get("berichten/");
     
     $data = [
         "test" => "world",
-        "bericht" => $bericht['message'],
+        "bericht" => $berichten['messages'][$id],
         "berichten" => $berichten['messages'],
         "image_api" => $image_api,   
+        "api" => $app->container->get('apiClient')->getApiRoot(),
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -204,33 +215,11 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($apiRoot, $app, $image
 /**
  * Berichten verwijderen
  */ 
-$app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) {
+$app->post('/dashboard/berichten/verwijderen', function () use ($app) {
 
-    //extract data from the post
-    //set POST variables
-    $url = $apiRoot . 'berichten/';
-    
-    //die (print_r($app->request));
     $ids = $app->request->post('ids');
-    $ids = $ids ? $ids : [];
+    $berichten = $app->container->get('apiClient')->delete("berichten/", $ids);
     
-    //url-ify the data for the POST
-    $fields_string = '';
-    foreach($ids as $id) { $fields_string .= 'ids[]='.$id.'&'; }
-    $fields_string = rtrim($fields_string, '&');
-
-    $ch = curl_init();
-    
-    //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_URL, $url . "?" . $fields_string);
-    curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "DELETE");
-    
-    //execute post
-    $result = curl_exec($ch);
-    
-    //close connection
-    curl_close($ch);
-
     $app->flash('success', 'Bericht(en) verwijderd');        
     $app->redirect("/dashboard/berichten");
     
@@ -239,27 +228,14 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($apiRoot, $app) 
 /**
  * Dag
  */
-$app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot, $analytics, $image_api) {
-
-    $json = @file_get_contents($apiRoot . "berichten/{$y}/{$m}/{$d}");
-          
-    if ( !empty($json) ) {
-        $berichten = json_decode($json, true);
-    } else {
-       die('Geen JSON');
-    }
+$app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
+    
+    $berichten = $app->container->get('apiClient')->get("berichten/{$y}/{$m}/{$d}");
     
     $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
     $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
-        
-    $json = @file_get_contents($apiRoot . "cruisekalender/{$y}/{$m}/{$d}");
-          
-    if ( !empty($json) ) {
-        $cruisekalender = json_decode($json, true);
-    } else {
-        die('Geen JSON');
-    }
     
+    $cruisekalender = $app->container->get('apiClient')->get("cruisekalender/{$y}/{$m}/{$d}");
 
     $N = date('N', strtotime("{$y}-{$m}-{$d}"));
     
@@ -279,7 +255,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($apiRoot, $analytics, $image_a
         "d" => $d,
         "m" => $m,
         "y" => $y,
-        "api" => $apiRoot,
+        "api" => $app->container->get('apiClient')->getApiRoot(),
         "image_api" => $image_api,        
         "analytics" => $analytics,
         "cruisekalender" => $cruisekalender['items'],
