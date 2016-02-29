@@ -48,6 +48,7 @@ $app->get('/dashboard/login', function () use ($apiRoot) {
 function renderMessages($fields = array()) {
     
     global $apiRoot;
+    global $image_api;
     
     $json = @file_get_contents($apiRoot . 'berichten/');
           
@@ -59,7 +60,8 @@ function renderMessages($fields = array()) {
     
     $data = [
         "berichten" => $berichten['messages'], 
-        "bericht" => $fields,     
+        "bericht" => $fields,
+        "image_api" => $image_api,     
         "template" => "dashboard/berichten.twig",
     ];
     
