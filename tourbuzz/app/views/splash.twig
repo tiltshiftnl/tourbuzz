@@ -1,21 +1,22 @@
 {% extends 'base/base.twig' %}
 
+{% block header %}
+
+{% endblock %}
+
 {% block main %}
 
 <main class="wrapper app-wrapper">
-  
-     {% if now|date('y-m-d') == datestring|date('y-m-d') %}
-        <h3 class="dag">{{ __('Vandaag') }}</h3>
-    {% else %}
-        <h3 class="dag">{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
-    {% endif %} 
-  
+    
     <section class="splash">
         {#<a href="#" class="close" data-close><i class="fa fa-close"></i></a>#}
         <article>
-            <h2>Testversie</h2>
-            <p>Welkom bij Tour Buzz. U kijkt naar een testversie, we horen graag uw mening.</p>
-            <a href="{{ redirect }}" class="button">ok</a>
+            <h3>Welkom bij Tour Buzz</h3>
+            <p>Op Tour Buzz vindt u dagelijks het belangrijkste touringcar nieuws uit Amsterdam.</p>
+                
+            <h4>Let op: Testversie</h4>
+            <p>Deze app wordt nog volop ontwikkeld door de Gemeente Amsterdam. We horen daarom graag uw mening. Deze kunt u mailen naar Rutger: <a href="mailto:r.dik@amsterdam.nl">r.dik@amsterdam.nl</a></p>
+            <a href="{{ redirect }}" class="button">start</a>
         </article>   
     </section>
     

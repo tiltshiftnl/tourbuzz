@@ -98,7 +98,7 @@ $app->hook('slim.before', function() use ($app) {
 $app->get('/', function () use ($app, $apiRoot) {
     
     if ( !empty($_SESSION['firstvisit']) ) {
-        $app->redirect(date('/Y/m/d'));
+        //$app->redirect(date('/Y/m/d'));
     }
     
     $_SESSION['firstvisit'] = true;
@@ -231,7 +231,7 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
 $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
     
     $berichten = $app->container->get('apiClient')->get("berichten/{$y}/{$m}/{$d}");
-    
+        
     $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
     $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
     

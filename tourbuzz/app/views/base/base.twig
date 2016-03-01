@@ -20,6 +20,8 @@
         <script>
             $(document).ready(function() {
                 
+                //$(".slider").toggleClass("hide");
+
                 $("#owl-example").owlCarousel({
                     singleItem: true,
                     navigation: true,
@@ -27,12 +29,26 @@
                     autoHeight: true
                 });
                 
-                $('[data-item]').on('click', function(e)  {
+                //get carousel instance data and store it in variable owl
+                var owl = $("#owl-example").data('owlCarousel');
+                
+                $('.slide-link').click(function(e){
+                    e.preventDefault();
                     $(".slider").toggleClass("hide");
                     $(".buzz").toggleClass("hide");                    
+                    var slide = $(this).attr('href'); 
+                    var index = slide.match(/[0-9]+/g);                                      
+                    owl.jumpTo(index - 1);
+                });
+                
+                $('[data-item]').on('click', function(e)  {
+                    e.preventDefault();
+                    //$(".slider").toggleClass("hide");
+                    //$(".buzz").toggleClass("hide");                    
                 });
                 
                 $('[data-close]').on('click', function(e)  {
+                    e.preventDefault();
                     $(".slider").toggleClass("hide");
                     $(".buzz").toggleClass("hide");                    
                 });               
@@ -91,7 +107,9 @@
 		{% block footer %}
 		    <footer class="wrapper app-wrapper">
 		        <p>{{ __('Kijk op') }} <a href="//www.amsterdam.nl/touringcars">www.amsterdam.nl/touringcars</a>
-		        <span class="debug">API : {{ api }} </span>
+		        
+		        <p style="font-weight: normal">Feedback of vragen kunt u sturen naar Rutger: <a href="mailto:r.dik@amsterdam.nl">r.dik@amsterdam.nl</a></p>
+		        <span class="debug">&copy; {{ now|date('Y') }} DataLab Amsterdam API : {{ api }} </span>
 		        </p>
 		    </footer>
 		{% endblock %}

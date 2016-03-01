@@ -409,10 +409,15 @@ article {
         font-size: 20px;
         margin-bottom: $margin-small;
     }
+    h4 { 
+        margin-bottom: $margin-small;        
+    }
     p {
         margin-bottom: 16px;   
     }
-    
+    a {
+        color: #647b9e;
+    }
 }
 
 .tab-navigation {
