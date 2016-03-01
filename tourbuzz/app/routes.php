@@ -76,7 +76,9 @@ class ApiClient {
     }
 }
 
-$app->container->set('apiClient', new ApiClient($apiRoot));
+$app->container->singleton('api', function () use ($apiRoot) {
+  return new ApiClient($apiRoot);
+});
  
 /**
  * Before
@@ -133,12 +135,12 @@ $app->get('/dashboard/login', function () use ($apiRoot) {
  */ 
 $app->get('/dashboard/berichten', function () use ($app, $image_api) {  
     
-    $berichten = $app->container->get('apiClient')->get("berichten/");
+    $berichten = $app->api->get("berichten/");
     
     $data = [
         "berichten" => $berichten['messages'], 
         "image_api" => $image_api,
-        "api" => $app->container->get('apiClient')->getApiRoot(),
+        "api" => $app->api->getApiRoot(),
         "template" => "dashboard/berichten.twig",
     ];
     
@@ -168,13 +170,13 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
     if ( empty ($fields['title']) ) {
         $app->flashNow('error', 'Titel is niet ingevuld');
     
-        $berichten = $app->container->get('apiClient')->get("berichten/");
+        $berichten = $app->api->get("berichten/");
         
         $data = [
             "berichten" => $berichten['messages'], 
             "bericht" => $fields,
             "image_api" => $image_api,     
-            "api" => $app->container->get('apiClient')->getApiRoot(),
+            "api" => $app->api->getApiRoot(),
             "template" => "dashboard/berichten.twig",
         ];
         
@@ -182,7 +184,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
 
     } else {
     
-        $app->container->get('apiClient')->post("berichten/", $fields);
+        $app->api->post("berichten/", $fields);
         
         $app->flash('success', 'Bericht toegevoegd');    
         $app->redirect("/dashboard/berichten");    
@@ -197,14 +199,14 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
  */ 
 $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
     
-    $berichten = $app->container->get('apiClient')->get("berichten/");
+    $berichten = $app->api->get("berichten/");
     
     $data = [
         "test" => "world",
         "bericht" => $berichten['messages'][$id],
         "berichten" => $berichten['messages'],
         "image_api" => $image_api,   
-        "api" => $app->container->get('apiClient')->getApiRoot(),
+        "api" => $app->api->getApiRoot(),
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -218,7 +220,7 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
 $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
 
     $ids = $app->request->post('ids');
-    $berichten = $app->container->get('apiClient')->delete("berichten/", $ids);
+    $berichten = $app->api->delete("berichten/", $ids);
     
     $app->flash('success', 'Bericht(en) verwijderd');        
     $app->redirect("/dashboard/berichten");
@@ -230,12 +232,12 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
  */
 $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
     
-    $berichten = $app->container->get('apiClient')->get("berichten/{$y}/{$m}/{$d}");
+    $berichten = $app->api->get("berichten/{$y}/{$m}/{$d}");
         
     $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
     $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
     
-    $cruisekalender = $app->container->get('apiClient')->get("cruisekalender/{$y}/{$m}/{$d}");
+    $cruisekalender = $app->api->get("cruisekalender/{$y}/{$m}/{$d}");
 
     $N = date('N', strtotime("{$y}-{$m}-{$d}"));
     
@@ -255,7 +257,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "d" => $d,
         "m" => $m,
         "y" => $y,
-        "api" => $app->container->get('apiClient')->getApiRoot(),
+        "api" => $app->api->getApiRoot(),
         "image_api" => $image_api,        
         "analytics" => $analytics,
         "cruisekalender" => $cruisekalender['items'],
