@@ -29,6 +29,22 @@ main {
     }  
 }
 
+.dagselectie {
+    margin-top:5px; 
+    .inner {
+    display: table;
+    margin: 0 auto;
+    }
+    h3 {
+        text-align: center;
+    }
+    a {
+        color: #aaa;
+        display: inline-block;
+        padding: 0 10px;   
+    }
+}
+
 .slider {
     article {
         padding: 20px;   
@@ -143,7 +159,8 @@ body {
 
 ol {
     position: relative;
-    left: 35px; 
+    left: 45px;
+    width: 90%;
     .nr {
         position: absolute;
         left: -40px;
@@ -242,9 +259,9 @@ ol {
         
         i {        
             //border: 1px solid #444;
-            border-radius: 5px;  
+            //border-radius: 5px;  
             display: inline-block;
-            padding: 10px 5px; 
+            //padding: 10px 5px; 
             font-size: 30px;  
         }
     }
@@ -271,7 +288,7 @@ ol {
         text-align: right;
         a {
             font-size: 15px;
-            line-height: 50px;
+            //line-height: 50px;
         }
         .active {
             font-weight: bold;

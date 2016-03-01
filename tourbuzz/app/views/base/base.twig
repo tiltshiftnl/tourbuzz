@@ -5,7 +5,7 @@
 		<meta name="viewport" content="initial-scale=1">
         <meta name="mobile-web-app-capable" content="yes">
         <!--<link href="/favicon.ico" rel="icon" type="image/x-icon">-->	
-		<title>TourBuzz</title>
+		<title>Tour Buzz</title>
 		<meta name="description" content="TourBuzz for coach drivers">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">		
 		<link rel="stylesheet" href="/css/scss/main.scss">
@@ -23,7 +23,7 @@
                 $("#owl-example").owlCarousel({
                     singleItem: true,
                     navigation: false,
-                    autoHeight: true,
+                    autoHeight: false,
                     afterInit : function(elem){
                         var that = this
                         that.owlControls.prependTo(elem)
@@ -92,14 +92,14 @@
 		{% block header %}
 		    <header class="main-header">
 		        <div class="app-wrapper">
-    		        <a href="/" class="home"><i class="fa fa-bus"></i></a>
+    		        <a href="/" class="home">{#<i class="fa fa-bus"></i>#}<img src="/img/buzzlogo-w.png" style="width:60px"></a>
     		        <h2>
     		            <a href="/">Tour Buzz</a>
-    		            <span>
+    		            {#<span>
     		                <a href="{{ vorige }}"><i class="fa fa-chevron-left"></i></a>
     		                <p id="headerdate" class="headerdate">{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</p>
     		                <a href="{{ volgende }}"><i class="fa fa-chevron-right"></i></a>
-                        </span>
+                        </span>#}
                     </h2>
     		        <nav class="taal">
     		            <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}>NL</a> | 
@@ -123,12 +123,10 @@
 		{% block main %}{% endblock %}
 		
 		{% block footer %}
-		    <footer class="wrapper app-wrapper">
-		        <p>{{ __('Kijk op') }} <a href="//www.amsterdam.nl/touringcars">www.amsterdam.nl/touringcars</a>
-		        
-		        <p style="font-weight: normal">Feedback of vragen kunt u sturen naar Rutger: <a href="mailto:r.dik@amsterdam.nl">r.dik@amsterdam.nl</a></p>
-		        <span class="debug">&copy; {{ now|date('Y') }} DataLab Amsterdam API : {{ api }} </span>
-		        </p>
+		    <footer>
+		        <p>{{ __('Kijk op') }} <a href="//www.amsterdam.nl/touringcars">www.amsterdam.nl/touringcars</a></p>
+		        <p style="font-weight: normal">Feedback of vragen kunt u sturen naar <br>Rutger: <a href="mailto:r.dik@amsterdam.nl">r.dik@amsterdam.nl</a></p>
+		        <p class="debug">API : {{ api }} </p>
 		    </footer>
 		{% endblock %}
 		
@@ -138,8 +136,9 @@
             var headerdate = new Pikaday({ 
                 field: document.getElementById('headerdate'),
                 format: '/YYYY/MM/DD',
+                theme: 'buzz-theme',
                 onSelect: function(date) {
-                    console.log(headerdate.toString());
+                    //console.log(headerdate.toString());
                     window.location = headerdate.toString();
                 }
             });

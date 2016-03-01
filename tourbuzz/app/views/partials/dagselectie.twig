@@ -1,0 +1,15 @@
+    {% set dagnotatie %}
+        {% if now|date('y-m-d') == datestring|date('y-m-d') %}
+            {{ __('Vandaag') }}
+        {% else %}
+            {{ dag }} {{ d }} {{ maand(m) }} {{ y }}
+        {% endif %}
+    {% endset %}
+
+    <nav class="dagselectie">
+        <div class="inner">
+        <a href="{{ vorige }}"><i class="fa fa-chevron-left"></i></a>
+        <h3 class="dag headerdate" id="headerdate"><i class="fa fa-calendar"></i>&nbsp;{{ dagnotatie }}</h3>
+        <a href="{{ volgende }}"><i class="fa fa-chevron-right"></i></a>
+        </div>
+    </nav>

@@ -12,11 +12,9 @@
 
          
     <section class="buzz">
-     {% if now|date('y-m-d') == datestring|date('y-m-d') %}
-        <h3 class="dag">{{ __('Vandaag') }}</h3>
-    {% else %}
-        <h3 class="dag">{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
-    {% endif %}         
+
+    {% include 'partials/dagselectie.twig' %}
+         
         <ol>
             {% for record in berichten %}
             
