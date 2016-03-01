@@ -1,46 +1,22 @@
 {% extends 'base/base.twig' %}
 
+{% block slider %}  
+     {% include 'partials/slider.twig' %}
+{% endblock %}
+
 {% block main %}
 
 <main class="wrapper app-wrapper">
   
+
+
+         
+    <section class="buzz">
      {% if now|date('y-m-d') == datestring|date('y-m-d') %}
         <h3 class="dag">{{ __('Vandaag') }}</h3>
     {% else %}
         <h3 class="dag">{{ dag }} {{ d }} {{ maand(m) }} {{ y }}</h3>
-    {% endif %} 
-  
-    <section class="slider hide" pico-id="slider">
-        <a href="#" class="close" data-close><i class="fa fa-close"></i></a>
-        <div id="owl-example" class="owl-carousel">
-            {% for record in berichten %}
-            
-            {% set title %}
-                {% if lang == 'nl' %}{{ record.title }}{% endif %}
-                {% if lang == 'en' %}{{ record.title_en }}{% endif %}
-                {% if lang == 'fr' %}{{ record.title_fr }}{% endif %}                
-            {% endset %}
- 
-            {% set body %}
-                {% if lang == 'nl' %}{{ record.body|raw }}{% endif %}
-                {% if lang == 'en' %}{{ record.body_en|raw }}{% endif %}
-                {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}                
-            {% endset %}
-                
-            <article>
-                <h3><span class="nr">{{ loop.index }}</span> {{ title }}</h3>
-                <p>{{ body|raw }}</p>
-                <a href="{{ record.link }}" class="extern" target="_blank">{{ record.link }}</a>
-                {% if record.image_url is not empty %}
-                <img src="{{ record.image_url }}/?width=800&height=400&method=fit">
-                {% endif %}
-            </article>
-            {% endfor %}
-        </div>
-    </section>  
-         
-    <section class="buzz">
-        
+    {% endif %}         
         <ol>
             {% for record in berichten %}
             

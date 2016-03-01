@@ -20,37 +20,53 @@
         <script>
             $(document).ready(function() {
                 
-                //$(".slider").toggleClass("hide");
-
                 $("#owl-example").owlCarousel({
                     singleItem: true,
-                    navigation: true,
-                    navigationText: ["vorige","volgende"],
-                    autoHeight: true
+                    navigation: false,
+                    autoHeight: true,
+                    afterInit : function(elem){
+                        var that = this
+                        that.owlControls.prependTo(elem)
+                    }
                 });
+                
+
                 
                 //get carousel instance data and store it in variable owl
                 var owl = $("#owl-example").data('owlCarousel');
+
+              // Custom Navigation Events
+              $(".next").click(function(){
+                $("#owl-example").trigger('owl.next');
+              })
+              $(".prev").click(function(){
+               $("#owl-example").trigger('owl.prev');
+              })
                 
-                $('.slide-link').click(function(e){
+                /*$('.slide-link').click(function(e){
                     e.preventDefault();
-                    $(".slider").toggleClass("hide");
-                    $(".buzz").toggleClass("hide");                    
                     var slide = $(this).attr('href'); 
                     var index = slide.match(/[0-9]+/g);                                      
                     owl.jumpTo(index - 1);
-                });
+                });*/
                 
                 $('[data-item]').on('click', function(e)  {
                     e.preventDefault();
-                    //$(".slider").toggleClass("hide");
-                    //$(".buzz").toggleClass("hide");                    
+                    $(".slider").toggleClass("hide");
+                    $(".buzz").toggleClass("hide");
+                    $(".main-header").toggleClass("hide");
+                    $("footer").toggleClass("hide");                    
+                    var slide = $(this).attr('href'); 
+                    var index = slide.match(/[0-9]+/g);                                      
+                    owl.jumpTo(index - 1);                    
                 });
                 
                 $('[data-close]').on('click', function(e)  {
                     e.preventDefault();
                     $(".slider").toggleClass("hide");
-                    $(".buzz").toggleClass("hide");                    
+                    $(".buzz").toggleClass("hide");
+                    $(".main-header").toggleClass("hide");
+                    $("footer").toggleClass("hide");                                                            
                 });               
                 
             });   
@@ -70,6 +86,8 @@
 	</head>
 	<body>
 	    {% include 'partials/grid.twig' %}
+		
+		{% block slider %}{% endblock %}
 		
 		{% block header %}
 		    <header class="main-header">

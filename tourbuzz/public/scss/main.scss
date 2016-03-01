@@ -20,13 +20,27 @@ main {
   padding: 10px 0;
 }
 
-.slider, .splash {
+.splash {
     border: 1px solid #eee;
     padding: 20px;
     box-shadow: 1px 1px 3px #ddd;
     article {
         padding: 10px;   
     }  
+}
+
+.slider {
+    article {
+        padding: 20px;   
+    }
+    .close {
+        float: right;
+        position: relative;
+        display: block;
+        top: 10px;
+        right: 15px;
+        z-index: 9999;
+    }         
 }
 
 .extern {
@@ -129,8 +143,7 @@ body {
 
 ol {
     position: relative;
-    left: 60px; 
-    width: 90%;
+    left: 35px; 
     .nr {
         position: absolute;
         left: -40px;
