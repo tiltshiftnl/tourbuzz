@@ -122,22 +122,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 				       $message->enddate >= $date;
 			}));
 		}
-		// Links to halte
-		$messages = array_map(function ($message) use ($coachUri) {
-			foreach (['body', 'body_en', 'body_fr'] as $field) { //FIXME magic array
-				$message->{$field} = preg_replace(
-					"/(H[0-9]+)/",
-					"<a href=\"{$coachUri}/haltes/$1\" class=\"halte-link\">$1</a>",
-					$message->{$field}
-				);
-				$message->{$field} = preg_replace(
-					"/(P[0-9]+)/",
-					"<a href=\"{$coachUri}/parkeerplaatsen/$1\" class=\"parkeerplaats-link\">$1</a>",
-					$message->{$field}
-				);
-			}
-			return $message;
-		}, $messages);
 		header("Content-type: application/json");
 		echo json_encode([
 			"_date" => $date,

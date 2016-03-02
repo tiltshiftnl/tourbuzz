@@ -47,9 +47,23 @@ function maand($m) {
     return translate($month[(int)$m - 1]);
 }
 
+function insertLinks($text) {
+    $coachUri = "//coach.fixxx.nl/";
+    $text = preg_replace(
+        "/(H[0-9]+)/",
+        "<a href=\"{$coachUri}haltes/$1\" class=\"halte-link\">$1</a>",
+        $text);
+    $text = preg_replace(
+        "/(P[0-9]+)/",
+        "<a href=\"{$coachUri}parkeerplaatsen/$1\" class=\"parkeerplaats-link\">$1</a>",
+        $text);
+    return $text;
+}
+
 $twig = $app->view()->getEnvironment();
 $twig->addFunction('__', new Twig_Function_Function('translate'));
 $twig->addFunction('maand', new Twig_Function_Function('maand'));
+$twig->addFunction('insertlinks', new Twig_Function_Function('insertLinks'));
 
 require_once "routes.php"; // System routes
 

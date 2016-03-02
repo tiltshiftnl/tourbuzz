@@ -16,9 +16,9 @@
         {% endset %}
     
         {% set body %}
-            {% if lang == 'nl' %}{{ record.body|raw }}{% endif %}
-            {% if lang == 'en' %}{{ record.body_en|raw }}{% endif %}
-            {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}                
+            {% if lang == 'nl' %}{{ insertlinks(record.body)|raw }}{% endif %}
+            {% if lang == 'en' %}{{ insertlinks(record.body_en)|raw }}{% endif %}
+            {% if lang == 'fr' %}{{ insertlinks(record.body_fr)|raw }}{% endif %}                
         {% endset %}
             
         <article>
