@@ -3,20 +3,20 @@
 {% block header %}
     <header class="main-header">
         <div class="app-wrapper">
-	        <a href="/" class="home"><i class="fa fa-bus"></i></a>
+	        <a href="/" class="home"><img src="/img/buzzlogo-w.png" style="width:60px"></a>
 	        <h2>
 	            <a href="/dashboard/berichten">Tour Buzz <span>Dashboard</span></a>
             </h2>
             <a href="" class="live">
-            
+
             </a>
         </div>
     </header>
 {% endblock %}
 
 {% block main %}
-<main class="wrapper app-wrapper"> 
- 
+<main class="wrapper app-wrapper">
+
     <form class="form-styles" method="post" action="/dashboard/berichten">
         <input type="hidden" name="id" value="{{ bericht.id }}">
 
@@ -28,17 +28,17 @@
                 <option value="drukte" {% if bericht.category == 'drukte' %}selected{% endif %}>Drukte</option>
                 <option value="calamiteit" {% if bericht.category == 'calamiteit' %}selected{% endif %}>Calamiteit / ongeluk</option>
                 <option value="wegwerkzaamheden" {% if bericht.category == 'wegwerkzaamheden' %}selected{% endif %}>Wegwerkzaamheden</option>
-                <option value="overig" {% if bericht.category == 'overig' %}selected{% endif %}>Overig</option>                
+                <option value="overig" {% if bericht.category == 'overig' %}selected{% endif %}>Overig</option>
             </select>
         </div>#}
 
         <nav pico-reset-class-container class="tab-navigation">
             <ul class="tabselect">
                 <li>
-                    <a pico-toggle-class class="active" pico-id="tab-nl" href="#tab-nl">nl</a>
+                    <a pico-toggle-class class="active" pico-id="tab-nl" href="#tab-nl">Nederlands</a>
                 </li>
                 <li>
-                    <a pico-toggle-class pico-id="tab-en" href="#tab-en">en</a>
+                    <a pico-toggle-class pico-id="tab-en" href="#tab-en">English</a>
                 </li>
                 {#<li>
                     <a pico-toggle-class pico-id="tab-fr" href="#tab-fr">fr</a>
@@ -47,20 +47,21 @@
             <div class="tab active" pico-id="tab-nl">
                 <input type="text" name="title" placeholder="Headline" value="{{ bericht.title }}">
                 <textarea name="body" placeholder="Situatie">{{ bericht.body }}</textarea>
-                <textarea name="advies" placeholder="Advies">{{ bericht.advies }}</textarea>                
+                <textarea name="advice" placeholder="Advies">{{ bericht.advice }}</textarea>
             </div>
             <div class="tab" pico-id="tab-en">
-                <input type="text" name="title_en" placeholder="Bericht (engels)" value="{{ bericht.title_en }}">
-                <textarea name="body_en" placeholder="Toelichting (engels)">{{ bericht.body_en }}</textarea>
+                <input type="text" name="title_en" placeholder="Headline (engels)" value="{{ bericht.title_en }}">
+                <textarea name="body_en" placeholder="Situatie (engels)">{{ bericht.body_en }}</textarea>
+                <textarea name="advice_en" placeholder="Advies (engels)">{{ bericht.advice_en }}</textarea>
             </div>
             {#<div class="tab" pico-id="tab-fr">
                 <input type="text" name="title_fr" placeholder="Bericht (frans)" value="{{ bericht.title_fr }}">
-                <textarea name="body_fr" placeholder="Toelichting (frans)">{{ bericht.body_fr }}</textarea>        
+                <textarea name="body_fr" placeholder="Toelichting (frans)">{{ bericht.body_fr }}</textarea>
             </div>#}
         </nav>
-        
-        <span class="maxchars">Max 200 karakters</span>
-        
+
+        {#<span class="maxchars">Max 200 karakters</span>#}
+
         <div class="grid-row group">
             <h3 style="margin-top: 20px">Publicatiedatum</h3>
             <div class="datepicker">
@@ -70,20 +71,20 @@
                 <input type="text" name="enddate" id="enddate" placeholder="Einde" value="{{ bericht.enddate }}">
             </div>
         </div>
-        
+
         <div class="grid-row group">
             <h3 style="margin-top: 20px">Link</h3>
             <input type="text" name="link" value="{{ bericht.link }}">
         </div>
- 
+
         <div class="grid-row group">
-            <h3 style="margin-top: 20px">Afbeelding</h3>             
+            <h3 style="margin-top: 20px">Afbeelding</h3>
             {% include 'dashboard/partials/fileupload.twig' %}
         </div>
-               
-        <button type="submit">Opslaan</button>        
+
+        <button type="submit">Opslaan</button>
     </form>
-    
+
     <section class="buzz">
         <form method="post" action="/dashboard/berichten/verwijderen">
         <button type="submit" class="verwijderen">Verwijderen</button>
@@ -101,7 +102,7 @@
         </ol>
         </form>
     </section>
-    
-    
+
+
 </main>
-{% endblock %} 
+{% endblock %}

@@ -4,9 +4,9 @@
  * Whitelisting.
  */
 $app->hook('slim.before.dispatch', function () use ($app) {
-	$ips = [
-		'/^84\.241\.210\.169$/', // IP whitelist voorbeeld
-		'/^127\.0\.0\.1$/',
+    $ips = [
+        '/^84\.241\.210\.169$/', // IP whitelist voorbeeld
+        '/^127\.0\.0\.1$/',
 	];
 	$matches = array_filter($ips, function ($ip) {
 		return preg_match($ip, $_SERVER["REMOTE_ADDR"]);
