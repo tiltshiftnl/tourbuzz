@@ -1,31 +1,22 @@
-# The following will allow you to use URLs such as the following:
-#
-#   example.com/anything
-#   example.com/anything/
-#
-# Which will actually serve files such as the following:
-#
-#   example.com/anything.html
-#   example.com/anything.php
-#
-# But *only if they exist*, otherwise it will report the usual 404 error.
 Options +FollowSymLinks
 RewriteEngine On
-# Remove trailing slashes.
-# e.g. example.com/foo/ will redirect to example.com/foo
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/$ /$1 [R=permanent,QSA]
-# Redirect to HTML if it exists.
-# e.g. example.com/foo will display the contents of example.com/foo.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.+)$ $1.html [L,QSA]
-# Redirect to PHP if it exists.
-# e.g. example.com/foo will display the contents of example.com/foo.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.+)$ $1.php [L,QSA]
-ErrorDocument 404 /404.php
-ErrorDocument 403 /403.php
+
+RewriteRule ^berichten(/.*)? berichten.php [NC,L]
+
+RewriteRule ^attracties(/.*)? attracties.php [NC,L]
+RewriteRule ^haltes(/.*)? haltes.php [NC,L]
+RewriteRule ^wegwerkzaamheden(/.*)? wegwerkzaamheden.php [NC,L]
+RewriteRule ^parkeerplaatsen(/.*)? parkeerplaatsen.php [NC,L]
+RewriteRule ^evenementen(/.*)? evenementen.php [NC,L]
+
+RewriteRule ^distance(/.*)? distance.php [NC,L]
+RewriteRule ^cruisekalender(/.*)? cruisekalender.php [NC,L]
+
+RewriteRule ^poi(/.*)? poi.php [NC,L]
+RewriteRule ^ov2(/.*)? ov2.php [NC,L]
+
+#ErrorDocument 404 /404.php
+#ErrorDocument 403 /403.php
