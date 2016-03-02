@@ -21,7 +21,7 @@
         <input type="hidden" name="id" value="{{ bericht.id }}">
 
         <h3>Nieuw bericht</h3>
-        <div class="grid-row">
+        {#<div class="grid-row">
             <select name="category">
                 <option value="nieuws">Nieuws</option>
                 <option value="evenement"{% if bericht.category == 'evenement' %}selected{% endif %}>Evenement</option>
@@ -30,7 +30,7 @@
                 <option value="wegwerkzaamheden" {% if bericht.category == 'wegwerkzaamheden' %}selected{% endif %}>Wegwerkzaamheden</option>
                 <option value="overig" {% if bericht.category == 'overig' %}selected{% endif %}>Overig</option>                
             </select>
-        </div>
+        </div>#}
 
         <nav pico-reset-class-container class="tab-navigation">
             <ul class="tabselect">
@@ -45,8 +45,9 @@
                 </li>#}
             </ul>
             <div class="tab active" pico-id="tab-nl">
-                <input type="text" name="title" placeholder="Bericht" value="{{ bericht.title }}">
-                <textarea name="body" placeholder="Toelichting (optioneel)">{{ bericht.body }}</textarea>
+                <input type="text" name="title" placeholder="Headline" value="{{ bericht.title }}">
+                <textarea name="body" placeholder="Situatie">{{ bericht.body }}</textarea>
+                <textarea name="advies" placeholder="Advies">{{ bericht.advies }}</textarea>                
             </div>
             <div class="tab" pico-id="tab-en">
                 <input type="text" name="title_en" placeholder="Bericht (engels)" value="{{ bericht.title_en }}">
