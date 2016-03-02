@@ -47,12 +47,12 @@
             <div class="tab active" pico-id="tab-nl">
                 <input type="text" name="title" placeholder="Headline" value="{{ bericht.title }}">
                 <textarea name="body" placeholder="Situatie">{{ bericht.body }}</textarea>
-                <textarea name="advies" placeholder="Advies">{{ bericht.advice }}</textarea>
+                <textarea name="advice" placeholder="Advies">{{ bericht.advice }}</textarea>
             </div>
             <div class="tab" pico-id="tab-en">
                 <input type="text" name="title_en" placeholder="Bericht (engels)" value="{{ bericht.title_en }}">
-                <textarea name="body_en" placeholder="Toelichting (engels)">{{ bericht.body_en }}</textarea>
-                <textarea name="advies" placeholder="Advies">{{ bericht.advice_en }}</textarea>
+                <textarea name="body_en" placeholder="Situatie (engels)">{{ bericht.body_en }}</textarea>
+                <textarea name="advice_en" placeholder="Advies (engels)">{{ bericht.advice_en }}</textarea>
             </div>
             {#<div class="tab" pico-id="tab-fr">
                 <input type="text" name="title_fr" placeholder="Bericht (frans)" value="{{ bericht.title_fr }}">
