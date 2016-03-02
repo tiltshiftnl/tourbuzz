@@ -30,19 +30,19 @@
     },
     "jan" : {
       "en" : "jan",
-      "fr" : "jan"       
+      "fr" : "jan"
     },
     "feb" : {
       "en" : "feb",
-      "fr" : "fév"        
+      "fr" : "fév"
     },
     "mrt" : {
       "en" : "mar",
-      "fr" : "mar"        
+      "fr" : "mar"
     },
     "apr" : {
       "en" : "apr",
-      "fr" : "avr"        
+      "fr" : "avr"
     },
     "mei" : {
       "en" : "may",
@@ -50,39 +50,39 @@
     },
     "jun" : {
       "en" : "jun",
-      "fr" : "jun"        
+      "fr" : "jun"
     },
     "jul" : {
       "en" : "jul",
-      "fr" : "jul"        
+      "fr" : "jul"
     },
     "aug" : {
       "en" : "aug",
-      "fr" : "aoû"        
+      "fr" : "aoû"
     },
     "sep" : {
       "en" : "sep",
-      "fr" : "sep"        
+      "fr" : "sep"
     },
     "okt" : {
       "en" : "oct",
-      "fr" : "oct"        
+      "fr" : "oct"
     },
     "nov" : {
       "en" : "nov",
-      "fr" : "nov"        
+      "fr" : "nov"
     },
     "dec" : {
       "en" : "dec",
-      "fr" : "déc"        
+      "fr" : "déc"
     },
     "Kijk op" : {
       "en" : "Check our website ",
-      "fr" : "Consultez le site "   
+      "fr" : "Consultez le site "
     },
     "Vandaag" : {
       "en" : "Today",
-      "fr" : "Aujourd'hui"      
+      "fr" : "Aujourd'hui"
     },
     "Kies een bestemming" : {
       "en" : "Choose your destination",
@@ -90,27 +90,30 @@
     },
     "Kies een andere bestemming" : {
       "en" : "Choose a different destination",
-      "fr" : "Choisissez une autre destination"        
+      "fr" : "Choisissez une autre destination"
     },
     "Toon op kaart" : {
       "en" : "Show on map",
-      "fr" : "Montrer sur la carte"        
+      "fr" : "Montrer sur la carte"
     },
     "Alternatieve haltes" : {
       "en" : "Alternative stops",
-      "fr" : "Alternatif arrêt"        
+      "fr" : "Alternatif arrêt"
     },
     "Haltes in de buurt" : {
       "en" : "Nearby stops",
-      "fr" : "Arrêts à proximité"        
-    },            
+      "fr" : "Arrêts à proximité"
+    },
     "Afstand" : {
       "en" : "Distance",
-      "fr" : "Distance"        
+      "fr" : "Distance"
     },
     "Bestemmingen in de buurt" : {
       "en" : "Nearby destinations",
-      "fr" : "Les destinations proches"        
-    }     
+      "fr" : "Les destinations proches"
+    },
+    "Advies" : {
+      "en" : "Advice"
+    }
   }
 }
