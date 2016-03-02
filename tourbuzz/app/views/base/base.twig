@@ -4,22 +4,22 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1">
         <meta name="mobile-web-app-capable" content="yes">
-        <!--<link href="/favicon.ico" rel="icon" type="image/x-icon">-->	
+        <!--<link href="/favicon.ico" rel="icon" type="image/x-icon">-->
 		<title>Tour Buzz</title>
 		<meta name="description" content="TourBuzz for coach drivers">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">		
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/css/scss/main.scss">
         <link rel="stylesheet" href="/js/owl-carousel/owl.carousel.css">
-        <link rel="stylesheet" href="/js/owl-carousel/owl.theme.css">        
+        <link rel="stylesheet" href="/js/owl-carousel/owl.theme.css">
 		<link rel="stylesheet" href="/js/pikaday/css/pikaday.css">
-		<link rel="stylesheet" href="/css/pikaday/buzz-theme.css">				
+		<link rel="stylesheet" href="/css/pikaday/buzz-theme.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="/js/owl-carousel/owl.carousel.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>        
+		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
         <script src="/js/pico-ui.js"></script>
         <script>
             $(document).ready(function() {
-                
+
                 $("#owl-example").owlCarousel({
                     singleItem: true,
                     navigation: false,
@@ -29,9 +29,9 @@
                         that.owlControls.prependTo(elem)
                     }
                 });
-                
 
-                
+
+
                 //get carousel instance data and store it in variable owl
                 var owl = $("#owl-example").data('owlCarousel');
 
@@ -42,34 +42,34 @@
               $(".prev").click(function(){
                $("#owl-example").trigger('owl.prev');
               })
-                
+
                 /*$('.slide-link').click(function(e){
                     e.preventDefault();
-                    var slide = $(this).attr('href'); 
-                    var index = slide.match(/[0-9]+/g);                                      
+                    var slide = $(this).attr('href');
+                    var index = slide.match(/[0-9]+/g);
                     owl.jumpTo(index - 1);
                 });*/
-                
+
                 $('[data-item]').on('click', function(e)  {
                     e.preventDefault();
                     $(".slider").toggleClass("hide");
                     $(".buzz").toggleClass("hide");
                     $(".main-header").toggleClass("hide");
-                    $("footer").toggleClass("hide");                    
-                    var slide = $(this).attr('href'); 
-                    var index = slide.match(/[0-9]+/g);                                      
-                    owl.jumpTo(index - 1);                    
+                    $("footer").toggleClass("hide");
+                    var slide = $(this).attr('href');
+                    var index = slide.match(/[0-9]+/g);
+                    owl.jumpTo(index - 1);
                 });
-                
+
                 $('[data-close]').on('click', function(e)  {
                     e.preventDefault();
                     $(".slider").toggleClass("hide");
                     $(".buzz").toggleClass("hide");
                     $(".main-header").toggleClass("hide");
-                    $("footer").toggleClass("hide");                                                            
-                });               
-                
-            });   
+                    $("footer").toggleClass("hide");
+                });
+
+            });
         </script>
         {% if analytics %}
         	<script>
@@ -77,18 +77,18 @@
         	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        	
+
         	  ga('create', 'UA-74182539-1', 'auto');
         	  ga('send', 'pageview');
-        	
+
         	</script>
     	{% endif %}
 	</head>
 	<body>
 	    {% include 'partials/grid.twig' %}
-		
+
 		{% block slider %}{% endblock %}
-		
+
 		{% block header %}
 		    <header class="main-header">
 		        <div class="app-wrapper">
@@ -102,14 +102,14 @@
                         </span>#}
                     </h2>
     		        <nav class="taal">
-    		            <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}>NL</a> | 
+    		            <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}>NL</a> |
     		            <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}>EN</a>
     		            {#<a href="?lang=fr" {% if lang =='fr' %}class="active"{% endif %}>fr</a>#}
     		        </nav>
 		        </div>
 		    </header>
 		{% endblock %}
-		
+
 		{% block flashmessages %}
 		    {% if flash is not empty %}
     		    <section class="flashmessages">
@@ -119,21 +119,21 @@
     		    </section>
 		    {% endif %}
 		{% endblock %}
-		
+
 		{% block main %}{% endblock %}
-		
+
 		{% block footer %}
 		    <footer>
 		        <p>{{ __('Kijk op') }} <a href="//www.amsterdam.nl/touringcars">www.amsterdam.nl/touringcars</a></p>
-		        <p style="font-weight: normal">Feedback of vragen kunt u sturen naar <br>Rutger: <a href="mailto:r.dik@amsterdam.nl">r.dik@amsterdam.nl</a></p>
+		        <p style="font-weight: normal">Feedback of vragen kunt u sturen naar <br>Mark Sloothaak: <a href="mailto:touringcar@amsterdam.nl">touringcar@amsterdam.nl</a></p>
 		        <p class="debug">API : {{ api }} </p>
 		    </footer>
 		{% endblock %}
-		
+
         <script src="/js/pikaday/pikaday.js"></script>
         <script>
 
-            var headerdate = new Pikaday({ 
+            var headerdate = new Pikaday({
                 field: document.getElementById('headerdate'),
                 format: '/YYYY/MM/DD',
                 theme: 'buzz-theme',
@@ -142,17 +142,17 @@
                     window.location = headerdate.toString();
                 }
             });
-        
-            var startdate = new Pikaday({ 
+
+            var startdate = new Pikaday({
                 field: document.getElementById('startdate'),
                 format: 'YYYY-MM-DD',
                 theme: 'buzz-theme'
             });
-            var enddate = new Pikaday({ 
+            var enddate = new Pikaday({
                 field: document.getElementById('enddate'),
                 format: 'YYYY-MM-DD',
                 theme: 'buzz-theme'
             });
-        </script>   
+        </script>
 	</body>
 </html>
