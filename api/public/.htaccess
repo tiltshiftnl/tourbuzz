@@ -4,19 +4,19 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/$ /$1 [R=permanent,QSA]
 
-RewriteRule ^berichten(/.*)? berichten.php [NC,L]
+RewriteRule ^berichten(/.*)?$ berichten.php [NC,L]
 
-RewriteRule ^attracties(/.*)? attracties.php [NC,L]
-RewriteRule ^haltes(/.*)? haltes.php [NC,L]
-RewriteRule ^wegwerkzaamheden(/.*)? wegwerkzaamheden.php [NC,L]
-RewriteRule ^parkeerplaatsen(/.*)? parkeerplaatsen.php [NC,L]
-RewriteRule ^evenementen(/.*)? evenementen.php [NC,L]
+RewriteRule ^attracties(/.*)?$ attracties.php [NC,L]
+RewriteRule ^haltes(/.*)?$ haltes.php [NC,L]
+RewriteRule ^wegwerkzaamheden(/.*)?$ wegwerkzaamheden.php [NC,L]
+RewriteRule ^parkeerplaatsen(/.*)?$ parkeerplaatsen.php [NC,L]
+RewriteRule ^evenementen(/.*)?$ evenementen.php [NC,L]
 
-RewriteRule ^distance(/.*)? distance.php [NC,L]
-RewriteRule ^cruisekalender(/.*)? cruisekalender.php [NC,L]
+RewriteRule ^distance(/.*)?$ distance.php [NC,L]
+RewriteRule ^cruisekalender(/.*)?$ cruisekalender.php [NC,L]
 
-RewriteRule ^poi(/.*)? poi.php [NC,L]
-RewriteRule ^ov2(/.*)? ov2.php [NC,L]
+RewriteRule ^poi(/.*)?$ poi.php [NC,L]
+RewriteRule ^ov2(/.*)?$ ov2.php [NC,L]
 
 #ErrorDocument 404 /404.php
 #ErrorDocument 403 /403.php
