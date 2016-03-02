@@ -57,6 +57,10 @@ function insertLinks($text) {
         "/(P[0-9]+)/",
         "<a href=\"{$coachUri}parkeerplaatsen/$1\" class=\"parkeerplaats-link\">$1</a>",
         $text);
+    $text = preg_replace(
+        "/([^\s]+@([^\s]+\.)+[^\s\.]+)/",
+        "<a href=\"mailto:$1\">$1</a>",
+        $text);
     return $text;
 }
 
