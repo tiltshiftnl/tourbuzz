@@ -91,6 +91,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
 	case "GET":
 		$messages = loadMessages();
+
+        // Make sure all the fields are there.
 		$messages = array_map(function ($message) use ($messageFields) {
 			foreach ($messageFields as $messageField) {
 				if (!isset($message->{$messageField})) {
@@ -99,11 +101,43 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			}
 			return $message;
 		}, $messages);
+
+        // Sort messages by date.
 		uasort($messages, function ($messageA, $messageB) {
 			return $messageA->startdate < $messageB->startdate;
 		});
+
+        // If link is available, and it is a link to google maps
+        // Get location geo information.
+        $messages = array_map(function ($message) {
+            $message->link_info = "";
+            $message->location = (object)[];
+            if (preg_match("/goo\.gl/", $message->link)) {
+                $ch = curl_init($message->link);
+                curl_setopt($ch, CURLOPT_NOBODY, 1);
+                $rs = curl_exec($ch);
+                $message->link_info = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
+                $matches = [];
+                preg_match("/@([0-9.]*),([0-9.]*),/", $message->link_info, $matches);
+                $message->location = [
+                    "lat" => $matches[1],
+                    "lng" => $matches[2]
+                ];
+            }
+            if (preg_match("/google\..*\/maps\//", $message->link)) {
+                $matches = [];
+                preg_match("/@([0-9.]*),([0-9.]*),/", $message->link, $matches);
+                $message->location = [
+                    "lat" => $matches[1],
+                    "lng" => $matches[2]
+                ];
+            }
+            return $message;
+        }, $messages);
+
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
-		$date = date("Y-m-d");
+
+        // If message id is present (40 char length)
 		// Get One and Exit.
 		if (!empty($uriParts[1]) && strlen($uriParts[1]) === 40) {
 			$id = $uriParts[1];
@@ -114,6 +148,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			]);
 			exit;
 		}
+
+		$date = date("Y-m-d");
+
 		// Filter by date.
 		if (!empty($uriParts[1]) && strlen($uriParts[1]) === 4) {
 			$date = "{$uriParts[1]}-{$uriParts[2]}-{$uriParts[3]}";
@@ -122,6 +159,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 				       $message->enddate >= $date;
 			}));
 		}
+
 		header("Content-type: application/json");
 		echo json_encode([
 			"_date" => $date,
