@@ -43,7 +43,7 @@ foreach ($jsonData->in_uitstaphaltes as $data) {
 		"straat" => $straat,
 		"locatie" => $locatie,
 		"capaciteit" => $capaciteit,
-		"coordinaten" => [
+		"location" => [
 			"lat" => $geoJson->coordinates[1],
 			"lng" => $geoJson->coordinates[0]
 		],

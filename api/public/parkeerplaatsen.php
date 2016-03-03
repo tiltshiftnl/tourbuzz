@@ -29,7 +29,7 @@ foreach ($jsonData->parkeerplaatsen as $data) {
 		"nummer" => array_shift($titleParts),
 		"naam" => trim(array_shift($titleParts)),
 		"capaciteit" => intval(str_replace("maximaal ", "", $data->Busplaatsen)),
-		"coordinaten" => [
+		"location" => [
 			"lat" => $geoJson->coordinates[1],
 			"lng" => $geoJson->coordinates[0]
 		],
