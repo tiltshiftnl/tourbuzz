@@ -321,6 +321,19 @@ ol.berichten {
         display: block;
     }
 
+.bericht-header {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    font-size: 19px;
+    line-height: 1.3em;
+    .nr {
+        position: absolute;
+        left: 0;
+        top: -1px;
+    }
+}
+
 .cruiseschepen, .evenementen, .wegwerkzaamheden {
     h3 {
        // font-size: 20px;
