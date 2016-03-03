@@ -18,7 +18,14 @@ try {
 
 $jsonData = json_decode($res->getBody());
 
-$parkeerplaatsen = [];
+$uriParts = array_values(array_filter(explode("/", $_SERVER["REQUEST_URI"])));
+
+$result = [
+	"_uri" => $uriParts,
+	"_bron" => $sourceUrl,
+	"_pogingen" => $tries
+];
+
 foreach ($jsonData->parkeerplaatsen as $data) {
 	$data = $data->parkeerplaats;
 	$titleParts = explode(":", $data->title);
@@ -37,12 +44,18 @@ foreach ($jsonData->parkeerplaatsen as $data) {
 		"mapsUrl" => $mapsUrl,
 		"_origineel" => $data
 	];
+	if (!empty($uriParts[1])) {
+		if (strtolower($parkeerplaats->nummer) !== strtolower($uriParts[1])) {
+			continue;
+		} else {
+			$result["parkeerplaats"] = $parkeerplaats;
+			break;
+		}
+	} else {
+		$result["parkeerplaatsen"][] = $parkeerplaats;
+	}
 	$parkeerplaatsen[] = $parkeerplaats;
 }
 
 header("Content-type: application/json");
-echo json_encode([
-	"_bron" => $sourceUrl,
-	"_pogingen" => $tries,
-	"parkeerplaatsen" => $parkeerplaatsen
-]);
+echo json_encode($result);
