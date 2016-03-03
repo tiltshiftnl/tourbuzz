@@ -282,7 +282,7 @@ ol.berichten {
     h2 {
         @include grid-col(1,2);
         text-align: center;
-            font-size: 28px;
+            font-size: 27px;
             line-height: 1em;
             margin: 0;
         span {
@@ -567,6 +567,7 @@ article {
     min-width: 35px;
     padding: 2px 5px 0;
     text-align: center;
+    text-transform: uppercase;
 }
 .parkeerplaats-link {
     background: #222;
