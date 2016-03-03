@@ -3,13 +3,10 @@
 {% block header %}
     <header class="main-header">
         <div class="app-wrapper">
-	        <a href="/" class="home"><img src="/img/buzzlogo-w.png" style="width:60px"></a>
-	        <h2>
-	            <a href="/dashboard/berichten">Tour Buzz <span>Dashboard</span></a>
+            <a href="/" class="home"><img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
+            <h2>
+                <a href="/dashboard/berichten">Tour Buzz <span>Dashboard</span></a>
             </h2>
-            <a href="" class="live">
-
-            </a>
         </div>
     </header>
 {% endblock %}
@@ -21,16 +18,6 @@
         <input type="hidden" name="id" value="{{ bericht.id }}">
 
         <h3>Nieuw bericht</h3>
-        {#<div class="grid-row">
-            <select name="category">
-                <option value="nieuws">Nieuws</option>
-                <option value="evenement"{% if bericht.category == 'evenement' %}selected{% endif %}>Evenement</option>
-                <option value="drukte" {% if bericht.category == 'drukte' %}selected{% endif %}>Drukte</option>
-                <option value="calamiteit" {% if bericht.category == 'calamiteit' %}selected{% endif %}>Calamiteit / ongeluk</option>
-                <option value="wegwerkzaamheden" {% if bericht.category == 'wegwerkzaamheden' %}selected{% endif %}>Wegwerkzaamheden</option>
-                <option value="overig" {% if bericht.category == 'overig' %}selected{% endif %}>Overig</option>
-            </select>
-        </div>#}
 
         <nav pico-reset-class-container class="tab-navigation">
             <ul class="tabselect">
@@ -54,10 +41,6 @@
                 <textarea name="body_en" placeholder="Situatie (engels)">{{ bericht.body_en }}</textarea>
                 <textarea name="advice_en" placeholder="Advies (engels)">{{ bericht.advice_en }}</textarea>
             </div>
-            {#<div class="tab" pico-id="tab-fr">
-                <input type="text" name="title_fr" placeholder="Bericht (frans)" value="{{ bericht.title_fr }}">
-                <textarea name="body_fr" placeholder="Toelichting (frans)">{{ bericht.body_fr }}</textarea>
-            </div>#}
         </nav>
 
         {#<span class="maxchars">Max 200 karakters</span>#}
@@ -88,15 +71,16 @@
     <section class="buzz">
         <form method="post" action="/dashboard/berichten/verwijderen">
         <button type="submit" class="verwijderen">Verwijderen</button>
-        {#<a href="#" class="verwijder"> x verwijderen</a>#}
         <h2>Berichten</h2>
-        <ol>
+        <ol class="berichten">
             {% for record in berichten %}
-            <li>
+            <li style="position: relative">
                 <input type="checkbox" name="ids[]" value="{{ record.id }}">
-                <span class="nr">{{ loop.index }}</span>
-                <a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a>
-                <span class="meta">{{ record.category }}</span>
+                <a href="/dashboard/berichten/{{ record.id }}">
+                    <span class="nr">{{ loop.index }}</span>
+                    {{ record.title }}
+                    <span class="meta">van <b>{{ record.startdate|date('d-m \'y') }}</b> t/m <b>{{ record.enddate|date('d-m \'y') }}</b></span>
+                </a>
             </li>
             {% endfor %}
         </ol>
