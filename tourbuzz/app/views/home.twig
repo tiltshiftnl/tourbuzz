@@ -1,39 +1,39 @@
 {% extends 'base/base.twig' %}
 
-{% block slider %}  
+{% block slider %}
      {% include 'partials/slider.twig' %}
 {% endblock %}
 
 {% block main %}
-    <img src="{% include 'partials/googlemap.twig' %}">    
 
 <main class="wrapper app-wrapper">
-           
+
     <section class="buzz">
 
     {% include 'partials/dagselectie.twig' %}
-         
+    <img src="{% include 'partials/googlemap.twig' %}">
+
         <ol>
             {% for record in berichten %}
-            
+
                 {% set title %}
                     {% if lang == 'nl' %}{{ record.title }}{% endif %}
                     {% if lang == 'en' %}{{ record.title_en }}{% endif %}
-                    {% if lang == 'fr' %}{{ record.title_fr }}{% endif %}                
+                    {% if lang == 'fr' %}{{ record.title_fr }}{% endif %}
                 {% endset %}
-     
+
                 {% set body %}
                     {% if lang == 'nl' %}{{ record.body|raw }}{% endif %}
                     {% if lang == 'en' %}{{ record.body_en|raw }}{% endif %}
-                    {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}                
+                    {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}
                 {% endset %}
-            
-                <li><a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" class="slide-link"><span class="nr">{{ loop.index }}</span>{{ title }}</a></li>        
+
+                <li><a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" class="slide-link"><span class="nr">{{ loop.index }}</span>{{ title }}</a></li>
             {% endfor %}
         </ol>
     </section>
 
-    
+
     {% if cruisekalender is not empty %}
     <section class="cruiseschepen">
         <h3><i class="fa fa-ship"></i> Passengers Terminal Amsterdam</h3>
@@ -46,7 +46,7 @@
         </ul>
     </section>
     {% endif %}
-    
+
 </main>
 
 {% endblock %}
