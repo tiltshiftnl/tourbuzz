@@ -125,18 +125,22 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                 $message->link_info = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
                 $matches = [];
                 preg_match("/@([0-9.]*),([0-9.]*),/", $message->link_info, $matches);
-                $message->location = [
-                    "lat" => $matches[1],
-                    "lng" => $matches[2]
-                ];
+                if (!empty($matches[1]) && !empty($matches[2])) {
+                    $message->location = [
+                        "lat" => $matches[1],
+                        "lng" => $matches[2]
+                    ];
+                }
             }
             if (preg_match("/google\..*\/maps\//", $message->link)) {
                 $matches = [];
                 preg_match("/@([0-9.]*),([0-9.]*),/", $message->link, $matches);
-                $message->location = [
-                    "lat" => $matches[1],
-                    "lng" => $matches[2]
-                ];
+                if (!empty($matches[1]) && !empty($matches[2])) {
+                    $message->location = [
+                        "lat" => $matches[1],
+                        "lng" => $matches[2]
+                    ];
+                }
             }
             return $message;
         }, $messages);
