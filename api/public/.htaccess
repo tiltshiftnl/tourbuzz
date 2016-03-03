@@ -5,6 +5,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/$ /$1 [R=permanent,QSA]
 
 RewriteRule ^berichten(/.*)?$ berichten.php [NC,L]
+RewriteRule ^afbeeldingen(/.*)?$ afbeeldingen.php [NC,L]
 
 RewriteRule ^attracties(/.*)?$ attracties.php [NC,L]
 RewriteRule ^haltes(/.*)?$ haltes.php [NC,L]
