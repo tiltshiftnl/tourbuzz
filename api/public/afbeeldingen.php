@@ -8,7 +8,7 @@ $fileDir = __DIR__ . "/../images/";
 
 switch ($_SERVER["REQUEST_METHOD"]) {
 	case "GET":
-		$fileName = array_values(array_filter(explode("/", $_SERVER["REQUEST_URI"])))[1];
+		$fileName = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])))[1];
 		$filePath = $fileDir . $fileName;
 		if (file_exists($filePath)) {
 			$manager = new ImageManager(["driver" => "imagick"]);
