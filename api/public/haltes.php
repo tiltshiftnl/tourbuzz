@@ -1,13 +1,23 @@
 <?php
 
-$sourceUrl = "http://www.amsterdamopendata.nl/files/ivv/touringcar/in_uitstaphaltes.json";
-$tries = 0;
-do {
-	$tries++;
-	$fileContents = file_get_contents($sourceUrl);
-	if (!$fileContents) usleep(mt_rand(0, 10000));
-} while (!$fileContents && $tries < 20);
-$jsonData = json_decode($fileContents);
+ini_set("error_reporting", 1);
+ini_set("display_errors", E_ALL);
+
+require_once("../vendor/autoload.php");
+
+//$sourceUrl = "http://www.amsterdamopendata.nl/files/ivv/touringcar/in_uitstaphaltes.json";
+//$sourceUrl = "http://data.amsterdam.nl/files/ivv/touringcar/in_uitstaphaltes.json";
+$sourceUrl = "http://open.datapunt.amsterdam.nl/ivv/touringcar/in_uitstaphaltes.json";
+
+try {
+    $guzzle = new GuzzleHttp\Client();
+    $res = $guzzle->request('GET', $sourceUrl);
+} catch (Exception $e) {
+    header("HTTP/1.1 404 Not Found");
+    exit;
+}
+
+$jsonData = json_decode($res->getBody());
 
 $uriParts = array_values(array_filter(explode("/", $_SERVER["REQUEST_URI"])));
 
