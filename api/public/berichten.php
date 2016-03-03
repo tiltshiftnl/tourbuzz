@@ -92,6 +92,12 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 	case "GET":
 		$messages = loadMessages();
 
+        // Filter out old messages.
+		$date = date("Y-m-d");
+		$messages = array_filter($messages, function ($message) use ($date) {
+			return $message->enddate >= $date;
+		});
+
         // Make sure all the fields are there.
 		$messages = array_map(function ($message) use ($messageFields) {
 			foreach ($messageFields as $messageField) {
@@ -141,6 +147,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		// Get One and Exit.
 		if (!empty($uriParts[1]) && strlen($uriParts[1]) === 40) {
 			$id = $uriParts[1];
+            if (!array_key_exists($id, $messages)) {
+                header("HTTP/1.1 404 Not Found");
+                exit;
+            }
 			$message = $messages[$id];
 			header("Content-type: application/json");
 			echo json_encode([
@@ -149,15 +159,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			exit;
 		}
 
-		$date = date("Y-m-d");
-
 		// Filter by date.
 		if (!empty($uriParts[1]) && strlen($uriParts[1]) === 4) {
 			$date = "{$uriParts[1]}-{$uriParts[2]}-{$uriParts[3]}";
-			$messages = array_values(array_filter($messages, function ($message) use ($date) {
+			$messages = array_filter($messages, function ($message) use ($date) {
 				return $message->startdate <= $date &&
 				       $message->enddate >= $date;
-			}));
+			});
 		}
 
 		header("Content-type: application/json");
