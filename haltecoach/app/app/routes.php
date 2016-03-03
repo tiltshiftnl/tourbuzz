@@ -93,11 +93,11 @@ $app->get('/bestemmingen/:trcid', function ($trcid) use ($apiRoot) {
 
     if ( !empty($haltes['haltes']) ) {
         foreach ($haltes['haltes'] as &$halte) {
-            $lat1 = $record['attractie']['coordinaten']['lat'];
-            $lng1 = $record['attractie']['coordinaten']['lng'];
+            $lat1 = $record['attractie']['location']['lat'];
+            $lng1 = $record['attractie']['location']['lng'];
 
-            $lat2 = $halte['coordinaten']['lat'];
-            $lng2 = $halte['coordinaten']['lng'];
+            $lat2 = $halte['location']['lat'];
+            $lng2 = $halte['location']['lng'];
 
             $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
             $halte['afstand'] = $afstand;
@@ -200,11 +200,11 @@ $app->get('/haltes/:slug', function ($slug) use ($apiRoot) {
     }
 
     foreach ($haltes['haltes'] as &$halte) {
-        $lat1 = $record['halte']['coordinaten']['lat'];
-        $lng1 = $record['halte']['coordinaten']['lng'];
+        $lat1 = $record['halte']['location']['lat'];
+        $lng1 = $record['halte']['location']['lng'];
 
-        $lat2 = $halte['coordinaten']['lat'];
-        $lng2 = $halte['coordinaten']['lng'];
+        $lat2 = $halte['location']['lat'];
+        $lng2 = $halte['location']['lng'];
 
         $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
         $halte['afstand'] = $afstand;
@@ -215,11 +215,11 @@ $app->get('/haltes/:slug', function ($slug) use ($apiRoot) {
     uasort($haltes['haltes'], 'cmpdistance');
 
     foreach ($attracties['attracties'] as &$attractie) {
-        $lat1 = $record['halte']['coordinaten']['lat'];
-        $lng1 = $record['halte']['coordinaten']['lng'];
+        $lat1 = $record['halte']['location']['lat'];
+        $lng1 = $record['halte']['location']['lng'];
 
-        $lat2 = $attractie['coordinaten']['lat'];
-        $lng2 = $attractie['coordinaten']['lng'];
+        $lat2 = $attractie['location']['lat'];
+        $lng2 = $attractie['location']['lng'];
 
         $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
         $attractie['afstand'] = $afstand;
@@ -271,11 +271,11 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($apiRoot) {
     }
 
     foreach ($haltes['haltes'] as &$halte) {
-        $lat1 = $record['halte']['coordinaten']['lat'];
-        $lng1 = $record['halte']['coordinaten']['lng'];
+        $lat1 = $record['halte']['location']['lat'];
+        $lng1 = $record['halte']['location']['lng'];
 
-        $lat2 = $halte['coordinaten']['lat'];
-        $lng2 = $halte['coordinaten']['lng'];
+        $lat2 = $halte['location']['lat'];
+        $lng2 = $halte['location']['lng'];
 
         $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
         $halte['afstand'] = $afstand;
@@ -286,11 +286,11 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($apiRoot) {
     uasort($haltes['haltes'], 'cmpdistance');
 
     foreach ($attracties['attracties'] as &$attractie) {
-        $lat1 = $record['halte']['coordinaten']['lat'];
-        $lng1 = $record['halte']['coordinaten']['lng'];
+        $lat1 = $record['halte']['location']['lat'];
+        $lng1 = $record['halte']['location']['lng'];
 
-        $lat2 = $attractie['coordinaten']['lat'];
-        $lng2 = $attractie['coordinaten']['lng'];
+        $lat2 = $attractie['location']['lat'];
+        $lng2 = $attractie['location']['lng'];
 
         $afstand = halteAfstand($lat1, $lng1, $lat2, $lng2);
         $attractie['afstand'] = $afstand;
