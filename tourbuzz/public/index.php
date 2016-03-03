@@ -48,14 +48,13 @@ function maand($m) {
 }
 
 function insertLinks($text) {
-    $coachUri = "//coach.fixxx.nl/";
     $text = preg_replace(
         "/((H|h)[0-9]+)/",
-        "<a href=\"{$coachUri}haltes/$1\" class=\"halte-link\">$1</a>",
+        "<a href=\"/haltes/$1\" class=\"halte-link\">$1</a>",
         $text);
     $text = preg_replace(
         "/((P|p)[0-9]+)/",
-        "<a href=\"{$coachUri}parkeerplaatsen/$1\" class=\"parkeerplaats-link\">$1</a>",
+        "<a href=\"/parkeerplaatsen/$1\" class=\"parkeerplaats-link\">$1</a>",
         $text);
     $text = preg_replace(
         "/([^\s]+@([^\s]+\.)+[^\s\.]+)/",
