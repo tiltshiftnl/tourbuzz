@@ -45,6 +45,10 @@
 
         {#<span class="maxchars">Max 200 karakters</span>#}
 
+        <div class="grid-row">
+            <input type="checkbox" name="important" value="important" {% if bericht.important is not empty %}checked=checked{% endif %}> Belangrijk bericht
+        </div>
+
         <div class="grid-row group">
             <h3 style="margin-top: 20px">Publicatiedatum</h3>
             <div class="datepicker">

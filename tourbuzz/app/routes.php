@@ -99,6 +99,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
       	'id' => $app->request->post('id'),
         'link' => $app->request->post('link'),
         'image_url' => $app->request->post('image_url'),
+        'important' => $app->request->post('important'),
     );
 
     if ( empty ($fields['title']) ) {
