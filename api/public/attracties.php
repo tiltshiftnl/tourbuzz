@@ -59,7 +59,7 @@ foreach ($jsonData as $data) {
 		"id" => $data->trcid,
 		"naam" => $data->title,
 		"adres" => $data->location->adress,
-		"coordinaten" => (object) [
+		"location" => (object) [
 			"lat" => floatval(str_replace(",", ".", $data->location->latitude)),
 			"lng" => floatval(str_replace(",", ".", $data->location->longitude))
 		],
