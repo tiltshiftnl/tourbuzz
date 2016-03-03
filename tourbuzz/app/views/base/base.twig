@@ -50,6 +50,7 @@
                     var slide = $(this).attr('href');
                     var index = slide.match(/[0-9]+/g);
                     owl.jumpTo(index - 1);
+                    $(window).scrollTop(0);
                 });
 
                 $('[data-close]').on('click', function(e)  {
