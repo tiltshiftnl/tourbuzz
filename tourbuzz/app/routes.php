@@ -195,8 +195,6 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "image_api" => $image_api,
         "analytics" => $analytics,
         "cruisekalender" => $cruisekalender['items'],
-        //"werkzaamheden" => $wegwerkzaamheden['werkzaamheden'],
-        //"evenementen" => $evenementen['evenementen'],
         "template" => "home.twig",
     ];
     render($data['template'], $data);

@@ -11,7 +11,6 @@
     <section class="buzz">
 
     {% include 'partials/dagselectie.twig' %}
-    <img src="{% include 'partials/googlemap.twig' %}">
 
         <ol>
             {% for record in berichten %}
@@ -31,6 +30,9 @@
                 <li><a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" class="slide-link"><span class="nr">{{ loop.index }}</span>{{ title }}</a></li>
             {% endfor %}
         </ol>
+
+        <img src="{% include 'partials/googlemap.twig' %}">
+
     </section>
 
 

@@ -61,6 +61,17 @@
                     $("footer").toggleClass("hide");
                 });
 
+                $('.fade-click').on('click', function(e)  {
+                    console.log('Fadeclick');
+                    e.preventDefault();
+                    newLocation = this.href;
+                    $('.buzz').fadeOut(200, newpage);
+                });
+
+                function newpage() {
+                    window.location = newLocation;
+                }
+
             });
         </script>
         {% if analytics %}
