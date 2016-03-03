@@ -45,6 +45,36 @@ $app->get('/', function () use ($app, $apiRoot) {
     render($data['template'], $data);
 });
 
+/**
+ * Halte profiel
+ */
+$app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
+
+    $halte = $app->api->get("haltes/".$slug);
+
+    $data = [
+        "record" => $halte['halte'],
+        "template" => "halte.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+/**
+ * Parkeerplaats profiel
+ */
+$app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
+
+    $parkeerplaats = $app->api->get("parkeerplaatsen/".$slug);
+
+    $data = [
+        "record" => $parkeerplaats['parkeerplaats'],
+        "template" => "parkeerplaats.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
 
 /*****************
 /* Admin Routes
