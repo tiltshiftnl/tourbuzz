@@ -68,7 +68,8 @@ $messageFields = [
 	"enddate",
 	"category",
 	"link",
-	"image_url"
+	"image_url",
+    "important"
 ];
 
 $messages = loadMessages();
@@ -95,7 +96,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         // Filter out old messages.
 		$date = date("Y-m-d");
 		$messages = array_filter($messages, function ($message) use ($date) {
-			return $message->enddate >= $date;
+			return $message->enddate >= $date || empty($message->enddate);
 		});
 
         // Make sure all the fields are there.
