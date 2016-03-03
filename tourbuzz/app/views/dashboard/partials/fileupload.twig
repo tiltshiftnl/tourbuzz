@@ -26,10 +26,11 @@
 			if (xhr.readyState !== XMLHttpRequest.DONE) {
 				return;
 			}
+            var image_url = uri + '/' + xhr.responseText;
 		  el.innerHTML =
-		    '<img src="' + uri + xhr.responseText + '">' +
-        '<a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>' +
-        '<input type="hidden" name="image_url" value="' + uri + xhr.responseText + '">';
+		    '<img src="' + image_url + '">' +
+            '<a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>' +
+            '<input type="hidden" name="image_url" value="' + image_url + '">';
 		}
 	}
 	
