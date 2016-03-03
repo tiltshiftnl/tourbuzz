@@ -1,0 +1,20 @@
+{% extends 'base/base.twig' %}
+
+{% block slider %}
+     {% include 'partials/slider.twig' %}
+{% endblock %}
+
+{% block main %}
+
+<main class="wrapper app-wrapper">
+
+    <div style="margin: 10px 0 20px 0">
+        <h2 class="parkeerplaats-link">{{ record.naam }}</h2>
+    </div>
+
+    <a href="#" onclick="window.history.back()">
+        <img src="{% include "partials/googlemap.single.twig" %}">
+    </a>
+</main>
+
+{% endblock %}
