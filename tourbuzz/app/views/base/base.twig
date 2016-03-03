@@ -65,7 +65,8 @@
                     console.log('Fadeclick');
                     e.preventDefault();
                     newLocation = this.href;
-                    $('.buzz').fadeOut(200, newpage);
+                    $("footer").fadeToggle(500);
+                    $(".buzz").fadeToggle(500, newpage);
                 });
 
                 function newpage() {
