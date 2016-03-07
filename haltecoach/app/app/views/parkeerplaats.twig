@@ -1,0 +1,45 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+<main class="wrapper app-wrapper">
+
+    <a href="/" class="start"><i class="fa fa-map-signs"></i> {{ __('Kies een andere bestemming') }}</a>
+
+    <header class="huidige-locatie">
+        <h1 class="bord groot">{{ record.haltenummer }}</h1>
+        <h3 style="margin-bottom: 0">{{ record.locatie }}</h3>
+        <h2>{{ record.straat }}</h2>
+        <a href="{{ record.mapsUrl }}" class="kaart-link"><i class="fa fa-map-marker"></i>
+ {{ __('Toon op kaart') }}</a>
+    </header>
+  
+    <div class="picture-in-picture-wrapper">
+        <img src="{{ record.mapsImageUrl }}">
+        <img src="/image/fit/600/300/img/halte-foto{{ random([1,2,3,4])}}.jpg" class="picture-in-picture">
+    </div>
+    
+    <section class="faciliteiten">
+        {# faciliteiten iconen #}
+    </section>
+    
+    <section class="gerelateerde-haltes">
+        <h3>{{ __('Alternatieve haltes') }}</h3>
+        {% for halte in haltes|slice(1,5) %}
+        <a href="/haltes/{{ halte.haltenummer }}" class="halte group">
+            <span class="bord">{{ halte.haltenummer }}</span> {{ halte.straat }}  <span class="afstand">{{ __('Afstand') }}: {{ halte.afstand }}m</span>
+        </a>
+        {% endfor %}
+    </section>
+
+    <section class="gerelateerde-bestemmingen">
+        <h3>{{ __('Bestemmingen in de buurt') }}</h3>
+        {% for bestemming in bestemmingen|slice(1,5) %}
+        <a href="/bestemmingen/{{ bestemming.id }}" class="halte group">
+            {#<img src="/image/fit/100/65?src={{ bestemming.media[0].url }}" class="bestemming-thumbnail"> {{ bestemming.naam }}  <span class="afstand">Afstand: {{ bestemming.afstand }}m</span>#}
+            <img src="{{ bestemming.media[0].url }}" class="bestemming-thumbnail" style="width:100px; height: 65px;"> {{ bestemming.naam }}  <span class="afstand">Afstand: {{ bestemming.afstand }}m</span>
+        </a>
+        {% endfor %}
+    </section>
+       
+</main>
+{% endblock %}

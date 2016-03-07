@@ -573,6 +573,21 @@ article {
     background: #222;
 }
 
+.bladeren {
+    a {
+        position: absolute;
+        z-index: 1000;
+    }
+    .volgende {
+        right: 0;
+        top: 50%;
+    }
+    .vorige {
+        left: 0;
+        top: 50%;
+    }
+}
+
 footer {
     background: #eee;
     padding: 10px 0;
