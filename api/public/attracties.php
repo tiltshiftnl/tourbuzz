@@ -59,7 +59,7 @@ foreach ($jsonData as $data) {
 		"id" => $data->trcid,
 		"naam" => $data->title,
 		"adres" => $data->location->adress,
-		"coordinaten" => (object) [
+		"location" => (object) [
 			"lat" => floatval(str_replace(",", ".", $data->location->latitude)),
 			"lng" => floatval(str_replace(",", ".", $data->location->longitude))
 		],
@@ -67,8 +67,8 @@ foreach ($jsonData as $data) {
 		"top" => in_array($data->title, $topAttracties),
 		"_origineel" => $data
 	];
-	$mapsImageUrl = "https://maps.googleapis.com/maps/api/staticmap?center={$attractie->coordinaten->lat},{$attractie->coordinaten->lng}&zoom=16&size=600x300&maptype=roadmap&markers={$attractie->coordinaten->lat},{$attractie->coordinaten->lng}&key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU";
-	$mapsUrl = "https://www.google.com/maps/?q=loc:{$attractie->coordinaten->lat},{$attractie->coordinaten->lng}";
+	$mapsImageUrl = "https://maps.googleapis.com/maps/api/staticmap?center={$attractie->location->lat},{$attractie->location->lng}&zoom=16&size=600x300&maptype=roadmap&markers={$attractie->location->lat},{$attractie->location->lng}&key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU";
+	$mapsUrl = "https://www.google.com/maps/?q=loc:{$attractie->location->lat},{$attractie->location->lng}";
 	$attractie->mapsImageUrl = $mapsImageUrl;
 	$attractie->mapsUrl = $mapsUrl;
 	if ($attractieId) {
