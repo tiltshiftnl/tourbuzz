@@ -199,6 +199,10 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
 
     $berichten = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
+    usort($berichten['messages'], function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
+
     $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
     $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
 
