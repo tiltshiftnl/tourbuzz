@@ -22,8 +22,12 @@
 
                 $("#owl-example").owlCarousel({
                     singleItem: true,
-                    navigation: false,
+                    navigation: true,
                     autoHeight: false,
+                     navigationText: [
+                        "Vorige",
+                        "Volgende"
+                    ],
                     afterInit : function(elem){
                         var that = this
                         that.owlControls.prependTo(elem)
@@ -34,12 +38,12 @@
                 var owl = $("#owl-example").data('owlCarousel');
 
                 // Custom Navigation Events
-                $(".volgende").click(function(){
+                /*$(".volgende").click(function(){
                     $("#owl-example").trigger('owl.next');
                 })
                 $(".vorige").click(function(){
                     $("#owl-example").trigger('owl.prev');
-                })
+                })*/
 
                 $('[data-item]').on('click', function(e)  {
                     e.preventDefault();

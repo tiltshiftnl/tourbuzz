@@ -574,18 +574,25 @@ article {
 }
 
 .bladeren {
+    position: relative;
     a {
-        position: fixed;
+        position: absolute;
         z-index: 1000;
     }
     .volgende {
         right: 0;
-        top: 50%;
+        top: 40px;
+        //top: 25%;
     }
     .vorige {
         left: 0;
-        top: 50%;
+        top: 40px;
+        //top: 25%;
     }
+}
+
+.owl-pagination {
+    margin-top: 40px;
 }
 
 footer {
