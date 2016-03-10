@@ -1,0 +1,632 @@
+/////////////////////
+// Main Styles
+/////////////////////
+
+@import "foundation.scss";
+@import "grid.scss";
+@import "typography.scss";
+@import "util.scss";
+
+$rood: #E01D1D;
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding: 10px 0;
+}
+
+.splash {
+    border: 1px solid #eee;
+    padding: 20px;
+    box-shadow: 1px 1px 3px #ddd;
+    article {
+        padding: 10px;
+    }
+}
+
+.dagselectie {
+    margin-top:5px;
+    .inner {
+    display: table;
+    margin: 0 auto;
+    }
+    h3 {
+        text-align: center;
+    }
+    a {
+        color: #aaa;
+        display: inline-block;
+        padding: 0 10px;
+    }
+}
+
+.slider {
+    article {
+        padding: 20px;
+    }
+    .close {
+        border: 1px solid #eee;
+        border-radius: 50%;
+        box-shadow: 0 1px 0 #ccc;
+        display: block;
+        float: right;
+        height: 30px;
+        line-height: 30px;
+        position: relative;
+        right: 15px;
+        text-align: center;
+        top: 10px;
+        width: 30px;
+        z-index: 9999;
+    }
+}
+
+.extern {
+    color: #647b9e;
+    display: block;
+    font-size: 13px;
+    line-height: 1.3em;
+    margin-bottom: $margin-medium;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+.buzzmap {
+    width: 100%;
+    margin-bottom: 15px;
+    @include grayscale;
+}
+
+.huidige-locatie {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 20px 0;
+    @extend .group;
+    padding: 5px;
+}
+
+   h3.dag {
+        margin-bottom: 5px;
+        color: #555;
+        text-align: center;
+    }
+
+.buzz {
+    h2 {
+        font-size: 20px;
+        margin-top: $margin-medium;
+        margin-bottom: $margin-small;
+    }
+    h3 {
+        margin-bottom: 5px;
+        color: #555;
+        text-align: center;
+    }
+    li {
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+    margin-bottom: 60px;
+}
+.bord {
+    background: #3669ac;
+    padding: 3px 10px;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    min-width: 50px;
+    margin-top: 5px;
+    text-align: center;
+    //@include linearGradient(#3A5495, #3669ac );
+    &.groot {
+      font-size: 32px;
+      padding: 15px;
+    }
+}
+
+.afstand {
+    color: #555;
+    display: block;
+    font-size: 12px;
+}
+
+.kaart-link {
+    color: #5393b8;
+    font-size: 14px;
+}
+
+.start {
+    /*border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 5px 10px;*/
+    margin-top: 10px;
+    display: inline-block;
+    color: #5393b8;
+    font-size: 14px;
+}
+
+.halte {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.buzz-logo {
+    width: 55px;
+}
+
+ol.berichten {
+    margin-bottom: 30px;
+    input[type=checkbox] {
+        position: absolute;
+        left: -30px;
+    }
+    a {
+        display: block;
+        position: relative;
+        padding-left: 40px;
+    }
+    .nr {
+        position: absolute;
+        left: 0;
+        top: -2px;
+    }
+}
+
+.nr {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    background: $rood;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 10px;
+    border-bottom: 1px solid #902a17;
+}
+
+.hide {
+    display: none;
+}
+
+.bestemming {
+    background: #eee;
+    @extend .group;
+    margin-bottom: 5px;
+    a {
+        @extend .group;
+    }
+    h3 {
+        float: left;
+        width: 75%;
+        padding: 5px;
+        margin: 0;
+        line-height: 40px;
+        font-size: 14px;
+        line-height: 1.4em;
+    }
+    img {
+        width: 25%;
+        float: right;
+        display: none;
+    }
+}
+
+.app-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.picture-in-picture-wrapper {
+    position: relative;
+}
+
+.picture-in-picture {
+    border: 2px solid #fff;
+    right: 0px;
+    bottom: 5px;
+    position: absolute;
+    width: 140px;
+}
+
+.gerelateerde-haltes,
+.gerelateerde-bestemmingen {
+    margin-bottom: 40px;
+    h3 {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+}
+
+.bestemming-thumbnail {
+    float: left;
+    margin-right: 15px;
+    display: block;
+}
+
+.main-header {
+    width: 100%;
+    //background: #f00;
+    background: $rood;
+    color: #fff;
+    border-bottom: 1px solid #902a17;
+    padding: 15px 5px;
+    @extend .group;
+    .home {
+        @include grid-col(1,4);
+
+        i {
+            //border: 1px solid #444;
+            //border-radius: 5px;
+            display: inline-block;
+            //padding: 10px 5px;
+            font-size: 30px;
+        }
+    }
+    h2 {
+        @include grid-col(1,2);
+        text-align: center;
+            font-size: 27px;
+            line-height: 1em;
+            margin: 0;
+        span {
+            display: block;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        i {
+            font-size: 15px;
+            padding: 0 5px;
+            color:rgba(255, 255, 255, 0.5);
+        }
+    }
+    .taal {
+        color:rgba(255, 255, 255, 0.5);
+        @include grid-col(1,4);
+        text-align: right;
+        margin-top: 3px;
+        a {
+            font-size: 15px;
+            //line-height: 50px;
+        }
+        .active {
+            font-weight: bold;
+            color: #fff;
+        }
+    }
+}
+
+    .meta {
+        font-size: 14px;
+        color: #888;
+    }
+
+    .meta-link {
+        font-size: 14px;
+        color:#637b95;
+        display: block;
+    }
+
+    .toelichting {
+        font-size: 14px;
+        color: #888;
+        display: block;
+    }
+
+.bericht-header {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    font-size: 19px;
+    line-height: 1.3em;
+    .nr {
+        position: absolute;
+        left: 0;
+        top: -1px;
+    }
+}
+
+.cruiseschepen, .evenementen, .wegwerkzaamheden {
+    h3 {
+       // font-size: 20px;
+       color: #333;
+       margin-bottom: $margin-small;
+    }
+
+    ul {
+        margin-top: 20px;
+    }
+    li {
+        margin-bottom: 0;
+    }
+    margin-bottom: 20px;
+}
+
+.headerdate {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.form-styles {
+    margin-bottom: 40px;
+    padding: 20px 20px;
+    background: #fafafa;
+    color: #888;
+
+    h3 {
+        margin-bottom: $margin-small;
+        color: #888;
+        font-size: 18px;
+    }
+    input[type=text], textarea, input[type=password] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #aaa;
+        @extend .text-body;
+    }
+    textarea {
+        padding: 10px;
+        border: 1px solid #aaa;
+        @extend .text-body;
+        overflow: auto;
+        resize: vertical;
+    }
+    select {
+        @extend .text-body;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+        background: url('/img/down.png') no-repeat 95% 50%;
+        background-size: 16px;
+        border-radius: 0;
+        background-color: #fff;
+        padding: 10px;
+        border: 1px solid #aaa;
+    }
+    input {
+        margin-bottom: $margin-small;
+    }
+    input + button {
+        margin-top: $margin-small;
+    }
+    select {
+        margin-bottom: $margin-small;
+    }
+    button {
+        margin-top: 10px;
+        @extend .button;
+    }
+    img {
+        vertical-align: top;
+    }
+    .close {
+        float: none;
+        top: 0;
+        right: -15px;
+    }
+}
+
+.datepicker {
+    width: 30%;
+    float: left;
+    margin-right: 10%;
+}
+
+.maxchars, .verwijder {
+    font-size: 12px;
+    float: right;
+    color: #888;
+    font-weight: bold;
+}
+
+.verwijderen {
+    float: right;
+}
+
+.dagen {
+    font-size: 12px;
+    color: #888;
+    font-weight: bold;
+}
+
+.button {
+    border: 0;
+    background: $rood;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: lowercase;
+}
+
+.close {
+    float: right;
+    position: relative;
+    top: -15px;
+}
+
+article {
+    h3 {
+        color: #333;
+        font-size: 20px;
+        margin-bottom: $margin-small;
+    }
+    h4 {
+        margin-bottom: $margin-small;
+    }
+    p {
+        margin-bottom: 16px;
+    }
+    a {
+        color: #647b9e;
+    }
+}
+
+.tab-navigation {
+  //margin-bottom: 20px;
+}
+.tab-navigation .tabselect {
+  @extend .group;
+  border-bottom: 1px solid #dee2e8;
+  margin: 10px 0;
+  padding: 0 0 2px;
+}
+.tab-navigation .tabselect li {
+  list-style: none;
+  float: left;
+  margin-right: 2px;
+}
+.tab-navigation .tabselect a {
+  background-color: #dee2e8;
+  font-size: 12px;
+  padding: 8px;
+}
+.tab-navigation .tabselect a:hover,
+.tab-navigation .tabselect a.active {
+  color: #fff;
+  background-color: #6F8397;
+}
+.tab-navigation .tabselect a:hover .count,
+.tab-navigation .tabselect a.active .count {
+  color: #fff;
+}
+.tab-navigation .tabselect .selected {
+  background-color: #333;
+  color: #fff;
+}
+.tab-navigation .tabselect .count {
+  font-size: 11px;
+  color: #7D7D7D;
+}
+.tab-navigation .tabselect .zero a {
+  color: #ccc;
+  background: #eee;
+  cursor: inherit;
+}
+.tab-navigation .tabselect .zero .count {
+  display: none;
+}
+.tab-navigation .tab {
+  display: none;
+}
+.tab-navigation .tab.active {
+  display: block;
+}
+.tab-navigation .tab .record a {
+  clear: left;
+  display: block;
+}
+
+.flashmessages {
+    clear: both;
+    @extend .group;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    .error {
+        background: #fcdede;
+        color: #DA4C4C;
+        text-align: center;
+        padding: 5px;
+        font-weight: bold;
+    }
+    .success {
+        background: #c6dac5;
+        color: #5c6f5b;
+        text-align: center;
+        padding: 5px;
+        font-weight: bold;
+    }
+}
+
+
+.halte-link, .parkeerplaats-link {
+    background: #3669ac;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 0px;
+    min-width: 35px;
+    padding: 2px 5px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+.parkeerplaats-link {
+    background: #222;
+}
+
+.bladeren {
+    position: relative;
+    a {
+        position: absolute;
+        z-index: 1000;
+    }
+    .volgende {
+        right: 0;
+        top: 40px;
+        //top: 25%;
+    }
+    .vorige {
+        left: 0;
+        top: 40px;
+        //top: 25%;
+    }
+}
+
+.owl-pagination {
+    margin-top: 40px;
+}
+
+footer {
+    background: #eee;
+    padding: 10px 0;
+    p {
+        font-size: 15px;
+        color: #888;
+        text-align: center;
+        font-weight: bold;
+    }
+    a {
+        text-decoration: underline;
+    }
+    .debug {
+        display: block;
+        font-size: 12px;
+        color: #aaa;
+        font-weight: normal;
+    }
+}
+
+
+// Syntax cheatsheet
+
+// .sectionclass {
+//     background: $rood; // variabelen
+//     @extend .group; // clearfix
+//
+//     @include grid-row; // nieuwe row voor subcols
+//     @include grid-row(20px); // nieuwe row voor subcols en gutter 20px
+//
+//     @include grid-col(3,5); // col-3-5
+//     @include grid-col(3,5,20px); // col-3-5 met gutter 20px
+//
+//     @include medium { // media query
+//         @include grid-col(1,1);
+//     }
+// }
