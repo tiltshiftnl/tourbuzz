@@ -48,6 +48,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             header("HTTP/1.1 404 Not Found");
             exit;
         }
+        $tokens = (object) array_filter((array) $tokens, function ($token) use ($username) {
+            return $token->username !== $username;
+        });
         $token = createToken();
         $tokens->{$token} = [
             "username" => $username,
@@ -83,5 +86,22 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             "username" => $username,
             "expires" => $maxAge - $age
         ]));
+        break;
+
+    case "DELETE":
+        if (empty($_GET["token"])) {
+            header("HTTP/1.1 400 Bad Request");
+            exit;
+        }
+        $token = $_GET["token"];
+        if (empty($tokens->{$token})) {
+            header("HTTP/1.1 404 Not Found");
+            exit;
+        }
+        unset($tokens->{$token});
+        file_put_contents("../files/tokens.json", json_encode($tokens));
+
+        header("HTTP/1.1 204 No Content");
+        exit;
         break;
 }
