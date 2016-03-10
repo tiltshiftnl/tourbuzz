@@ -1,6 +1,5 @@
 <?php
 
-//FIXME move this class to own file.
 class ApiClient {
     private $_guzzle;
     private $_apiRoot;
@@ -41,8 +40,3 @@ class ApiClient {
         $this->_guzzle->request('DELETE', $requestUri);
     }
 }
-
-$app->container->singleton('api', function () use ($apiRoot) {
-  return new ApiClient($apiRoot);
-});
-

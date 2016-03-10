@@ -11,7 +11,11 @@ use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Exception\BadResponseException;
 
-require_once("loadApiSingleton.php");
+require_once("ApiClient.php");
+
+$app->container->singleton('api', function () use ($apiRoot) {
+  return new ApiClient($apiRoot);
+});
 
 /**
  * Before
