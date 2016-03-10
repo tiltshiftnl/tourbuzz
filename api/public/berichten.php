@@ -5,6 +5,7 @@ ini_set("display_errors", E_ALL);
 
 $filePath = "../files/messages.json";
 $coachUri = "http://coach.fixxx.nl";
+$authUri = "http://api.dev.fixxx.nl/auth";
 
 function randomHash() {
 	$alphabet = "0123456789abcdefg";
@@ -76,6 +77,19 @@ $messages = loadMessages();
 
 switch ($_SERVER["REQUEST_METHOD"]) {
 	case "POST":
+
+        // Authorization
+        if (empty($_REQUEST["token"])) {
+            header("HTTP/1.1 401 Unauthorized");
+            exit;
+        }
+        $token = $_REQUEST["token"];
+        $res = json_decode(file_get_contents("{$authUri}?token={$token}"));
+        if (empty($res) || empty($res->username)) {
+            header("HTTP/1.1 401 Unauthorized");
+            exit;
+        }
+
 		$message = (object) [];
 		foreach ($messageFields as $messageField) {
 			$message->{$messageField} = !empty($_POST[$messageField]) ?
@@ -183,6 +197,19 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		exit;
 
 	case "DELETE":
+        
+        // Authorization
+        if (empty($_REQUEST["token"])) {
+            header("HTTP/1.1 401 Unauthorized");
+            exit;
+        }
+        $token = $_REQUEST["token"];
+        $res = json_decode(file_get_contents("{$authUri}?token={$token}"));
+        if (empty($res) || empty($res->username)) {
+            header("HTTP/1.1 401 Unauthorized");
+            exit;
+        }
+
 		$messages = loadMessages();
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$id = $uriParts[1];
