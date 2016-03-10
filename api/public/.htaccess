@@ -19,5 +19,7 @@ RewriteRule ^cruisekalender(/.*)?$ cruisekalender.php [NC,L]
 RewriteRule ^poi(/.*)?$ poi.php [NC,L]
 RewriteRule ^ov2(/.*)?$ ov2.php [NC,L]
 
+RewriteRule ^auth(/.*)?$ auth.php [NC,L]
+
 #ErrorDocument 404 /404.php
 #ErrorDocument 403 /403.php
