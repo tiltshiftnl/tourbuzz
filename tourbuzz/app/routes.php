@@ -116,6 +116,7 @@ $app->get('/dashboard/login', function () use ($apiRoot) {
  */
 $app->get('/dashboard/logout', function () use ($app, $apiRoot) {
 
+    $res = $app->api->delete("auth?token={$_SESSION['auth_token']}");
     unset($_SESSION['auth_token']);
 
     $app->flash('success', 'Je bent nu uitgelogd. Tot kijk!');

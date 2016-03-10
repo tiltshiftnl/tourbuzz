@@ -48,8 +48,17 @@ class ApiClient {
         return json_decode($res->getBody(), true);
     }
 
-    public function delete($uri, $ids) {
-        $ids = $ids ? $ids : [];
+    public function delete($uri, $ids = []) {
+
+        if (substr($uri, 0, 5) === "auth?") {
+            $requestUri = "{$this->_apiRoot}{$uri}";
+            try {
+               $this->_guzzle->request('DELETE', $requestUri);
+            } catch (BadResponseException $exception) {
+                return null;
+            }
+            return true;
+        }
 
         //url-ify the data for the POST
         $fieldsString = '';
