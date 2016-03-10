@@ -6,11 +6,6 @@ if (file_exists($localConfigFilePath)) {
 	require_once($localConfigFilePath);
 }
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Request;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Exception\BadResponseException;
-
 require_once("ApiClient.php");
 
 $app->container->singleton('api', function () use ($apiRoot) {
@@ -72,7 +67,7 @@ $app->get('/haltes', function () use ($app, $apiRoot) {
  */
 $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
 
-    $halte = $app->api->get("haltes/".$slug);
+    $halte = $app->api->get("haltes/{$slug}");
 
     $data = [
         "record" => $halte['halte'],
@@ -88,7 +83,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
  */
 $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
 
-    $parkeerplaats = $app->api->get("parkeerplaatsen/".$slug);
+    $parkeerplaats = $app->api->get("parkeerplaatsen/{$slug}");
 
     $data = [
         "record" => $parkeerplaats['parkeerplaats'],
@@ -111,6 +106,7 @@ $app->get('/dashboard/login', function () use ($apiRoot) {
     $data = [
         "template" => "dashboard/login.twig",
     ];
+
     render($data['template'], $data);
 })->name("login");
 
@@ -124,7 +120,6 @@ $app->get('/dashboard/logout', function () use ($app, $apiRoot) {
 
     $app->flash('success', 'Je bent nu uitgelogd. Tot kijk!');
     $app->redirect("/dashboard/login");
-
 })->name("logout");
 
 
@@ -138,12 +133,10 @@ $app->post('/dashboard/login', function () use ($app, $apiRoot) {
         'password' => $app->request->post('password')
     );
 
-    try {
-        $res = $app->api->post("auth", $fields);
-    } catch (BadResponseException $e) {
+    $res = $app->api->post("auth", $fields);
+    if (!$res) {
         $app->flash('error', 'Onjuiste inloggegevens');
         $app->redirect("/dashboard/login");
-        //die(" FOUTE GEBRUIKER " . $e->getResponse()->getStatusCode());
     }
 
     $_SESSION['auth_token'] = $res['token'];
@@ -151,7 +144,6 @@ $app->post('/dashboard/login', function () use ($app, $apiRoot) {
 
     $app->flash('success', 'Je bent ingelogd');
     $app->redirect("/dashboard/berichten");
-
 })->name("login");
 
 
@@ -166,17 +158,15 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
         $app->redirect("/dashboard/login");
     }
 
-    try {
-        $res = $app->api->get('auth?token='.$_SESSION['auth_token']);
-        //throw new BadResponseException('H');
-    } catch (BadResponseException $e) {
+    $res = $app->api->get('auth?token='.$_SESSION['auth_token']);
+    if (!$res) {
         $app->redirect("/dashboard/logout");
     }
 
-    $berichten = $app->api->get("berichten");
+    $res = $app->api->get("berichten");
 
     $data = [
-        "berichten" => $berichten['messages'],
+        "berichten" => $res['messages'],
         "image_api" => $image_api,
         "api" => $app->api->getApiRoot(),
         "username" => $_SESSION['username'],
@@ -223,23 +213,20 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         ];
 
         render($data['template'], $data);
-
     } else {
 
         $token = $_SESSION['auth_token'];
 
-        try {
-            $res = $app->api->post("berichten?token=".$token, $fields);
-        } catch (BadResponseException $e) {
+        $app->api->setToken($_SESSION['auth_token']);
+        $res = $app->api->post("berichten", $fields);
+        if (!$res) {
             $app->flash('error', 'Mag niet! Unauthorized');
             $app->redirect("/dashboard/berichten");
         }
 
         $app->flash('success', 'Bericht toegevoegd');
         $app->redirect("/dashboard/berichten");
-
     }
-
 })->name("berichten");
 
 
@@ -271,16 +258,15 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
     $ids = $app->request->post('ids');
     $token = $_SESSION['auth_token'];
 
-    try {
-        $app->api->delete("berichten?token=".$token, $ids);
-    } catch (BadResponseException $e) {
+    $app->api->setToken($_SESSION['auth_token']);
+    $res = $app->api->delete("berichten", $ids);
+    if (!$res) {
         $app->flash('error', 'Mag niet! Unauthorized');
         $app->redirect("/dashboard/berichten");
     }
 
     $app->flash('success', 'Bericht(en) verwijderd');
     $app->redirect("/dashboard/berichten");
-
 });
 
 
