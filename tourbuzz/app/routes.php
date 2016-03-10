@@ -9,6 +9,7 @@ if (file_exists($localConfigFilePath)) {
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
+use GuzzleHttp\Exception\BadResponseException;
 
 require_once("loadApiSingleton.php");
 
@@ -45,6 +46,23 @@ $app->get('/', function () use ($app, $apiRoot) {
     render($data['template'], $data);
 });
 
+
+/**
+ * Halte profiel
+ */
+$app->get('/haltes', function () use ($app, $apiRoot) {
+
+    $haltes = $app->api->get("haltes");
+
+    $data = [
+        "haltes" => $haltes['haltes'],
+        "template" => "overzichtskaart.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
 /**
  * Halte profiel
  */
@@ -59,6 +77,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
 
     render($data['template'], $data);
 });
+
 
 /**
  * Parkeerplaats profiel
@@ -93,9 +112,62 @@ $app->get('/dashboard/login', function () use ($apiRoot) {
 
 
 /**
+ * Logout
+ */
+$app->get('/dashboard/logout', function () use ($app, $apiRoot) {
+
+    unset($_SESSION['auth_token']);
+
+    $app->flash('success', 'Je bent nu uitgelogd. Tot kijk!');
+    $app->redirect("/dashboard/login");
+
+})->name("logout");
+
+
+/**
+ * Login post
+ */
+$app->post('/dashboard/login', function () use ($app, $apiRoot) {
+
+    $fields = array(
+        'username' => $app->request->post('username'),
+        'password' => $app->request->post('password')
+    );
+
+    try {
+        $res = $app->api->post("auth", $fields);
+    } catch (BadResponseException $e) {
+        $app->flash('error', 'Onjuiste inloggegevens');
+        $app->redirect("/dashboard/login");
+        //die(" FOUTE GEBRUIKER " . $e->getResponse()->getStatusCode());
+    }
+
+    $_SESSION['auth_token'] = $res['token'];
+    $_SESSION['username']   = $app->request->post('username');
+
+    $app->flash('success', 'Je bent ingelogd');
+    $app->redirect("/dashboard/berichten");
+
+})->name("login");
+
+
+/**
  * Berichten get
  */
 $app->get('/dashboard/berichten', function () use ($app, $image_api) {
+
+    // Check token
+    if ( empty($_SESSION['auth_token']) ) {
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
+    try {
+        $res = $app->api->get('auth?token='.$_SESSION['auth_token']);
+        //throw new BadResponseException('H');
+    } catch (BadResponseException $e) {
+        $app->redirect("/dashboard/logout");
+    }
 
     $berichten = $app->api->get("berichten");
 
@@ -103,6 +175,7 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
         "berichten" => $berichten['messages'],
         "image_api" => $image_api,
         "api" => $app->api->getApiRoot(),
+        "username" => $_SESSION['username'],
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -149,7 +222,14 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
 
     } else {
 
-        $app->api->post("berichten", $fields);
+        $token = $_SESSION['auth_token'];
+
+        try {
+            $res = $app->api->post("berichten?token=".$token, $fields);
+        } catch (BadResponseException $e) {
+            $app->flash('error', 'Mag niet! Unauthorized');
+            $app->redirect("/dashboard/berichten");
+        }
 
         $app->flash('success', 'Bericht toegevoegd');
         $app->redirect("/dashboard/berichten");
@@ -185,11 +265,31 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
 $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
 
     $ids = $app->request->post('ids');
-    $berichten = $app->api->delete("berichten", $ids);
+    $token = $_SESSION['auth_token'];
+
+    try {
+        $app->api->delete("berichten?token=".$token, $ids);
+    } catch (BadResponseException $e) {
+        $app->flash('error', 'Mag niet! Unauthorized');
+        $app->redirect("/dashboard/berichten");
+    }
 
     $app->flash('success', 'Bericht(en) verwijderd');
     $app->redirect("/dashboard/berichten");
 
+});
+
+
+/**
+ * Styleguide
+ */
+$app->get('/styleguide', function () {
+
+    $data = [
+        "template" => "styleguide.twig",
+    ];
+
+    render($data['template'], $data);
 });
 
 /**

@@ -2,9 +2,11 @@
 
 {% block main %}
     <main class="app-wrapper">
-        <h3>Tour Buzz Dashboard</h3>
-        <input type="text" placeholder="Gebruikersnaam">
-        <input type="password" placeholder="Wachtwoord">
-        <button>Login</button>
+        <form class="form-styles" method="post">
+            <h2>Dashboard</h2>
+            <input type="text" placeholder="Gebruikersnaam" name="username">
+            <input type="password" placeholder="Wachtwoord" name="password">
+            <button type="submit">Login</button>
+        </form>
     </main>
 {% endblock %}

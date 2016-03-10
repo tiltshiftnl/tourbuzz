@@ -4,32 +4,33 @@
 class ApiClient {
     private $_guzzle;
     private $_apiRoot;
-    
+
     public function __construct($url) {
         $this->_guzzle = new \GuzzleHttp\Client();
         $this->_apiRoot = $url;
     }
-    
+
     public function getApiRoot() {
         return $this->_apiRoot;
     }
-    
+
     public function get($uri) {
         $requestUri = "{$this->_apiRoot}{$uri}";
         $res = $this->_guzzle->request('GET', $requestUri);
         return json_decode($res->getBody(), true);
     }
-        
+
     public function post($uri, $fields) {
         $requestUri = "{$this->_apiRoot}{$uri}";
-        $this->_guzzle->request('POST', $requestUri, [
+        $res = $this->_guzzle->request('POST', $requestUri, [
             'form_params' => $fields
         ]);
+        return json_decode($res->getBody(), true);
     }
-    
+
     public function delete($uri, $ids) {
         $ids = $ids ? $ids : [];
-        
+
         //url-ify the data for the POST
         $fieldsString = '';
         foreach($ids as $id) { $fieldsString .= 'ids[]='.$id.'&'; }
@@ -44,4 +45,4 @@ class ApiClient {
 $app->container->singleton('api', function () use ($apiRoot) {
   return new ApiClient($apiRoot);
 });
- 
+

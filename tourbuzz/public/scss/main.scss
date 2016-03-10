@@ -374,7 +374,7 @@ ol.berichten {
         color: #888;
         font-size: 18px;
     }
-    input[type=text], textarea {
+    input[type=text], textarea, input[type=password] {
         width: 100%;
         padding: 10px;
         border: 1px solid #aaa;
@@ -539,7 +539,6 @@ article {
     margin-top: 0px;
     margin-bottom: 15px;
     .error {
-        //border: 1px solid #f38686;
         background: #fcdede;
         color: #DA4C4C;
         text-align: center;
@@ -547,7 +546,6 @@ article {
         font-weight: bold;
     }
     .success {
-        //border: 1px solid #7b9879;
         background: #c6dac5;
         color: #5c6f5b;
         text-align: center;
