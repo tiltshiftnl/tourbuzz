@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="nl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+
+        <link rel="image_src" href="/img/tourbuzz_fb_preview.png">
+        <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+        <link rel="apple-touch-icon" href="/img/buzz-icon.png">
+
+        <title>Tour Buzz</title>
+        <meta name="title" content="Tour Buzz">
+        <meta name="description" content="Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
+        <meta name="keywords" content="amsterdam, touringcar, nieuws">
+
+        <!--<link href="/favicon.ico" rel="icon" type="image/x-icon">-->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/scss/main-cleanup.scss">
+        <link rel="stylesheet" href="/js/owl-carousel/owl.carousel.css">
+        <link rel="stylesheet" href="/js/owl-carousel/owl.theme.css">
+        <link rel="stylesheet" href="/js/pikaday/css/pikaday.css">
+        <link rel="stylesheet" href="/css/pikaday/buzz-theme.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="/js/owl-carousel/owl.carousel.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+        <script src="/js/pico-ui.js"></script>
+        <script>
+            $(document).ready(function() {
+
+                $("#owl-example").owlCarousel({
+                    singleItem: true,
+                    navigation: true,
+                    autoHeight: false,
+                     navigationText: [
+                        "Vorige",
+                        "Volgende"
+                    ],
+                    afterInit : function(elem){
+                        var that = this
+                         that.owlControls.prependTo(elem)
+                    }
+                });
+
+                //get carousel instance data and store it in variable owl
+                var owl = $("#owl-example").data('owlCarousel');
+
+                // Custom Navigation Events
+                /*$(".volgende").click(function(){
+                    $("#owl-example").trigger('owl.next');
+                })
+                $(".vorige").click(function(){
+                    $("#owl-example").trigger('owl.prev');
+                })*/
+
+                $('[data-item]').on('click', function(e)  {
+                    e.preventDefault();
+                    $(".slider").toggleClass("hide");
+                    $(".buzz").toggleClass("hide");
+                    $(".main-header").toggleClass("hide");
+                    $("footer").toggleClass("hide");
+                    var slide = $(this).attr('href');
+                    var index = slide.match(/[0-9]+/g);
+                    owl.jumpTo(index - 1);
+                    $(window).scrollTop(0);
+                });
+
+                $('[data-close]').on('click', function(e)  {
+                    e.preventDefault();
+                    $(".slider").toggleClass("hide");
+                    $(".buzz").toggleClass("hide");
+                    $(".main-header").toggleClass("hide");
+                    $("footer").toggleClass("hide");
+                });
+
+                $('.fade-click').on('click', function(e)  {
+                    console.log('Fadeclick');
+                    e.preventDefault();
+                    newLocation = this.href;
+                    $("footer").fadeToggle(500);
+                    $(".buzz").fadeToggle(500, newpage);
+                });
+
+                function newpage() {
+                    window.location = newLocation;
+                }
+
+            });
+        </script>
+        {% if analytics %}
+            <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-74182539-1', 'auto');
+              ga('send', 'pageview');
+
+            </script>
+        {% endif %}
+    </head>
+    <body>
+        {% include 'partials/grid.twig' %}
+
+        {% block slider %}{% endblock %}
+
+        {% block header %}
+            <header class="main-header">
+                <div class="app-wrapper">
+                    <a href="/" class="home">{#<i class="fa fa-bus"></i>#}<img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
+                    <h2>
+                        <a href="/">Tour&nbsp;Buzz</a>
+                    </h2>
+                    <nav class="taal">
+                        <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}>NL</a> |
+                        <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}>EN</a>
+                    </nav>
+                </div>
+            </header>
+        {% endblock %}
+
+        {% block flashmessages %}
+            {% if flash is not empty %}
+                <section class="flashmessages">
+                    {% for type, message in flash %}
+                        <p class="{{ type }}">{{ message }}</p>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endblock %}
+
+        {% block main %}{% endblock %}
+
+        {% block footer %}
+            <footer>
+                <p>{{ __('Kijk op') }} <a href="//www.amsterdam.nl/touringcars" target="_blank">www.amsterdam.nl/touringcars</a></p>
+                <p style="font-weight: normal">Feedback of vragen kunt u sturen naar <br>Mark Sloothaak: <a href="mailto:touringcar@amsterdam.nl">touringcar@amsterdam.nl</a></p>
+                {#<p class="debug">API : {{ api }} </p>#}
+            </footer>
+        {% endblock %}
+
+        <script src="/js/pikaday/pikaday.js"></script>
+        <script>
+
+            var headerdate = new Pikaday({
+                field: document.getElementById('headerdate'),
+                format: '/YYYY/MM/DD',
+                theme: 'buzz-theme',
+                onSelect: function(date) {
+                    //console.log(headerdate.toString());
+                    window.location = headerdate.toString();
+                }
+            });
+
+            var startdate = new Pikaday({
+                field: document.getElementById('startdate'),
+                format: 'YYYY-MM-DD',
+                theme: 'buzz-theme'
+            });
+            var enddate = new Pikaday({
+                field: document.getElementById('enddate'),
+                format: 'YYYY-MM-DD',
+                theme: 'buzz-theme'
+            });
+        </script>
+    </body>
+</html>
