@@ -99,6 +99,14 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
  ****************/
 
 /**
+ * Logout
+ */
+$app->get('/dashboard', function () use ($app) {
+    $app->redirect("/dashboard/berichten");
+});
+
+
+/**
  * Login
  */
 $app->get('/dashboard/login', function () use ($apiRoot) {

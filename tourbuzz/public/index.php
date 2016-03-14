@@ -27,7 +27,7 @@ function translate($msg) {
 function maand($m) {
 
     if ( empty($m) ) {
-        return "Geen datum";   
+        return "Geen datum";
     }
     $month = array (
         'jan',
@@ -43,8 +43,18 @@ function maand($m) {
         'nov',
         'dec'
     );
-    
+
     return translate($month[(int)$m - 1]);
+}
+
+function markerLabel($index) {
+
+    $labels = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+    if ($index > 9) {
+        return $labels[$index-10];
+    }
+    return $index;
 }
 
 function insertLinks($text) {
@@ -67,6 +77,7 @@ $twig = $app->view()->getEnvironment();
 $twig->addFunction('__', new Twig_Function_Function('translate'));
 $twig->addFunction('maand', new Twig_Function_Function('maand'));
 $twig->addFunction('insertlinks', new Twig_Function_Function('insertLinks'));
+$twig->addFunction('markerlabel', new Twig_Function_Function('markerLabel'));
 
 require_once "routes.php"; // System routes
 
