@@ -4,8 +4,11 @@ ini_set("error_reporting", 1);
 ini_set("display_errors", E_ALL);
 
 $filePath = "../files/messages.json";
+$buzzProc = "http://";
+$buzzUri = "buzz.dev.fixxx.nl";
 $coachUri = "http://coach.fixxx.nl";
 $authUri = "http://api.dev.fixxx.nl/auth";
+$mailTo = "j.groenen@amsterdam.nl, a.zwiers@amsterdam.nl";
 
 function randomHash() {
 	$alphabet = "0123456789abcdefg";
@@ -95,8 +98,21 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			$message->{$messageField} = !empty($_POST[$messageField]) ?
 				$_POST[$messageField] : "";
 		}
+        if (!empty($message->id) && empty($messages[$message->id])) {
+            header("HTTP/1.1 404 Not Found");
+            exit;
+        }
 		if (empty($message->id)) {
 			$message->id = randomHash();
+            mail(
+                $mailTo,
+                "Er is een nieuw bericht aangemaakt in Tour Buzz",
+                "Er is een nieuw bericht aangemaakt in Tour Buzz door {$res->username} met de titel \"{$message->title}\".\r\n" .
+                "Bekijk het bericht op {$buzzProc}{$buzzUri}/dashboard/berichten/{$message->id}",
+                "From: dashboard@{$buzzUri}\r\n" .
+                "Reply-To: noreply@{$buzzUri}\r\n" . 
+                "X-Mailer: PHP/" . phpversion()
+            );
 		}
 		$messages[$message->id] = $message;
 		saveMessages($messages);
