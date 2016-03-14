@@ -8,7 +8,7 @@
 <main class="wrapper app-wrapper">
     <section class="buzz">
     <img src="{% spaceless %}
-https://maps.googleapis.com/maps/api/staticmap?center=52.372981,4.901327&amp;zoom=14&scale=1&amp;size=840x700&amp;maptype=roadmap{% for record in haltes %}{% if record.location is not empty %}&amp;markers=label:{{ loop.index }}|{{ record.location.lat }},{{ record.location.lng }}{% endif %}{% endfor %}
+https://maps.googleapis.com/maps/api/staticmap?center=52.372981,4.901327&amp;zoom=14&scale=1&amp;size=840x700&amp;maptype=roadmap{% for record in haltes %}{% if record.location is not empty %}&amp;markers=label:{{ markerlabel(loop.index) }}|{{ record.location.lat }},{{ record.location.lng }}{% endif %}{% endfor %}
 &amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU
 {% endspaceless %}">
     </section>
