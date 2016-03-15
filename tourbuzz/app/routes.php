@@ -49,15 +49,51 @@ $app->get('/', function () use ($app, $apiRoot) {
 
 
 /**
- * Halte profiel
+ * Haltes
  */
 $app->get('/haltes', function () use ($app, $apiRoot) {
 
     $haltes = $app->api->get("haltes");
 
+    $res = $app->api->get("berichten/".date('Y')."/".date('m')."/".date('d'));
+
+    $berichten = array_filter($res['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
     $data = [
+        "berichten" => $berichten,
         "haltes" => $haltes['haltes'],
-        "template" => "overzichtskaart.twig",
+        "d" => date('d'),
+        "m" => date('m'),
+        "Y" => date('Y'),
+        "template" => "haltes.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Parkeerplaatsen
+ */
+$app->get('/parkeren', function () use ($app, $apiRoot) {
+
+    $parkeerplaatsen = $app->api->get("parkeerplaatsen");
+
+    $res = $app->api->get("berichten/".date('Y')."/".date('m')."/".date('d'));
+
+    $berichten = array_filter($res['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    $data = [
+        "berichten" => $berichten,
+        "parkeerplaatsen" => $parkeerplaatsen['parkeerplaatsen'],
+        "d" => date('d'),
+        "m" => date('m'),
+        "Y" => date('Y'),
+        "template" => "parkeerplaatsen.twig",
     ];
 
     render($data['template'], $data);
@@ -371,3 +407,15 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
     render($data['template'], $data);
 })->name("home");
 
+/**
+ * Testkaart
+ */
+$app->get('/testkaart', function () use ($app, $apiRoot) {
+
+    $data = [
+        "center" => array("lat" => 52.372981, "lng" => 4.901327),
+        "template" => "testkaart.twig",
+    ];
+
+    render($data['template'], $data);
+});

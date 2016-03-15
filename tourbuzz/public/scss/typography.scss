@@ -10,13 +10,14 @@ $margin-small: 10px;
 .text-intro {
     font-size: 20px;
     color: #888;
-    line-height: 1.4em;  
+    line-height: 1.4em;
 }
 
 .text-body {
     font-family: sans-serif;
+    font-family: "Avenir LT W01_85 Heavy1475544", arial,sans-serif;
     font-size: 16px;
-    line-height: 1.4em;   
+    line-height: 1.4em;
 }
 
 .p-text {
@@ -24,33 +25,33 @@ $margin-small: 10px;
 }
 
 .article-text {
-    
+
     h1 {
-        @extend .text-h1;   
+        @extend .text-h1;
     }
 
     p {
-        @extend .p-text;   
+        @extend .p-text;
     }
-    
+
     .inleiding {
-        @extend .text-intro;   
+        @extend .text-intro;
     }
-    
+
     ul {
-        padding-left: 20px;   
+        padding-left: 20px;
     }
-    
+
     li {
         display: list-item;
         list-style: decimal;
-        margin-bottom: $margin-small;   
+        margin-bottom: $margin-small;
     }
-    
+
     figure, img {
         margin-bottom: $margin-medium;
         display: block;
         background: green;
     }
-    
+
 }

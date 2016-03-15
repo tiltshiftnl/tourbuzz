@@ -7,14 +7,36 @@
 {% block main %}
 <main class="wrapper app-wrapper">
     <section class="buzz">
-    <img src="{% spaceless %}
+        {% include 'partials/dagselectie.twig' %}
+
+        <nav class="topselectie">
+            <a href="/{{ Y }}/{{ m }}/{{ d }}" class="grotekaart">berichten ({{ berichten|length }})</a>
+            <a href="/haltes" class="grotekaart">haltes</a>
+            <a href="/parkeren" class="grotekaart active">parkeren</a>
+        </nav>
+    <h2>Alle parkeerplaatsen</h2>
+    <p style="margin-bottom: 15px">Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven.</p>
+    {#<img src="{% spaceless %}
 https://maps.googleapis.com/maps/api/staticmap?center=52.372981,4.901327&amp;zoom=14&scale=1&amp;size=840x700&amp;maptype=roadmap{% for record in haltes|slice(0,22) %}{% if record.location is not empty %}&amp;markers=icon:http://www.adriaan.tv/images/h4.png|{{ record.location.lat }},{{ record.location.lng }}{% endif %}{% endfor %}
 &amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU
-{% endspaceless %}">
+{% endspaceless %}">#}
+
     <img src="{% spaceless %}
-https://maps.googleapis.com/maps/api/staticmap?center=52.372981,4.901327&amp;zoom=14&scale=1&amp;size=840x700&amp;maptype=roadmap{% for record in haltes %}{% if record.location is not empty %}&amp;markers=label:{{ markerlabel(loop.index) }}|{{ record.location.lat }},{{ record.location.lng }}{% endif %}{% endfor %}
+https://maps.googleapis.com/maps/api/staticmap?center=52.372981,4.901327&amp;zoom=12&scale=1&amp;size=840x700&amp;maptype=roadmap{% for record in parkeerplaatsen %}{% if record.location is not empty %}&amp;markers=label:{{ markerlabel(loop.index) }}|{{ record.location.lat }},{{ record.location.lng }}{% endif %}{% endfor %}
 &amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU
 {% endspaceless %}">
+
+
+        <ol>
+            {% for halte in haltes %}
+            <li>
+                <span class="nr">{{ markerlabel(loop.index) }}</span>
+                <a href="/halte/{{ halte.haltenummer }}" class="halte-link">{{ halte.haltenummer }}</a>
+                {{ halte.straat }}
+                <span class="meta">{{ halte.locatie }}</span>
+            </li>
+            {% endfor %}
+        </ol>
     </section>
 </main>
 {% endblock %}

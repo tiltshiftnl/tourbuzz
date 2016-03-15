@@ -1,0 +1,35 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+<main class="wrapper">
+    <style>
+        .kaartmap {
+            position: relative;
+            width: 100%;
+        }
+        .kaartmap img {
+            width: 100%;
+        }
+        #link-a {
+            position: absolute;
+            top: 50.555345435%;
+            left: 50.43534543%;
+        }
+        #link-b {
+            position: absolute;
+            top: 5%;
+            left: 10%;
+        }
+        .maplink {
+            position: relative;
+            left: -16px;
+            top: -30px;
+        }
+    </style>
+    <section class="kaartmap wrapper">
+        <img src="{% include 'partials/googlemap.empty.twig' %}">
+        <a href="#" id="link-a"><img src="//www.adriaan.tv/images/h4.png" class="maplink"></a>
+        <a href="#" id="link-b"><img src="//www.adriaan.tv/images/h4.png" class="maplink"></a>
+    </section>
+</main>
+{% endblock %}

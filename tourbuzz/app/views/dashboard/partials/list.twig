@@ -1,0 +1,25 @@
+<form method="post" action="/dashboard/berichten/verwijderen">
+    <button type="submit" class="verwijderen">Verwijderen</button>
+    <h2>Berichten</h2>
+    <table>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Nr</th>
+            <th>Headline</th>
+            <th>Van</th>
+            <th>T/m</th>
+        </tr>
+        {% for record in berichten %}
+        <tr {% if not record.is_live %}class="draft"{% endif %}>
+            <td><input type="checkbox" name="ids[]" value="{{ record.id }}"></td>
+            <td><span class="nr">{{ loop.index }}</span></td>
+            <td><a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a></td>
+            <td><span class="meta">{{ record.startdate|date('d-m-Y') }}</span></td>
+            <td><span class="meta">{{ record.enddate|date('d-m-Y') }}</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+
+
+<th>

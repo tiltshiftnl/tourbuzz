@@ -2,7 +2,7 @@
 
 {% block header %}
     <header class="main-header">
-        <div class="app-wrapper">
+        <div class="wrapper">
             <a href="/" class="home"><img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
             <h2>
                 <a href="/dashboard/berichten">Tour Buzz <span>Dashboard</span></a>
@@ -13,7 +13,8 @@
 {% endblock %}
 
 {% block main %}
-<main class="wrapper app-wrapper">
+<main class="wrapper">
+    <div class="col-1-1">
 
     <form class="form-styles" method="post" action="/dashboard/berichten">
         <input type="hidden" name="id" value="{{ bericht.id }}">
@@ -78,7 +79,8 @@
     </form>
 
     <section class="buzz">
-        <form method="post" action="/dashboard/berichten/verwijderen">
+        {% include 'dashboard/partials/list.twig' %}
+        {#<form method="post" action="/dashboard/berichten/verwijderen">
         <button type="submit" class="verwijderen">Verwijderen</button>
         <h2>Berichten</h2>
         <ol class="berichten">
@@ -93,9 +95,9 @@
             </li>
             {% endfor %}
         </ol>
-        </form>
+        </form>#}
     </section>
 
-
+</div>
 </main>
 {% endblock %}
