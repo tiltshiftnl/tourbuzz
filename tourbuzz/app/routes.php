@@ -206,6 +206,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         'link' => $app->request->post('link'),
         'image_url' => $app->request->post('image_url'),
         'important' => $app->request->post('important'),
+        'is_live' => $app->request->post('is_live'),
     );
 
     if ( empty ($fields['title']) ) {
@@ -296,14 +297,20 @@ $app->get('/styleguide', function () {
  */
 $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
 
-    $berichten = $app->api->get("berichten/{$y}/{$m}/{$d}");
+    $res = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
-    usort($berichten['messages'], function ($b1, $b2) {
+    $berichten = array_filter($res['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
         return $b1['important'] < $b2['important'];
     });
 
-    $volgende = "/".str_replace('-', '/', $berichten['_nextDate']);
-    $vorige   = "/".str_replace('-', '/', $berichten['_prevDate']);
+    $volgende = "/".str_replace('-', '/', $res['_nextDate']);
+    $vorige   = "/".str_replace('-', '/', $res['_prevDate']);
+
+    //FIXME Remove this call to cruise calendar?
 
     $cruisekalender = $app->api->get("cruisekalender/{$y}/{$m}/{$d}");
 
@@ -317,7 +324,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
 
     $data = [
         "lang" => $_SESSION['lang'],
-        "berichten" => $berichten['messages'],
+        "berichten" => $berichten,
         "volgende" => $volgende,
         "vorige" => $vorige,
         "datestring" => "{$y}-{$m}-{$d}",
