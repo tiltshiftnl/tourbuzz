@@ -60,6 +60,10 @@
             </div>
         </div>
 
+        <div class="grid-row">
+            <input type="checkbox" name="is_live" value="is_live" {% if bericht.is_live is not empty %}checked=checked{% endif %}> Publiceren op Tour Buzz
+        </div>
+
         <div class="grid-row group">
             <h3 style="margin-top: 20px">Link</h3>
             <input type="text" name="link" value="{{ bericht.link }}">

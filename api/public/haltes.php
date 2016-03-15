@@ -59,7 +59,7 @@ foreach ($jsonData->in_uitstaphaltes as $data) {
 			break;
 		}
 	} else {
-		$result["haltes"][] = $halte;
+		$result["haltes"][$halte->haltenummer] = $halte;
 	}
 }
 

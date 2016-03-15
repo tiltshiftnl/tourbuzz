@@ -73,7 +73,8 @@ $messageFields = [
 	"category",
 	"link",
 	"image_url",
-    "important"
+    "important",
+    "is_live"
 ];
 
 $messages = loadMessages();
@@ -139,11 +140,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			return $message;
 		}, $messages);
 
-        // Sort messages by date.
-		uasort($messages, function ($messageA, $messageB) {
-			return $messageA->startdate < $messageB->startdate;
-		});
-
         // If link is available, and it is a link to google maps
         // Get location geo information.
         $messages = array_map(function ($message) {
@@ -203,11 +199,17 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			});
 		}
 
+        // Sort messages by date.
+		uasort($messages, function ($messageA, $messageB) {
+			return $messageA->startdate > $messageB->startdate;
+		});
+
 		header("Content-type: application/json");
 		echo json_encode([
 			"_date" => $date,
 			"_nextDate" => date("Y-m-d", strtotime("+1 day", strtotime($date))), 
-			"_prevDate" => date("Y-m-d", strtotime("-1 day", strtotime($date))), 
+			"_prevDate" => date("Y-m-d", strtotime("-1 day", strtotime($date))),
+            "_timestamp" => date("Y-m-d", filemtime($filePath)), 
 			"messages" => $messages
 		]);
 		exit;
