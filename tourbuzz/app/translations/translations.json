@@ -76,9 +76,13 @@
       "en" : "dec",
       "fr" : "d√©c"
     },
-    "Kijk op" : {
-      "en" : "Check our website ",
-      "fr" : "Consultez le site "
+    "Meer info" : {
+      "en" : "More info",
+      "fr" : "Plus d'info"
+    },
+    "Laatste wijziging" : {
+      "en" : "Last updated",
+      "fr" : "derni√re mise a jour"
     },
     "Vandaag" : {
       "en" : "Today",

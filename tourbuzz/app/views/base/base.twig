@@ -134,8 +134,11 @@
 
         {% block footer %}
             <footer>
-                <p>{{ __('Kijk op') }} <a href="//www.amsterdam.nl/touringcars" target="_blank">www.amsterdam.nl/touringcars</a></p>
-                <p style="font-weight: normal">Feedback of vragen kunt u sturen naar <br>Mark Sloothaak: <a href="mailto:touringcar@amsterdam.nl">touringcar@amsterdam.nl</a></p>
+                <p>{{ __('Meer info') }}: <a href="//www.amsterdam.nl/touringcars" target="_blank">www.amsterdam.nl/touringcars</a></p>
+                <p style="font-weight: normal">{{ __('Feedback of vragen kunt u sturen naar') }}<br>Mark Sloothaak: <a href="mailto:touringcar@amsterdam.nl">touringcar@amsterdam.nl</a></p>
+                {% if timestamp is not empty %}
+                    <p>{{ __('Laatste wijziging') }}: {{ timestamp }}</p>
+                {% endif %}
                 {#<p class="debug">API : {{ api }} </p>#}
             </footer>
         {% endblock %}

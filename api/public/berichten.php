@@ -208,7 +208,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		echo json_encode([
 			"_date" => $date,
 			"_nextDate" => date("Y-m-d", strtotime("+1 day", strtotime($date))), 
-			"_prevDate" => date("Y-m-d", strtotime("-1 day", strtotime($date))), 
+			"_prevDate" => date("Y-m-d", strtotime("-1 day", strtotime($date))),
+            "_timestamp" => date("Y-m-d", filemtime($filePath)), 
 			"messages" => $messages
 		]);
 		exit;

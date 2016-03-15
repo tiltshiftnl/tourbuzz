@@ -336,6 +336,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "image_api" => $image_api,
         "analytics" => $analytics,
         "cruisekalender" => $cruisekalender['items'],
+        "timestamp" => $res['_timestamp'],
         "template" => "home.twig",
     ];
     render($data['template'], $data);
