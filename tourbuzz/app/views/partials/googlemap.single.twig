@@ -1,1 +1,5 @@
-https://maps.googleapis.com/maps/api/staticmap?zoom=14&scale=2&amp;size=420x350&amp;maptype=roadmap&amp;markers={{ record.location.lat }},{{ record.location.lng }}&amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU
+{% spaceless %}https://maps.googleapis.com/maps/api/staticmap?center={{ record.location.lat }},{{ record.location.lng }}&zoom=15&scale=2&amp;size=420x350&amp;maptype=roadmap&amp;markers=label:1|{{ record.location.lat }},{{ record.location.lng }}{% for halte in haltes|slice(1,9) %}
+    {% if halte.location is not empty %}
+    &amp;markers=icon:http://www.adriaan.tv/images/h4.png|{{ halte.location.lat }},{{ halte.location.lng }}
+    {% endif %}
+{% endfor %}&amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU{% endspaceless %}

@@ -12,6 +12,8 @@ $app->container->singleton('api', function () use ($apiRoot) {
   return new ApiClient($apiRoot);
 });
 
+require_once("distance.php");
+
 /**
  * Before
  */
@@ -67,15 +69,42 @@ $app->get('/haltes', function () use ($app, $apiRoot) {
  */
 $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
 
-    $halte = $app->api->get("haltes/{$slug}");
+    $res = $app->api->get("haltes");
+    $haltes = $res['haltes'];
+    $halte = $haltes[$slug];
+
+    uasort($haltes, function ($h1, $h2) use ($halte) {
+        $d1 = distance(
+            $halte['location']['lat'],
+            $halte['location']['lng'],
+            $h1['location']['lat'],
+            $h1['location']['lng']
+        );
+        $d2 = distance(
+            $halte['location']['lat'],
+            $halte['location']['lng'],
+            $h2['location']['lat'],
+            $h2['location']['lng']
+        );
+        return $d1 > $d2;
+    });
 
     $data = [
-        "record" => $halte['halte'],
+        "record" => $halte,
+        "haltes" => $haltes,
         "template" => "halte.twig",
     ];
 
     render($data['template'], $data);
 });
+
+// Comparison function
+function cmpdistance($a, $b) {
+    if ($a['afstand'] == $b['afstand']) {
+        return 0;
+    }
+    return ($a['afstand'] < $b['afstand']) ? -1 : 1;
+}
 
 
 /**
