@@ -22,14 +22,14 @@
         }
         .maplink {
             position: relative;
-            left: -16px;
-            top: -30px;
+            left: -25px;
+            top: -45px;
         }
     </style>
     <section class="kaartmap wrapper">
         <img src="{% include 'partials/googlemap.empty.twig' %}">
         {% for halte in haltes %}
-            <a href="#{{ halte.haltenummer }}" id="link-a" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%"><img src="//www.adriaan.tv/images/h4.png" class="maplink"></a>
+            <a href="#{{ halte.haltenummer }}" id="link-a" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%"><img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink"></a>
         {% endfor %}
     </section>
 </main>

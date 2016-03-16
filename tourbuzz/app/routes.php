@@ -445,14 +445,22 @@ $app->get('/testkaart', function () use ($app, $apiRoot) {
     $haltes = array_map(function ($halte) use($center, $mapOptions, $ppd) {
         $dLat = $halte['location']['lat'] - $center['lat'];
         $dLng = $halte['location']['lng'] - $center['lng'];
-        $dX = $dLat * 100 * $ppd['lat'][$mapOptions['zoom']];
-        $dY = $dLng * 100 * $ppd['lng'][$mapOptions['zoom']];
+        $dY = $dLat * 100 * $ppd['lat'][$mapOptions['zoom']];
+        $dX = $dLng * 100 * $ppd['lng'][$mapOptions['zoom']];
         $halte['rel_loc'] = [
-            "dX" => 2 * (50 + ($dX / ($mapOptions['width']) / 2)) / $mapOptions['scale'],
-            "dY" => 2 * (50 + ($dY / ($mapOptions['height']) / 2)) / $mapOptions['scale'],
+            "dX" => 50 + ($dX / ($mapOptions['width'])),
+            "dY" => 50 - ($dY / ($mapOptions['height'])),
         ];
         return $halte;
     }, $haltes);
+
+    $haltes = array_filter($haltes, function ($halte) {
+        return
+            !($halte['rel_loc']['dX'] > 100) &&
+            !($halte['rel_loc']['dX'] < 0) &&
+            !($halte['rel_loc']['dY'] > 100) &&
+            !($halte['rel_loc']['dY'] < 0);
+    });
 
     $data = [
         "haltes" => $haltes,
