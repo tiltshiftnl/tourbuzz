@@ -412,8 +412,52 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
  */
 $app->get('/testkaart', function () use ($app, $apiRoot) {
 
+    // Pixels per dLat and dLng for Amsterdam (approx) at zoomlevels.
+    $ppd = [
+        "lat" => [
+            "12" => 4770.821985494679,
+            "13" => 9541.643998239988,
+            "14" => 19083.28801010367,
+        ],
+        "lng" => [
+            "12" => 2912.711111111111,
+            "13" => 5825.422222222222,
+            "14" => 11650.844444444445,
+        ],
+    ];
+
+    $res = $app->api->get("haltes");
+    $haltes = $res['haltes'];
+
+    $center = [
+        "lat" => 52.372981,
+        "lng" => 4.901327,
+    ];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 14,
+        "scale" => 2,
+    ];
+
+    // Calculate relative positions on the map.
+    $haltes = array_map(function ($halte) use($center, $mapOptions, $ppd) {
+        $dLat = $halte['location']['lat'] - $center['lat'];
+        $dLng = $halte['location']['lng'] - $center['lng'];
+        $dX = $dLat * 100 * $ppd['lat'][$mapOptions['zoom']];
+        $dY = $dLng * 100 * $ppd['lng'][$mapOptions['zoom']];
+        $halte['rel_loc'] = [
+            "dX" => 2 * (50 + ($dX / ($mapOptions['width']) / 2)) / $mapOptions['scale'],
+            "dY" => 2 * (50 + ($dY / ($mapOptions['height']) / 2)) / $mapOptions['scale'],
+        ];
+        return $halte;
+    }, $haltes);
+
     $data = [
-        "center" => array("lat" => 52.372981, "lng" => 4.901327),
+        "haltes" => $haltes,
+        "center" => $center,
+        "map" => $mapOptions,
         "template" => "testkaart.twig",
     ];
 

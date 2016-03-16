@@ -1,1 +1,1 @@
-{% spaceless %}https://maps.googleapis.com/maps/api/staticmap?center={{ center.lat }},{{ center.lng }}&zoom=12&scale=2&amp;size=420x350&amp;maptype=roadmap&amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU{% endspaceless %}
+{% spaceless %}https://maps.googleapis.com/maps/api/staticmap?center={{ center.lat }},{{ center.lng }}&zoom={{ map.zoom }}&scale={{ map.scale }}&amp;size={{ map.width }}x{{ map.height }}&amp;maptype=roadmap&amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU{% endspaceless %}
