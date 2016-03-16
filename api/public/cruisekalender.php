@@ -6,7 +6,7 @@ $year = $uriParts[1];
 $month = $uriParts[2];
 $day = $uriParts[3];
 
-$sourceUrl = "http://api.qcommerz.nl/pta/?y={$year}";
+$sourceUrl = "http://api.tourbuzz.nl/pta/?y={$year}";
 
 $cacheFilepath = "../cache/pta_{$year}.json";
 if (is_file($cacheFilepath) && time() - filemtime($cacheFilepath) < 24 * 3600) {

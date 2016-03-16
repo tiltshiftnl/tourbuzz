@@ -1,7 +1,7 @@
 <?php
 
-ini_set("display_errors", 1);
-ini_set("error_reporting", E_ALL);
+//ini_set("display_errors", 1);
+//ini_set("error_reporting", E_ALL);
 
 function distance($lat1, $lng1, $lat2, $lng2) {
 	$R = 6371;

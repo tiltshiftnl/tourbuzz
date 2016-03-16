@@ -1,7 +1,7 @@
 <?php
 
-ini_set("error_reporting", 1);
-ini_set("display_errors", E_ALL);
+//ini_set("error_reporting", 1);
+//ini_set("display_errors", E_ALL);
 
 $passwords = json_decode(file_get_contents("../files/passwords.json"));
 $tokens = json_decode(file_get_contents("../files/tokens.json"));

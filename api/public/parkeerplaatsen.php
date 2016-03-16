@@ -1,7 +1,7 @@
 <?php
 
-ini_set("error_reporting", 1);
-ini_set("display_errors", E_ALL);
+//ini_set("error_reporting", 1);
+//ini_set("display_errors", E_ALL);
 
 require_once("../vendor/autoload.php");
 
