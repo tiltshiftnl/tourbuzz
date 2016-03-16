@@ -374,6 +374,33 @@ ol.berichten {
     }
 }
 
+.kaartmap {
+    position: relative;
+    width: 100%;
+    a {
+        position: absolute;
+    }
+}
+
+.maplink {
+    position: relative;
+    left: -25px;
+    top: -45px;
+}
+
+.maplink-p {
+    position: relative;
+    left: -10px;
+    top: -23px;
+}
+
+.maplink-m {
+    position: relative;
+    left: 12px;
+    top: -24px;
+}
+
+
 table {
     border-collapse: collapse;
     //table-layout: fixed;

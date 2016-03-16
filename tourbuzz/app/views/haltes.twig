@@ -1,7 +1,7 @@
 {% extends 'base/base.twig' %}
 
 {% block slider %}
-     {% include 'partials/slider.twig' %}
+    {% include 'partials/slider.twig' %}
 {% endblock %}
 
 {% block main %}
@@ -14,38 +14,27 @@
             <a href="/haltes" class="grotekaart active">haltes</a>
             <a href="/parkeren" class="grotekaart">parkeren</a>
         </nav>
-    <h2>Alle halteerplekken</h2>
-    <p style="margin-bottom: 15px">Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route.<br><b>Let op:</b> maximaal 10 min stilstaan.</p>
-    {#<img src="{% spaceless %}
-https://maps.googleapis.com/maps/api/staticmap?center=52.372981,4.901327&amp;zoom=14&scale=1&amp;size=840x700&amp;maptype=roadmap{% for record in haltes|slice(0,22) %}{% if record.location is not empty %}&amp;markers=icon:http://www.adriaan.tv/images/h4.png|{{ record.location.lat }},{{ record.location.lng }}{% endif %}{% endfor %}
-&amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU
-{% endspaceless %}">#}
 
-    <img src="{% spaceless %}
-https://maps.googleapis.com/maps/api/staticmap?center=52.372981,4.901327&amp;zoom=14&scale=1&amp;size=840x700&amp;maptype=roadmap{% for record in haltes %}{% if record.location is not empty %}&amp;markers=label:{{ markerlabel(loop.index) }}|{{ record.location.lat }},{{ record.location.lng }}{% endif %}{% endfor %}
-&amp;key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU
-{% endspaceless %}">
+        <h2>Alle halteerplekken</h2>
+        <p style="margin-bottom: 15px">Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route.<br><b>Let op:</b> maximaal 10 min stilstaan.</p>
 
+        <section class="kaartmap wrapper">
+            <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
+            {% for halte in haltes %}
+            <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%">
+                <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink">
+            </a>
+            {% endfor %}
+        </section>
 
         <ol>
-            {% for halte in haltes %}
-            <li>
-                <span class="nr">{{ markerlabel(loop.index) }}</span>
-                <a href="/halte/{{ halte.haltenummer }}" class="halte-link">{{ halte.haltenummer }}</a>
-                {{ halte.straat }}
-                <span class="meta">{{ halte.locatie }}</span>
-            </li>
-            {% endfor %}
+        {% for halte in haltes %}
+        <li>
+            <a href="/halte/{{ halte.haltenummer }}" class="halte-link">{{ halte.haltenummer }}</a>
+            {{ halte.straat }}
+        </li>
+        {% endfor %}
         </ol>
     </section>
 </main>
 {% endblock %}
-
-{#
-https://maps.googleapis.com/maps/api/staticmap?size=480x480&markers=icon:path/to/image.png%257C996600%7Carea/you/want/
-http://maps.google.com/maps/api/staticmap?center=25.3176452,82.97391440000001,&zoom=15&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|25.3176452,82.97391440000001&path=color:0x0000FF80|weight:5|25.3176452,82.97391440000001&size=175x175
-#}
-
-{#
-https://maps.googleapis.com/maps/api/staticmap?center=52.372981,4.901327&zoom=14&scale=1&size=840x700&maptype=roadmap&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3790835137,4.89627599697&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3780618189,4.89812135677&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3775640615,4.89756345729&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3708830912,4.89061117153&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3689703136,4.89310026149&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3679221812,4.89400148372&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3677125517,4.90374326686&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3580423111,4.89189863185&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3596672691,4.88318681697&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3616852789,4.88322973232&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3701101294,4.88891601543&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3742106027,4.88374471644&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3755729761,4.89275693874&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3763589416,4.89400148372&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3780618189,4.89434480647&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3651838178,4.90556716899&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.359962114,4.88760709743&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3740534031,4.89071309546&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3766798735,4.90046560745&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3583830331,4.87982869129&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3367550868,4.87545132617&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3826920031,4.9037539957&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3244027504,4.89273548107&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3825774005,4.8951280115&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3714988307,4.91569519023&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3778522375,4.90988016109&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3654294913,4.93436336498&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3669968561,4.8958387969&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.3560398613,4.92823183517&markers=icon:http://www.megaadresse.com/images/icons/google-maps.png|52.387166731,4.8928642271&key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU
-#}

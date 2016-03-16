@@ -38,8 +38,16 @@
         </ol>
 
 
+        <section class="kaartmap wrapper">
+            <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
+            {% for record in berichten %}
+            <a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
+                <img src="/img/markers/{{ loop.index }}.png" class="maplink-m">
+            </a>
+            {% endfor %}
+        </section>
 
-        <img src="{% include 'partials/googlemap.twig' %}">
+        {#<img src="{% include 'partials/googlemap.twig' %}">#}
 
     </section>
 
