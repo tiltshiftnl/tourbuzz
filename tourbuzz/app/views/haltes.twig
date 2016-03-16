@@ -22,7 +22,7 @@
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
             {% for halte in haltes %}
             <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%">
-                <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink">
+                <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h" style="width: 50%">
             </a>
             {% endfor %}
         </section>

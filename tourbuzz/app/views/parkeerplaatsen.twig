@@ -22,7 +22,7 @@
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
             {% for parkeerplaats in parkeerplaatsen %}
             <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" style="top: {{ parkeerplaats.rel_loc.dY }}%; left: {{ parkeerplaats.rel_loc.dX }}%">
-                <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink">
+                <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p">
             </a>
             {% endfor %}
         </section>
