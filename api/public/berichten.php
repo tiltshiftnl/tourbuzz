@@ -103,15 +103,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         }
 		if (empty($message->id)) {
 			$message->id = randomHash();
-            mail(
-                $mailTo,
-                "Er is een nieuw bericht aangemaakt in Tour Buzz",
-                "Er is een nieuw bericht aangemaakt in Tour Buzz door {$res->username} met de titel \"{$message->title}\".\r\n" .
-                "Bekijk het bericht op {$buzzProc}{$buzzUri}/dashboard/berichten/{$message->id}",
-                "From: dashboard@{$buzzUri}\r\n" .
-                "Reply-To: noreply@{$buzzUri}\r\n" . 
-                "X-Mailer: PHP/" . phpversion()
-            );
 		}
 		$messages[$message->id] = $message;
 		saveMessages($messages);
