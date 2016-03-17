@@ -33,7 +33,7 @@
 
                 $("#owl-example").owlCarousel({
                     singleItem: true,
-                    navigation: true,
+                    navigation: false,
                     autoHeight: false,
                      navigationText: [
                         "Vorige",
@@ -60,8 +60,8 @@
                     e.preventDefault();
                     $(".slider").toggleClass("hide");
                     $(".buzz").toggleClass("hide");
-                    $(".main-header").toggleClass("hide");
-                    $("footer").toggleClass("hide");
+                    //$(".main-header").toggleClass("hide");
+                    //$("footer").toggleClass("hide");
                     var slide = $(this).attr('href');
                     var index = slide.match(/[0-9]+/g);
                     owl.jumpTo(index - 1);
@@ -72,8 +72,8 @@
                     e.preventDefault();
                     $(".slider").toggleClass("hide");
                     $(".buzz").toggleClass("hide");
-                    $(".main-header").toggleClass("hide");
-                    $("footer").toggleClass("hide");
+                    //$(".main-header").toggleClass("hide");
+                    //$("footer").toggleClass("hide");
                 });
 
                 $('.fade-click').on('click', function(e)  {
@@ -106,7 +106,6 @@
     <body>
         {% include 'partials/grid.twig' %}
 
-        {% block slider %}{% endblock %}
 
         {% block header %}
             <header class="main-header">
@@ -143,6 +142,10 @@
                 </nav>
             </div>
         {% endblock %}
+
+        <div class="wrapper app-wrapper">
+            {% block slider %}{% endblock %}
+        </div>
 
         {% block main %}{% endblock %}
 
