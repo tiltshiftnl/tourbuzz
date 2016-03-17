@@ -122,6 +122,7 @@ $app->get('/parkeren', function () use ($app, $apiRoot) {
     $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
 
     $data = [
+        "activetab" => "parkeren",
         "parkeerplaatsen" => $parkeerplaatsen,
         "d" => date('d'),
         "m" => date('m'),
@@ -157,11 +158,15 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
     $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
+        "activetab" => "haltes",
         "record" => $halte,
         "haltes" => $haltes,
         "map" => $mapOptions,
         "center" => $center, //FIXME Use $mapOptions in template and remove this.
         "template" => "halte.twig",
+        "d" => date("d"),
+        "m" => date("m"),
+        "Y" => date("Y"),
     ];
 
     render($data['template'], $data);
@@ -184,8 +189,12 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
     $parkeerplaats = $app->api->get("parkeerplaatsen/{$slug}");
 
     $data = [
+        "activetab" => "parkeren",
         "record" => $parkeerplaats['parkeerplaats'],
         "template" => "parkeerplaats.twig",
+        "d" => date("d"),
+        "m" => date("m"),
+        "Y" => date("Y"),
     ];
 
     render($data['template'], $data);
@@ -278,6 +287,9 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
         "api" => $app->api->getApiRoot(),
         "username" => $_SESSION['username'],
         "template" => "dashboard/berichten.twig",
+        "d" => date("d"),
+        "m" => date("m"),
+        "Y" => date("Y"),
     ];
 
     render($data['template'], $data);
@@ -435,6 +447,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
     $berichten = locationItemsToMap($berichten, $mapOptions);
 
     $data = [
+        "activetab" => "berichten",
         "lang" => $_SESSION['lang'],
         "berichten" => $berichten,
         "volgende" => $volgende,
@@ -443,7 +456,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "dag" => $dag,
         "d" => $d,
         "m" => $m,
-        "y" => $y,
+        "Y" => $y,
         "api" => $app->api->getApiRoot(),
         "image_api" => $image_api,
         "analytics" => $analytics,
@@ -481,6 +494,7 @@ $app->get('/haltes', function () use ($app, $apiRoot) {
     $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
+        "activetab" => "haltes",
         "haltes" => $haltes,
         "d" => date('d'),
         "m" => date('m'),
