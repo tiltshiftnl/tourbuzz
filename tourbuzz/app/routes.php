@@ -166,6 +166,9 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
         "record" => $halte,
         "haltes" => $haltes,
         "template" => "halte.twig",
+        "d" => date("d"),
+        "m" => date("m"),
+        "Y" => date("Y"),
     ];
 
     render($data['template'], $data);
@@ -191,6 +194,9 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
         "activetab" => "parkeren",
         "record" => $parkeerplaats['parkeerplaats'],
         "template" => "parkeerplaats.twig",
+        "d" => date("d"),
+        "m" => date("m"),
+        "Y" => date("Y"),
     ];
 
     render($data['template'], $data);
@@ -283,6 +289,9 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
         "api" => $app->api->getApiRoot(),
         "username" => $_SESSION['username'],
         "template" => "dashboard/berichten.twig",
+        "d" => date("d"),
+        "m" => date("m"),
+        "Y" => date("Y"),
     ];
 
     render($data['template'], $data);
@@ -449,7 +458,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "dag" => $dag,
         "d" => $d,
         "m" => $m,
-        "y" => $y,
+        "Y" => $y,
         "api" => $app->api->getApiRoot(),
         "image_api" => $image_api,
         "analytics" => $analytics,
