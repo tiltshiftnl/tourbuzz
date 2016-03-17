@@ -30,7 +30,7 @@ $poiFile = new ov2file();
 $poiFile->filename = "touringcars.ov2";
 
 // HALTES
-$json = file_get_contents("http://api.qcommerz.nl/haltes/");
+$json = file_get_contents("http://api.tourbuzz.nl/haltes/");
 $rs = json_decode($json);
 foreach ($rs->haltes as $halte) {
         //$halte->naam = str_replace(",", "/", $halte->naam);
@@ -39,7 +39,7 @@ foreach ($rs->haltes as $halte) {
 }
 
 // PARKEERPLAATSEN
-$json = file_get_contents("http://api.qcommerz.nl/parkeerplaatsen/");
+$json = file_get_contents("http://api.tourbuzz.nl/parkeerplaatsen/");
 $rs = json_decode($json);
 foreach ($rs->parkeerplaatsen as $parkeerplaats) {
         if (!$parkeerplaats->naam) $parkeerplaats->naam = $parkeerplaats->nummer;
@@ -49,7 +49,7 @@ foreach ($rs->parkeerplaatsen as $parkeerplaats) {
 }
 
 // ATTRACTIES
-$json = file_get_contents("http://api.qcommerz.nl/attracties/");
+$json = file_get_contents("http://api.tourbuzz.nl/attracties/");
 $rs = json_decode($json);
 foreach ($rs->attracties as $attractie) {
         //$attractie->naam = str_replace(",", "/", $attractie->naam);

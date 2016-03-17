@@ -1,14 +1,12 @@
 <?php
 
-ini_set("error_reporting", 1);
-ini_set("display_errors", E_ALL);
+//ini_set("error_reporting", 1);
+//ini_set("display_errors", E_ALL);
 
-$filePath = "../files/messages.json";
-$buzzProc = "http://";
-$buzzUri = "buzz.dev.fixxx.nl";
-$coachUri = "http://coach.fixxx.nl";
-$authUri = "http://api.dev.fixxx.nl/auth";
-$mailTo = "j.groenen@amsterdam.nl, a.zwiers@amsterdam.nl";
+require_once("../config/berichten/config.php");
+if (is_file("../config/berichten/config_local.php")) {
+    require_once("../config/berichten/config_local.php");
+}
 
 function randomHash() {
 	$alphabet = "0123456789abcdefg";

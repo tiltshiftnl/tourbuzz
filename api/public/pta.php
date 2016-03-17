@@ -1,7 +1,7 @@
 <?php
 
-ini_set("error_reporting", 1);
-ini_set("display_errors", E_ALL);
+//ini_set("error_reporting", 1);
+//ini_set("display_errors", E_ALL);
 
 $url = "http://www.ptamsterdam.nl/local/scripts/";
 $m = (int) $_GET['m'];
