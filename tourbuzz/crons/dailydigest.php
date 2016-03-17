@@ -1,9 +1,10 @@
 <?php
 
-require_once(__DIR__ . '/config.php');
-if (is_file(__DIR__ . '/config_local.php')) {
-    require_once(__DIR__ . '/config_local.php');
-}
+$apiUri = "http://api.tourbuzz.nl";
+$buzzProc = "http://";
+$buzzUri = "www.tourbuzz.nl";
+$mailTo = "m.sloothaak@amsterdam.nl, thartevelt@amsterdam.nl";
+$mailTo = "j.groenen@amsterdam.nl";
 
 $res = json_decode(file_get_contents($apiUri . "/berichten/" . date("Y/m/d")));
 $messages = (array) $res->messages;
