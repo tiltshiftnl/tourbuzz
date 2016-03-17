@@ -186,7 +186,37 @@ function cmpdistance($a, $b) {
  */
 $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
 
-    $parkeerplaats = $app->api->get("parkeerplaatsen/{$slug}");
+    $res = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $res['parkeerplaatsen'];
+    $parkeerplaats = $parkeerplaatsen[$slug];
+
+    $center = $parkeerplaats['location'];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 15,
+        "scale" => 2,
+        "center" => $center,
+    ];
+
+    $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
+
+    $data = [
+        "activetab" => "parkeerplaatsen",
+        "record" => $parkeerplaats,
+        "parkeerplaatsen" => $parkeerplaatsen,
+        "map" => $mapOptions,
+        "center" => $center, //FIXME Use $mapOptions in template and remove this.
+        "template" => "parkeerplaats.twig",
+        "d" => date("d"),
+        "m" => date("m"),
+        "Y" => date("Y"),
+    ];
+
+    render($data['template'], $data);
+
+    /*$parkeerplaats = $app->api->get("parkeerplaatsen/{$slug}");
 
     $data = [
         "activetab" => "parkeren",
@@ -197,7 +227,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
         "Y" => date("Y"),
     ];
 
-    render($data['template'], $data);
+    render($data['template'], $data);*/
 });
 
 
