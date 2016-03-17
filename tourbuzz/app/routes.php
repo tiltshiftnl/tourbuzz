@@ -15,12 +15,10 @@ $app->container->singleton('api', function () use ($apiRoot) {
 require_once("distance.php");
 
 /**
- * FIXME 
+ *
  */
 function sendNewBerichtMail($berichtId, $berichtTitle) {
-    $mailTo = "j.groenen@amsterdam.nl, a.zwiers@amsterdam.nl";
-    $buzzProc = "http://";
-    $buzzUri = "buzz.dev.fixxx.nl";
+    global $mailTo, $buzzProc, $buzzUri;
     mail(
         $mailTo,
         "Er is een nieuw bericht aangemaakt in tour buzz",
