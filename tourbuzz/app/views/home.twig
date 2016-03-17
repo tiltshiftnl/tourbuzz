@@ -10,13 +10,13 @@
 
     <section class="buzz">
 
-    {% include 'partials/dagselectie.twig' %}
-
         <nav class="topselectie">
-            <a href="#" class="grotekaart active">berichten ({{ berichten|length }})</a>
+            <a href="#" class="grotekaart active">berichten</a>
             <a href="/haltes" class="grotekaart">haltes</a>
             <a href="/parkeren" class="grotekaart">parkeren</a>
         </nav>
+
+        {% include 'partials/dagselectie.twig' %}
 
         <ol class="berichten">
             {% for record in berichten %}
@@ -42,7 +42,7 @@
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
             {% for record in berichten %}
             <a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
-                <img src="/img/markers/{{ loop.index }}.png" class="maplink-m">
+                <img src="/img/markers/{{ loop.index }}.png" class="maplink-m" style="width: 50%">
             </a>
             {% endfor %}
         </section>

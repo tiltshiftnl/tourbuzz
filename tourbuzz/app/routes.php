@@ -15,7 +15,7 @@ $app->container->singleton('api', function () use ($apiRoot) {
 require_once("distance.php");
 
 /**
- * 
+ *
  */
 function locationItemsToMap($items, $mapOptions) {
     // Pixels per dLat and dLng for Amsterdam (approx) at zoomlevels.
@@ -140,7 +140,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
     $haltes = $res['haltes'];
     $halte = $haltes[$slug];
 
-    uasort($haltes, function ($h1, $h2) use ($halte) {
+    /*uasort($haltes, function ($h1, $h2) use ($halte) {
         $d1 = distance(
             $halte['location']['lat'],
             $halte['location']['lng'],
@@ -154,11 +154,25 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
             $h2['location']['lng']
         );
         return $d1 > $d2;
-    });
+    });*/
+
+    $center = $halte['location'];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 14,
+        "scale" => 2,
+        "center" => $center,
+    ];
+
+    $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
         "record" => $halte,
         "haltes" => $haltes,
+        "map" => $mapOptions,
+        "center" => $center, //FIXME Use $mapOptions in template and remove this.
         "template" => "halte.twig",
     ];
 

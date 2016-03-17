@@ -12,9 +12,16 @@
         <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span>
     </div>
 
-    <a href="#" onclick="window.history.back()">
-        <img src="{% include "partials/googlemap.single.twig" %}">
-    </a>
+    <section class="kaartmap wrapper">
+        <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
+        {% for halte in haltes %}
+        <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%">
+            <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h" style="width: 50%">
+        </a>
+        {% endfor %}
+    </section>
+
+
 </main>
 
 {% endblock %}
