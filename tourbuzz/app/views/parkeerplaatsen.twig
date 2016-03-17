@@ -22,11 +22,20 @@
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
             {% for parkeerplaats in parkeerplaatsen %}
             <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" style="top: {{ parkeerplaats.rel_loc.dY }}%; left: {{ parkeerplaats.rel_loc.dX }}%">
-                <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p">
+                <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p" style="width: 50%">
             </a>
             {% endfor %}
         </section>
 
+        <ol>
+        {% for parkeerplaats in parkeerplaatsen %}
+        <li>
+            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link">{{ parkeerplaats.nummer }}</a>
+            {{ parkeerplaats.naam }} {#<span class="meta">{{ halte.locatie }}</span>
+            {{ halte.capaciteit }} plaatsen#}
+        </li>
+        {% endfor %}
+        </ol>
     </section>
 </main>
 {% endblock %}
