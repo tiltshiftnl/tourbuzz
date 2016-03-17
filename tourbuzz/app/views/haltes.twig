@@ -30,8 +30,9 @@
         <ol>
         {% for halte in haltes %}
         <li>
-            <a href="/halte/{{ halte.haltenummer }}" class="halte-link">{{ halte.haltenummer }}</a>
-            {{ halte.straat }}
+            <a href="/haltes/{{ halte.haltenummer }}" class="halte-link">{{ halte.haltenummer }}</a>
+            {{ halte.straat }} {#<span class="meta">{{ halte.locatie }}</span>
+            {{ halte.capaciteit }} plaatsen#}
         </li>
         {% endfor %}
         </ol>
