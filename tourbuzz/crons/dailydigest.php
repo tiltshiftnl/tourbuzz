@@ -3,8 +3,7 @@
 $apiUri = "http://api.tourbuzz.nl";
 $buzzProc = "http://";
 $buzzUri = "www.tourbuzz.nl";
-$mailTo = "m.sloothaak@amsterdam.nl, thartevelt@amsterdam.nl";
-$mailTo = "j.groenen@amsterdam.nl";
+$mailTo = "m.sloothaak@amsterdam.nl, thartevelt@amsterdam.nl, j.groenen@amsterdam.nl, a.zwiers@amsterdam.nl";
 
 $res = json_decode(file_get_contents($apiUri . "/berichten/" . date("Y/m/d")));
 $messages = (array) $res->messages;
