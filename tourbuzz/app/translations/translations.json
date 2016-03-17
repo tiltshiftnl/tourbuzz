@@ -118,6 +118,18 @@
     },
     "Advies" : {
       "en" : "Advice"
+    },
+    "berichten" : {
+        "en" : "messages"
+    },
+    "haltes" : {
+        "en" : "stops"
+    },
+    "parkeren" : {
+        "en" : "parkings"
+    },
+    "Feedback of vragen kunt u sturen naar" : {
+        "en" : "For questions and feedback please contact"
     }
   }
 }

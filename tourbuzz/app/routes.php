@@ -94,6 +94,7 @@ $app->get('/', function () use ($app, $apiRoot) {
     $_SESSION['firstvisit'] = true;
 
     $data = [
+        "lang" => $_SESSION['lang'],
         "redirect" => date('/Y/m/d'),
         "template" => "splash.twig",
     ];
@@ -127,6 +128,7 @@ $app->get('/parkeren', function () use ($app, $apiRoot) {
     $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
 
     $data = [
+        "lang" => $_SESSION['lang'],
         "activetab" => "parkeren",
         "parkeerplaatsen" => $parkeerplaatsen,
         "d" => date('d'),
@@ -163,6 +165,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
     $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
+        "lang" => $_SESSION['lang'],
         "activetab" => "haltes",
         "record" => $halte,
         "haltes" => $haltes,
@@ -208,6 +211,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
     $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
 
     $data = [
+        "lang" => $_SESSION['lang'],
         "activetab" => "parkeren",
         "record" => $parkeerplaats,
         "parkeerplaatsen" => $parkeerplaatsen,
@@ -529,6 +533,7 @@ $app->get('/haltes', function () use ($app, $apiRoot) {
     $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
+        "lang" => $_SESSION['lang'],
         "activetab" => "haltes",
         "haltes" => $haltes,
         "d" => date('d'),
