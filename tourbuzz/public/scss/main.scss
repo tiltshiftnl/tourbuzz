@@ -43,6 +43,7 @@ main {
     h3 {
         text-align: center;
         font-size: 20px;
+        color: #333;
     }
     a {
         color: #aaa;
@@ -115,7 +116,7 @@ body {
     }
     h3 {
         margin-bottom: 5px;
-        color: #555;
+        color: #333;
         text-align: center;
     }
     li {
@@ -357,7 +358,7 @@ ol.berichten {
 
 .topselectie {
     position: relative;
-    top: 10px;
+    top: 20px;
     border-bottom: 2px solid #888;
 }
 
