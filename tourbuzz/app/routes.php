@@ -122,6 +122,7 @@ $app->get('/parkeren', function () use ($app, $apiRoot) {
     $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
 
     $data = [
+        "activetab" => "parkeren",
         "parkeerplaatsen" => $parkeerplaatsen,
         "d" => date('d'),
         "m" => date('m'),
@@ -161,6 +162,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
     });
 
     $data = [
+        "activetab" => "haltes",
         "record" => $halte,
         "haltes" => $haltes,
         "template" => "halte.twig",
@@ -186,6 +188,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
     $parkeerplaats = $app->api->get("parkeerplaatsen/{$slug}");
 
     $data = [
+        "activetab" => "parkeren",
         "record" => $parkeerplaats['parkeerplaats'],
         "template" => "parkeerplaats.twig",
     ];
@@ -437,6 +440,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
     $berichten = locationItemsToMap($berichten, $mapOptions);
 
     $data = [
+        "activetab" => "berichten",
         "lang" => $_SESSION['lang'],
         "berichten" => $berichten,
         "volgende" => $volgende,
@@ -483,6 +487,7 @@ $app->get('/haltes', function () use ($app, $apiRoot) {
     $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
+        "activetab" => "haltes",
         "haltes" => $haltes,
         "d" => date('d'),
         "m" => date('m'),
