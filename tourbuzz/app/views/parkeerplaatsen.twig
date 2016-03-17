@@ -8,8 +8,7 @@
 <main class="wrapper app-wrapper">
     <section class="buzz">
 
-        <h2>Alle parkeerplaatsen</h2>
-        <p style="margin-bottom: 15px">Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven.</p>
+        <p style="margin: 25px 0 15px">Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven.</p>
 
         <section class="kaartmap wrapper">
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
@@ -22,10 +21,10 @@
 
         <ol>
         {% for parkeerplaats in parkeerplaatsen %}
-        <li>
-            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link">{{ parkeerplaats.nummer }}</a>
-            {{ parkeerplaats.naam }} {#<span class="meta">{{ halte.locatie }}</span>
-            {{ halte.capaciteit }} plaatsen#}
+        <li style="position: relative; padding-left: 45px">
+            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link" style="position: absolute; left: 0">{{ parkeerplaats.nummer }}</a>
+            {{ parkeerplaats.naam }}&nbsp;<span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span> {# FIXME #}
+            {#{{ halte.capaciteit }} plaatsen#}
         </li>
         {% endfor %}
         </ol>

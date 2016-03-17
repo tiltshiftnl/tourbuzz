@@ -8,9 +8,8 @@
 
 <main class="wrapper app-wrapper">
 
-    <div style="margin: 10px 0 20px 0">
-        <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span>
-    </div>
+    <section class="buzz">
+    <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span>
 
     <section class="kaartmap wrapper">
         <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
@@ -20,8 +19,9 @@
         </a>
         {% endfor %}
     </section>
+    <p class="meta">{{ record.locatie }}</p>
 
-
+    </section>
 </main>
 
 {% endblock %}

@@ -8,8 +8,7 @@
 <main class="wrapper app-wrapper">
     <section class="buzz">
 
-        <h2>Alle halteerplekken</h2>
-        <p style="margin-bottom: 15px">Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route.<br><b>Let op:</b> maximaal 10 min stilstaan.</p>
+        <p style="margin: 25px 0 15px">Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route.<br><b>Let op:</b> maximaal 10 min stilstaan.</p>
 
         <section class="kaartmap wrapper">
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
@@ -22,10 +21,10 @@
 
         <ol>
         {% for halte in haltes %}
-        <li>
-            <a href="/haltes/{{ halte.haltenummer }}" class="halte-link">{{ halte.haltenummer }}</a>
-            {{ halte.straat }} {#<span class="meta">{{ halte.locatie }}</span>
-            {{ halte.capaciteit }} plaatsen#}
+        <li style="position: relative; padding-left: 45px">
+            <a href="/haltes/{{ halte.haltenummer }}" class="halte-link" style="position: absolute; left: 0">{{ halte.haltenummer }}</a>
+            {{ halte.straat }} <span class="meta">{{ halte.locatie }}</span>
+            {#{{ halte.capaciteit }} plaatsen#}
         </li>
         {% endfor %}
         </ol>
