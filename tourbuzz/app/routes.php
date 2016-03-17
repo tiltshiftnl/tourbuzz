@@ -15,6 +15,22 @@ $app->container->singleton('api', function () use ($apiRoot) {
 require_once("distance.php");
 
 /**
+ *
+ */
+function sendNewBerichtMail($berichtId, $berichtTitle) {
+    global $mailTo, $buzzProc, $buzzUri;
+    mail(
+        $mailTo,
+        "Er is een nieuw bericht aangemaakt in tour buzz",
+        "Er is een nieuw bericht aangemaakt in tour buzz door {$_SESSION['username']} met de titel \"{$berichtTitle}\".\r\n" .
+        "Bekijk het bericht op {$buzzProc}{$buzzUri}/dashboard/berichten/{$berichtId}",
+        "From: dashboard@{$buzzUri}\r\n" .
+        "Reply-To: noreply@{$buzzUri}\r\n" .
+        "X-Mailer: PHP/" . phpversion()
+   );
+}
+
+/**
  * FIXME Split into map and filter function.
  */
 function locationItemsToMap($items, $mapOptions, $filter = true) {
@@ -381,6 +397,11 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         if (!$res) {
             $app->flash('error', 'Mag niet! Unauthorized');
             $app->redirect("/dashboard/berichten");
+        }
+
+        // Mail when a new bericht is added successfully.
+        if (empty($fields['id'])) {
+            sendNewBerichtMail($res['id'], $fields['title']);
         }
 
         $app->flash('success', 'Bericht toegevoegd');
