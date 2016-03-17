@@ -15,7 +15,7 @@ $app->container->singleton('api', function () use ($apiRoot) {
 require_once("distance.php");
 
 /**
- * 
+ *
  */
 function locationItemsToMap($items, $mapOptions) {
     // Pixels per dLat and dLng for Amsterdam (approx) at zoomlevels.
@@ -145,26 +145,24 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
     $haltes = $res['haltes'];
     $halte = $haltes[$slug];
 
-    uasort($haltes, function ($h1, $h2) use ($halte) {
-        $d1 = distance(
-            $halte['location']['lat'],
-            $halte['location']['lng'],
-            $h1['location']['lat'],
-            $h1['location']['lng']
-        );
-        $d2 = distance(
-            $halte['location']['lat'],
-            $halte['location']['lng'],
-            $h2['location']['lat'],
-            $h2['location']['lng']
-        );
-        return $d1 > $d2;
-    });
+    $center = $halte['location'];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 15,
+        "scale" => 2,
+        "center" => $center,
+    ];
+
+    $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
         "activetab" => "haltes",
         "record" => $halte,
         "haltes" => $haltes,
+        "map" => $mapOptions,
+        "center" => $center, //FIXME Use $mapOptions in template and remove this.
         "template" => "halte.twig",
         "d" => date("d"),
         "m" => date("m"),
@@ -188,7 +186,37 @@ function cmpdistance($a, $b) {
  */
 $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
 
-    $parkeerplaats = $app->api->get("parkeerplaatsen/{$slug}");
+    $res = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $res['parkeerplaatsen'];
+    $parkeerplaats = $parkeerplaatsen[$slug];
+
+    $center = $parkeerplaats['location'];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 15,
+        "scale" => 2,
+        "center" => $center,
+    ];
+
+    $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
+
+    $data = [
+        "activetab" => "parkeerplaatsen",
+        "record" => $parkeerplaats,
+        "parkeerplaatsen" => $parkeerplaatsen,
+        "map" => $mapOptions,
+        "center" => $center, //FIXME Use $mapOptions in template and remove this.
+        "template" => "parkeerplaats.twig",
+        "d" => date("d"),
+        "m" => date("m"),
+        "Y" => date("Y"),
+    ];
+
+    render($data['template'], $data);
+
+    /*$parkeerplaats = $app->api->get("parkeerplaatsen/{$slug}");
 
     $data = [
         "activetab" => "parkeren",
@@ -199,7 +227,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
         "Y" => date("Y"),
     ];
 
-    render($data['template'], $data);
+    render($data['template'], $data);*/
 });
 
 
