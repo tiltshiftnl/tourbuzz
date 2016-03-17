@@ -1,79 +1,79 @@
 {
   "translations" : {
-    "ma": {
-    	"en": "mon",
+    "maandag": {
+    	"en": "monday",
     	"fr": "Lu"
     },
-    "di": {
-    	"en": "tue",
+    "dinsdag": {
+    	"en": "tuesday",
     	"fr": "Ma"
     },
-    "wo": {
-    	"en": "wed",
+    "woensdag": {
+    	"en": "wednesday",
     	"fr": "Me"
     },
-    "do": {
-    	"en": "thu",
+    "donderdag": {
+    	"en": "thursday",
     	"fr": "Jeu"
     },
-    "vr": {
-    	"en": "fri",
+    "vrijdag": {
+    	"en": "friday",
     	"fr": "Ve"
     },
-    "za": {
-    	"en": "sat",
+    "zaterdag": {
+    	"en": "saturday",
     	"fr": "Sa"
     },
-    "zo": {
-    	"en": "sun",
+    "zondag": {
+    	"en": "sunday",
     	"fr": "mD"
     },
-    "jan" : {
-      "en" : "jan",
+    "januari" : {
+      "en" : "january",
       "fr" : "jan"
     },
-    "feb" : {
-      "en" : "feb",
+    "februari" : {
+      "en" : "february",
       "fr" : "fév"
     },
-    "mrt" : {
-      "en" : "mar",
+    "maart" : {
+      "en" : "march",
       "fr" : "mar"
     },
-    "apr" : {
-      "en" : "apr",
+    "april" : {
+      "en" : "april",
       "fr" : "avr"
     },
     "mei" : {
       "en" : "may",
       "fr" : "mai"
     },
-    "jun" : {
-      "en" : "jun",
+    "juni" : {
+      "en" : "june",
       "fr" : "jun"
     },
-    "jul" : {
-      "en" : "jul",
+    "juli" : {
+      "en" : "july",
       "fr" : "jul"
     },
-    "aug" : {
-      "en" : "aug",
+    "augustus" : {
+      "en" : "august",
       "fr" : "aoû"
     },
-    "sep" : {
-      "en" : "sep",
+    "september" : {
+      "en" : "september",
       "fr" : "sep"
     },
-    "okt" : {
-      "en" : "oct",
+    "oktober" : {
+      "en" : "october",
       "fr" : "oct"
     },
-    "nov" : {
-      "en" : "nov",
+    "november" : {
+      "en" : "november",
       "fr" : "nov"
     },
-    "dec" : {
-      "en" : "dec",
+    "december" : {
+      "en" : "december",
       "fr" : "déc"
     },
     "Meer info" : {
@@ -83,6 +83,9 @@
     "Laatste wijziging" : {
       "en" : "Last updated",
       "fr" : "dernière mise a jour"
+    },
+    "kies dag" : {
+      "en" : "pick a day"
     },
     "Vandaag" : {
       "en" : "Today",
