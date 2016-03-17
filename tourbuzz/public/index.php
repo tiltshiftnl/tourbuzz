@@ -35,10 +35,10 @@ function maand($m) {
         'mrt',
         'apr',
         'mei',
-        'jun',
-        'jul',
+        'juni',
+        'juli',
         'aug',
-        'sep',
+        'sept',
         'okt',
         'nov',
         'dec'
