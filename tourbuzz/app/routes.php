@@ -144,28 +144,12 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
     $haltes = $res['haltes'];
     $halte = $haltes[$slug];
 
-    /*uasort($haltes, function ($h1, $h2) use ($halte) {
-        $d1 = distance(
-            $halte['location']['lat'],
-            $halte['location']['lng'],
-            $h1['location']['lat'],
-            $h1['location']['lng']
-        );
-        $d2 = distance(
-            $halte['location']['lat'],
-            $halte['location']['lng'],
-            $h2['location']['lat'],
-            $h2['location']['lng']
-        );
-        return $d1 > $d2;
-    });*/
-
     $center = $halte['location'];
 
     $mapOptions = [
         "width" => 420,
         "height" => 350,
-        "zoom" => 14,
+        "zoom" => 15,
         "scale" => 2,
         "center" => $center,
     ];
