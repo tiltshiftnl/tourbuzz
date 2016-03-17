@@ -203,7 +203,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
     $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
 
     $data = [
-        "activetab" => "parkeerplaatsen",
+        "activetab" => "parkeren",
         "record" => $parkeerplaats,
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
