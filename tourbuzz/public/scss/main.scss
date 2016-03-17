@@ -38,12 +38,14 @@ main {
     }
     .kalender-icon {
         margin-right: 5px;
-        vertical-align: top;
+        vertical-align: middle;
     }
     h3 {
-        text-align: center;
+        text-align: left;
         font-size: 20px;
-        color: #333;
+        color: #555;
+        text-transform: capitalize;
+        //font-family: "Avenir LT W01_85 Heavy1475544", arial,sans-serif;
     }
     a {
         color: #aaa;

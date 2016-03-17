@@ -464,7 +464,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
     $N = date('N', strtotime("{$y}-{$m}-{$d}"));
 
     $day = array (
-        'ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'
+        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
     );
 
     $dag = translate($day[(int)$N - 1]);
