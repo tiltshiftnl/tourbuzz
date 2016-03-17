@@ -1,5 +1,5 @@
 <?php 
    
-$apiRoot = "http://api.fixxx.nl/";
+$apiRoot = "http://api.tourbuzz.nl/";
 $analytics = true;
 $image_api = "http://api.fixxx.nl/afbeeldingen";

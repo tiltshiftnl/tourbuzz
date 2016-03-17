@@ -15,9 +15,9 @@ $app->container->singleton('api', function () use ($apiRoot) {
 require_once("distance.php");
 
 /**
- *
+ * FIXME Split into map and filter function.
  */
-function locationItemsToMap($items, $mapOptions) {
+function locationItemsToMap($items, $mapOptions, $filter = true) {
     // Pixels per dLat and dLng for Amsterdam (approx) at zoomlevels.
     $ppd = [
         "lat" => [
@@ -40,25 +40,30 @@ function locationItemsToMap($items, $mapOptions) {
 
     // Calculate relative positions on the map.
     $items = array_map(function ($item) use ($mapOptions, $ppd) {
-        $dLat = $item['location']['lat'] - $mapOptions['center']['lat'];
-        $dLng = $item['location']['lng'] - $mapOptions['center']['lng'];
-        $dY = $dLat * 100 * $ppd['lat'][$mapOptions['zoom']];
-        $dX = $dLng * 100 * $ppd['lng'][$mapOptions['zoom']];
-        $item['rel_loc'] = [
-            "dX" => 50 + ($dX / ($mapOptions['width'])),
-            "dY" => 50 - ($dY / ($mapOptions['height'])),
-        ];
+        if (!empty($item['location'])) {
+            $dLat = $item['location']['lat'] - $mapOptions['center']['lat'];
+            $dLng = $item['location']['lng'] - $mapOptions['center']['lng'];
+            $dY = $dLat * 100 * $ppd['lat'][$mapOptions['zoom']];
+            $dX = $dLng * 100 * $ppd['lng'][$mapOptions['zoom']];
+            $item['rel_loc'] = [
+                "dX" => 50 + ($dX / ($mapOptions['width'])),
+                "dY" => 50 - ($dY / ($mapOptions['height'])),
+            ];
+        }
         return $item;
     }, $items);
 
     // Filter out points outside of the map.
-    $items = array_filter($items, function ($item) {
-        return
-            !($item['rel_loc']['dX'] > 100) &&
-            !($item['rel_loc']['dX'] < 0) &&
-            !($item['rel_loc']['dY'] > 100) &&
-            !($item['rel_loc']['dY'] < 0);
-    });
+    if ($filter) {
+        $items = array_filter($items, function ($item) {
+            return
+                !empty($item['rel_loc']) &&
+                !($item['rel_loc']['dX'] > 100) &&
+                !($item['rel_loc']['dX'] < 0) &&
+                !($item['rel_loc']['dY'] > 100) &&
+                !($item['rel_loc']['dY'] < 0);
+        });
+    }
 
     return $items;
 }
@@ -474,7 +479,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "center" => $center,
     ];
 
-    $berichten = locationItemsToMap($berichten, $mapOptions);
+    $berichten = locationItemsToMap($berichten, $mapOptions, false);
 
     $data = [
         "activetab" => "berichten",
