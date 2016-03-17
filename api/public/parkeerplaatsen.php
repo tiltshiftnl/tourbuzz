@@ -52,9 +52,8 @@ foreach ($jsonData->parkeerplaatsen as $data) {
 			break;
 		}
 	} else {
-		$result["parkeerplaatsen"][] = $parkeerplaats;
+		$result["parkeerplaatsen"][$parkeerplaats->nummer] = $parkeerplaats;
 	}
-	$parkeerplaatsen[] = $parkeerplaats;
 }
 
 header("Content-type: application/json");
