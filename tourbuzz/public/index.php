@@ -30,18 +30,18 @@ function maand($m) {
         return "Geen datum";
     }
     $month = array (
-        'jan',
-        'feb',
-        'mrt',
-        'apr',
+        'januari',
+        'februari',
+        'maart',
+        'april',
         'mei',
         'juni',
         'juli',
-        'aug',
-        'sept',
-        'okt',
-        'nov',
-        'dec'
+        'augustus',
+        'september',
+        'oktober',
+        'november',
+        'december'
     );
 
     return translate($month[(int)$m - 1]);
