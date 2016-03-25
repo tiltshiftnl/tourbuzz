@@ -147,6 +147,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                         "lng" => $matches[2]
                     ];
                 }
+                preg_match("/\?q=([0-9.]*),([0-9.]*)&/", $message->link_info, $matches);
+                if (!empty($matches[1]) && !empty($matches[2])) {
+                    $message->location = [
+                        "lat" => $matches[1],
+                        "lng" => $matches[2]
+                    ];
+                }
             }
             if (preg_match("/google\..*\/maps\//", $message->link)) {
                 $matches = [];
