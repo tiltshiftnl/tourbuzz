@@ -9,7 +9,7 @@
 <main class="wrapper app-wrapper">
 
     <section class="buzz">
-        <h2 class="parkeerplaats-link">{{ record.nummer }}</h2>&nbsp;&nbsp;<span>{{ record.naam }}</span><br>
+        <h2 class="parkeerplaats-link">{{ record.nummer }}</h2>&nbsp;&nbsp;<span>{{ record.naam }}</span>&nbsp;&nbsp;<span class="kaart-link"><a href="{{ record.mapsUrl }}">Google Maps</a></span><br>
         <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span>
         <p class="meta">{{ record._origineel.Bijzonderheden }}</p>
         <section class="kaartmap wrapper">
