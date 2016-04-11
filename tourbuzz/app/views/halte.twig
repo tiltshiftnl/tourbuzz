@@ -9,8 +9,9 @@
 <main class="wrapper app-wrapper">
 
     <section class="buzz">
-    <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span>
-
+    <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span><br>
+    <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+    <p class="meta">{{ record.locatie }}</p>
     <section class="kaartmap wrapper">
         <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
         {% for halte in haltes %}
@@ -19,7 +20,6 @@
         </a>
         {% endfor %}
     </section>
-    <p class="meta">{{ record.locatie }}</p>
 
     </section>
 </main>

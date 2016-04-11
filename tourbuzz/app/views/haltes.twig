@@ -23,8 +23,9 @@
         {% for halte in haltes %}
         <li style="position: relative; padding-left: 45px">
             <a href="/haltes/{{ halte.haltenummer }}" class="halte-link" style="position: absolute; left: 0">{{ halte.haltenummer }}</a>
-            {{ halte.straat }} <span class="meta">{{ halte.locatie }}</span>
-            {#{{ halte.capaciteit }} plaatsen#}
+            {{ halte.straat }}<br>
+            <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+            <span class="meta">{{ halte.locatie }}</span>
         </li>
         {% endfor %}
         </ol>
