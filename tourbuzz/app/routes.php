@@ -505,7 +505,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
     $mapOptions = [
         "width" => 420,
         "height" => 350,
-        "zoom" => 13,
+        "zoom" => 12,
         "scale" => 2,
         "center" => $center,
     ];
