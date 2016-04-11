@@ -24,7 +24,9 @@
         <li style="position: relative; padding-left: 45px">
             {% if halte.rel_loc is not empty %}
             <a href="/haltes/{{ halte.haltenummer }}" class="halte-link" style="position: absolute; left: 0">{{ halte.haltenummer }}</a>
-            {{ halte.straat }} <span class="meta">{{ halte.locatie }}</span>
+            <a href="/haltes/{{ halte.haltenummer }}">{{ halte.straat }}</a><br>
+            <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+            <span class="meta">{{ halte.locatie }}</span>
             {% endif %}
         </li>
         {% endfor %}
