@@ -17,7 +17,7 @@
             {% for parkeerplaats in parkeerplaatsen %}
                 {% if parkeerplaats.rel_loc is not empty %}
                     <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" style="top: {{ parkeerplaats.rel_loc.dY }}%; left: {{ parkeerplaats.rel_loc.dX }}%">
-                        <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p" style="width: 50%">
+                        <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p large">
                     </a>
                 {% endif %}
             {% endfor %}

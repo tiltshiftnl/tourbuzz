@@ -392,6 +392,7 @@ ol.berichten {
     width: 100%;
     a {
         position: absolute;
+        width: 46px;
     }
 }
 
@@ -405,18 +406,36 @@ ol.berichten {
     position: relative;
     left: -12px;
     top: -23px;
+    width: 50%;
+    &.large {
+      width: 100%;
+      left: -20px;
+      top: -46px;
+    }
 }
 
 .maplink-h {
     position: relative;
     left: -12px;
     top: -23px;
+    width: 50%;
+    &.large {
+      width: 100%;
+      left: -24px;
+      top: -46px;
+    }
 }
 
 .maplink-m {
     position: relative;
     left: -10px;
     top: -23px;
+    width: 50%;
+    &.large {
+      width: 100%;
+      left: -20px;
+      top: -46px;
+    }
 }
 
 
@@ -713,11 +732,11 @@ footer {
 }
 
 .capaciteit {
-    color: #000;
-    padding: 1px 4px;
+    border: 1px solid #adadad;
     border-radius: 4px;
-    border: 1px solid #000;
-    font-size: 0.8em;
+    color: $zwart;
+    padding: 3px 6px;
+    font-size: 12px;
 }
 
 // Syntax cheatsheet

@@ -17,7 +17,7 @@
         {% for halte in haltes %}
             {% if halte.rel_loc is not empty %}
                 <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%">
-                    <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h" style="width: 50%">
+                    <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h large">
                 </a>
             {% endif %}
         {% endfor %}

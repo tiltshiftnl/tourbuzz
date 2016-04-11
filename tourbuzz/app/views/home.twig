@@ -12,16 +12,6 @@
 
         {% include 'partials/dagselectie.twig' %}
 
-        <section class="kaartmap wrapper">
-            <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
-            {% for record in berichten %}
-                {% if record.rel_loc is not empty %}
-                    <a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
-                        <img src="/img/markers/{{ loop.index }}.png" class="maplink-m" style="width: 50%">
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </section>
 
         <ol class="berichten">
             {% for record in berichten %}
@@ -42,25 +32,19 @@
             {% endfor %}
         </ol>
 
-
-        {#<img src="{% include 'partials/googlemap.twig' %}">#}
+        <section class="kaartmap wrapper">
+            <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
+            {% for record in berichten %}
+                {% if record.rel_loc is not empty %}
+                    <a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
+                        <img src="/img/markers/{{ loop.index }}.png" class="maplink-m">
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </section>
 
     </section>
 
-    {#
-    {% if cruisekalender is not empty %}
-    <section class="cruiseschepen">
-        <h3><i class="fa fa-ship"></i> Passengers Terminal Amsterdam</h3>
-        <ul>
-        {% for record in cruisekalender %}
-            <li>
-            {{ record.name }} <span class="meta">({{ record.passagiers}} passagiers) - {{ record.aanvang }}</span>
-            </li>
-        {% endfor %}
-        </ul>
-    </section>
-    {% endif %}
-    #}
 </main>
 
 {% endblock %}
