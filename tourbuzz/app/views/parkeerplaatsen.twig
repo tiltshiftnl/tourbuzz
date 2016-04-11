@@ -23,7 +23,7 @@
         {% for parkeerplaats in parkeerplaatsen %}
         <li style="position: relative; padding-left: 45px">
             <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link" style="position: absolute; left: 0">{{ parkeerplaats.nummer }}</a>
-            {{ parkeerplaats.naam }}<br>
+            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}">{{ parkeerplaats.naam }}</a><br>
             <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
             <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span> {# FIXME #}
             {#{{ halte.capaciteit }} plaatsen#}
