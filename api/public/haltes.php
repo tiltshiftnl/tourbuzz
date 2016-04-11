@@ -63,5 +63,9 @@ foreach ($jsonData->in_uitstaphaltes as $data) {
 	}
 }
 
+uksort($result["haltes"], function ($a, $b) {
+    return (int) substr($a, 1) > (int) substr($b, 1);
+});
+
 header("Content-type: application/json");
 echo json_encode($result);

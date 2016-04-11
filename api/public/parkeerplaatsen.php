@@ -56,5 +56,9 @@ foreach ($jsonData->parkeerplaatsen as $data) {
 	}
 }
 
+uksort($result["parkeerplaatsen"], function ($a, $b) {
+    return (int) substr($a, 1) > (int) substr($b, 1);
+});
+
 header("Content-type: application/json");
 echo json_encode($result);
