@@ -14,9 +14,11 @@
     <section class="kaartmap wrapper">
         <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
         {% for halte in haltes %}
-        <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%">
-            <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h" style="width: 50%">
-        </a>
+            {% if halte.rel_loc is not empty %}
+                <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%">
+                    <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h" style="width: 50%">
+                </a>
+            {% endif %}
         {% endfor %}
     </section>
     <p class="meta">{{ record.locatie }}</p>

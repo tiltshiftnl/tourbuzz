@@ -22,9 +22,10 @@
         <ol>
         {% for halte in haltes %}
         <li style="position: relative; padding-left: 45px">
+            {% if halte.rel_loc is not empty %}
             <a href="/haltes/{{ halte.haltenummer }}" class="halte-link" style="position: absolute; left: 0">{{ halte.haltenummer }}</a>
             {{ halte.straat }} <span class="meta">{{ halte.locatie }}</span>
-            {#{{ halte.capaciteit }} plaatsen#}
+            {% endif %}
         </li>
         {% endfor %}
         </ol>

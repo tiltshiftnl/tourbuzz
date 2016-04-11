@@ -69,17 +69,19 @@ function locationItemsToMap($items, $mapOptions, $filter = true) {
         return $item;
     }, $items);
 
-    // Filter out points outside of the map.
-    if ($filter) {
-        $items = array_filter($items, function ($item) {
-            return
-                !empty($item['rel_loc']) &&
-                !($item['rel_loc']['dX'] > 100) &&
-                !($item['rel_loc']['dX'] < 0) &&
-                !($item['rel_loc']['dY'] > 100) &&
-                !($item['rel_loc']['dY'] < 0);
-        });
-    }
+    // Remove rel_loc for points outside of the map.
+    $items = array_map(function ($item) {
+        if (empty($item['rel_loc'])) {
+            return $item;
+        }
+        if (($item['rel_loc']['dX'] > 100) ||
+            ($item['rel_loc']['dX'] < 0) ||
+            ($item['rel_loc']['dY'] > 100) ||
+            ($item['rel_loc']['dY'] < 0)) {
+            unset($item['rel_loc']);
+        }
+        return $item;
+    }, $items);
 
     return $items;
 }
@@ -174,7 +176,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
     $mapOptions = [
         "width" => 420,
         "height" => 350,
-        "zoom" => 15,
+        "zoom" => 16,
         "scale" => 2,
         "center" => $center,
     ];
@@ -503,7 +505,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
     $mapOptions = [
         "width" => 420,
         "height" => 350,
-        "zoom" => 12,
+        "zoom" => 13,
         "scale" => 2,
         "center" => $center,
     ];

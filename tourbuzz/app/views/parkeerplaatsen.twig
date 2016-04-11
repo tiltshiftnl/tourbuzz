@@ -22,9 +22,11 @@
         <ol>
         {% for parkeerplaats in parkeerplaatsen %}
         <li style="position: relative; padding-left: 45px">
-            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link" style="position: absolute; left: 0">{{ parkeerplaats.nummer }}</a>
-            {{ parkeerplaats.naam }}&nbsp;<span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span> {# FIXME #}
-            {#{{ halte.capaciteit }} plaatsen#}
+            {% if parkeerplaats.rel_loc is not empty %}
+                <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link" style="position: absolute; left: 0">{{ parkeerplaats.nummer }}</a>
+                {{ parkeerplaats.naam }}&nbsp;<span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span> {# FIXME #}
+                {#{{ halte.capaciteit }} plaatsen#}
+            {% endif %}
         </li>
         {% endfor %}
         </ol>
