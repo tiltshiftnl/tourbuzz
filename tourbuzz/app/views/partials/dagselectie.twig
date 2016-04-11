@@ -2,7 +2,7 @@
         {% if now|date('y-m-d') == datestring|date('y-m-d') %}
             {{ __('Vandaag') }}
         {% else %}
-            {{ dag }} {{ d }} {{ maand(m) }}
+            {{ dag }} {{ j }} {{ maand(m) }}
         {% endif %}
     {% endset %}
 
