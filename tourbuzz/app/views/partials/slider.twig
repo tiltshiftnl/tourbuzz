@@ -28,7 +28,7 @@
             <h3 class="bericht-header">
                 <span class="nr">{{ loop.index }}</span> {{ title }}
             </h3>
-            {#<p>{{ body|raw }}</p>
+            <p>{{ body|raw }}</p>
             {% if advice|trim is not empty %}
                 <section class="advies">
                     <h4>{{ __('Advies') }}</h4>
@@ -38,9 +38,10 @@
 
             {% if record.image_url is not empty %}
                 <img src="{{ record.image_url }}/?width=800&method=fit">
-            {% endif %}#}
+            {% endif %}
 
             {% if record.location is not empty %}
+                <a href="https://maps.google.com?q={{ record.location.lat }},{{ record.location.lng }}" class="kaartlink">Bekijk op Google maps</a>
                 <section class="kaartmap wrapper">
 
                     <img src="{% include 'partials/googlemap.empty.twig' with {'map': record.map} %}" style="width: 100%">
@@ -50,7 +51,10 @@
                         </a>
                     {% endif %}
                 </section>
-            {% else %}
+            {% endif %}
+
+
+            {% if record.link %}
                 <a href="{{ record.link }}" class="extern" target="_blank">Meer informatie</a>
             {% endif %}
 
