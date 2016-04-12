@@ -790,6 +790,11 @@ footer {
     font-size: 12px;
 }
 
+input.disabled {
+    border-color: #ccc;
+    color: #ccc;
+}
+
 // Syntax cheatsheet
 
 // .sectionclass {

@@ -101,9 +101,23 @@ $(function() {
         </div>
 
         <div class="grid-row">
-            <h3 style="margin-top: 20px">Locatie</h3>
-            <input type="text" id="locatiezoekveld">
-            <div id="locationpicker" style="width: 500px; height: 400px;"></div>
+            <h3 style="margin-top: 20px"><label><input type="checkbox" name="include_location" {% if bericht.location.lat is not empty %}checked{% endif %}> Locatie gebruiken</label></h3>
+            <input type="text" id="locatiezoekveld" {% if bericht.location.lat is empty %}class="disabled"{% endif %}>
+            <div style="position:relative; width: 500px; height: 400px">
+                <div id="locationpicker" style="position: absolute; width: 500px; height: 400px;"></div>
+                <div id="locationpickermask" style="position: absolute; width: 500px; height: 400px; background: #fff; opacity: 0.7; {% if bericht.location.lat is not empty %}display: none{% endif %}"></div>
+            </div>
+            <script>
+                $("input[name=include_location]").click(function () {
+                    $("#locatiezoekveld").toggleClass("disabled", !$(this).is(":checked"));
+                    $("#locationpickermask").toggle(!$(this).is(":checked"));
+                });
+                $("#locatiezoekveld").focus(function () {
+                    if (!$("input[name=include_location").is(":checked")) {
+                        $("input[name=include_location]").click();
+                    }
+                });
+            </script>
         </div>
 
         <div class="grid-row group">
