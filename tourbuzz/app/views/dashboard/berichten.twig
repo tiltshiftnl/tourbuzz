@@ -1,5 +1,36 @@
 {% extends 'base/base.twig' %}
 
+{% block scripts %}
+<script>
+$(function() {
+    $('#locatiezoekveld').keypress(function (e) {
+        if (e.keyCode === 10 || e.keyCode === 13) {
+            e.preventDefault();
+        }
+    });
+    var lat = '{{ bericht.location_lat }}' || 52.37940158476047;
+    var lng = '{{ bericht.location_lng }}' || 4.899436755541956;
+    $('#locationpicker').locationpicker({
+        location: {
+            latitude: lat,
+            longitude: lng
+        },
+        radius: 0,
+        zoom: 14,
+        inputBinding: {
+            locationNameInput: $('#locatiezoekveld')
+        },
+        enableAutocomplete: true,
+        onchanged: function (location) {
+            //console.log(location.latitude, location.longitude);
+            $('input[name=location_lng]').val(location.longitude);
+            $('input[name=location_lat]').val(location.latitude);
+        }
+    });
+});
+</script>
+{% endblock %}
+
 {% block header %}
     <header class="main-header">
         <div class="wrapper">
@@ -20,12 +51,10 @@
 
     <form class="form-styles" method="post" action="/dashboard/berichten">
         <input type="hidden" name="id" value="{{ bericht.id }}">
+        <input type="hidden" name="location_lat" value="{{ bericht.location_lat }}">
+        <input type="hidden" name="location_lng" value="{{ bericht.location_lng }}">
 
         <h3>Nieuw bericht</h3>
-
-        <div class="grid-row">
-            {% include 'dashboard/partials/gmaps-picker.twig' %}
-        </div>
 
         <nav pico-reset-class-container class="tab-navigation">
             <ul class="tabselect">
@@ -71,14 +100,21 @@
             <input type="checkbox" name="is_live" value="is_live" {% if bericht.is_live is not empty %}checked=checked{% endif %}> Publiceren op Tour Buzz
         </div>
 
-        <div class="grid-row group">
-            <h3 style="margin-top: 20px">Link</h3>
-            <input type="text" name="link" value="{{ bericht.link }}">
+        <div class="grid-row">
+            <h3 style="margin-top: 20px">Locatie</h3>
+            <input type="text" id="locatiezoekveld">
+            <div id="locationpicker" style="width: 500px; height: 400px;"></div>
         </div>
 
         <div class="grid-row group">
             <h3 style="margin-top: 20px">Afbeelding</h3>
             {% include 'dashboard/partials/fileupload.twig' %}
+        </div>
+
+
+        <div class="grid-row group">
+            <h3 style="margin-top: 20px">Link</h3>
+            <input type="text" name="link" value="{{ bericht.link }}">
         </div>
 
         <button type="submit">Opslaan</button>

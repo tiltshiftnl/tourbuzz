@@ -412,6 +412,8 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
       	'startdate' => $app->request->post('startdate'),
       	'enddate' => $app->request->post('enddate'),
       	'id' => $app->request->post('id'),
+        'location_lat' => $app->request->post('location_lat'),
+        'location_lng' => $app->request->post('location_lng'),
         'link' => $app->request->post('link'),
         'image_url' => $app->request->post('image_url'),
         'important' => $app->request->post('important'),
