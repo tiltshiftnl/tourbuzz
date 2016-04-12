@@ -3,50 +3,37 @@
 {% block scripts %}
 <script>
     $(document).ready(function() {
-        console.log('details');
-
-        $("#owl-example").owlCarousel({
+        var owl = $("#owl-example");
+        owl.owlCarousel({
             singleItem: true,
             navigation: false,
             autoHeight: false,
-             navigationText: [
+            navigationText: [
                 "Vorige",
                 "Volgende"
             ],
-            afterInit : function(elem){
-                var that = this
-                that.owlControls.prependTo(elem)
+            afterInit : function (elem) {
+                this.owlControls.prependTo(elem);
+            },
+            afterMove: function (e) {
+                console.log(owl.data('owlCarousel').$userItems[owl.data('owlCarousel').currentItem]);
             }
         });
 
         //get carousel instance data and store it in variable owl
-        var owl = $("#owl-example").data('owlCarousel');
-        var hash = window.location.hash;
-        var index = hash.match(/[0-9]+/g);
-        console.log(index);
-        owl.jumpTo(index - 1);
+        var index = window.location.hash.match(/[0-9]+/g);
+        owl.data('owlCarousel').jumpTo(index - 1);
         $(window).scrollTop(0);
 
         // Custom Navigation Events
-        /*$(".volgende").click(function(){
+        /*
+        $(".volgende").click(function(){
             $("#owl-example").trigger('owl.next');
-        })
+        });
         $(".vorige").click(function(){
             $("#owl-example").trigger('owl.prev');
-        })*/
-
-        $('.fade-click').on('click', function(e)  {
-            console.log('Fadeclick');
-            e.preventDefault();
-            newLocation = this.href;
-            $("footer").fadeToggle(500);
-            $(".buzz").fadeToggle(500, newpage);
         });
-
-        function newpage() {
-            window.location = newLocation;
-        }
-
+        */
     });
 </script>
 {% endblock %}
