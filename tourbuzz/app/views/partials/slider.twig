@@ -24,7 +24,7 @@
             {% if lang == 'en' %}{{ insertlinks(record.advice_en)|raw }}{% endif %}
         {% endset %}
 
-        <article data-id="{{ record.id }}">
+        <article data-id="{{ record.id }}" data-titel="{{ title }}">
             <h3 class="bericht-header">
                 <span class="nr">{{ loop.index }}</span> {{ title }}
             </h3>
