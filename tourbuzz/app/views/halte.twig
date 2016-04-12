@@ -6,7 +6,7 @@
 
     <section class="buzz">
     <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span>&nbsp;&nbsp;<span class="kaart-link"><a href="{{ record.mapsUrl }}">Google Maps</a></span><br>
-    <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+    <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span><br>
     <p class="meta">{{ record.locatie }}</p>
     <section class="kaartmap wrapper">
         <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
