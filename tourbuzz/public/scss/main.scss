@@ -10,6 +10,7 @@
 //$rood: #E01D1D;
 $rood: #D80E27;
 $zwart: #333;
+$link-color: #5393b8;
 
 body {
     display: flex;
@@ -479,6 +480,11 @@ table {
 .headerdate {
     display: inline-block;
     cursor: pointer;
+    .meta {
+        color: $link-color;
+        text-decoration: underline;
+        font-size: 13px;
+    }
 }
 
 .form-styles {

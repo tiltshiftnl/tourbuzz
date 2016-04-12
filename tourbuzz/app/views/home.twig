@@ -1,9 +1,5 @@
 {% extends 'base/base.twig' %}
 
-{% block slider %}
-     {% include 'partials/slider.twig' %}
-{% endblock %}
-
 {% block main %}
 
 <main class="wrapper app-wrapper">
@@ -11,7 +7,6 @@
     <section class="buzz">
 
         {% include 'partials/dagselectie.twig' %}
-
 
         <ol class="berichten">
             {% for record in berichten %}
@@ -28,7 +23,7 @@
                     {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}
                 {% endset %}
 
-                <li><a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" class="slide-link"><span class="nr">{{ loop.index }}</span>{{ title }}</a></li>
+                <li><a href="/{{ Y }}/{{ m }}/{{ d }}/details#slide{{ loop.index }}" class="slide-link"><span class="nr">{{ loop.index }}</span>{{ title }}</a></li>
             {% endfor %}
         </ol>
 
@@ -36,7 +31,8 @@
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
             {% for record in berichten %}
                 {% if record.rel_loc is not empty %}
-                    <a href="#slide{{ loop.index }}" data-item="{{ loop.index }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
+                    {#<a href="details#slide{{ loop.index }}" data-item="{{ loop.index }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">#}
+                    <a href="/{{ Y }}/{{ m }}/{{ d }}/details#slide{{ loop.index }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
                         <img src="/img/markers/{{ loop.index }}.png" class="maplink-m">
                     </a>
                 {% endif %}

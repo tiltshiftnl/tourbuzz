@@ -1,0 +1,70 @@
+{% extends 'base/base.twig' %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        console.log('details');
+
+        $("#owl-example").owlCarousel({
+            singleItem: true,
+            navigation: false,
+            autoHeight: false,
+             navigationText: [
+                "Vorige",
+                "Volgende"
+            ],
+            afterInit : function(elem){
+                var that = this
+                that.owlControls.prependTo(elem)
+            }
+        });
+
+        //get carousel instance data and store it in variable owl
+        var owl = $("#owl-example").data('owlCarousel');
+        var hash = window.location.hash;
+        var index = hash.match(/[0-9]+/g);
+        console.log(index);
+        owl.jumpTo(index - 1);
+        $(window).scrollTop(0);
+
+        // Custom Navigation Events
+        /*$(".volgende").click(function(){
+            $("#owl-example").trigger('owl.next');
+        })
+        $(".vorige").click(function(){
+            $("#owl-example").trigger('owl.prev');
+        })*/
+
+        $('.fade-click').on('click', function(e)  {
+            console.log('Fadeclick');
+            e.preventDefault();
+            newLocation = this.href;
+            $("footer").fadeToggle(500);
+            $(".buzz").fadeToggle(500, newpage);
+        });
+
+        function newpage() {
+            window.location = newLocation;
+        }
+
+    });
+</script>
+{% endblock %}
+
+{% block slider %}
+     {% include 'partials/slider.twig' %}
+{% endblock %}
+
+{% block main %}
+
+<main class="wrapper app-wrapper">
+
+   {# <section class="buzz">
+
+        {% include 'partials/dagselectie.twig' %}
+
+    </section> #}
+
+</main>
+
+{% endblock %}

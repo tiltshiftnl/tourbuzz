@@ -1,5 +1,5 @@
- <section class="slider hide" pico-id="slider">
-    <a href="#" class="close" data-close><i class="fa fa-close"></i></a>
+ <section class="slider" pico-id="slider">
+    <a href="/{{ Y }}/{{ m }}/{{ d }}" class="close"><i class="fa fa-close"></i></a>
 
     {#<nav class="bladeren">
         <a class="volgende" href="#volgende"><img src="/img/volgende.png" alt="volgende"></a>
@@ -28,7 +28,7 @@
             <h3 class="bericht-header">
                 <span class="nr">{{ loop.index }}</span> {{ title }}
             </h3>
-            <p>{{ body|raw }}</p>
+            {#<p>{{ body|raw }}</p>
             {% if advice|trim is not empty %}
                 <section class="advies">
                     <h4>{{ __('Advies') }}</h4>
@@ -38,22 +38,18 @@
 
             {% if record.image_url is not empty %}
                 <img src="{{ record.image_url }}/?width=800&method=fit">
-            {% endif %}
+            {% endif %}#}
 
             {% if record.location is not empty %}
                 <section class="kaartmap wrapper">
 
-                    <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
+                    <img src="{% include 'partials/googlemap.empty.twig' with {'map': record.map} %}" style="width: 100%">
                     {% if record.rel_loc is not empty %}
                         <a href="{{ record.link_info }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
                             <img src="/img/markers/{{ loop.index }}.png" class="maplink-m large">
                         </a>
                     {% endif %}
                 </section>
-
-                {#<a href="{{ record.link }}" target="_blank">
-                    <img src="{% include "partials/googlemap.single.twig" %}">
-                </a>#}
             {% else %}
                 <a href="{{ record.link }}" class="extern" target="_blank">Meer informatie</a>
             {% endif %}

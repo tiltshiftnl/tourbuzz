@@ -122,14 +122,14 @@ $app->get('/', function () use ($app, $apiRoot) {
 
 
 /**
- * Parkeerplaatsen
+ * Haltes
  */
-$app->get('/parkeren', function () use ($app, $apiRoot) {
+$app->get('/haltes', function () use ($app, $apiRoot) {
 
-    $res = $app->api->get("parkeerplaatsen");
-    $parkeerplaatsen = $res['parkeerplaatsen'];
+    $res = $app->api->get("haltes");
+    $haltes = $res['haltes'];
 
-    //FIXME Global Amsterdam Center point
+    //FIXME Global Amsterdam Center Point
     $center = [
         "lat" => 52.372981,
         "lng" => 4.901327,
@@ -138,29 +138,28 @@ $app->get('/parkeren', function () use ($app, $apiRoot) {
     $mapOptions = [
         "width" => 420,
         "height" => 350,
-        "zoom" => 12,
+        "zoom" => 14,
         "scale" => 2,
         "center" => $center,
     ];
 
-    $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
+    $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
         "lang" => $_SESSION['lang'],
-        "activetab" => "parkeren",
-        "parkeerplaatsen" => $parkeerplaatsen,
+        "activetab" => "haltes",
+        "haltes" => $haltes,
         "j" => date('j'),
         "d" => date('d'),
         "m" => date('m'),
         "Y" => date('Y'),
         "center" => $center, //FIXME Use $mapOptions in template and remove this.
         "map" => $mapOptions,
-        "template" => "parkeerplaatsen.twig",
+        "template" => "haltes.twig",
     ];
 
     render($data['template'], $data);
 });
-
 
 /**
  * Halte profiel
@@ -208,6 +207,45 @@ function cmpdistance($a, $b) {
     return ($a['afstand'] < $b['afstand']) ? -1 : 1;
 }
 
+/**
+ * Parkeerplaatsen
+ */
+$app->get('/parkeren', function () use ($app, $apiRoot) {
+
+    $res = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $res['parkeerplaatsen'];
+
+    //FIXME Global Amsterdam Center point
+    $center = [
+        "lat" => 52.372981,
+        "lng" => 4.901327,
+    ];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 12,
+        "scale" => 2,
+        "center" => $center,
+    ];
+
+    $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
+
+    $data = [
+        "lang" => $_SESSION['lang'],
+        "activetab" => "parkeren",
+        "parkeerplaatsen" => $parkeerplaatsen,
+        "j" => date('j'),
+        "d" => date('d'),
+        "m" => date('m'),
+        "Y" => date('Y'),
+        "center" => $center, //FIXME Use $mapOptions in template and remove this.
+        "map" => $mapOptions,
+        "template" => "parkeerplaatsen.twig",
+    ];
+
+    render($data['template'], $data);
+});
 
 /**
  * Parkeerplaats profiel
@@ -468,6 +506,7 @@ $app->get('/styleguide', function () {
     render($data['template'], $data);
 });
 
+
 /**
  * Dag
  */
@@ -536,42 +575,71 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
     render($data['template'], $data);
 })->name("home");
 
+
 /**
- * Haltes
+ * Dag details
  */
-$app->get('/haltes', function () use ($app, $apiRoot) {
+$app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $image_api) {
 
-    $res = $app->api->get("haltes");
-    $haltes = $res['haltes'];
+    $res = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
-    //FIXME Global Amsterdam Center Point
-    $center = [
-        "lat" => 52.372981,
-        "lng" => 4.901327,
-    ];
+    $berichten = array_filter($res['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
 
-    $mapOptions = [
-        "width" => 420,
-        "height" => 350,
-        "zoom" => 14,
-        "scale" => 2,
-        "center" => $center,
-    ];
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
 
-    $haltes = locationItemsToMap($haltes, $mapOptions);
+    $volgende = "/".str_replace('-', '/', $res['_nextDate']);
+    $vorige   = "/".str_replace('-', '/', $res['_prevDate']);
+
+    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
+
+    $day = array (
+        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
+    );
+
+    $dag = translate($day[(int)$N - 1]);
+
+    foreach ($berichten as &$bericht) {
+        if ( !empty($bericht['location']) ) {
+            $center = $bericht['location'];
+
+            $mapOptions = [
+                "width" => 420,
+                "height" => 350,
+                "zoom" => 15,
+                "scale" => 2,
+                "center" => $center,
+            ];
+
+            $bericht['map'] = $mapOptions;
+            $bericht['rel_loc'] = array ('dX' => 50,'dY' => 50);
+            // locationItemsToMap($bericht, $mapOptions, false)
+        }
+    }
 
     $data = [
+        "activetab" => "berichten",
         "lang" => $_SESSION['lang'],
-        "activetab" => "haltes",
-        "haltes" => $haltes,
+        "berichten" => $berichten,
+        "volgende" => $volgende,
+        "vorige" => $vorige,
+        "datestring" => "{$y}-{$m}-{$d}",
+        "dag" => $dag,
         "j" => date('j'),
-        "d" => date('d'),
-        "m" => date('m'),
-        "Y" => date('Y'),
+        "d" => $d,
+        "m" => $m,
+        "Y" => $y,
+        "api" => $app->api->getApiRoot(),
+        "image_api" => $image_api,
+        "analytics" => $analytics,
+        //"cruisekalender" => $cruisekalender['items'],
+        "timestamp" => $res['_timestamp'],
         "center" => $center, //FIXME Use $mapOptions in template and remove this.
         "map" => $mapOptions,
-        "template" => "haltes.twig",
+        "template" => "details.twig",
     ];
-
     render($data['template'], $data);
 });
