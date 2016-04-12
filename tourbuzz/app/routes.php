@@ -468,6 +468,7 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
         "bericht" => $berichten['messages'][$id],
         "berichten" => $berichten['messages'],
         "image_api" => $image_api,
+        "username" => $_SESSION['username'],
         "api" => $app->api->getApiRoot(),
         "template" => "dashboard/berichten.twig",
     ];
