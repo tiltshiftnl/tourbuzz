@@ -4,6 +4,17 @@
 <script>
     $(document).ready(function() {
         var owl = $("#owl-example");
+        function sendPixel(index) {
+            var userItem = owl.data('owlCarousel').$userItems[index];
+            var id = $(userItem).data("id");
+            var titel = $(userItem).data("titel");
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Bericht',
+              eventAction: 'bericht bekeken',
+              eventLabel: titel + ' (id: ' + id + ')'
+            });
+        }
         owl.owlCarousel({
             singleItem: true,
             navigation: false,
@@ -16,21 +27,20 @@
                 this.owlControls.prependTo(elem);
             },
             afterMove: function () {
-                var userItem = owl.data('owlCarousel').$userItems[owl.data('owlCarousel').currentItem];
-                var id = $(userItem).data("id");
-                var titel = $(userItem).data("titel");
-                ga('send', {
-                  hitType: 'event',
-                  eventCategory: 'Bericht',
-                  eventAction: 'bericht bekeken',
-                  eventLabel: titel + ' (id: ' + id + ')'
-                });
+                var index = owl.data('owlCarousel').currentItem;
+                window.location.hash = "slide" + (index + 1);
+                sendPixel(index);
             }
         });
 
         //get carousel instance data and store it in variable owl
         var index = window.location.hash.match(/[0-9]+/g);
+
         owl.data('owlCarousel').jumpTo(index - 1);
+        if (index == 1) {
+            sendPixel(index); // AfterMove after landing for index 1, because jumpTo will not trigger.
+        }
+
         $(window).scrollTop(0);
 
         // Custom Navigation Events
