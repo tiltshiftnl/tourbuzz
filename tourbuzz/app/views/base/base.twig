@@ -76,10 +76,19 @@
                     <h2>
                         <a href="/">Tour&nbsp;Buzz</a>
                     </h2>
+
+                    <nav class="taalswitch group">
+                        <div class="dropdown group">
+                            <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}><img src="/img/nederlands.png"> NL</a>
+                            <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}><img src="/img/english.png"> EN</a>
+                        </div>
+                    </nav>
+                    {#
                     <nav class="taal">
                         <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}>NL</a> |
                         <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}>EN</a>
                     </nav>
+                    #}
                 </div>
             </header>
 

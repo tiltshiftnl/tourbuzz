@@ -331,6 +331,39 @@ ol.berichten {
     }
 }
 
+.taalswitch {
+    position: relative;
+    a {
+        display: none;
+        clear: right;
+        &.active {
+            display: block;
+        }
+        &:hover {
+            font-weight: bold;
+        }
+    }
+    .dropdown {
+        padding: 5px;
+        float: right;
+        width: 25%;
+        position: absolute;
+        right: 0;
+    }
+    &:hover {
+        .dropdown {
+            background: #F76868;
+        }
+        a {
+            display: block;
+        }
+    }
+    background-image:url(/img/down.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: 20px;
+}
+
 .dashboard {
     .home {
         @include grid-col(1,4);
@@ -594,7 +627,7 @@ table {
 .close {
     float: right;
     position: relative;
-    top: -15px;
+    top: -5px;
 }
 
 article {
