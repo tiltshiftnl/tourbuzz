@@ -412,13 +412,16 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
       	'startdate' => $app->request->post('startdate'),
       	'enddate' => $app->request->post('enddate'),
       	'id' => $app->request->post('id'),
-        'location_lat' => $app->request->post('location_lat'),
-        'location_lng' => $app->request->post('location_lng'),
         'link' => $app->request->post('link'),
         'image_url' => $app->request->post('image_url'),
         'important' => $app->request->post('important'),
         'is_live' => $app->request->post('is_live'),
     );
+
+    if ($app->request->post("include_location")) {
+        $fields['location_lat'] = $app->request->post('location_lat');
+        $fields['location_lng'] = $app->request->post('location_lng');
+    }
 
     if ( empty ($fields['title']) ) {
         $app->flashNow('error', 'Titel is niet ingevuld');
