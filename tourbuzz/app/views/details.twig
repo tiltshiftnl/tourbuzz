@@ -15,8 +15,16 @@
             afterInit : function (elem) {
                 this.owlControls.prependTo(elem);
             },
-            afterMove: function (e) {
-                console.log(owl.data('owlCarousel').$userItems[owl.data('owlCarousel').currentItem]);
+            afterMove: function () {
+                var userItem = owl.data('owlCarousel').$userItems[owl.data('owlCarousel').currentItem];
+                var id = $(userItem).data("id");
+                var titel = $(userItem).data("titel");
+                ga('send', {
+                  hitType: 'event',
+                  eventCategory: 'Bericht',
+                  eventAction: 'bericht bekeken',
+                  eventLabel: titel + ' (id: ' + id + ')'
+                });
             }
         });
 
