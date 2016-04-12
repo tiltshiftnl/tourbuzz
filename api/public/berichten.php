@@ -72,7 +72,9 @@ $messageFields = [
 	"link",
 	"image_url",
     "important",
-    "is_live"
+    "is_live",
+    "location_lat",
+    "location_lng",
 ];
 
 $messages = loadMessages();
@@ -134,6 +136,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         $messages = array_map(function ($message) {
             $message->link_info = "";
             $message->location = (object)[];
+            if (!empty($message->location_lat) && !empty($message->location_lng)) {
+                $message->location = [
+                    "lat" => $message->location_lat,
+                    "lng" => $message->location_lng
+                ];
+            }
+            /**
             if (preg_match("/goo\.gl/", $message->link)) {
                 $ch = curl_init($message->link);
                 curl_setopt($ch, CURLOPT_NOBODY, 1);
@@ -165,6 +174,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                     ];
                 }
             }
+            */
             return $message;
         }, $messages);
 
