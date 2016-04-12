@@ -89,7 +89,6 @@ main {
 }
 
 body {
-    font-family: "Avenir LT W01_85 Heavy1475544", arial,sans-serif;
     font-family: sans-serif;
     font-size: 16px;
     line-height: 1.5em;
@@ -109,11 +108,11 @@ body {
     padding: 5px;
 }
 
-   h3.dag {
-        margin-bottom: 5px;
-        color: #555;
-        text-align: center;
-    }
+h3.dag {
+    margin-bottom: 5px;
+    color: #555;
+    text-align: center;
+}
 
 .buzz {
     h2 {
@@ -144,7 +143,6 @@ body {
     min-width: 50px;
     margin-top: 5px;
     text-align: center;
-    //@include linearGradient(#3A5495, #3669ac );
     &.groot {
       font-size: 32px;
       padding: 15px;
@@ -311,7 +309,7 @@ ol.berichten {
             color:rgba(255, 255, 255, 0.5);
         }
         a {
-             font-family: "Avenir LT W01_85 Heavy1475544", arial,sans-serif;
+             font-family: sans-serif;
              text-transform: lowercase;
              font-size: 30px;
              //font-weight: 800;
@@ -333,22 +331,35 @@ ol.berichten {
     }
 }
 
-    .meta {
-        font-size: 14px;
-        color: #888;
+.dashboard {
+    .home {
+        @include grid-col(1,4);
     }
+    h2 {
+        @include grid-col(1,2);
+    }
+    .logout {
+        @include grid-col(1,4);
+        text-align: right;
+    }
+}
 
-    .meta-link {
-        font-size: 14px;
-        color:#637b95;
-        display: block;
-    }
+.meta {
+    font-size: 14px;
+    color: #888;
+}
 
-    .toelichting {
-        font-size: 14px;
-        color: #888;
-        display: block;
-    }
+.meta-link {
+    font-size: 14px;
+    color:#637b95;
+    display: block;
+}
+
+.toelichting {
+    font-size: 14px;
+    color: #888;
+    display: block;
+}
 
 .bericht-header {
     position: relative;
@@ -510,6 +521,7 @@ table {
         @extend .text-body;
         overflow: auto;
         resize: vertical;
+        margin-bottom: 10px;
     }
     select {
         @extend .text-body;
