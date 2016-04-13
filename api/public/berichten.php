@@ -17,6 +17,50 @@ function randomHash() {
 	return $hash;
 }
 
+function migrateMessages($messages) {
+    // If link is available, and it is a link to google maps
+    // Get location geo information.
+    $messages = array_map(function ($message) {
+        $link_info = "";
+        $migrated = false;
+        if (empty($message->location_lat) && empty($message->location_lng)) {
+            if (preg_match("/goo\.gl/", $message->link)) {
+                $ch = curl_init($message->link);
+                curl_setopt($ch, CURLOPT_NOBODY, 1);
+                $rs = curl_exec($ch);
+                $link_info = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
+                $matches = [];
+                preg_match("/@([0-9.]*),([0-9.]*),/", $link_info, $matches);
+                if (!empty($matches[1]) && !empty($matches[2])) {
+                    $message->location_lat = $matches[1];
+                    $message->location_lng = $matches[2];
+                }
+                preg_match("/\?q=([0-9.]*),([0-9.]*)&/", $link_info, $matches);
+                if (!empty($matches[1]) && !empty($matches[2])) {
+                    $message->location_lat = $matches[1];
+                    $message->location_lng = $matches[2];
+                }
+            }
+            if (preg_match("/google\..*\/maps\//", $message->link)) {
+                $matches = [];
+                preg_match("/@([0-9.]*),([0-9.]*),/", $message->link, $matches);
+                if (!empty($matches[1]) && !empty($matches[2])) {
+                    $message->location_lat = $matches[1];
+                    $message->location_lng = $matches[2];
+                }
+            }
+        }
+        if ($message->location_lat) {
+            $migrated = true;
+        }
+        return $message;
+    }, $messages);
+    if (migrated) {
+        saveMessages($messages);
+    }
+    return $messages;
+}
+
 function loadMessages() {
 	global $filePath;
 	$messagesJson = file_get_contents($filePath);
@@ -78,6 +122,7 @@ $messageFields = [
 ];
 
 $messages = loadMessages();
+$messages = migrateMessages($messages);
 
 switch ($_SERVER["REQUEST_METHOD"]) {
 	case "POST":
@@ -142,39 +187,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                     "lng" => $message->location_lng
                 ];
             }
-            /**
-            if (preg_match("/goo\.gl/", $message->link)) {
-                $ch = curl_init($message->link);
-                curl_setopt($ch, CURLOPT_NOBODY, 1);
-                $rs = curl_exec($ch);
-                $message->link_info = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
-                $matches = [];
-                preg_match("/@([0-9.]*),([0-9.]*),/", $message->link_info, $matches);
-                if (!empty($matches[1]) && !empty($matches[2])) {
-                    $message->location = [
-                        "lat" => $matches[1],
-                        "lng" => $matches[2]
-                    ];
-                }
-                preg_match("/\?q=([0-9.]*),([0-9.]*)&/", $message->link_info, $matches);
-                if (!empty($matches[1]) && !empty($matches[2])) {
-                    $message->location = [
-                        "lat" => $matches[1],
-                        "lng" => $matches[2]
-                    ];
-                }
-            }
-            if (preg_match("/google\..*\/maps\//", $message->link)) {
-                $matches = [];
-                preg_match("/@([0-9.]*),([0-9.]*),/", $message->link, $matches);
-                if (!empty($matches[1]) && !empty($matches[2])) {
-                    $message->location = [
-                        "lat" => $matches[1],
-                        "lng" => $matches[2]
-                    ];
-                }
-            }
-            */
             return $message;
         }, $messages);
 
