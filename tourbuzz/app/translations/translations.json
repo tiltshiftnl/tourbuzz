@@ -84,11 +84,13 @@
       "en" : "Last updated",
       "fr" : "dernière mise a jour"
     },
-    "kies dag" : {
-      "en" : "pick a day"
+    "kies andere dag" : {
+      "en" : "pick a day",
+      "de" : "Wählen Sie einen Tag"
     },
     "Vandaag" : {
       "en" : "Today",
+      "de" : "Heute",
       "fr" : "Aujourd'hui"
     },
     "Kies een bestemming" : {
@@ -123,13 +125,16 @@
       "en" : "Advice"
     },
     "berichten" : {
-        "en" : "messages"
+        "en" : "messages",
+        "de" : "Berichte"
     },
     "haltes" : {
-        "en" : "stops"
+        "en" : "stops",
+        "de" : "Bushaltestellen"
     },
     "parkeren" : {
-        "en" : "parkings"
+        "en" : "parkings",
+        "de" : "Parkplatz"
     },
     "plaatsen" : {
         "en" : "spots"

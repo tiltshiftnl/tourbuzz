@@ -64,9 +64,9 @@ $(function() {
                 <li>
                     <a pico-toggle-class pico-id="tab-en" href="#tab-en">English</a>
                 </li>
-                {#<li>
-                    <a pico-toggle-class pico-id="tab-fr" href="#tab-fr">fr</a>
-                </li>#}
+                <li>
+                    <a pico-toggle-class pico-id="tab-de" href="#tab-de">Deutsch</a>
+                </li>
             </ul>
             <div class="tab active" pico-id="tab-nl">
                 <input type="text" name="title" placeholder="Headline" value="{{ bericht.title }}">
@@ -77,6 +77,11 @@ $(function() {
                 <input type="text" name="title_en" placeholder="Headline (engels)" value="{{ bericht.title_en }}">
                 <textarea name="body_en" placeholder="Situatie (engels)">{{ bericht.body_en }}</textarea>
                 <textarea name="advice_en" placeholder="Advies (engels)">{{ bericht.advice_en }}</textarea>
+            </div>
+            <div class="tab" pico-id="tab-de">
+                <input type="text" name="title_de" placeholder="Headline (duits)" value="{{ bericht.title_de }}">
+                <textarea name="body_de" placeholder="Situatie (duits)">{{ bericht.body_de }}</textarea>
+                <textarea name="advice_de" placeholder="Advies (duits)">{{ bericht.advice_de }}</textarea>
             </div>
         </nav>
 
@@ -136,22 +141,6 @@ $(function() {
 
     <section class="buzz">
         {% include 'dashboard/partials/list.twig' %}
-        {#<form method="post" action="/dashboard/berichten/verwijderen">
-        <button type="submit" class="verwijderen">Verwijderen</button>
-        <h2>Berichten</h2>
-        <ol class="berichten">
-            {% for record in berichten %}
-            <li style="position: relative">
-                <input type="checkbox" name="ids[]" value="{{ record.id }}">
-                <a href="/dashboard/berichten/{{ record.id }}">
-                    <span class="nr">{{ loop.index }}</span>
-                    {{ record.title }}
-                    <span class="meta">van <b>{{ record.startdate|date('d-m \'y') }}</b> t/m <b>{{ record.enddate|date('d-m \'y') }}</b></span>
-                </a>
-            </li>
-            {% endfor %}
-        </ol>
-        </form>#}
     </section>
 
 </div>
