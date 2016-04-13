@@ -131,6 +131,15 @@
     "parkeren" : {
         "en" : "parkings"
     },
+    "plaatsen" : {
+        "en" : "spots"
+    },
+    "Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan." : {
+        "en" : "See below for locations of stops where you can drop off and pick up your passengers. If a stop is occupied, please continue to the next one on your route. You are allowed a maximum time of 10 minutes on these stops."
+    },
+    "Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven." : {
+        "en" : "You can park touringcars on these locations. For prices, see below the map."
+    },
     "Feedback of vragen kunt u sturen naar" : {
         "en" : "For questions and feedback please contact"
     }
