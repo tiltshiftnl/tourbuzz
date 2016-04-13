@@ -94,7 +94,7 @@ $app->hook('slim.before', function() use ($app) {
         $_SESSION['lang'] = 'nl';
     }
     $lang = $app->request()->params('lang');
-    if (isset($lang) && in_array($lang, array('nl', /*'fr',*/ 'en'))) {
+    if (isset($lang) && in_array($lang, array('nl','de','en'))) {
         $_SESSION['lang'] = $lang;
     }
 });
@@ -407,8 +407,9 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
       	'title_en' => $app->request->post('title_en'),
       	'body_en' => $app->request->post('body_en'),
         'advice_en' => $app->request->post('advice_en'),
-      	'title_fr' => $app->request->post('title_fr'),
-      	'body_fr' => $app->request->post('body_fr'),
+      	'title_de' => $app->request->post('title_de'),
+      	'body_de' => $app->request->post('body_de'),
+        'advice_de' => $app->request->post('advice_de'),
       	'startdate' => $app->request->post('startdate'),
       	'enddate' => $app->request->post('enddate'),
       	'id' => $app->request->post('id'),

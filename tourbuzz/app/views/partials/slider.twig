@@ -12,16 +12,19 @@
         {% set title %}
             {% if lang == 'nl' %}{{ record.title }}{% endif %}
             {% if lang == 'en' %}{{ record.title_en }}{% endif %}
+            {% if lang == 'de' %}{{ record.title_de }}{% endif %}
         {% endset %}
 
         {% set body %}
             {% if lang == 'nl' %}{{ insertlinks(record.body)|raw }}{% endif %}
             {% if lang == 'en' %}{{ insertlinks(record.body_en)|raw }}{% endif %}
+            {% if lang == 'de' %}{{ insertlinks(record.body_de)|raw }}{% endif %}
         {% endset %}
 
         {% set advice %}
             {% if lang == 'nl' %}{{ insertlinks(record.advice)|raw }}{% endif %}
             {% if lang == 'en' %}{{ insertlinks(record.advice_en)|raw }}{% endif %}
+            {% if lang == 'de' %}{{ insertlinks(record.body_de)|raw }}{% endif %}
         {% endset %}
 
         <article data-id="{{ record.id }}" data-titel="{{ title }}">
