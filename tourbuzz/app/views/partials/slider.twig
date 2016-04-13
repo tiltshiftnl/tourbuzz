@@ -42,15 +42,17 @@
 
             {% if record.location is not empty %}
                 <a href="https://maps.google.com?q={{ record.location.lat }},{{ record.location.lng }}" class="kaartlink">Bekijk op Google maps</a>
-                <section class="kaartmap wrapper">
+                {% if record.include_map is not empty %}
+                    <section class="kaartmap wrapper">
 
-                    <img src="{% include 'partials/googlemap.empty.twig' with {'map': record.map} %}" style="width: 100%">
-                    {% if record.rel_loc is not empty %}
-                        <a href="{{ record.link_info }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
-                            <img src="/img/markers/{{ loop.index }}.png" class="maplink-m large">
-                        </a>
-                    {% endif %}
-                </section>
+                        <img src="{% include 'partials/googlemap.empty.twig' with {'map': record.map} %}" style="width: 100%">
+                        {% if record.rel_loc is not empty %}
+                            <a href="{{ record.link_info }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
+                                <img src="/img/markers/{{ loop.index }}.png" class="maplink-m large">
+                            </a>
+                        {% endif %}
+                    </section>
+                {% endif %}
             {% endif %}
 
 

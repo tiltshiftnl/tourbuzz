@@ -53,6 +53,10 @@ function migrateMessages($messages) {
         if ($message->location_lat) {
             $migrated = true;
         }
+        if (!isset($message->include_map)) {
+            $message->include_map = true;
+            $migrated = true;
+        }
         return $message;
     }, $messages);
     if (migrated) {
@@ -110,6 +114,9 @@ $messageFields = [
 	"title_fr",
 	"body_fr",
 	"advice_fr",
+	"title_de",
+	"body_de",
+	"advice_de",
 	"startdate",
 	"enddate",
 	"category",
@@ -117,6 +124,7 @@ $messageFields = [
 	"image_url",
     "important",
     "is_live",
+    "include_map",
     "location_lat",
     "location_lng",
 ];

@@ -8,23 +8,38 @@ require_once("../vendor/autoload.php");
 //$sourceUrl = "http://www.amsterdamopendata.nl/files/ivv/touringcar/in_uitstaphaltes.json";
 //$sourceUrl = "http://data.amsterdam.nl/files/ivv/touringcar/in_uitstaphaltes.json";
 $sourceUrl = "http://open.datapunt.amsterdam.nl/ivv/touringcar/in_uitstaphaltes.json";
+$messagesUrl = "http://api.tourbuzz.nl/berichten/" . date("Y/m/d");
+
+$guzzle = new GuzzleHttp\Client();
 
 try {
-    $guzzle = new GuzzleHttp\Client();
     $res = $guzzle->request('GET', $sourceUrl);
+    $jsonData = json_decode($res->getBody());
 } catch (Exception $e) {
     header("HTTP/1.1 404 Not Found");
     exit;
 }
 
-$jsonData = json_decode($res->getBody());
+$disabled = [];
+try {
+    $res = $guzzle->request('GET', $messagesUrl);
+    $messages = json_decode($res->getBody());
+    foreach ($messages->messages as $msg) {
+        if (preg_match("/((H|h)[0-9]+) niet beschikbaar/", $msg->title, $matches)) {
+            $disabled[$matches[1]] = $matches[1];
+        }
+    }
+} catch (Exception $e) {
+    // void ignore
+}
 
 $uriParts = array_values(array_filter(explode("/", $_SERVER["REQUEST_URI"])));
 
 $result = [
+    "_datum" => date("Y-m-d"),
 	"_uri" => $uriParts,
 	"_bron" => $sourceUrl,
-	"_pogingen" => $tries
+	"_pogingen" => $tries,
 ];
 
 foreach ($jsonData->in_uitstaphaltes as $data) {
@@ -49,6 +64,7 @@ foreach ($jsonData->in_uitstaphaltes as $data) {
 		],
 		"mapsImageUrl" => $mapsImageUrl,
 		"mapsUrl" => $mapsUrl,
+        "beschikbaar" => empty($disabled[$haltenummer]),
 		"_origineel" => $data
 	];
 	if (!empty($uriParts[1])) {
