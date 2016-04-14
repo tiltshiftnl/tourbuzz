@@ -6,13 +6,17 @@
 
     <section class="buzz">
     <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span>&nbsp;&nbsp;<span class="kaart-link"><a href="{{ record.mapsUrl }}">Google Maps</a></span><br>
-    <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span><br>
+    {% if halte.beschikbaar %}
+        <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span><br>
+    {% else %}
+        <span class="capaciteit">{{ __('niet beschikbaar') }}</span><br>
+    {% endif %}
     <p class="meta">{{ record.locatie }}</p>
     <section class="kaartmap wrapper">
         <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
         {% for halte in haltes %}
             {% if halte.rel_loc is not empty %}
-                <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%">
+                <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%; {% if not halte.beschikbaar %}opacity: 0.5{% endif %}">
                     <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h large">
                 </a>
             {% endif %}

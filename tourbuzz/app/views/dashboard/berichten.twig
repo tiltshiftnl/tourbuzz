@@ -50,10 +50,10 @@ $(function() {
     <div class="col-1-1">
 
     {% if bericht.id is empty and not show_form %}
-        <button onclick="$('form').show(); $(this).hide()">Nieuw bericht</button>
+        <button onclick="$('form').css({position: 'relative', left: 0}); $(this).hide()">Nieuw bericht</button>
     {% endif %}
 
-    <form class="form-styles" method="post" action="/dashboard/berichten" {% if bericht.id is empty and not show_form %}style="display: none"{% endif %}>
+    <form class="form-styles" method="post" action="/dashboard/berichten" {% if bericht.id is empty and not show_form %}style="position: absolute; left: -100%"{% endif %}>
         <input type="hidden" name="id" value="{{ bericht.id }}">
         <input type="hidden" name="location_lat" value="{{ bericht.location_lat }}">
         <input type="hidden" name="location_lng" value="{{ bericht.location_lng }}">

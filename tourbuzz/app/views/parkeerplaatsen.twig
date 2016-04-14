@@ -10,7 +10,7 @@
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
             {% for parkeerplaats in parkeerplaatsen %}
                 {% if parkeerplaats.rel_loc is not empty %}
-                    <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" style="top: {{ parkeerplaats.rel_loc.dY }}%; left: {{ parkeerplaats.rel_loc.dX }}%">
+                    <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" style="top: {{ parkeerplaats.rel_loc.dY }}%; left: {{ parkeerplaats.rel_loc.dX }}%; {% if not parkeerplaats.beschikbaar %}opacity: 0.5{% endif %}">
                         <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p" style="width: 50%">
                     </a>
                 {% endif %}
@@ -20,9 +20,13 @@
         <ol>
         {% for parkeerplaats in parkeerplaatsen %}
         <li style="position: relative; padding-left: 45px">
-            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link" style="position: absolute; left: 0">{{ parkeerplaats.nummer }}</a>
+            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</a>
             <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}">{{ parkeerplaats.naam }}</a><br>
-            <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
+            {% if parkeerplaats.beschikbaar %}
+                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
+            {% else %}
+                <span class="capaciteit">{{ __('niet beschikbaar') }}</span><br>
+            {% endif %}
             <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span> {# FIXME #}
         </li>
         {% endfor %}

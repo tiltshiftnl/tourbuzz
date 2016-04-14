@@ -164,11 +164,23 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
 	case "GET":
 
-        // Filter out old messages.
 		$date = date("Y-m-d");
-		$messages = array_filter($messages, function ($message) use ($date) {
-			return $message->enddate >= $date || empty($message->enddate);
-		});
+
+        $messages = array_map(function ($message) use ($date) {
+            if ($message->enddate < $date) {
+                $message->status = "archived";
+            } else if ($message->startdate > $date) {
+                $message->status = "scheduled";
+            } else {
+                $message->status = "active";
+            }
+            return $message;
+        }, $messages);
+
+        // Filter out old messages.
+		//$messages = array_filter($messages, function ($message) use ($date) {
+		//	return $message->enddate >= $date || empty($message->enddate);
+		//});
 
         // Make sure all the fields are there.
 		$messages = array_map(function ($message) use ($messageFields) {
