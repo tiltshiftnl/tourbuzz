@@ -54,7 +54,7 @@
 
                     <img src="{% include 'partials/googlemap.empty.twig' with {'map': record.map} %}" style="width: 100%">
                     {% if record.rel_loc is not empty %}
-                        <a href="{{ record.link_info }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
+                        <a href="#" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
                             <img src="/img/markers/{{ loop.index }}.png" class="maplink-m large">
                         </a>
                     {% endif %}
