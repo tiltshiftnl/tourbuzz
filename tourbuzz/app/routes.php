@@ -304,7 +304,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
  ****************/
 
 /**
- * Logout
+ * Dashboard
  */
 $app->get('/dashboard', function () use ($app) {
     $app->redirect("/dashboard/berichten");
@@ -331,6 +331,8 @@ $app->get('/dashboard/logout', function () use ($app, $apiRoot) {
 
     $res = $app->api->delete("auth?token={$_SESSION['auth_token']}");
     unset($_SESSION['auth_token']);
+    unset($_SESSION['username']);
+    session_destroy();
 
     $app->flash('success', 'Je bent nu uitgelogd. Tot kijk!');
     $app->redirect("/dashboard/login");
@@ -357,7 +359,14 @@ $app->post('/dashboard/login', function () use ($app, $apiRoot) {
     $_SESSION['username']   = $app->request->post('username');
 
     $app->flash('success', 'Je bent ingelogd');
-    $app->redirect("/dashboard/berichten");
+
+    if ( !empty($_SESSION['redirect_url']) ) {
+        $target = $_SESSION['redirect_url'];
+        unset($_SESSION['redirect_url']);
+        $app->redirect($target);
+    } else {
+        $app->redirect("/dashboard/berichten");
+    }
 })->name("login");
 
 
@@ -468,6 +477,12 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
 
     $berichten = $app->api->get("berichten");
 
+    if ( empty($_SESSION['username']) ) {
+        $_SESSION['redirect_url'] = "/dashboard/berichten/{$id}";
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
     $data = [
         "test" => "world",
         "bericht" => $berichten['messages'][$id],
@@ -498,6 +513,14 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
     }
 
     $app->flash('success', 'Bericht(en) verwijderd');
+    $app->redirect("/dashboard/berichten");
+});
+
+
+/**
+ * Dashboard wildcard redirect
+ */
+$app->get('/dashboard/(:wildcard+)', function () use ($app) {
     $app->redirect("/dashboard/berichten");
 });
 
