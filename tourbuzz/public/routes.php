@@ -1,5 +1,5 @@
 <?php
-    
+
 /**
  * Whitelisting.
  */
@@ -27,6 +27,21 @@ $app->notFound(function () use ($app) {
     $app->render("404.twig");
 });
 
+
+/**
+ * Robots.txt
+ */
+$app->get('/robots.txt', function () use ($app) {
+    header("Content-type: text/plain");
+    if ( $_SERVER['HTTP_HOST'] == 'www.tourbuzz.nl' ) {
+        readfile('robots.live.txt');
+    } else {
+        readfile('robots.dev.txt');
+    }
+    die;
+});
+
+
 /**
  * Render wrapper om debug info te genereren.
  * FIXME Is er een andere manier om dit te doen?
@@ -38,17 +53,17 @@ function render($template, $data = []) {
     if (isset($_GET['grid'])) {
         $gridcols = $_GET['grid'];
         if ($gridcols > 0) {
-            $data['grid'] = $gridcols;        
+            $data['grid'] = $gridcols;
         } else {
             $data['grid'] = 12; // default
         }
-    } 
+    }
 
     if (isset($_GET['sessiondestroy'])) {
-        
+
         // Unset all of the session variables.
         $_SESSION = array();
-        
+
         // If it's desired to kill the session, also delete the session cookie.
         // Note: This will destroy the session, and not just the session data!
         if (ini_get("session.use_cookies")) {
@@ -58,12 +73,12 @@ function render($template, $data = []) {
                 $params["secure"], $params["httponly"]
             );
         }
-        
+
         // Finally, destroy the session.
-        session_destroy();        
+        session_destroy();
         die('Session destroyed<br><a href="/">home</a>');
-    } 
-    
+    }
+
     if (isset($_GET['debug'])) {
         switch ($_GET['debug']) {
             case 'json':
@@ -84,7 +99,7 @@ function render($template, $data = []) {
  * Afbeeldingen schalen via externe url.
  */
 $app->get('/image/:operation/:width/:height', function ($operation, $width, $height) use ($app) {
-   
+
     //die('deze local?');
 
     $imageManager = new \Intervention\Image\ImageManager([
@@ -110,8 +125,8 @@ $app->get('/image/:operation/:width/:height', function ($operation, $width, $hei
  * Afbeeldingen schalen.
  */
 $app->get('/image/:operation/:width/:height/:path+', function ($operation, $width, $height, $filepath) {
-    
-    
+
+
     $imageManager = new \Intervention\Image\ImageManager([
         "driver" => "imagick"
     ]);
@@ -143,7 +158,7 @@ $app->get('/css/:path+', function ($filepath) {
     }
     $scssCompiler = new scssc();
     $scssCompiler->setFormatter("scss_formatter");
-    
+
     header("Content-type: text/css");
     echo $scssCompiler->compile("@import '{$filepath}'");
     die;
