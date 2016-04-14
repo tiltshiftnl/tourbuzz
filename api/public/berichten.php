@@ -21,7 +21,7 @@ function migrateMessages($messages) {
     // If link is available, and it is a link to google maps
     // Get location geo information.
     $migrated = false; // Something changed and needs to be saved.
-    $messages = array_map(function ($message) {
+    $messages = array_map(function ($message) use (&$migrated) {
         if (preg_match("/goo\.gl/", $message->link)) {
             $ch = curl_init($message->link);
             curl_setopt($ch, CURLOPT_NOBODY, 1);
@@ -50,7 +50,7 @@ function migrateMessages($messages) {
             $message->link = "";
             $migrated = true; // Something changed and needs to be saved.
         }
-        if (!isset($message->include_map)) {
+        if (!is_bool($message->include_map)) {
             $message->include_map = true;
             $migrated = true;
         }
