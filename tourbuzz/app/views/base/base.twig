@@ -52,7 +52,6 @@
     <body>
         {% include 'partials/grid.twig' %}
 
-
         {% block header %}
             <header class="main-header">
                 <div class="app-wrapper">
@@ -60,19 +59,38 @@
                     <h2>
                         <a href="/">Tour&nbsp;Buzz</a>
                     </h2>
-                    {#
+
                     <nav class="taalswitch group">
                         <div class="dropdown group">
-                            <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}><img src="/img/nederlands.png"> NL</a>
-                            <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}><img src="/img/english.png"> EN</a>
+
+                            {% if lang == 'nl' %}
+                                <a href="?lang=nl" class="active"><img src="/img/taal/nl.png" class="vlag">nl</a>
+                                <a href="?lang=en"><img src="/img/taal/en.png" class="vlag">en</a>
+                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag">de</a>
+                            {% elseif lang == 'en' %}
+                                <a href="?lang=en" class="active"><img src="/img/taal/en.png" class="vlag">en</a>
+                                <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag">nl</a>
+                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag">de</a>
+                            {% elseif lang == 'de' %}
+                                <a href="?lang=de" class="active"><img src="/img/taal/de.png" class="vlag">de</a>
+                                <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag">nl</a>
+                                <a href="?lang=en"><img src="/img/taal/en.png" class="vlag">en</a>
+                            {% endif %}
+
+                            {#<a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}><img src="/img/taal/nl.png" class="vlag">nl</a>
+                            <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}><img src="/img/taal/en.png" class="vlag">en</a>
+                            <a href="?lang=de" {% if lang =='de' %}class="active"{% endif %}><img src="/img/taal/de.png" class="vlag">de</a>
+                            #}
                         </div>
                     </nav>
-                    #}
+
+                    {#
                     <nav class="taal">
                         <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}>NL</a> |
-                        <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}>EN</a>
-                        {#<a href="?lang=de" {% if lang =='de' %}class="active"{% endif %}>DE</a>#}
+                        <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}>EN</a> |
+                        <a href="?lang=de" {% if lang =='de' %}class="active"{% endif %}>DE</a>
                     </nav>
+                    #}
                 </div>
             </header>
 

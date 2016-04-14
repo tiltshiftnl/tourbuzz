@@ -210,7 +210,7 @@ ol.berichten {
     font-weight: bold;
     font-size: 15px;
     margin-right: 10px;
-    border-bottom: 1px solid #902a17;
+    //border-bottom: 1px solid #902a17;
 }
 
 .hide {
@@ -331,10 +331,14 @@ ol.berichten {
 
 .taalswitch {
     position: relative;
+    float: right; // FIXME
     a {
         display: none;
         clear: right;
+        text-transform: uppercase;
+        margin-bottom: 5px;
         &.active {
+            font-weight: bold;
             display: block;
         }
         &:hover {
@@ -342,24 +346,40 @@ ol.berichten {
         }
     }
     .dropdown {
-        padding: 5px;
+        padding: 5px 10px;
         float: right;
-        width: 25%;
+        width: 80px;
+        //width: 70px;
         position: absolute;
+        top: -2px;
         right: 0;
+        //background-color: #F76868;
+        //background-image:url(/img/down.png);
+        background-repeat: no-repeat;
+        background-position: 60px 5px;
+        background-size: 20px;
+        z-index: 999;
+        border-radius: 5px;
     }
     &:hover {
         .dropdown {
-            background: #F76868;
+            background-color: rgba(0,0,0,0.4);
         }
         a {
             display: block;
         }
     }
-    background-image:url(/img/down.png);
-    background-repeat: no-repeat;
-    background-position: center right;
-    background-size: 20px;
+}
+
+.vlag {
+    width: 25px;
+    display: inline-block;
+    margin-right: 5px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    border-right: 1px solid rgba(0,0,0,0.3);
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
 }
 
 .dashboard {
