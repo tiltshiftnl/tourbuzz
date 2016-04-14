@@ -49,12 +49,16 @@ $(function() {
 <main class="wrapper">
     <div class="col-1-1">
 
-    <form class="form-styles" method="post" action="/dashboard/berichten">
+    {% if bericht.id is empty and not show_form %}
+        <button onclick="$('form').show(); $(this).hide()">Nieuw bericht</button>
+    {% endif %}
+
+    <form class="form-styles" method="post" action="/dashboard/berichten" {% if bericht.id is empty and not show_form %}style="display: none"{% endif %}>
         <input type="hidden" name="id" value="{{ bericht.id }}">
         <input type="hidden" name="location_lat" value="{{ bericht.location_lat }}">
         <input type="hidden" name="location_lng" value="{{ bericht.location_lng }}">
 
-        <h3>Nieuw bericht</h3>
+        <a href="/dashboard/berichten" style="float: right">Annuleren</a>
 
         <nav pico-reset-class-container class="tab-navigation">
             <ul class="tabselect">
@@ -144,7 +148,11 @@ $(function() {
             <input type="text" name="link" value="{{ bericht.link }}">
         </div>
 
-        <button type="submit">Opslaan</button>
+        <button type="submit" name="submit" value="opslaan">Opslaan</button>
+
+        {% if bericht.id is not empty %}
+            <button type="submit" name="submit" value="dupliceren">Dupliceren</button>
+        {% endif %}
     </form>
 
     <section class="buzz">

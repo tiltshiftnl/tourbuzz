@@ -394,10 +394,6 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
         "api" => $app->api->getApiRoot(),
         "username" => $_SESSION['username'],
         "template" => "dashboard/berichten.twig",
-        "j" => date('j'),
-        "d" => date("d"),
-        "m" => date("m"),
-        "Y" => date("Y"),
     ];
 
     render($data['template'], $data);
@@ -421,13 +417,16 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         'advice_de' => $app->request->post('advice_de'),
       	'startdate' => $app->request->post('startdate'),
       	'enddate' => $app->request->post('enddate'),
-      	'id' => $app->request->post('id'),
         'link' => $app->request->post('link'),
         'image_url' => $app->request->post('image_url'),
         'important' => $app->request->post('important'),
         'is_live' => $app->request->post('is_live'),
         'include_map' => $app->request->post('include_map'),
     );
+
+    if ($app->request->post('submit') !== "dupliceren") {
+        $fields['id'] = $app->request->post('id');
+    }
 
     if ($app->request->post("include_location")) {
         $fields['location_lat'] = $app->request->post('location_lat');
@@ -444,7 +443,9 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
             "bericht" => $fields,
             "image_api" => $image_api,
             "api" => $app->api->getApiRoot(),
+            "username" => $_SESSION['username'],
             "template" => "dashboard/berichten.twig",
+            "show_form" => true,
         ];
 
         render($data['template'], $data);
@@ -460,11 +461,15 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         }
 
         // Mail when a new bericht is added successfully.
-        if (empty($fields['id'])) {
+        if (empty($app->request->post("id"))) {
+            $app->flash('success', 'Bericht toegevoegd');
             sendNewBerichtMail($res['id'], $fields['title']);
+        } else if ($app->request->post("submit") === "dupliceren") {
+            $app->flash('success', 'Bericht gedupliceerd');
+        } else {
+            $app->flash('success', 'Bericht opgeslagen');
         }
 
-        $app->flash('success', 'Bericht toegevoegd');
         $app->redirect("/dashboard/berichten");
     }
 })->name("berichten");
