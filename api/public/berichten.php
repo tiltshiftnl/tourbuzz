@@ -163,7 +163,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		exit;
 
 	case "GET":
-		$messages = loadMessages();
 
         // Filter out old messages.
 		$date = date("Y-m-d");
@@ -251,7 +250,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             exit;
         }
 
-		$messages = loadMessages();
 		$uriParts = array_values(array_filter(explode("/", explode("?", $_SERVER["REQUEST_URI"])[0])));
 		$id = $uriParts[1];
 		$ids = $id ? [$id] : $_GET["ids"];
