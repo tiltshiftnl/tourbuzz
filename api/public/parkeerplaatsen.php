@@ -48,6 +48,7 @@ foreach ($jsonData->parkeerplaatsen as $data) {
 	$mapsImageUrl = "https://maps.googleapis.com/maps/api/staticmap?center={$geoJson->coordinates[1]},{$geoJson->coordinates[0]}&zoom=16&size=600x300&maptype=roadmap&markers={$geoJson->coordinates[1]},{$geoJson->coordinates[0]}&key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU";
 	$mapsUrl = "https://www.google.com/maps/?q=loc:{$geoJson->coordinates[1]},{$geoJson->coordinates[0]}";
     $nummer = array_shift($titleParts);
+	if (!preg_match('/^P[0-9]{1,2}$/', $nummer)) continue;
 	$parkeerplaats = (object) [
 		"nummer" => $nummer,
 		"naam" => trim(array_shift($titleParts)),
