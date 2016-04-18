@@ -425,14 +425,14 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         'image_url' => $app->request->post('image_url'),
         'important' => $app->request->post('important'),
         'is_live' => $app->request->post('is_live'),
-        'include_map' => $app->request->post('include_map'),
+        'include_map' => !!$app->request->post('include_map'),
     );
 
     if ($app->request->post('submit') !== "dupliceren") {
         $fields['id'] = $app->request->post('id');
     }
 
-    if ($app->request->post("include_location")) {
+    if ($app->request->post('include_location')) {
         $fields['location_lat'] = $app->request->post('location_lat');
         $fields['location_lng'] = $app->request->post('location_lng');
     }

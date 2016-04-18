@@ -149,6 +149,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			$message->{$messageField} = !empty($_POST[$messageField]) ?
 				$_POST[$messageField] : "";
 		}
+        // Bugfix: needs to be boolean.
+        $message->include_map = (bool) $message->include_map;
         if (!empty($message->id) && empty($messages[$message->id])) {
             header("HTTP/1.1 404 Not Found");
             exit;
