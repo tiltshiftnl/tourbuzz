@@ -671,12 +671,12 @@ article {
 }
 
 .tab-navigation {
-  //margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .tab-navigation .tabselect {
   @extend .group;
   border-bottom: 1px solid #dee2e8;
-  margin: 10px 0;
+  margin: 10px 0 0;
   padding: 0 0 2px;
 }
 .tab-navigation .tabselect li {
@@ -685,14 +685,15 @@ article {
   margin-right: 2px;
 }
 .tab-navigation .tabselect a {
-  background-color: #dee2e8;
+  /*background-color: #dee2e8;*/
   font-size: 12px;
   padding: 8px;
 }
 .tab-navigation .tabselect a:hover,
 .tab-navigation .tabselect a.active {
-  color: #fff;
-  background-color: #6F8397;
+  /*color: #fff;*/
+  /*background-color: #6F8397;*/
+  background-color: #dee2e8;
 }
 .tab-navigation .tabselect a:hover .count,
 .tab-navigation .tabselect a.active .count {
@@ -716,6 +717,8 @@ article {
 }
 .tab-navigation .tab {
   display: none;
+  background: #dee2e8;
+  padding: 10px;
 }
 .tab-navigation .tab.active {
   display: block;

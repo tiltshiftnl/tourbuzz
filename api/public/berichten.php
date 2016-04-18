@@ -156,6 +156,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 		if (empty($message->id)) {
 			$message->id = randomHash();
 		}
+        if ($message->startdate && $message->startdate > $message->enddate) {
+            $message->enddate = $message->startdate;
+        }
 		$messages[$message->id] = $message;
 		saveMessages($messages);
 		header("Content-type: application/json");

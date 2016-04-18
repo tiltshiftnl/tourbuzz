@@ -389,6 +389,10 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
     $res = $app->api->get("berichten");
 
     $data = [
+        "bericht" => [ // defaults
+            "startdate" => date("Y-m-d"),
+            "enddate" => date("Y-m-d"),
+        ],
         "berichten" => $res['messages'],
         "image_api" => $image_api,
         "api" => $app->api->getApiRoot(),
