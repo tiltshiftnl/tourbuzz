@@ -11,8 +11,18 @@
 
         {% set title %}
             {% if lang == 'nl' %}{{ record.title }}{% endif %}
-            {% if lang == 'en' %}{{ record.title_en }}{% endif %}
-            {% if lang == 'de' %}{{ record.title_de }}{% endif %}
+
+            {% if lang == 'en' %}
+                {% if record.title_en %}{{ record.title_en }}
+                {% else %}{{ record.title }} <span class="meta">(translation unavailable)</span>
+                {% endif %}
+            {% endif %}
+
+            {% if lang == 'de' %}
+                {% if record.title_de %}{{ record.title_de }}
+                {% else %}{{ record.title_en }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+                {% endif %}
+            {% endif %}
         {% endset %}
 
         {% set body %}
@@ -27,7 +37,7 @@
             {% if lang == 'de' %}{{ insertlinks(record.body_de)|raw }}{% endif %}
         {% endset %}
 
-        <article data-id="{{ record.id }}" data-titel="{{ title }}">
+        <article data-id="{{ record.id }}" data-titel="{{ record.title }}">
             <h3 class="bericht-header">
                 <span class="nr">{{ loop.index }}</span> {{ title }}
             </h3>
@@ -40,7 +50,7 @@
             {% endif %}
 
             {% if record.link %}
-                <h4>Meer informatie</h4>
+                <h4>{{ __('Meer informatie') }}</h4>
                 <a href="{{ record.link }}" class="extern" target="_blank">{{ record.link }}</a>
             {% endif %}
 

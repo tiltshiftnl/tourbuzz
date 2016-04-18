@@ -14,7 +14,7 @@
                 {% set title %}
                     {% if lang == 'nl' %}{{ record.title }}{% endif %}
 
-                    {% if lang == 'en' %}{{ record.title_en }}
+                    {% if lang == 'en' %}
                         {% if record.title_en %}{{ record.title_en }}
                         {% else %}{{ record.title }} <span class="meta">(translation unavailable)</span>
                         {% endif %}
