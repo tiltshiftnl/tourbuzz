@@ -13,11 +13,11 @@ $zwart: #333;
 $link-color: #5393b8;
 
 body {
-    display: flex;
     min-height: 100vh;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
+    display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
 }
