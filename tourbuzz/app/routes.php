@@ -106,7 +106,7 @@ $app->hook('slim.before', function() use ($app) {
 $app->get('/', function () use ($app, $apiRoot) {
 
     if ( !empty($_SESSION['firstvisit']) ) {
-        //$app->redirect(date('/Y/m/d'));
+        $app->redirect(date('/Y/m/d'));
     }
 
     $_SESSION['firstvisit'] = true;
