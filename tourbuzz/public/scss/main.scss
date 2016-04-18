@@ -15,10 +15,15 @@ $link-color: #5393b8;
 body {
     display: flex;
     min-height: 100vh;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
 
 main {
+    -ms-flex: 1;
     flex: 1;
     padding: 10px 0;
 }
