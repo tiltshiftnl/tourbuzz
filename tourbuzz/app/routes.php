@@ -568,6 +568,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
     //$cruisekalender = $app->api->get("cruisekalender/{$y}/{$m}/{$d}");
 
     $N = date('N', strtotime("{$y}-{$m}-{$d}"));
+    $j = date('j', strtotime("{$y}-{$m}-{$d}"));
 
     $day = array (
         'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
@@ -599,7 +600,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "vorige" => $vorige,
         "datestring" => "{$y}-{$m}-{$d}",
         "dag" => $dag,
-        "j" => date('j'),
+        "j" => $j,
         "d" => $d,
         "m" => $m,
         "Y" => $y,
