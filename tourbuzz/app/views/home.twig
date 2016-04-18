@@ -13,14 +13,24 @@
 
                 {% set title %}
                     {% if lang == 'nl' %}{{ record.title }}{% endif %}
-                    {% if lang == 'en' %}{{ record.title_en }}{% endif %}
-                    {% if lang == 'fr' %}{{ record.title_fr }}{% endif %}
+
+                    {% if lang == 'en' %}{{ record.title_en }}
+                        {% if record.title_en %}{{ record.title_en }}
+                        {% else %}{{ record.title }} <span class="meta">(translation unavailable)</span>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if lang == 'de' %}
+                        {% if record.title_de %}{{ record.title_de }}
+                        {% else %}{{ record.title_en }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+                        {% endif %}
+                    {% endif %}
                 {% endset %}
 
                 {% set body %}
                     {% if lang == 'nl' %}{{ record.body|raw }}{% endif %}
                     {% if lang == 'en' %}{{ record.body_en|raw }}{% endif %}
-                    {% if lang == 'fr' %}{{ record.body_fr|raw }}{% endif %}
+                    {% if lang == 'de' %}{{ record.body_de|raw }}{% endif %}
                 {% endset %}
 
                 <li><a href="/{{ Y }}/{{ m }}/{{ d }}/details#slide{{ loop.index }}" class="slide-link"><span class="nr">{{ loop.index }}</span>{{ title }}</a></li>
