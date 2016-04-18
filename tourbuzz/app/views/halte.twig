@@ -6,7 +6,7 @@
 
     <section class="buzz">
     <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span>&nbsp;&nbsp;<span class="kaart-link"><a href="{{ record.mapsUrl }}">Google Maps</a></span><br>
-    {% if halte.beschikbaar %}
+    {% if record.beschikbaar %}
         <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span><br>
     {% else %}
         <span class="capaciteit">{{ __('niet beschikbaar') }}</span><br>
