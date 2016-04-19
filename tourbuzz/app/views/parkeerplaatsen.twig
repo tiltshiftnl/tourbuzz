@@ -20,14 +20,18 @@
         <ol>
         {% for parkeerplaats in parkeerplaatsen %}
         <li style="position: relative; padding-left: 45px">
-            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</a>
-            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}">{{ parkeerplaats.naam }}</a><br>
-            {% if parkeerplaats.beschikbaar %}
-                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
-            {% else %}
-                <span class="capaciteit">{{ __('niet beschikbaar') }}</span><br>
-            {% endif %}
-            <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span> {# FIXME #}
+            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}">
+                <div>
+                    <span class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</span>
+                    <span>{{ parkeerplaats.naam }}</span><br>
+                    {% if parkeerplaats.beschikbaar %}
+                        <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
+                    {% else %}
+                      <span class="capaciteit">{{ __('niet beschikbaar') }}</span><br>
+                    {% endif %}
+                    <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span> {# FIXME #}
+                </div>
+            </a>
         </li>
         {% endfor %}
         </ol>
