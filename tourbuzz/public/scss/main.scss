@@ -22,6 +22,23 @@ main {
     padding: 10px 0;
 }
 
+article {
+    h3 {
+        color: #333;
+        font-size: 20px;
+        margin-bottom: $margin-small;
+    }
+    h4 {
+        margin-bottom: $margin-small;
+    }
+    p {
+        margin-bottom: 16px;
+    }
+    a {
+        color: #647b9e;
+    }
+}
+
 .splash {
     border: 1px solid #eee;
     padding: 20px;
@@ -95,23 +112,6 @@ h3.dag {
     margin-bottom: 5px;
     color: #555;
     text-align: center;
-}
-
-article {
-    h3 {
-        color: #333;
-        font-size: 20px;
-        margin-bottom: $margin-small;
-    }
-    h4 {
-        margin-bottom: $margin-small;
-    }
-    p {
-        margin-bottom: 16px;
-    }
-    a {
-        color: #647b9e;
-    }
 }
 
 .buzz {
@@ -301,7 +301,7 @@ ol.berichten {
         }
         a {
              font-family: sans-serif;
-             font-size: 30px;
+             font-size: 31px;
         }
     }
 }
@@ -360,19 +360,6 @@ ol.berichten {
     top: -1px;
 }
 
-.dashboard {
-    .home {
-        @include grid-col(1,4);
-    }
-    h2 {
-        @include grid-col(1,2);
-    }
-    .logout {
-        @include grid-col(1,4);
-        text-align: right;
-    }
-}
-
 .meta {
     font-size: 14px;
     color: #888;
@@ -402,29 +389,6 @@ ol.berichten {
         top: -1px;
     }
 }
-
-/*
-.topselectie {
-    position: relative;
-    top: 20px;
-    border-bottom: 2px solid $zwart;
-}
-
-.grotekaart {
-    background: #ddd;
-    color: #333;
-    display: inline-block;
-    padding: 2px 10px;
-    position: relative;
-    margin-right: 3px;
-    margin-bottom: 0px;
-    font-size: 13px;
-    &.active {
-        color: #fff;
-        background: $zwart;
-        font-weight: bold;
-    }
-}*/
 
 .main-nav {
     position: relative;
@@ -523,8 +487,20 @@ table {
     cursor: pointer;
     .meta {
         color: $link-color;
-        //text-decoration: underline;
         font-size: 13px;
+    }
+}
+
+.dashboard {
+    .home {
+        @include grid-col(1,4);
+    }
+    h2 {
+        @include grid-col(1,2);
+    }
+    .logout {
+        @include grid-col(1,4);
+        text-align: right;
     }
 }
 
@@ -713,24 +689,6 @@ input.disabled {
 .parkeerplaats-link {
     background: #222;
 }
-
-.bladeren {
-    position: relative;
-    a {
-        position: absolute;
-        z-index: 1000;
-    }
-    .volgende {
-        right: 0;
-        top: 40px;
-    }
-    .vorige {
-        left: 0;
-        top: 40px;
-    }
-}
-
-
 
 .capaciteit {
     border: 1px solid #adadad;
