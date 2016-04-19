@@ -39,6 +39,25 @@ article {
     }
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    th, td {
+        text-align: left;
+        padding: 5px 10px;
+    }
+    td {
+        border: 1px solid #eee;
+    }
+    .draft td {
+        color: #888;
+    }
+    .draft .nr {
+       background-color: #aaa;
+       border-bottom: 0;
+    }
+}
+
 .splash {
     border: 1px solid #eee;
     padding: 20px;
@@ -113,6 +132,38 @@ h3.dag { // FIXME
     text-align: center;
 }
 
+.headerdate {
+    display: inline-block;
+    cursor: pointer;
+    .meta {
+        color: $link-color;
+        font-size: 13px;
+    }
+}
+
+.main-nav {
+    position: relative;
+    top: 20px;
+    height: 30px;
+    border-bottom: 1px solid #ccc;
+
+    a {
+        color: #555;
+        display: inline-block;
+        padding: 2px 10px;
+        position: relative;
+        margin-right: 3px;
+        margin-bottom: 0px;
+        font-size: 13px;
+        font-weight: bold;
+        &.active {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-bottom-color: #fff;
+        }
+    }
+}
+
 .slider {
     article {
         padding: 20px;
@@ -146,6 +197,20 @@ h3.dag { // FIXME
     margin-bottom: $margin-medium;
 }
 
+.kaart-link {
+    color: #5393b8;
+    font-size: 14px;
+}
+
+.start {
+    margin-top: 10px;
+    display: inline-block;
+    color: #5393b8;
+    font-size: 14px;
+}
+
+/* Berichten */
+
 .buzz {
     h2 {
         font-size: 20px;
@@ -163,25 +228,6 @@ h3.dag { // FIXME
         margin-top: 10px;
     }
     margin-bottom: 60px;
-}
-
-.kaart-link {
-    color: #5393b8;
-    font-size: 14px;
-}
-
-.start {
-    margin-top: 10px;
-    display: inline-block;
-    color: #5393b8;
-    font-size: 14px;
-}
-
-.halte {
-    display: block;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
 }
 
 ol.berichten {
@@ -216,20 +262,53 @@ ol.berichten {
     margin-right: 10px;
 }
 
-.hide {
-    display: none;
+.bericht-header {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    font-size: 19px;
+    line-height: 1.3em;
+    .nr {
+        position: absolute;
+        left: 0;
+        top: -1px;
+    }
 }
 
-.app-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-}
+/* Haltes en parkeerplaatsen */
 
-.bestemming-thumbnail {
-    float: left;
-    margin-right: 15px;
+.halte {
     display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
 }
+
+.halte-link, .parkeerplaats-link {
+    background: #466890;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 0px;
+    min-width: 35px;
+    padding: 2px 5px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.parkeerplaats-link {
+    background: #222;
+}
+
+.capaciteit {
+    border: 1px solid #adadad;
+    border-radius: 4px;
+    color: $zwart;
+    padding: 3px 6px;
+    font-size: 12px;
+}
+
+/* Taalswitch */
 
 .taalswitch {
     position: relative;
@@ -285,6 +364,13 @@ ol.berichten {
     top: -1px;
 }
 
+/* Util */
+
+.app-wrapper { // FIXME: grid
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 .meta {
     font-size: 14px;
     color: #888;
@@ -296,46 +382,30 @@ ol.berichten {
     display: block;
 }
 
+.hide {
+    display: none;
+}
+
+.button {
+    border: 0;
+    background: $rood;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: lowercase;
+}
+
+.close {
+    float: right;
+    position: relative;
+    top: -5px;
+}
+
 .toelichting {
     font-size: 14px;
     color: #888;
     display: block;
-}
-
-.bericht-header {
-    position: relative;
-    padding-left: 40px;
-    margin-bottom: 15px;
-    font-size: 19px;
-    line-height: 1.3em;
-    .nr {
-        position: absolute;
-        left: 0;
-        top: -1px;
-    }
-}
-
-.main-nav {
-    position: relative;
-    top: 20px;
-    height: 30px;
-    border-bottom: 1px solid #ccc;
-
-    a {
-        color: #555;
-        display: inline-block;
-        padding: 2px 10px;
-        position: relative;
-        margin-right: 3px;
-        margin-bottom: 0px;
-        font-size: 13px;
-        font-weight: bold;
-        &.active {
-            background: #fff;
-            border: 1px solid #ccc;
-            border-bottom-color: #fff;
-        }
-    }
 }
 
 .kaartmap {
@@ -346,6 +416,8 @@ ol.berichten {
         width: 46px;
     }
 }
+
+/* Maplinks */
 
 .maplink {
     position: relative;
@@ -387,34 +459,6 @@ ol.berichten {
     }
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    th, td {
-        text-align: left;
-        padding: 5px 10px;
-    }
-    td {
-        border: 1px solid #eee;
-    }
-    .draft td {
-        color: #888;
-    }
-    .draft .nr {
-       background-color: #aaa;
-       border-bottom: 0;
-    }
-}
-
-.headerdate {
-    display: inline-block;
-    cursor: pointer;
-    .meta {
-        color: $link-color;
-        font-size: 13px;
-    }
-}
-
 .dashboard {
     .home {
         @include grid-col(1,4);
@@ -427,6 +471,8 @@ table {
         text-align: right;
     }
 }
+
+/* Forms */
 
 .form-styles {
     margin-bottom: 40px;
@@ -518,21 +564,7 @@ input.disabled {
     font-weight: bold;
 }
 
-.button {
-    border: 0;
-    background: $rood;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: lowercase;
-}
-
-.close {
-    float: right;
-    position: relative;
-    top: -5px;
-}
+/* Tabnavigation */
 
 .tab-navigation {
     margin-bottom: 10px;
@@ -596,30 +628,6 @@ input.disabled {
         padding: 5px;
         font-weight: bold;
     }
-}
-
-.halte-link, .parkeerplaats-link {
-    background: #466890;
-    color: #fff;
-    display: inline-block;
-    font-weight: bold;
-    margin-top: 0px;
-    min-width: 35px;
-    padding: 2px 5px 0;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.parkeerplaats-link {
-    background: #222;
-}
-
-.capaciteit {
-    border: 1px solid #adadad;
-    border-radius: 4px;
-    color: $zwart;
-    padding: 3px 6px;
-    font-size: 12px;
 }
 
 footer {
