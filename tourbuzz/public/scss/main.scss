@@ -403,6 +403,7 @@ ol.berichten {
     }
 }
 
+/*
 .topselectie {
     position: relative;
     top: 20px;
@@ -422,6 +423,29 @@ ol.berichten {
         color: #fff;
         background: $zwart;
         font-weight: bold;
+    }
+}*/
+
+.main-nav {
+    position: relative;
+    top: 20px;
+    height: 30px;
+    border-bottom: 1px solid #ccc;
+
+    a {
+        color: #555;
+        display: inline-block;
+        padding: 2px 10px;
+        position: relative;
+        margin-right: 3px;
+        margin-bottom: 0px;
+        font-size: 13px;
+        font-weight: bold;
+        &.active {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-bottom-color: #fff;
+        }
     }
 }
 
@@ -499,7 +523,7 @@ table {
     cursor: pointer;
     .meta {
         color: $link-color;
-        text-decoration: underline;
+        //text-decoration: underline;
         font-size: 13px;
     }
 }

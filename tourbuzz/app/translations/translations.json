@@ -124,15 +124,15 @@
     "Advies" : {
       "en" : "Advice"
     },
-    "berichten" : {
-        "en" : "messages",
+    "Berichten" : {
+        "en" : "Messages",
         "de" : "Berichte"
     },
-    "haltes" : {
-        "en" : "stops",
+    "Haltes" : {
+        "en" : "Stops",
         "de" : "Bushaltestellen"
     },
-    "parkeren" : {
+    "Parkeren" : {
         "en" : "parkings",
         "de" : "Parkplatz"
     },

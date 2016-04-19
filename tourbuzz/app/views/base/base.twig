@@ -106,7 +106,7 @@
             {% endif %}
         {% endblock %}
 
-        {% block topselectie %}
+        {#{% block topselectie %}
             <div class="wrapper app-wrapper">
                 <nav class="topselectie">
                     <a href="/{{ Y }}/{{ m }}/{{ d }}" class="grotekaart {% if activetab == 'berichten' %}active{% endif %}">{{ __('berichten') }}</a>
@@ -114,7 +114,18 @@
                     <a href="/parkeren" class="grotekaart {% if activetab == 'parkeren' %}active{% endif %}">{{ __('parkeren') }}</a>
                 </nav>
             </div>
+        {% endblock %}#}
+
+        {% block topselectie %}
+            <div class="wrapper app-wrapper">
+                <nav class="main-nav">
+                    <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{{ __('Berichten') }}</a>
+                    <a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('Haltes') }}</a>
+                    <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('Parkeren') }}</a>
+                </nav>
+            </div>
         {% endblock %}
+
 
         <div class="wrapper app-wrapper">
             {% block slider %}{% endblock %}
