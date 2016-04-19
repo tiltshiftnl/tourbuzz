@@ -60,21 +60,21 @@
                         <a href="/">Tour&nbsp;Buzz</a>
                     </h2>
 
-                    <nav class="taalswitch group">
+                    <nav class="taalswitch group" pico-toggle-class="open">
                         <div class="dropdown group">
 
                             {% if lang == 'nl' %}
-                                <a href="?lang=nl" class="active"><img src="/img/taal/nl.png" class="vlag">nl</a>
-                                <a href="?lang=en"><img src="/img/taal/en.png" class="vlag">en</a>
-                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag">de</a>
+                                <a href="#" class="active"><img src="/img/taal/nl.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
+                                <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
+                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag"></a>
                             {% elseif lang == 'en' %}
-                                <a href="?lang=en" class="active"><img src="/img/taal/en.png" class="vlag">en</a>
-                                <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag">nl</a>
-                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag">de</a>
+                                <a href="#" class="active"><img src="/img/taal/en.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
+                                <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag"></a>
+                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag"></a>
                             {% elseif lang == 'de' %}
-                                <a href="?lang=de" class="active"><img src="/img/taal/de.png" class="vlag">de</a>
-                                <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag">nl</a>
-                                <a href="?lang=en"><img src="/img/taal/en.png" class="vlag">en</a>
+                                <a href="#" class="active"><img src="/img/taal/de.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
+                                <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag"></a>
+                                <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
                             {% endif %}
 
                             {#<a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}><img src="/img/taal/nl.png" class="vlag">nl</a>

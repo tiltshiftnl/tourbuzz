@@ -353,7 +353,7 @@ ol.berichten {
     .dropdown {
         padding: 5px 10px;
         float: right;
-        width: 80px;
+        width: 60px;
         //width: 70px;
         position: absolute;
         top: -2px;
@@ -366,14 +366,18 @@ ol.berichten {
         z-index: 999;
         border-radius: 5px;
     }
-    &:hover {
+    &.open {
         .dropdown {
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.5);
         }
         a {
             display: block;
         }
     }
+}
+
+.down-w {
+    width: 10px;
 }
 
 .vlag {
