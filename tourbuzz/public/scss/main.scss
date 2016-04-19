@@ -48,6 +48,46 @@ article {
     }
 }
 
+.main-header {
+    width: 100%;
+    background: $rood;
+    color: #fff;
+    padding: 15px 5px;
+    @extend .group;
+    .home {
+        @include grid-col(1,4);
+        i {
+            display: inline-block;
+            font-size: 30px;
+        }
+    }
+    h2 {
+        @include grid-col(1,2);
+        text-align: center;
+        font-size: 27px;
+        line-height: 1em;
+        margin: 0;
+        span {
+            display: block;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        i {
+            font-size: 15px;
+            padding: 0 5px;
+            color:rgba(255, 255, 255, 0.5);
+        }
+        a {
+             font-family: sans-serif;
+             font-size: 31px;
+        }
+    }
+}
+
+.buzz-logo {
+    width: 55px;
+}
+
 .dagselectie {
     margin-top:25px;
     .kalender-icon {
@@ -65,6 +105,12 @@ article {
         display: inline-block;
         padding: 0 10px;
     }
+}
+
+h3.dag { // FIXME
+    margin-bottom: 5px;
+    color: #555;
+    text-align: center;
 }
 
 .slider {
@@ -100,20 +146,6 @@ article {
     margin-bottom: $margin-medium;
 }
 
-.huidige-locatie {
-    border: 1px solid #eee;
-    border-radius: 5px;
-    margin: 20px 0;
-    @extend .group;
-    padding: 5px;
-}
-
-h3.dag {
-    margin-bottom: 5px;
-    color: #555;
-    text-align: center;
-}
-
 .buzz {
     h2 {
         font-size: 20px;
@@ -133,29 +165,6 @@ h3.dag {
     margin-bottom: 60px;
 }
 
-.bord {
-    background: #3669ac;
-    padding: 3px 10px;
-    color: #fff;
-    font-weight: bold;
-    display: inline-block;
-    float: left;
-    margin-right: 10px;
-    min-width: 50px;
-    margin-top: 5px;
-    text-align: center;
-    &.groot {
-      font-size: 32px;
-      padding: 15px;
-    }
-}
-
-.afstand {
-    color: #555;
-    display: block;
-    font-size: 12px;
-}
-
 .kaart-link {
     color: #5393b8;
     font-size: 14px;
@@ -173,10 +182,6 @@ h3.dag {
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #ccc;
-}
-
-.buzz-logo {
-    width: 55px;
 }
 
 ol.berichten {
@@ -215,95 +220,15 @@ ol.berichten {
     display: none;
 }
 
-.bestemming {
-    background: #eee;
-    @extend .group;
-    margin-bottom: 5px;
-    a {
-        @extend .group;
-    }
-    h3 {
-        float: left;
-        width: 75%;
-        padding: 5px;
-        margin: 0;
-        line-height: 40px;
-        font-size: 14px;
-        line-height: 1.4em;
-    }
-    img {
-        width: 25%;
-        float: right;
-        display: none;
-    }
-}
-
 .app-wrapper {
     max-width: 600px;
     margin: 0 auto;
-}
-
-.picture-in-picture-wrapper {
-    position: relative;
-}
-
-.picture-in-picture {
-    border: 2px solid #fff;
-    right: 0px;
-    bottom: 5px;
-    position: absolute;
-    width: 140px;
-}
-
-.gerelateerde-haltes,
-.gerelateerde-bestemmingen {
-    margin-bottom: 40px;
-    h3 {
-        font-size: 20px;
-        margin-top: 20px;
-    }
 }
 
 .bestemming-thumbnail {
     float: left;
     margin-right: 15px;
     display: block;
-}
-
-.main-header {
-    width: 100%;
-    background: $rood;
-    color: #fff;
-    padding: 15px 5px;
-    @extend .group;
-    .home {
-        @include grid-col(1,4);
-        i {
-            display: inline-block;
-            font-size: 30px;
-        }
-    }
-    h2 {
-        @include grid-col(1,2);
-        text-align: center;
-        font-size: 27px;
-        line-height: 1em;
-        margin: 0;
-        span {
-            display: block;
-            font-size: 16px;
-            font-weight: normal;
-        }
-        i {
-            font-size: 15px;
-            padding: 0 5px;
-            color:rgba(255, 255, 255, 0.5);
-        }
-        a {
-             font-family: sans-serif;
-             font-size: 31px;
-        }
-    }
 }
 
 .taalswitch {
@@ -479,7 +404,6 @@ table {
        background-color: #aaa;
        border-bottom: 0;
     }
-
 }
 
 .headerdate {
