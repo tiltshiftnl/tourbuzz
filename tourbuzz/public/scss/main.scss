@@ -72,6 +72,10 @@ main {
     }
 }
 
+.owl-pagination {
+    margin-top: 40px;
+}
+
 .extern {
     color: $link-color;
     display: block;
@@ -490,21 +494,6 @@ table {
 
 }
 
-.cruiseschepen, .evenementen, .wegwerkzaamheden {
-    h3 {
-       color: #333;
-       margin-bottom: $margin-small;
-    }
-
-    ul {
-        margin-top: 20px;
-    }
-    li {
-        margin-bottom: 0;
-    }
-    margin-bottom: 20px;
-}
-
 .headerdate {
     display: inline-block;
     cursor: pointer;
@@ -539,6 +528,8 @@ table {
         overflow: auto;
         resize: vertical;
         margin-bottom: 10px;
+        margin-top: 0;
+        display: block;
     }
     select {
         @extend .text-body;
@@ -633,8 +624,9 @@ input.disabled {
             margin-right: 2px;
         }
         a {
-            font-size: 12px;
-            padding: 8px;
+            font-size: 14px;
+            color: #888;
+            padding: 12px;
         }
         a:hover, a.active {
             background-color: #dee2e8;
@@ -661,7 +653,6 @@ input.disabled {
 
 }
 
-
 .flashmessages {
     clear: both;
     @extend .group;
@@ -683,7 +674,6 @@ input.disabled {
     }
 }
 
-
 .halte-link, .parkeerplaats-link {
     background: #466890;
     color: #fff;
@@ -695,6 +685,7 @@ input.disabled {
     text-align: center;
     text-transform: uppercase;
 }
+
 .parkeerplaats-link {
     background: #222;
 }
@@ -715,9 +706,7 @@ input.disabled {
     }
 }
 
-.owl-pagination {
-    margin-top: 40px;
-}
+
 
 .capaciteit {
     border: 1px solid #adadad;
@@ -726,8 +715,6 @@ input.disabled {
     padding: 3px 6px;
     font-size: 12px;
 }
-
-
 
 footer {
     background: #eee;
