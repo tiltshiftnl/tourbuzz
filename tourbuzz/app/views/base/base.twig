@@ -5,9 +5,12 @@
         <meta name="viewport" content="initial-scale=1">
         <meta name="mobile-web-app-capable" content="yes">
 
-        <link rel="image_src" href="/img/tourbuzz_fb_preview.png">
         <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
         <link rel="apple-touch-icon" href="/img/buzz-icon.png">
+
+        {% block meta %}
+        <link rel="image_src" href="/img/tourbuzz_fb_preview.png">
+        <link rel="canonical" href="http://www.tourbuzz.nl">
 
         <title>Tour Buzz</title>
         <meta name="title" content="Tour Buzz">
@@ -18,6 +21,8 @@
         <meta property="og:url" content="http://www.tourbuzz.nl">
         <meta property="og:description" content="Tour Buzz - Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
         <meta property="og:site_name" content="Tour Buzz">
+        <meta property="og:image" content="http://www.tourbuzz.nl/img/tourbuzz_fb_preview.png">
+        {% endblock %}
 
 		<script type="text/javascript" src="//fast.fonts.net/jsapi/7cd4c080-5246-49b1-8f48-530e9d1829a6.js"></script>
 		<link href="//fast.fonts.net/cssapi/7cd4c080-5246-49b1-8f48-530e9d1829a6.css" rel="stylesheet" >
