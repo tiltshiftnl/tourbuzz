@@ -25,7 +25,7 @@ try {
     $res = $guzzle->request('GET', $messagesUrl);
     $messages = json_decode($res->getBody());
     foreach ($messages->messages as $msg) {
-        if ($msg->is_live && preg_match("/((P|p)[0-9]+) niet beschikbaar/", $msg->title, $matches)) {
+        if ($msg->is_live && preg_match("/((P|p)[0-9]{1,2}).* niet beschikbaar/", $msg->title, $matches)) {
             $disabled[$matches[1]] = $matches[1];
         }
     }
