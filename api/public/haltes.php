@@ -5,10 +5,10 @@
 
 require_once("../vendor/autoload.php");
 
-//$sourceUrl = "http://www.amsterdamopendata.nl/files/ivv/touringcar/in_uitstaphaltes.json";
-//$sourceUrl = "http://data.amsterdam.nl/files/ivv/touringcar/in_uitstaphaltes.json";
-$sourceUrl = "http://open.datapunt.amsterdam.nl/ivv/touringcar/in_uitstaphaltes.json";
-$messagesUrl = "http://api.tourbuzz.nl/berichten/" . date("Y/m/d");
+require_once("../config/haltes/config.php");
+if (is_file("../config/haltes/config_local.php")) {
+    require_once("../config/haltes/config_local.php");
+}
 
 $guzzle = new GuzzleHttp\Client();
 
@@ -25,7 +25,7 @@ try {
     $res = $guzzle->request('GET', $messagesUrl);
     $messages = json_decode($res->getBody());
     foreach ($messages->messages as $msg) {
-        if (preg_match("/((H|h)[0-9]+) niet beschikbaar/", $msg->title, $matches)) {
+        if ($msg->is_live && preg_match("/((H|h)[0-9]+) niet beschikbaar/", $msg->title, $matches)) {
             $disabled[$matches[1]] = $matches[1];
         }
     }
