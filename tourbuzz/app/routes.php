@@ -466,7 +466,10 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
 
         // Mail when a new bericht is added successfully.
         if (empty($app->request->post("id"))) {
-            $app->flash('success', 'Bericht toegevoegd');
+            $notes = "";
+            if ( empty($fields['title_en']) ) { $notes .="NOTE: Geen Engelse vertaling. "; }
+            if ( empty($fields['title_de']) ) { $notes .="NOTE: Geen Duitse vertaling. "; }
+            $app->flash('success', 'Bericht toegevoegd. '.$notes);
             sendNewBerichtMail($res['id'], $fields['title']);
         } else if ($app->request->post("submit") === "dupliceren") {
             $app->flash('success', 'Bericht gedupliceerd');
