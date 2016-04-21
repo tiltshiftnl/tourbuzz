@@ -298,6 +298,12 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
     render($data['template'], $data);*/
 });
 
+/**
+ * Overview formats navigatie apparaten
+ */
+$app->get('/downloads', function () use ($app) {
+    render("downloads.twig");
+});
 
 /*****************
 /* Admin Routes
