@@ -71,7 +71,7 @@ table {
     width: 100%;
     background: $rood;
     color: #fff;
-    padding: 15px 5px;
+    padding: 15px 0;
     @extend .group;
     .home {
         @include grid-col(1,4);
@@ -104,11 +104,11 @@ table {
 }
 
 .buzz-logo {
-    width: 55px;
+    min-width: 55px;
+    max-width: 75%;
 }
 
 .dagselectie {
-    margin-top:25px;
     .kalender-icon {
         margin-right: 5px;
         vertical-align: middle;
@@ -143,8 +143,10 @@ h3.dag { // FIXME
 
 .main-nav {
     position: relative;
-    top: 20px;
+    @include grid-col(1,1);
+    //top: 20px;
     height: 30px;
+    margin: 20px 0;
     border-bottom: 1px solid #ccc;
 
     a {
@@ -186,10 +188,6 @@ h3.dag { // FIXME
     }
 }
 
-.owl-pagination {
-    margin-top: 40px;
-}
-
 .extern {
     color: $link-color;
     display: block;
@@ -212,6 +210,7 @@ h3.dag { // FIXME
 /* Berichten */
 
 .buzz {
+    @include grid-col(1,1);
     h2 {
         font-size: 20px;
         margin-top: $margin-medium;
@@ -367,8 +366,8 @@ ol.berichten {
 /* Util */
 
 .app-wrapper { // FIXME: grid
-    max-width: 600px;
-    margin: 0 auto;
+    //max-width: 600px;
+    //margin: 0 auto;
 }
 
 .meta {
@@ -607,6 +606,11 @@ input.disabled {
         }
     }
 
+}
+
+.kaartlink {
+    //float: right;
+    margin: 5px 0;
 }
 
 .feedback {

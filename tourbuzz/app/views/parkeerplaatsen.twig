@@ -17,10 +17,12 @@
 {% endblock %}
 
 {% block main %}
-<main class="wrapper app-wrapper">
+<main class="wrapper">
     <section class="buzz">
 
-        <p style="margin: 25px 0 15px">{{ __('Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven.') }}</p>
+        <article>
+            <p>{{ __('Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven.') }}</p>
+        </article>
 
         <section class="kaartmap wrapper">
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">

@@ -54,7 +54,6 @@
             {% endif %}
 
             {% if record.location is not empty %}
-                <a href="https://maps.google.com?q={{ record.location.lat }},{{ record.location.lng }}" class="kaartlink">Bekijk op Google maps</a>
                 {% if record.include_map is not empty %}
                     <section class="kaartmap wrapper">
                        <img src="{% include 'partials/googlemap.empty.twig' with {'map': record.map} %}" style="width: 100%">
@@ -64,6 +63,7 @@
                             </a>
                         {% endif %}
                     </section>
+                    <a href="https://maps.google.com?q={{ record.location.lat }},{{ record.location.lng }}" class="kaartlink">Bekijk op Google maps</a>
                 {% endif %}
             {% endif %}
 

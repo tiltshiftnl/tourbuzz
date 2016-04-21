@@ -1,7 +1,7 @@
 // Wrapper
 
 .wrapper {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     max-width: 1480px;
     @extend .group;
@@ -15,7 +15,7 @@ html {
 }
 *, *:before, *:after {
     box-sizing: inherit;
-    -moz-box-sizing: inherit;   
+    -moz-box-sizing: inherit;
 }
 
 // Grid cols & rows
@@ -36,7 +36,7 @@ html {
 // Grid overlay
 
 .grid-overlay {
-    width: 100%;    
+    width: 100%;
     pointer-events: none;
     position: fixed;
     z-index: 999;
@@ -44,12 +44,12 @@ html {
         background: rgba(255, 125, 125, 0.4);
         height: 2000px;
         padding-top: 20px;
-    }      
+    }
 }
 
-@for $i from 1 through 24 {   
+@for $i from 1 through 24 {
     .col-1-#{$i} {
-        @include grid-col(1,$i);        
+        @include grid-col(1,$i);
     }
 }
 

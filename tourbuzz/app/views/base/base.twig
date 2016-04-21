@@ -59,13 +59,11 @@
 
         {% block header %}
             <header class="main-header">
-                <div class="app-wrapper">
+                <div class="wrapper">
                     <a href="/" class="home"><img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
                     <h2>
-                        {#<a href="/">Tour&nbsp;Buzz</a>#}
                         <a href="/"><img src="/img/tour-buzz.png" alt="Tour Buzz"></a>
                     </h2>
-
                     <nav class="taalswitch group" pico-toggle-class="open">
                         <div class="dropdown group">
                             {% if lang == 'nl' %}
@@ -99,13 +97,13 @@
         {% endblock %}
 
         {% block topselectie %}
-            <div class="wrapper app-wrapper">
-                <nav class="main-nav">
-                    <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{{ __('Berichten') }}</a>
-                    <a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('Haltes') }}</a>
-                    <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('Parkeren') }}</a>
-                </nav>
-            </div>
+            <nav class="main-nav">
+                <div class="wrapper">
+                        <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{{ __('Berichten') }}</a>
+                        <a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('Haltes') }}</a>
+                        <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('Parkeren') }}</a>
+                </div>
+            </nav>
         {% endblock %}
 
         {% block slider %}{% endblock %}
