@@ -60,14 +60,14 @@
         {% block header %}
             <header class="main-header">
                 <div class="app-wrapper">
-                    <a href="/" class="home">{#<i class="fa fa-bus"></i>#}<img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
+                    <a href="/" class="home"><img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
                     <h2>
-                        <a href="/">Tour&nbsp;Buzz</a>
+                        {#<a href="/">Tour&nbsp;Buzz</a>#}
+                        <a href="/"><img src="/img/tour-buzz.png" alt="Tour Buzz"></a>
                     </h2>
 
                     <nav class="taalswitch group" pico-toggle-class="open">
                         <div class="dropdown group">
-
                             {% if lang == 'nl' %}
                                 <a href="#" class="active"><img src="/img/taal/nl.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
                                 <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
@@ -81,24 +81,11 @@
                                 <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag"></a>
                                 <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
                             {% endif %}
-
-                            {#<a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}><img src="/img/taal/nl.png" class="vlag">nl</a>
-                            <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}><img src="/img/taal/en.png" class="vlag">en</a>
-                            <a href="?lang=de" {% if lang =='de' %}class="active"{% endif %}><img src="/img/taal/de.png" class="vlag">de</a>
-                            #}
                         </div>
                     </nav>
 
-                    {#
-                    <nav class="taal">
-                        <a href="?lang=nl" {% if lang =='nl' %}class="active"{% endif %}>NL</a> |
-                        <a href="?lang=en" {% if lang =='en' %}class="active"{% endif %}>EN</a> |
-                        <a href="?lang=de" {% if lang =='de' %}class="active"{% endif %}>DE</a>
-                    </nav>
-                    #}
                 </div>
             </header>
-
         {% endblock %}
 
         {% block flashmessages %}
@@ -111,16 +98,6 @@
             {% endif %}
         {% endblock %}
 
-        {#{% block topselectie %}
-            <div class="wrapper app-wrapper">
-                <nav class="topselectie">
-                    <a href="/{{ Y }}/{{ m }}/{{ d }}" class="grotekaart {% if activetab == 'berichten' %}active{% endif %}">{{ __('berichten') }}</a>
-                    <a href="/haltes" class="grotekaart {% if activetab == 'haltes' %}active{% endif %}">{{ __('haltes') }}</a>
-                    <a href="/parkeren" class="grotekaart {% if activetab == 'parkeren' %}active{% endif %}">{{ __('parkeren') }}</a>
-                </nav>
-            </div>
-        {% endblock %}#}
-
         {% block topselectie %}
             <div class="wrapper app-wrapper">
                 <nav class="main-nav">
@@ -131,8 +108,7 @@
             </div>
         {% endblock %}
 
-        {% block slider %}
-        {% endblock %}
+        {% block slider %}{% endblock %}
 
         {% block main %}{% endblock %}
 
@@ -143,7 +119,6 @@
                 {% if timestamp is not empty %}
                     <p>{{ __('Laatste wijziging') }}: {{ timestamp|date('d-m-Y') }}</p>
                 {% endif %}
-                {#<p class="debug">API : {{ api }} </p>#}
 
                 <center style="margin-top: 10px"><div class="fb-like" data-share="false" data-width="240" data-show-faces="false"></div></center>
 
@@ -182,7 +157,7 @@
               version    : 'v2.6'
             });
           };
-        
+
           (function(d, s, id){
              var js, fjs = d.getElementsByTagName(s)[0];
              if (d.getElementById(id)) {return;}

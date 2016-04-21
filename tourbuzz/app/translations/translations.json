@@ -143,6 +143,18 @@
         "en" : "More info",
         "de" : "Mehr info"
     },
+    "Is deze informatie nuttig?" : {
+        "en" : "Was this helpful?",
+        "de" : "War dies hilfreich?"
+    },
+    "Ja" : {
+        "en" : "Yes",
+        "de" : "Ja"
+    },
+    "Nee" : {
+        "en" : "No",
+        "de" : "Nein"
+    },
     "Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan." : {
         "en" : "See below for locations of stops where you can drop off and pick up your passengers. If a stop is occupied, please continue to the next one on your route. You are allowed a maximum time of 10 minutes on these stops."
     },

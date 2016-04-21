@@ -609,6 +609,57 @@ input.disabled {
 
 }
 
+.feedback {
+    //background: #eee;
+    //padding: 10px;
+    margin: 20px 0;
+    h4 {
+        //color: #888;
+    }
+    a {
+        border: 1px solid #eee;
+        border-radius: 5px;
+        display: inline-block;
+        margin-right: 10px;
+        padding: 5px 10px;
+        font-size: 18px;
+        font-weight: bold;
+        position: relative;
+        min-width: 90px;
+        text-transform: lowercase;
+        background: #fff;
+        border-bottom: 2px solid #ccc;
+        @include transition(0.5);
+        &.ja:hover {
+            color: green;
+            background: #eeffee;
+            border-bottom-color: #88cc88;
+        }
+        &.nee:hover {
+            color: red;
+            background: #ffeeee;
+            border-bottom-color: #cc8888;
+        }
+    }
+    .icon {
+        width: 32px;
+        height: 29px;
+        margin-right: 8px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .thumbs-up {
+        background-image: url(/img/thumbs-up-o.png);
+        position: relative;
+        top: -2px;
+    }
+    .thumbs-down {
+        background-image: url(/img/thumbs-down-o.png);
+        position: relative;
+        top: 2px;
+    }
+}
+
 .flashmessages {
     clear: both;
     @extend .group;
