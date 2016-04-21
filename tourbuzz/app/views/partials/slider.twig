@@ -66,7 +66,13 @@
                     </section>
                 {% endif %}
             {% endif %}
-    
+
+            <section class="feedback">
+                <h4>{{ __('Is deze informatie nuttig?') }}</h4>
+                <a href="#" class="ja"><i class="icon thumbs-up"></i>{{ __('Ja') }}</a>
+                <a href="#" class="nee"><i class="icon thumbs-down"></i>{{ __('Nee') }}</a>
+            </section>
+
             <div class="fb-share-button" data-layout="button" data-mobile-iframe="true"></div>
 
         </article>
