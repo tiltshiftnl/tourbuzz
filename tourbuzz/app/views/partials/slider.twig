@@ -78,4 +78,22 @@
         </article>
         {% endfor %}
     </div>
+    <script>
+        $(".feedback a").click(function (e) {
+            e.preventDefault();
+            var $bericht = $(this).closest("*[data-id]");
+            var id = $bericht.data("id");
+            var titel = $bericht.data("titel");
+            var nuttig = $(this).hasClass("ja");
+            console.log(id, titel, nuttig);
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Nuttig',
+              eventAction: nuttig ? 'positief' : 'negatief',
+              eventLabel: titel + ' (id: ' + id + ')'
+            });
+            $(".feedback a").removeClass("active");
+            $(this).addClass("active");
+        });
+    </script>
 </section>
