@@ -1,0 +1,76 @@
+{% extends 'base/base.twig' %}
+
+{% block meta %}
+    <link rel="image_src" href="{{ bericht.image_url }}">
+    <link rel="canonical" href="http://www.tourbuzz.nl/bericht/{{ bericht.id }}">
+
+    <title>{{ bericht.title }}</title>
+    <meta name="title" content="{{ bericht.title }}">
+    <meta name="description" content="{{ bericht.body }}">
+    <meta name="keywords" content="amsterdam, touringcar">
+
+    <meta property="og:title" content="{{ bericht.title }}">
+    <meta property="og:url" content="http://www.tourbuzz.nl/bericht/{{ bericht.id }}">
+    <meta property="og:description" content="{{ bericht.body }}">
+    <meta property="og:site_name" content="Tour Buzz">
+    <meta property="og:image" content="{{ bericht.image_url }}">
+{% endblock %}
+
+{% block topselectie %}{# hidden #}{% endblock %}
+
+{% block main %}
+<main class="wrapper">
+    <section class="slider">
+        {% set title %}
+            {% if lang == 'nl' %}{{ bericht.title }}{% endif %}
+
+            {% if lang == 'en' %}
+                {% if bericht.title_en %}{{ bericht.title_en }}
+                {% else %}{{ bericht.title }} <span class="meta">(translation unavailable)</span>
+                {% endif %}
+            {% endif %}
+
+            {% if lang == 'de' %}
+                {% if bericht.title_de %}{{ bericht.title_de }}
+                {% else %}{{ bericht.title_en }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+                {% endif %}
+            {% endif %}
+        {% endset %}
+
+        {% set body %}
+            {% if lang == 'nl' %}{{ insertlinks(bericht.body)|raw }}{% endif %}
+            {% if lang == 'en' %}{{ insertlinks(bericht.body_en)|raw }}{% endif %}
+            {% if lang == 'de' %}{{ insertlinks(bericht.body_de)|raw }}{% endif %}
+        {% endset %}
+
+        {% set advice %}
+            {% if lang == 'nl' %}{{ insertlinks(bericht.advice)|raw }}{% endif %}
+            {% if lang == 'en' %}{{ insertlinks(bericht.advice_en)|raw }}{% endif %}
+            {% if lang == 'de' %}{{ insertlinks(bericht.body_de)|raw }}{% endif %}
+        {% endset %}
+
+        <article data-id="{{ bericht.id }}" data-titel="{{ bericht.title }}">
+            <h3>
+                {{ bericht.title }}
+            </h3>
+            <p>{{ bericht.body|raw }}</p>
+            {% if bericht.advice|trim is not empty %}
+                <section class="advies">
+                    <h4>{{ __('Advies') }}</h4>
+                    <p>{{ bericht.advice|raw }}</p>
+                </section>
+            {% endif %}
+
+            {% if bericht.link %}
+                <h4>{{ __('Meer informatie') }}</h4>
+                <a href="{{ bericht.link }}" class="extern" target="_blank">{{ bericht.link }}</a>
+            {% endif %}
+
+            {% if bericht.image_url is not empty %}
+                <img src="{{ bericht.image_url }}/?width=800&method=fit">
+            {% endif %}
+
+            <p><a href="/">{{ __('Meer nieuws') }}</a></p>
+    </section>
+</main>
+{% endblock %}

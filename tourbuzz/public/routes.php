@@ -46,7 +46,7 @@ $app->get('/robots.txt', function () use ($app) {
  * Render wrapper om debug info te genereren.
  * FIXME Is er een andere manier om dit te doen?
  */
-function render($template, $data = []) {
+function render($template, $data = [], $headers = []) {
     global $app;
     $data['current'] = $app->router()->getCurrentRoute()->getName();
 
@@ -92,6 +92,11 @@ function render($template, $data = []) {
                 die;
         }
     }
+
+    foreach ($headers as $key => $value) {
+        $app->response->headers->set($key, $value);
+    }
+
     $app->render($template, $data);
 }
 

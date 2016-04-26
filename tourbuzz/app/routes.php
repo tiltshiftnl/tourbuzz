@@ -693,3 +693,44 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
     ];
     render($data['template'], $data);
 });
+
+/**
+ * Enkel bericht
+ */
+$app->get('/bericht/:id', function ($id) use ($app) {
+
+    $res = $app->api->get("berichten/{$id}");
+
+    $data = [
+        "bericht" => $res['message']
+    ];
+
+    render("bericht.twig", $data);
+});
+
+/**
+ * RSS
+ */
+$app->get('/rss', function () use ($app) {
+
+    list($Y, $m, $d) = explode("-", date("Y-m-d"));
+    $dateurlstring = "{$Y}/{$m}/{$d}";
+
+    $res = $app->api->get("berichten/{$dateurlstring}");
+
+    $berichten = array_filter($res['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
+
+    $data = [
+        "berichten" => $berichten,
+        "datum" => date(DATE_ISO8601),
+        "dateurlstring" => $dateurlstring,
+    ];
+
+    render("rss.twig", $data, ["Content-type" => "application/xml"]);
+});
