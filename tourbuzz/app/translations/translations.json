@@ -2,87 +2,108 @@
   "translations" : {
     "maandag": {
     	"en": "monday",
+        "de": "Montag",
     	"fr": "Lu"
     },
     "dinsdag": {
     	"en": "tuesday",
+        "de": "Dienstag",
     	"fr": "Ma"
     },
     "woensdag": {
     	"en": "wednesday",
+        "de": "Mittwoch",
     	"fr": "Me"
     },
     "donderdag": {
     	"en": "thursday",
+        "de": "Donnerstag",
     	"fr": "Jeu"
     },
     "vrijdag": {
     	"en": "friday",
+        "de": "Freitag",
     	"fr": "Ve"
     },
     "zaterdag": {
     	"en": "saturday",
+        "de": "Samstag",
     	"fr": "Sa"
     },
     "zondag": {
     	"en": "sunday",
+        "de": "Sonntag",
     	"fr": "mD"
     },
     "januari" : {
-      "en" : "january",
-      "fr" : "jan"
+        "en" : "january",
+        "de" : "Januar",
+        "fr" : "jan"
     },
     "februari" : {
-      "en" : "february",
-      "fr" : "fév"
+        "en" : "february",
+        "de" : "Februar",
+        "fr" : "fév"
     },
     "maart" : {
-      "en" : "march",
-      "fr" : "mar"
+        "en" : "march",
+        "de" : "M�rz",
+        "fr" : "mar"
     },
     "april" : {
-      "en" : "april",
-      "fr" : "avr"
+        "en" : "april",
+        "de" : "April",
+        "fr" : "avr"
     },
     "mei" : {
-      "en" : "may",
-      "fr" : "mai"
+        "en" : "may",
+        "de" : "Mai",
+        "fr" : "mai"
     },
     "juni" : {
-      "en" : "june",
-      "fr" : "jun"
+        "en" : "june",
+        "de" : "Juni",
+        "fr" : "jun"
     },
     "juli" : {
       "en" : "july",
+      "de" : "Juli",
       "fr" : "jul"
     },
     "augustus" : {
-      "en" : "august",
-      "fr" : "aoû"
+        "en" : "august",
+        "de" : "August",
+        "fr" : "aoû"
     },
     "september" : {
-      "en" : "september",
-      "fr" : "sep"
+        "en" : "september",
+        "de" : "September",
+        "fr" : "sep"
     },
     "oktober" : {
-      "en" : "october",
-      "fr" : "oct"
+        "en" : "october",
+        "de" : "Oktober",
+        "fr" : "oct"
     },
     "november" : {
-      "en" : "november",
-      "fr" : "nov"
+        "en" : "november",
+        "de" : "November",
+        "fr" : "nov"
     },
     "december" : {
-      "en" : "december",
-      "fr" : "déc"
+        "en" : "december",
+        "de" : "Dezember",
+        "fr" : "déc"
     },
     "Meer info" : {
-      "en" : "More info",
-      "fr" : "Plus d'info"
+        "en" : "More info",
+        "de" : "Mehr Informationen",
+        "fr" : "Plus d'info"
     },
     "Laatste wijziging" : {
-      "en" : "Last updated",
-      "fr" : "dernière mise a jour"
+        "en" : "Last updated",
+        "fr" : "dernière mise a jou",
+        "de" : "Letzte Änderung"
     },
     "kies andere dag" : {
       "en" : "pick a day",
@@ -137,7 +158,8 @@
         "de" : "Parkplatz"
     },
     "plaatsen" : {
-        "en" : "spots"
+        "en" : "spots",
+        "de" : "Plätze"
     },
     "Meer informatie" : {
         "en" : "More info",
@@ -160,13 +182,16 @@
         "de" : "Nein"
     },
     "Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan." : {
-        "en" : "See below for locations of stops where you can drop off and pick up your passengers. If a stop is occupied, please continue to the next one on your route. You are allowed a maximum time of 10 minutes on these stops."
+        "en" : "See below for locations of stops where you can drop off and pick up your passengers. If a stop is occupied, please continue to the next one on your route. You are allowed a maximum time of 10 minutes on these stops.",
+        "de" : "An diesen Stellen können die Passagiere an Bord und von Bord gehen.In einem belebten Bahnhof, fahren Sie mit dem nächsten auf der Reiseroute. Hinweis: Stopp bis zu 10 min."
     },
     "Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven." : {
-        "en" : "You can park touringcars on these locations. For prices, see below the map."
+        "en" : "You can park touringcars on these locations. For prices, see below the map.",
+        "de" : "An diesen Stellen können Sie Ihren Bus parken. Unter der Karte sind die Preise."
     },
     "Feedback of vragen kunt u sturen naar" : {
-        "en" : "For questions and feedback please contact"
+        "en" : "For questions and feedback please contact",
+        "de" : "Bei Fragen und Anregungen wenden Sie sich bitte an"
     }
   }
 }
