@@ -145,6 +145,7 @@ h3.dag { // FIXME
     position: relative;
     @include grid-col(1,1);
     //top: 20px;
+    float: none;
     height: 30px;
     margin: 20px 0;
     border-bottom: 1px solid #ccc;
