@@ -70,20 +70,20 @@ function locationItemsToMap($items, $mapOptions, $filter = true) {
     }, $items);
 
     // Remove rel_loc for points outside of the map.
-
-
-    /*$items = array_map(function ($item) {
-        if (empty($item['rel_loc'])) {
+    if ($filter) {
+        $items = array_map(function ($item) {
+            if (empty($item['rel_loc'])) {
+                return $item;
+            }
+            if (($item['rel_loc']['dX'] > 100) ||
+                ($item['rel_loc']['dX'] < 0) ||
+                ($item['rel_loc']['dY'] > 100) ||
+                ($item['rel_loc']['dY'] < 0)) {
+                unset($item['rel_loc']);
+            }
             return $item;
-        }
-        if (($item['rel_loc']['dX'] > 100) ||
-            ($item['rel_loc']['dX'] < 0) ||
-            ($item['rel_loc']['dY'] > 100) ||
-            ($item['rel_loc']['dY'] < 0)) {
-            unset($item['rel_loc']);
-        }
-        return $item;
-    }, $items);*/
+        }, $items);
+    }
 
     return $items;
 }
@@ -145,7 +145,7 @@ $app->get('/haltes', function () use ($app, $apiRoot) {
         "center" => $center,
     ];
 
-    $haltes = locationItemsToMap($haltes, $mapOptions);
+    $haltes = locationItemsToMap($haltes, $mapOptions, false);
 
     $data = [
         "lang" => $_SESSION['lang'],
