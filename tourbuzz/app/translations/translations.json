@@ -1,5 +1,5 @@
 {
-  "translations" : {
+"translations" : {
     "maandag": {
     	"en": "monday",
         "de": "Montag",
@@ -47,7 +47,7 @@
     },
     "maart" : {
         "en" : "march",
-        "de" : "M�rz",
+        "de" : "März",
         "fr" : "mar"
     },
     "april" : {
@@ -66,9 +66,9 @@
         "fr" : "jun"
     },
     "juli" : {
-      "en" : "july",
-      "de" : "Juli",
-      "fr" : "jul"
+        "en" : "july",
+        "de" : "Juli",
+        "fr" : "jul"
     },
     "augustus" : {
         "en" : "august",
@@ -102,48 +102,49 @@
     },
     "Laatste wijziging" : {
         "en" : "Last updated",
-        "fr" : "dernière mise a jou",
-        "de" : "Letzte Änderung"
+        "de" : "Letzte Ănderung",
+        "fr" : "dernière mise a jour"
     },
     "kies andere dag" : {
-      "en" : "pick a day",
-      "de" : "Wählen Sie einen Tag"
+        "en" : "pick a day",
+        "de" : "Wählen Sie einen Tag"
     },
     "Vandaag" : {
-      "en" : "Today",
-      "de" : "Heute",
-      "fr" : "Aujourd'hui"
+        "en" : "Today",
+        "de" : "Heute",
+        "fr" : "Aujourd'hui"
     },
     "Kies een bestemming" : {
-      "en" : "Choose your destination",
-      "fr" : "Choisissez votre destination"
+        "en" : "Choose your destination",
+        "fr" : "Choisissez votre destination"
     },
     "Kies een andere bestemming" : {
-      "en" : "Choose a different destination",
-      "fr" : "Choisissez une autre destination"
+        "en" : "Choose a different destination",
+        "fr" : "Choisissez une autre destination"
     },
     "Toon op kaart" : {
-      "en" : "Show on map",
-      "fr" : "Montrer sur la carte"
+        "en" : "Show on map",
+        "fr" : "Montrer sur la carte"
     },
     "Alternatieve haltes" : {
-      "en" : "Alternative stops",
-      "fr" : "Alternatif arrêt"
+        "en" : "Alternative stops",
+        "fr" : "Alternatif arrêt"
     },
     "Haltes in de buurt" : {
-      "en" : "Nearby stops",
-      "fr" : "Arrêts à proximité"
+        "en" : "Nearby stops",
+        "fr" : "Arrêts à proximité"
     },
     "Afstand" : {
-      "en" : "Distance",
-      "fr" : "Distance"
+        "en" : "Distance",
+        "fr" : "Distance"
     },
     "Bestemmingen in de buurt" : {
-      "en" : "Nearby destinations",
-      "fr" : "Les destinations proches"
+        "en" : "Nearby destinations",
+        "fr" : "Les destinations proches"
     },
     "Advies" : {
-      "en" : "Advice"
+      "en" : "Advice",
+      "de" : "Hinweis"
     },
     "Berichten" : {
         "en" : "Messages",
@@ -165,13 +166,17 @@
         "en" : "More info",
         "de" : "Mehr info"
     },
-    "Meer nieuws": {
-        "en": "More news",
-        "de": "Mehr News"
+    "Bekijk op Google maps" : {
+        "en" : "View on Google maps",
+        "de" : "Auf Google Maps"
     },
     "Is deze informatie nuttig?" : {
         "en" : "Was this helpful?",
         "de" : "War dies hilfreich?"
+    },
+    "niet beschikbaar" : {
+        "en" : "not available",
+        "de" : "nicht nutzbar"
     },
     "Ja" : {
         "en" : "Yes",
@@ -183,7 +188,7 @@
     },
     "Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan." : {
         "en" : "See below for locations of stops where you can drop off and pick up your passengers. If a stop is occupied, please continue to the next one on your route. You are allowed a maximum time of 10 minutes on these stops.",
-        "de" : "An diesen Stellen können die Passagiere an Bord und von Bord gehen.In einem belebten Bahnhof, fahren Sie mit dem nächsten auf der Reiseroute. Hinweis: Stopp bis zu 10 min."
+        "de" : "An diesen Stellen können die Passagiere an Bord und von Bord gehen. In einem belebten Bahnhof, fahren Sie mit dem nächsten auf der Reiseroute. Hinweis: Stopp bis zu 10 min."
     },
     "Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven." : {
         "en" : "You can park touringcars on these locations. For prices, see below the map.",
