@@ -106,13 +106,20 @@ table {
 .adam-logo {
     display: block;
     width: 35%;
+    max-width: 190px;
     padding-left: 10px;
     margin-bottom: 20px;
 }
 
 .buzz-logo {
+    width: 100%;
     min-width: 55px;
-    max-width: 75%;
+}
+
+.title-logo {
+    width: 100%;
+    min-width: 160px;
+    max-width: 270px;
 }
 
 .dagselectie {
