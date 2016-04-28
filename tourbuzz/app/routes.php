@@ -70,7 +70,9 @@ function locationItemsToMap($items, $mapOptions, $filter = true) {
     }, $items);
 
     // Remove rel_loc for points outside of the map.
-    $items = array_map(function ($item) {
+
+
+    /*$items = array_map(function ($item) {
         if (empty($item['rel_loc'])) {
             return $item;
         }
@@ -81,7 +83,7 @@ function locationItemsToMap($items, $mapOptions, $filter = true) {
             unset($item['rel_loc']);
         }
         return $item;
-    }, $items);
+    }, $items);*/
 
     return $items;
 }
