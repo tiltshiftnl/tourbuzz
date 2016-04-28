@@ -18,10 +18,38 @@ $margin-small: 10px;
     //font-family: "Avenir LT W01_85 Heavy1475544", arial,sans-serif;
     font-size: 16px;
     line-height: 1.4em;
+    @extend .avenir-55-roman;
 }
 
 .p-text {
     margin-bottom: $margin-medium;
+}
+
+/*
+
+font-family:'Avenir LT W01_55 Roman1475520';
+font-family:'Avenir LT W01_55 Obliqu1475526';
+font-family:'Avenir LT W01_85 Heavy1475544';
+font-family:'Avenir LT W01_85 Heavy_1475550';
+font-family:'Avenir LT W01_95 Black1475556';
+font-family:'Avenir LT W01_95 Black_1475562';
+
+
+    Avenir 55 Roman
+    Avenir 55 Roman Oblique
+    Avenir 85 Heavy
+    Avenir 85 Heavy Oblique
+    Avenir 95 Black
+    Avenir 95 Black Oblique
+
+*/
+
+.avenir-55-roman {
+    font-family:'Avenir LT W01_55 Roman1475520';
+}
+
+.avenir-55-roman-oblique {
+    font-family:'Avenir LT W01_55 Obliqu1475526';
 }
 
 .article-text {

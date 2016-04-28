@@ -620,6 +620,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "timestamp" => $res['_timestamp'],
         "center" => $center, //FIXME Use $mapOptions in template and remove this.
         "map" => $mapOptions,
+        "adamlogo" => true,
         "template" => "home.twig",
     ];
     render($data['template'], $data);

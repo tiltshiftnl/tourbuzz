@@ -29,6 +29,7 @@
 
         <!--<link href="/favicon.ico" rel="icon" type="image/x-icon">-->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//fast.fonts.net/cssapi/7cd4c080-5246-49b1-8f48-530e9d1829a6.css">
         <link rel="stylesheet" href="/css/scss/main.scss">
         <link rel="stylesheet" href="/js/owl-carousel/owl.carousel.css">
         <link rel="stylesheet" href="/js/owl-carousel/owl.theme.css">
@@ -60,9 +61,10 @@
         {% block header %}
             <header class="main-header">
                 <div class="wrapper">
+                    {% if adamlogo %}<img src="/img/adam-logo.png" class="adam-logo">{% endif %}
                     <a href="/" class="home"><img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
                     <h2>
-                        <a href="/"><img src="/img/tour-buzz.png" alt="Tour Buzz"></a>
+                        <a href="/"><img src="/img/tour-buzz.png" alt="Tour Buzz" class="title-logo"></a>
                     </h2>
                     <nav class="taalswitch group" pico-toggle-class="open">
                         <div class="dropdown group">
@@ -99,7 +101,7 @@
         {% block topselectie %}
             <nav class="main-nav">
                 <div class="wrapper">
-                        <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{{ __('Berichten') }}</a>
+                        <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{#<img src="/img/buzz-icon-g.png" class="buzz-icon">#}{{ __('Berichten') }}</a>
                         <a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('Haltes') }}</a>
                         <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('Parkeren') }}</a>
                 </div>
