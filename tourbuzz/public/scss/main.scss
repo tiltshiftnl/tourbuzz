@@ -321,6 +321,10 @@ ol.berichten {
     color: $zwart;
     padding: 3px 6px;
     font-size: 12px;
+    &.nietbeschikbaar {
+       color: red;
+       border-color: red;
+    }
 }
 
 /* Taalswitch */
