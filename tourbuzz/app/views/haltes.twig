@@ -29,7 +29,18 @@
             <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
             {% for halte in haltes %}
                 {% if halte.rel_loc is not empty %}
-                    <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%; {% if not halte.beschikbaar %}opacity: 0.5{% endif %}">
+
+                    {% if halte.rel_loc.dY < 0 %}{% set dy %}0{% endset %}
+                    {% elseif halte.rel_loc.dY > 100 %}{% set dy %}100{% endset %}
+                    {% else %}{% set dy %}{{ halte.rel_loc.dY }}{% endset %}
+                    {% endif %}
+
+                    {% if halte.rel_loc.dX < 0 %}{% set dx %}0{% endset %}
+                    {% elseif halte.rel_loc.dX > 100 %}{% set dx %}100{% endset %}
+                    {% else %}{% set dx %}{{ halte.rel_loc.dX }}{% endset %}
+                    {% endif %}
+
+                    <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ dy }}%; left: {{ dx }}%; {% if not halte.beschikbaar %}opacity: 0.5{% endif %}">
                         <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h">
                     </a>
                 {% endif %}
@@ -46,7 +57,7 @@
                     {% if halte.beschikbaar %}
                         <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
                     {% else %}
-                        <span class="capaciteit">{{ __('niet beschikbaar') }}</span><br>
+                        <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
                     {% endif %}
                     <span class="meta">{{ halte.locatie }}</span>
                 </div>

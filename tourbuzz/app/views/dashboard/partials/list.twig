@@ -6,8 +6,8 @@
             <th>&nbsp;</th>
             <th>Nr</th>
             <th>Headline</th>
-            <th>Van</th>
-            <th>T/m</th>
+            <th style="width: 15%">Van</th>
+            <th style="width: 15%">T/m</th>
         </tr>
         {% for record in berichten if record.status == "active" %}
         <tr {% if not record.is_live %}class="draft"{% endif %}>
@@ -25,8 +25,8 @@
             <th>&nbsp;</th>
             <th>Nr</th>
             <th>Headline</th>
-            <th>Van</th>
-            <th>T/m</th>
+            <th style="width: 15%">Van</th>
+            <th style="width: 15%">T/m</th>
         </tr>
         {% for record in berichten if record.status == "scheduled" %}
         <tr {% if not record.is_live %}class="draft"{% endif %}>
@@ -44,8 +44,8 @@
             <th>&nbsp;</th>
             <th>Nr</th>
             <th>Headline</th>
-            <th>Van</th>
-            <th>T/m</th>
+            <th style="width: 15%">Van</th>
+            <th style="width: 15%">T/m</th>
         </tr>
         {% for record in berichten if record.status == "archived" %}
         <tr {% if not record.is_live %}class="draft"{% endif %}>
