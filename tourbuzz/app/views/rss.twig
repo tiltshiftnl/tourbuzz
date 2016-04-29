@@ -4,13 +4,13 @@
         <link>http://www.tourbuzz.nl</link>
         <description>Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.</description>
         <language>nl-nl</language>
-        <lastBuildDate>{{ datum }}</lastBuildDate>
+        <lastBuildDate>{{ datetime }}</lastBuildDate>
         {% for bericht in berichten %}
         <item>
             <title>{{ bericht.title }}</title>
             <link>http://www.tourbuzz.nl/bericht/{{ bericht.id }}</link>
-            <guid>{{ bericht.id }}</guid>
-            <pubDate>{{ bericht.startdate }}T00:00:00+0200</pubDate>
+            <guid>{{ bericht.id }}{{ dateCode }}</guid>
+            <pubDate>{{ pubDate }}</pubDate>
             <author>Tour Buzz</author>
             <description>{{ bericht.body }}</description>
             <content:encoded>

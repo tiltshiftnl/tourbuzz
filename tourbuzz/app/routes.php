@@ -731,8 +731,10 @@ $app->get('/rss', function () use ($app) {
 
     $data = [
         "berichten" => $berichten,
-        "datum" => date(DATE_ISO8601),
         "dateurlstring" => $dateurlstring,
+        "datetime" => date(DATE_ISO8601),
+        "pubDate" => date(DATE_ISO8601, strtotime(date("Y-m-d"))),
+        "dateCode" => date("Ymd"),
     ];
 
     render("rss.twig", $data, ["Content-type" => "application/xml"]);
