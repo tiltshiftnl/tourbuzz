@@ -85,15 +85,13 @@
             var id = $bericht.data("id");
             var titel = $bericht.data("titel");
             var nuttig = $(this).hasClass("ja");
-            console.log(id, titel, nuttig);
             ga('send', {
               hitType: 'event',
               eventCategory: 'Nuttig',
               eventAction: nuttig ? 'positief' : 'negatief',
               eventLabel: titel + ' (id: ' + id + ')'
             });
-            $(".feedback a").removeClass("active");
-            $(this).addClass("active");
+            $(this).closest(".feedback").html("<h4>{{ __("Bedankt voor uw feedback.") }}</h4>");
         });
     </script>
 </section>

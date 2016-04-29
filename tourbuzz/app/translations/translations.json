@@ -197,6 +197,10 @@
     "Feedback of vragen kunt u sturen naar" : {
         "en" : "For questions and feedback please contact",
         "de" : "Bei Fragen und Anregungen wenden Sie sich bitte an"
+    },
+    "Bedankt voor uw feedback." : {
+        "en" : "Thank you for your feedback.",
+        "de" : "Vielen Dank für Ihr Feedback."
     }
   }
 }
