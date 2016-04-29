@@ -8,7 +8,7 @@
         {% for bericht in berichten %}
         <item>
             <title>{{ bericht.title }}</title>
-            <link>http://www.tourbuzz.nl/bericht/{{ bericht.id }}</link>
+            <link>http://www.tourbuzz.nl/bericht/{{ bericht.id }}#{{ dateCode }}</link>
             <guid>{{ bericht.id }}{{ dateCode }}</guid>
             <pubDate>{{ pubDate }}</pubDate>
             <author>Tour Buzz</author>
@@ -25,18 +25,22 @@
                         <body>
                             <article>
                                 <header>
+                                    {% if bericht.image_url is not empty %}
                                     <figure>
                                         <img src="{{ bericht.image_url }}" />
-                                        <figcaption>{{ bericht.advice }}</figcaption>
+                                        <figcaption>{{ bericht.title }}</figcaption>
                                     </figure>
+                                    {% endif %}
                                     <h1>{{ bericht.title }}</h1>
                                 </header>
+                                {% if bericht.image_url is not empty %}
                                 <figure>
                                     <img src="{{ bericht.image_url }}" class="no-margin"/>
                                     <figcaption class="op-left op-large">
                                         <h1>{{ bericht.title }}</h1>
                                     </figcaption>
                                 </figure>
+                                {% endif %}
                                 <p>
                                     {{ bericht.body }}
                                 </p>
