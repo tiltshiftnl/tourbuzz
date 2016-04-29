@@ -145,7 +145,7 @@ $app->get('/haltes', function () use ($app, $apiRoot) {
         "center" => $center,
     ];
 
-    $haltes = locationItemsToMap($haltes, $mapOptions, false);
+    $haltes = locationItemsToMap($haltes, $mapOptions, true);
 
     $data = [
         "lang" => $_SESSION['lang'],
