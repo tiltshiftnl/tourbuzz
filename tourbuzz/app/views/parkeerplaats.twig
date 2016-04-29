@@ -9,7 +9,7 @@
         {% if record.beschikbaar %}
             <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span>
         {% else %}
-            <span class="capaciteit">{{ __('niet beschikbaar') }}</span>
+            <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span>
         {% endif %}
         <p class="meta">{{ record._origineel.Bijzonderheden }}</p>
         <section class="kaartmap wrapper">
