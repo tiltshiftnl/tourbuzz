@@ -22,4 +22,3 @@ Work in progress
 Work in progress
 
 crontab -l
-password file for facebook token
