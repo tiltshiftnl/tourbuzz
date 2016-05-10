@@ -201,6 +201,10 @@
     "Bedankt voor uw feedback." : {
         "en" : "Thank you for your feedback.",
         "de" : "Vielen Dank für Ihr Feedback."
+    },
+    "Download bestanden voor GPS navigatie" : {
+        "en" : "Download GPS navigation files",
+        "de" : "Download GPS navigation files"
     }
   }
 }

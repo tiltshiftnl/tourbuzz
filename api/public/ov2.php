@@ -35,7 +35,7 @@ $rs = json_decode($json);
 foreach ($rs->haltes as $halte) {
         //$halte->naam = str_replace(",", "/", $halte->naam);
         //echo "{$halte->coordinaten->lng},\t{$halte->coordinaten->lat},\t{$halte->haltenummer},\thalte\n";
-	$poiFile->add_POI($halte->coordinaten->lat, $halte->coordinaten->lng, $halte->haltenummer);
+	$poiFile->add_POI($halte->location->lat, $halte->location->lng, $halte->haltenummer);
 }
 
 // PARKEERPLAATSEN
@@ -45,16 +45,7 @@ foreach ($rs->parkeerplaatsen as $parkeerplaats) {
         if (!$parkeerplaats->naam) $parkeerplaats->naam = $parkeerplaats->nummer;
         //$parkeerplaats->naam = str_replace(",", "/", $parkeerplaats->naam);
         //echo "{$parkeerplaats->coordinaten->lng},\t{$parkeerplaats->coordinaten->lat},\t{$parkeerplaats->naam},\tparkeerplaats\n";
-	$poiFile->add_POI($parkeerplaats->coordinaten->lat, $parkeerplaats->coordinaten->lng, $parkeerplaats->naam);
-}
-
-// ATTRACTIES
-$json = file_get_contents("http://api.tourbuzz.nl/attracties/");
-$rs = json_decode($json);
-foreach ($rs->attracties as $attractie) {
-        //$attractie->naam = str_replace(",", "/", $attractie->naam);
-        //echo "{$attractie->coordinaten->lng},\t{$attractie->coordinaten->lat},\t{$attractie->naam},\tattractie\n";
-	$poiFile->add_POI($attractie->coordinaten->lat, $attractie->coordinaten->lng, $attractie->naam);
+	$poiFile->add_POI($parkeerplaats->location->lat, $parkeerplaats->location->lng, $parkeerplaats->naam);
 }
 
 setHeaders($poiFile->filename);

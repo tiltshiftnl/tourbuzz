@@ -19,7 +19,7 @@ echo json_encode([
 			"uri" => "http://api.tourbuzz.nl/haltes/"
 		],
 		"parkeerplaatsen" => [
-			"origineel" => "http://www.fixxx.nl/parkeerplaatsen/",
+			"origineel" => "http://open.datapunt.amsterdam.nl/ivv/touringcar/parkeerplaatsen.json",
 			"uri" => "http://api.tourbuzz.nl/parkeerplaatsen/"
 		],
 		"poi" => [

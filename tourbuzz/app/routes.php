@@ -1,21 +1,23 @@
 <?php
 
+
 require_once("config/config.php");
 $localConfigFilePath = __DIR__ . "/config/config_local.php";
 if (file_exists($localConfigFilePath)) {
 	require_once($localConfigFilePath);
 }
 
+
 require_once("ApiClient.php");
 
+
 $app->container->singleton('api', function () use ($apiRoot) {
-  return new ApiClient($apiRoot);
+    return new ApiClient($apiRoot);
 });
 
-require_once("distance.php");
 
 /**
- *
+ * Sends an e-mail about a newly created message (bericht).
  */
 function sendNewBerichtMail($berichtId, $berichtTitle) {
     global $mailTo, $buzzProc, $buzzUri;
@@ -30,8 +32,10 @@ function sendNewBerichtMail($berichtId, $berichtTitle) {
    );
 }
 
+
 /**
- * FIXME Split into map and filter function.
+ * Adds relative positions to items based on Google Maps zoom-level.
+ * Needed to plot markers on static map using css.
  */
 function locationItemsToMap($items, $mapOptions, $filter = true) {
     // Pixels per dLat and dLng for Amsterdam (approx) at zoomlevels.
@@ -88,8 +92,9 @@ function locationItemsToMap($items, $mapOptions, $filter = true) {
     return $items;
 }
 
+
 /**
- * Before
+ * Before routing.
  */
 $app->hook('slim.before', function() use ($app) {
     if (empty($_SESSION['lang'])) {
@@ -103,35 +108,22 @@ $app->hook('slim.before', function() use ($app) {
 
 
 /**
- * Home
+ * Home redirects to current date.
  */
 $app->get('/', function () use ($app, $apiRoot) {
-
-    //if ( !empty($_SESSION['firstvisit']) ) {
-        $app->redirect(date('/Y/m/d'));
-    //}
-
-    //$_SESSION['firstvisit'] = true;
-
-    //$data = [
-    //    "lang" => $_SESSION['lang'],
-    //    "redirect" => date('/Y/m/d'),
-    //    "template" => "splash.twig",
-    //];
-
-    //render($data['template'], $data);
+    $app->redirect(date('/Y/m/d'));
 });
 
 
 /**
- * Haltes
+ * Overview of busstops (haltes).
  */
-$app->get('/haltes', function () use ($app, $apiRoot) {
+$app->get('/haltes', function () use ($app, $analytics) {
 
     $res = $app->api->get("haltes");
     $haltes = $res['haltes'];
 
-    //FIXME Global Amsterdam Center Point
+    // Amsterdam Center Point.
     $center = [
         "lat" => 52.372981,
         "lng" => 4.901327,
@@ -140,33 +132,33 @@ $app->get('/haltes', function () use ($app, $apiRoot) {
     $mapOptions = [
         "width" => 420,
         "height" => 350,
-        "zoom" => 14,
-        "scale" => 2,
+        "zoom" => 14, // Google Maps zoom level.
+        "scale" => 2, // Double resolution for retina display.
         "center" => $center,
     ];
 
     $haltes = locationItemsToMap($haltes, $mapOptions, true);
 
     $data = [
+        "m" => date('m'),
+        "d" => date('d'),
+        "Y" => date('Y'),
         "lang" => $_SESSION['lang'],
         "activetab" => "haltes",
         "haltes" => $haltes,
-        "j" => date('j'),
-        "d" => date('d'),
-        "m" => date('m'),
-        "Y" => date('Y'),
-        "center" => $center, //FIXME Use $mapOptions in template and remove this.
         "map" => $mapOptions,
+        "analytics" => $analytics,
         "template" => "haltes.twig",
     ];
 
     render($data['template'], $data);
 });
 
+
 /**
- * Halte profiel
+ * Single busstop (halte).
  */
-$app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
+$app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
 
     $res = $app->api->get("haltes");
     $haltes = $res['haltes'];
@@ -185,39 +177,31 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $apiRoot) {
     $haltes = locationItemsToMap($haltes, $mapOptions);
 
     $data = [
+        "m" => date('m'),
+        "d" => date('d'),
+        "Y" => date('Y'),
         "lang" => $_SESSION['lang'],
         "activetab" => "haltes",
         "record" => $halte,
         "haltes" => $haltes,
         "map" => $mapOptions,
-        "center" => $center, //FIXME Use $mapOptions in template and remove this.
+        "analytics" => $analytics,
         "template" => "halte.twig",
-        "j" => date('j'),
-        "d" => date("d"),
-        "m" => date("m"),
-        "Y" => date("Y"),
     ];
 
     render($data['template'], $data);
 });
 
-// Comparison function
-function cmpdistance($a, $b) {
-    if ($a['afstand'] == $b['afstand']) {
-        return 0;
-    }
-    return ($a['afstand'] < $b['afstand']) ? -1 : 1;
-}
 
 /**
- * Parkeerplaatsen
+ * Overview of busparkings (parkeerplaatsen).
  */
-$app->get('/parkeren', function () use ($app, $apiRoot) {
+$app->get('/parkeren', function () use ($app, $analytics) {
 
     $res = $app->api->get("parkeerplaatsen");
     $parkeerplaatsen = $res['parkeerplaatsen'];
 
-    //FIXME Global Amsterdam Center point
+    // Amsterdam Center Point.
     $center = [
         "lat" => 52.372981,
         "lng" => 4.901327,
@@ -226,33 +210,33 @@ $app->get('/parkeren', function () use ($app, $apiRoot) {
     $mapOptions = [
         "width" => 420,
         "height" => 350,
-        "zoom" => 12,
-        "scale" => 2,
+        "zoom" => 12, // Google Maps zoom level.
+        "scale" => 2, // Double resolution for retina display.
         "center" => $center,
     ];
 
     $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
 
     $data = [
+        "m" => date('m'),
+        "d" => date('d'),
+        "Y" => date('Y'),
         "lang" => $_SESSION['lang'],
         "activetab" => "parkeren",
         "parkeerplaatsen" => $parkeerplaatsen,
-        "j" => date('j'),
-        "d" => date('d'),
-        "m" => date('m'),
-        "Y" => date('Y'),
-        "center" => $center, //FIXME Use $mapOptions in template and remove this.
         "map" => $mapOptions,
+        "analytics" => $analytics,
         "template" => "parkeerplaatsen.twig",
     ];
 
     render($data['template'], $data);
 });
 
+
 /**
- * Parkeerplaats profiel
+ * Single busparking (parkeerplaats).
  */
-$app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
+$app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
 
     $res = $app->api->get("parkeerplaatsen");
     $parkeerplaatsen = $res['parkeerplaatsen'];
@@ -271,445 +255,35 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $apiRoot) {
     $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
 
     $data = [
+        "m" => date('m'),
+        "d" => date('d'),
+        "Y" => date('Y'),
         "lang" => $_SESSION['lang'],
         "activetab" => "parkeren",
         "record" => $parkeerplaats,
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
-        "center" => $center, //FIXME Use $mapOptions in template and remove this.
-        "template" => "parkeerplaats.twig",
-        "j" => date('j'),
-        "d" => date("d"),
-        "m" => date("m"),
-        "Y" => date("Y"),
-    ];
-
-    render($data['template'], $data);
-
-    /*$parkeerplaats = $app->api->get("parkeerplaatsen/{$slug}");
-
-    $data = [
-        "activetab" => "parkeren",
-        "record" => $parkeerplaats['parkeerplaats'],
-        "template" => "parkeerplaats.twig",
-        "d" => date("d"),
-        "m" => date("m"),
-        "Y" => date("Y"),
-    ];
-
-    render($data['template'], $data);*/
-});
-
-/**
- * Overview formats navigatie apparaten
- */
-$app->get('/downloads', function () use ($app) {
-    render("downloads.twig");
-});
-
-/*****************
-/* Admin Routes
- ****************/
-
-/**
- * Dashboard
- */
-$app->get('/dashboard', function () use ($app) {
-    $app->redirect("/dashboard/berichten");
-});
-
-
-/**
- * Login
- */
-$app->get('/dashboard/login', function () use ($apiRoot) {
-
-    $data = [
-        "template" => "dashboard/login.twig",
-    ];
-
-    render($data['template'], $data);
-})->name("login");
-
-
-/**
- * Logout
- */
-$app->get('/dashboard/logout', function () use ($app, $apiRoot) {
-
-    $res = $app->api->delete("auth?token={$_SESSION['auth_token']}");
-    unset($_SESSION['auth_token']);
-    unset($_SESSION['username']);
-    session_destroy();
-
-    $app->flash('success', 'Je bent nu uitgelogd. Tot kijk!');
-    $app->redirect("/dashboard/login");
-})->name("logout");
-
-
-/**
- * Login post
- */
-$app->post('/dashboard/login', function () use ($app, $apiRoot) {
-
-    $fields = array(
-        'username' => $app->request->post('username'),
-        'password' => $app->request->post('password')
-    );
-
-    $res = $app->api->post("auth", $fields);
-    if (!$res) {
-        $app->flash('error', 'Onjuiste inloggegevens');
-        $app->redirect("/dashboard/login");
-    }
-
-    $_SESSION['auth_token'] = $res['token'];
-    $_SESSION['username']   = $app->request->post('username');
-
-    $app->flash('success', 'Je bent ingelogd');
-
-    if ( !empty($_SESSION['redirect_url']) ) {
-        $target = $_SESSION['redirect_url'];
-        unset($_SESSION['redirect_url']);
-        $app->redirect($target);
-    } else {
-        $app->redirect("/dashboard/berichten");
-    }
-})->name("login");
-
-
-/**
- * Berichten get
- */
-$app->get('/dashboard/berichten', function () use ($app, $image_api) {
-
-    // Check token
-    if ( empty($_SESSION['auth_token']) ) {
-        $app->flash('error', 'Eerst inloggen');
-        $app->redirect("/dashboard/login");
-    }
-
-    $res = $app->api->get('auth?token='.$_SESSION['auth_token']);
-    if (!$res) {
-        $app->redirect("/dashboard/logout");
-    }
-
-    $res = $app->api->get("berichten");
-
-    $data = [
-        "bericht" => [ // defaults
-            "startdate" => date("Y-m-d"),
-            "enddate" => date("Y-m-d"),
-        ],
-        "berichten" => $res['messages'],
-        "image_api" => $image_api,
-        "api" => $app->api->getApiRoot(),
-        "username" => $_SESSION['username'],
-        "template" => "dashboard/berichten.twig",
-    ];
-
-    render($data['template'], $data);
-})->name("berichten");
-
-/**
- * Berichten post
- */
-$app->post('/dashboard/berichten', function () use ($app, $image_api) {
-
-    $fields = array(
-        'category' => $app->request->post('category'),
-      	'title' => $app->request->post('title'),
-      	'body' => $app->request->post('body'),
-      	'advice' => $app->request->post('advice'),
-      	'title_en' => $app->request->post('title_en'),
-      	'body_en' => $app->request->post('body_en'),
-        'advice_en' => $app->request->post('advice_en'),
-      	'title_de' => $app->request->post('title_de'),
-      	'body_de' => $app->request->post('body_de'),
-        'advice_de' => $app->request->post('advice_de'),
-      	'startdate' => $app->request->post('startdate'),
-      	'enddate' => $app->request->post('enddate'),
-        'link' => $app->request->post('link'),
-        'image_url' => $app->request->post('image_url'),
-        'important' => $app->request->post('important'),
-        'is_live' => $app->request->post('is_live'),
-        'include_map' => !!$app->request->post('include_map'),
-    );
-
-    if ($app->request->post('submit') !== "dupliceren") {
-        $fields['id'] = $app->request->post('id');
-    }
-
-    if ($app->request->post('include_location')) {
-        $fields['location_lat'] = $app->request->post('location_lat');
-        $fields['location_lng'] = $app->request->post('location_lng');
-    }
-
-    if ( empty ($fields['title']) ) {
-        $app->flashNow('error', 'Titel is niet ingevuld');
-
-        $berichten = $app->api->get("berichten");
-
-        $data = [
-            "berichten" => $berichten['messages'],
-            "bericht" => $fields,
-            "image_api" => $image_api,
-            "api" => $app->api->getApiRoot(),
-            "username" => $_SESSION['username'],
-            "template" => "dashboard/berichten.twig",
-            "show_form" => true,
-        ];
-
-        render($data['template'], $data);
-    } else {
-
-        $token = $_SESSION['auth_token'];
-
-        $app->api->setToken($_SESSION['auth_token']);
-        $res = $app->api->post("berichten", $fields);
-        if (!$res) {
-            $app->flash('error', 'Mag niet! Unauthorized');
-            $app->redirect("/dashboard/berichten");
-        }
-
-        // Mail when a new bericht is added successfully.
-        if (empty($app->request->post("id"))) {
-            $notes = "";
-            if ( empty($fields['title_en']) ) { $notes .="NOTE: Geen Engelse vertaling. "; }
-            if ( empty($fields['title_de']) ) { $notes .="NOTE: Geen Duitse vertaling. "; }
-            $app->flash('success', 'Bericht toegevoegd. '.$notes);
-            sendNewBerichtMail($res['id'], $fields['title']);
-        } else if ($app->request->post("submit") === "dupliceren") {
-            $app->flash('success', 'Bericht gedupliceerd');
-        } else {
-            $app->flash('success', 'Bericht opgeslagen');
-        }
-
-        $app->redirect("/dashboard/berichten");
-    }
-})->name("berichten");
-
-
-/**
- * Berichten bewerken
- */
-$app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
-
-    $berichten = $app->api->get("berichten");
-
-    if ( empty($_SESSION['username']) ) {
-        $_SESSION['redirect_url'] = "/dashboard/berichten/{$id}";
-        $app->flash('error', 'Eerst inloggen');
-        $app->redirect("/dashboard/login");
-    }
-
-    $data = [
-        "test" => "world",
-        "bericht" => $berichten['messages'][$id],
-        "berichten" => $berichten['messages'],
-        "image_api" => $image_api,
-        "username" => $_SESSION['username'],
-        "api" => $app->api->getApiRoot(),
-        "template" => "dashboard/berichten.twig",
-    ];
-
-    render($data['template'], $data);
-});
-
-
-/**
- * Berichten verwijderen
- */
-$app->post('/dashboard/berichten/verwijderen', function () use ($app) {
-
-    $ids = $app->request->post('ids');
-    $token = $_SESSION['auth_token'];
-
-    $app->api->setToken($_SESSION['auth_token']);
-    $res = $app->api->delete("berichten", $ids);
-    if (!$res) {
-        $app->flash('error', 'Mag niet! Unauthorized');
-        $app->redirect("/dashboard/berichten");
-    }
-
-    $app->flash('success', 'Bericht(en) verwijderd');
-    $app->redirect("/dashboard/berichten");
-});
-
-
-/**
- * Dashboard wildcard redirect
- */
-$app->get('/dashboard/(:wildcard+)', function () use ($app) {
-    $app->redirect("/dashboard/berichten");
-});
-
-
-/**
- * Styleguide
- */
-$app->get('/styleguide', function () {
-
-    $data = [
-        "template" => "styleguide.twig",
-    ];
-
-    render($data['template'], $data);
-});
-
-
-/**
- * Dag
- */
-$app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
-
-    $res = $app->api->get("berichten/{$y}/{$m}/{$d}");
-
-    $berichten = array_filter($res['messages'], function ($bericht) {
-        return !empty($bericht['is_live']);
-    });
-
-    usort($berichten, function ($b1, $b2) {
-        return $b1['important'] < $b2['important'];
-    });
-
-    $volgende = "/".str_replace('-', '/', $res['_nextDate']);
-    $vorige   = "/".str_replace('-', '/', $res['_prevDate']);
-
-    //$cruisekalender = $app->api->get("cruisekalender/{$y}/{$m}/{$d}");
-
-    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
-    $j = date('j', strtotime("{$y}-{$m}-{$d}"));
-
-    $day = array (
-        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
-    );
-
-    $dag = translate($day[(int)$N - 1]);
-
-    //FIXME Global Amsterdam Center Point
-    $center = [
-        "lat" => 52.372981,
-        "lng" => 4.901327,
-    ];
-
-    $mapOptions = [
-        "width" => 420,
-        "height" => 350,
-        "zoom" => 12,
-        "scale" => 2,
-        "center" => $center,
-    ];
-
-    $berichten = locationItemsToMap($berichten, $mapOptions, false);
-
-    $data = [
-        "activetab" => "berichten",
-        "lang" => $_SESSION['lang'],
-        "berichten" => $berichten,
-        "volgende" => $volgende,
-        "vorige" => $vorige,
-        "datestring" => "{$y}-{$m}-{$d}",
-        "dag" => $dag,
-        "j" => $j,
-        "d" => $d,
-        "m" => $m,
-        "Y" => $y,
-        "api" => $app->api->getApiRoot(),
-        "image_api" => $image_api,
         "analytics" => $analytics,
-        //"cruisekalender" => $cruisekalender['items'],
-        "timestamp" => $res['_timestamp'],
-        "center" => $center, //FIXME Use $mapOptions in template and remove this.
-        "map" => $mapOptions,
-        "adamlogo" => true,
-        "template" => "home.twig",
+        "template" => "parkeerplaats.twig",
     ];
+
     render($data['template'], $data);
-})->name("home");
+});
 
 
 /**
- * Dag details
+ * Overview of downloadable formats for GPS navigation.
  */
-$app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $image_api) {
-
-    $res = $app->api->get("berichten/{$y}/{$m}/{$d}");
-
-    $berichten = array_filter($res['messages'], function ($bericht) {
-        return !empty($bericht['is_live']);
-    });
-
-    usort($berichten, function ($b1, $b2) {
-        return $b1['important'] < $b2['important'];
-    });
-
-    $volgende = "/".str_replace('-', '/', $res['_nextDate']);
-    $vorige   = "/".str_replace('-', '/', $res['_prevDate']);
-
-    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
-
-    $day = array (
-        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
-    );
-
-    $dag = translate($day[(int)$N - 1]);
-
-    foreach ($berichten as &$bericht) {
-        if ( !empty($bericht['location']) ) {
-            $center = $bericht['location'];
-
-            $mapOptions = [
-                "width" => 420,
-                "height" => 350,
-                "zoom" => 15,
-                "scale" => 2,
-                "center" => $center,
-            ];
-
-            $bericht['map'] = $mapOptions;
-            $bericht['rel_loc'] = array ('dX' => 50,'dY' => 50);
-            // locationItemsToMap($bericht, $mapOptions, false)
-        }
-    }
+$app->get('/downloads', function () use ($app, $analytics) {
 
     $data = [
-        "activetab" => "berichten",
-        "lang" => $_SESSION['lang'],
-        "berichten" => $berichten,
-        "volgende" => $volgende,
-        "vorige" => $vorige,
-        "datestring" => "{$y}-{$m}-{$d}",
-        "dag" => $dag,
-        "j" => date('j'),
-        "d" => $d,
-        "m" => $m,
-        "Y" => $y,
-        "api" => $app->api->getApiRoot(),
-        "image_api" => $image_api,
         "analytics" => $analytics,
-        //"cruisekalender" => $cruisekalender['items'],
-        "timestamp" => $res['_timestamp'],
-        "center" => $center, //FIXME Use $mapOptions in template and remove this.
-        "map" => $mapOptions,
-        "template" => "details.twig",
-    ];
-    render($data['template'], $data);
-});
-
-/**
- * Enkel bericht
- */
-$app->get('/bericht/:id', function ($id) use ($app) {
-
-    $res = $app->api->get("berichten/{$id}");
-
-    $data = [
-        "bericht" => $res['message']
+        "template" => "downloads.twig",
     ];
 
-    render("bericht.twig", $data);
+    render($data["template"], $data);
 });
+
 
 /**
  * RSS
@@ -739,3 +313,404 @@ $app->get('/rss', function () use ($app) {
 
     render("rss.twig", $data, ["Content-type" => "application/xml"]);
 });
+
+
+/****************
+ * Admin Routes *
+ ****************/
+
+
+/**
+ * Dashboard.
+ */
+$app->get('/dashboard', function () use ($app) {
+
+    $app->redirect("/dashboard/berichten");
+});
+
+
+/**
+ * Login.
+ */
+$app->get('/dashboard/login', function () {
+
+    render("dashboard/login.twig");
+});
+
+
+/**
+ * Login post
+ */
+$app->post('/dashboard/login', function () use ($app) {
+
+    $fields = array(
+        'username' => $app->request->post('username'),
+        'password' => $app->request->post('password')
+    );
+
+    $res = $app->api->post("auth", $fields);
+    if (!$res) {
+        $app->flash('error', 'Onjuiste inloggegevens');
+        $app->redirect("/dashboard/login");
+    }
+
+    $_SESSION['auth_token'] = $res['token'];
+    $_SESSION['username']   = $app->request->post('username');
+
+    $app->flash('success', 'Je bent ingelogd');
+
+    if ( !empty($_SESSION['redirect_url']) ) {
+        $target = $_SESSION['redirect_url'];
+        unset($_SESSION['redirect_url']);
+    } else {
+        $target = "/dashboard/berichten";
+    }
+    
+    $app->redirect($target);
+});
+
+
+/**
+ * Logout.
+ */
+$app->get('/dashboard/logout', function () use ($app) {
+
+    if ( !empty($_SESSION['auth_token']) ) {
+        $res = $app->api->delete("auth?token={$_SESSION['auth_token']}");
+        unset($_SESSION['auth_token']);
+        unset($_SESSION['username']);
+        session_destroy();
+
+        session_start();
+        $app->flash('success', 'Je bent nu uitgelogd. Tot kijk!');
+    }
+
+    $app->redirect("/dashboard/login");
+});
+
+
+/**
+ * Overview of messages (berichten).
+ */
+$app->get('/dashboard/berichten', function () use (
+    $app,
+    $image_api // Needed for image upload.
+) {
+
+    // Check token.
+    if ( empty($_SESSION['auth_token']) ) {
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
+    $res = $app->api->get("auth?token={$_SESSION['auth_token']}");
+    if (!$res) {
+        $app->redirect("/dashboard/logout");
+    }
+
+    $res = $app->api->get("berichten");
+
+    $data = [
+        "bericht" => [ // Default values for new message (bericht).
+            "startdate" => date("Y-m-d"),
+            "enddate" => date("Y-m-d"),
+        ],
+        "berichten" => $res['messages'],
+        "image_api" => $image_api,
+        "username" => $_SESSION['username'],
+        "template" => "dashboard/berichten.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Add new message (bericht).
+ */
+$app->post('/dashboard/berichten', function () use ($app, $image_api) {
+
+    $fields = array(
+        'category' => $app->request->post('category'),
+      	'title' => $app->request->post('title'),
+      	'body' => $app->request->post('body'),
+      	'advice' => $app->request->post('advice'),
+      	'title_en' => $app->request->post('title_en'),
+      	'body_en' => $app->request->post('body_en'),
+        'advice_en' => $app->request->post('advice_en'),
+      	'title_de' => $app->request->post('title_de'),
+      	'body_de' => $app->request->post('body_de'),
+        'advice_de' => $app->request->post('advice_de'),
+      	'startdate' => $app->request->post('startdate'),
+      	'enddate' => $app->request->post('enddate'),
+        'link' => $app->request->post('link'),
+        'image_url' => $app->request->post('image_url'),
+        'important' => $app->request->post('important'),
+        'is_live' => $app->request->post('is_live'),
+        'include_map' => !!$app->request->post('include_map'),
+    );
+
+    // If not "dupliceren", then use the available id (if set) to update existing message.
+    if ($app->request->post('submit') !== "dupliceren") {
+        $fields['id'] = $app->request->post('id');
+    }
+
+    if ($app->request->post('include_location')) {
+        $fields['location_lat'] = $app->request->post('location_lat');
+        $fields['location_lng'] = $app->request->post('location_lng');
+    }
+
+    // Title is a required field.
+    if ( empty ($fields['title']) ) {
+        $app->flashNow('error', 'Titel is niet ingevuld');
+
+        $berichten = $app->api->get("berichten");
+
+        $data = [
+            "berichten" => $berichten['messages'],
+            "bericht" => $fields,
+            "image_api" => $image_api,
+            "username" => $_SESSION['username'],
+            "template" => "dashboard/berichten.twig",
+            "show_form" => true,
+        ];
+
+        render($data['template'], $data);
+    } else {
+
+        $token = $_SESSION['auth_token'];
+
+        $app->api->setToken($_SESSION['auth_token']);
+        $res = $app->api->post("berichten", $fields);
+        if (!$res) {
+            $app->flash('error', 'Mag niet! Unauthorized');
+            $app->redirect("/dashboard/berichten");
+        }
+
+        // Mail when a new bericht is added successfully.
+        if ( empty($app->request->post("id")) ) {
+            $notes = "";
+            if ( empty($fields['title_en']) ) {
+                $notes .= " NOTE: Geen Engelse vertaling.";
+            }
+            if ( empty($fields['title_de']) ) {
+                $notes .= " NOTE: Geen Duitse vertaling.";
+            }
+            sendNewBerichtMail($res['id'], $fields['title']);
+            $app->flash('success', 'Bericht toegevoegd.' . $notes);
+        } else if ($app->request->post("submit") === "dupliceren") {
+            $app->flash('success', 'Bericht gedupliceerd');
+        } else {
+            $app->flash('success', 'Bericht opgeslagen');
+        }
+
+        $app->redirect("/dashboard/berichten");
+    }
+});
+
+
+/**
+ * Edit message (bericht).
+ */
+$app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
+
+    $berichten = $app->api->get("berichten");
+
+    if ( empty($_SESSION['username']) ) {
+        $_SESSION['redirect_url'] = "/dashboard/berichten/{$id}";
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
+    $data = [
+        "bericht" => $berichten['messages'][$id],
+        "berichten" => $berichten['messages'],
+        "image_api" => $image_api,
+        "username" => $_SESSION['username'],
+        "template" => "dashboard/berichten.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Delete messages (berichten).
+ */
+$app->post('/dashboard/berichten/verwijderen', function () use ($app) {
+
+    $ids = $app->request->post('ids');
+    $token = $_SESSION['auth_token'];
+
+    $app->api->setToken($_SESSION['auth_token']);
+    $res = $app->api->delete("berichten", $ids);
+    if (!$res) {
+        $app->flash('error', 'Mag niet! Unauthorized');
+        $app->redirect("/dashboard/berichten");
+    }
+
+    $app->flash('success', 'Bericht(en) verwijderd');
+    $app->redirect("/dashboard/berichten");
+});
+
+
+/**
+ * Dashboard wildcard redirect.
+ */
+$app->get('/dashboard/(:wildcard+)', function () use ($app) {
+    $app->redirect("/dashboard/berichten");
+});
+
+
+/**
+ * Overview of messages for a single day.
+ */
+$app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
+
+    $res = $app->api->get("berichten/{$y}/{$m}/{$d}");
+
+    $berichten = array_filter($res['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
+
+    //$volgende = "/".str_replace('-', '/', $res['_nextDate']);
+    //$vorige   = "/".str_replace('-', '/', $res['_prevDate']);
+
+    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
+    $j = date('j', strtotime("{$y}-{$m}-{$d}"));
+
+    $day = array(
+        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
+    );
+
+    $dag = translate($day[(int)$N - 1]);
+
+    // Amsterdam Center Point.
+    $center = [
+        "lat" => 52.372981,
+        "lng" => 4.901327,
+    ];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 12, // Google Maps zoom level.
+        "scale" => 2, // Double resolution for retina display.
+        "center" => $center,
+    ];
+
+    $berichten = locationItemsToMap($berichten, $mapOptions, false);
+
+    $data = [
+        "activetab" => "berichten",
+        "lang" => $_SESSION['lang'],
+        "berichten" => $berichten,
+        //"volgende" => $volgende,
+        //"vorige" => $vorige,
+        "datestring" => "{$y}-{$m}-{$d}",
+        "dag" => $dag,
+        "j" => $j,
+        "d" => $d,
+        "m" => $m,
+        "Y" => $y,
+        "image_api" => $image_api,
+        "timestamp" => $res['_timestamp'],
+        "map" => $mapOptions,
+        "adamlogo" => true,
+        "analytics" => $analytics,
+        "template" => "home.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Details slider of messages for a single day.
+ */
+$app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $image_api) {
+
+    $res = $app->api->get("berichten/{$y}/{$m}/{$d}");
+
+    $berichten = array_filter($res['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
+
+    //$volgende = "/".str_replace('-', '/', $res['_nextDate']);
+    //$vorige   = "/".str_replace('-', '/', $res['_prevDate']);
+
+    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
+
+    $day = array(
+        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
+    );
+
+    $dag = translate($day[(int)$N - 1]);
+
+    foreach ($berichten as &$bericht) {
+        if ( !empty($bericht['location']) ) {
+            $center = $bericht['location'];
+
+            $mapOptions = [
+                "width" => 420,
+                "height" => 350,
+                "zoom" => 15, // Googme Maps zoom level.
+                "scale" => 2, // Double resolution for retina display.
+                "center" => $center,
+            ];
+
+            $bericht['map'] = $mapOptions;
+            $bericht['rel_loc'] = array(
+                'dX' => 50,
+                'dY' => 50
+            );
+        }
+    }
+
+    $data = [
+        "activetab" => "berichten",
+        "lang" => $_SESSION['lang'],
+        "berichten" => $berichten,
+        //"volgende" => $volgende,
+        //"vorige" => $vorige,
+        "datestring" => "{$y}-{$m}-{$d}",
+        "dag" => $dag,
+        "j" => date('j'),
+        "d" => $d,
+        "m" => $m,
+        "Y" => $y,
+        "image_api" => $image_api,
+        "timestamp" => $res['_timestamp'],
+        "map" => $mapOptions,
+        "analytics" => $analytics,
+        "template" => "details.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Single message (bericht).
+ */
+$app->get('/bericht/:id', function ($id) use ($app, $analytics) {
+
+    $res = $app->api->get("berichten/{$id}");
+
+    $data = [
+        "bericht" => $res['message'],
+        "analytics" => $analytics,
+        "template" => "bericht.twig",
+    ];
+
+    render($data["template"], $data);
+});
+
