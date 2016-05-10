@@ -4,13 +4,13 @@
         <link>http://www.tourbuzz.nl</link>
         <description>Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.</description>
         <language>nl-nl</language>
-        <lastBuildDate>{{ datum }}</lastBuildDate>
+        <lastBuildDate>{{ datetime }}</lastBuildDate>
         {% for bericht in berichten %}
         <item>
             <title>{{ bericht.title }}</title>
-            <link>http://www.tourbuzz.nl/bericht/{{ bericht.id }}</link>
-            <guid>{{ bericht.id }}</guid>
-            <pubDate>{{ bericht.startdate }}T00:00:00+0200</pubDate>
+            <link>http://www.tourbuzz.nl/bericht/{{ bericht.id }}#{{ dateCode }}</link>
+            <guid>{{ bericht.id }}{{ dateCode }}</guid>
+            <pubDate>{{ pubDate }}</pubDate>
             <author>Tour Buzz</author>
             <description>{{ bericht.body }}</description>
             <content:encoded>
@@ -19,20 +19,28 @@
                     <html lang="nl" prefix="op: http://media.facebook.com/op#">
                         <head>
                             <meta charset="utf-8">
-                            <link rel="canonical" href="http://www.tourbuzz.nl/bericht/{{ bericht.id }}">
+                            <link rel="canonical" href="http://www.tourbuzz.nl/bericht/{{ bericht.id }}#{{ dateCode }}">
                             <meta property="op:markup_version" content="v1.0">
                         </head>
                         <body>
                             <article>
                                 <header>
+                                    {% if bericht.image_url is not empty %}
+                                    <figure>
+                                        <img src="{{ bericht.image_url }}" />
+                                        <figcaption>{{ bericht.title }}</figcaption>
+                                    </figure>
+                                    {% endif %}
                                     <h1>{{ bericht.title }}</h1>
                                 </header>
+                                {% if bericht.image_url is not empty %}
                                 <figure>
                                     <img src="{{ bericht.image_url }}" class="no-margin"/>
                                     <figcaption class="op-left op-large">
                                         <h1>{{ bericht.title }}</h1>
                                     </figcaption>
                                 </figure>
+                                {% endif %}
                                 <p>
                                     {{ bericht.body }}
                                 </p>
