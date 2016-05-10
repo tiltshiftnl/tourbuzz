@@ -50,6 +50,8 @@ class ApiClient {
 
     public function delete($uri, $ids = []) {
 
+        // To remove authentication token for login.
+        //FIXME Create specific function deleteSession for this.
         if (substr($uri, 0, 5) === "auth?") {
             $requestUri = "{$this->_apiRoot}{$uri}";
             try {
@@ -60,7 +62,7 @@ class ApiClient {
             return true;
         }
 
-        //url-ify the data for the POST
+        // Url-ify the data for the POST (ids to delete).
         $fieldsString = '';
         foreach($ids as $id) { $fieldsString .= 'ids[]='.$id.'&'; }
         $fieldsString = rtrim($fieldsString, '&');
@@ -84,3 +86,4 @@ class ApiClient {
         return true;
     }
 }
+
