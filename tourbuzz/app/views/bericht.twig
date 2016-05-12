@@ -50,10 +50,9 @@
         {% endset %}
 
         <article data-id="{{ bericht.id }}" data-titel="{{ bericht.title }}">
-            <h3>
-                {{ bericht.title }}
-            </h3>
+            <h3>{{ bericht.title }}</h3>
             <p>{{ bericht.body|raw }}</p>
+
             {% if bericht.advice|trim is not empty %}
                 <section class="advies">
                     <h4>{{ __('Advies') }}</h4>

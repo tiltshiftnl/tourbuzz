@@ -8,11 +8,9 @@
 
     <nav class="dagselectie">
         <div class="inner group">
-            {#<a href="{{ vorige }}" class="fade-click"><i class="fa fa-chevron-left"></i></a>#}
-            <h3 class="dag" style="float: left">{{ dagnotatie }} {#<span class="meta">({{ berichten|length }})</span>#}</h3>
+            <h3 class="dag">{{ dagnotatie }} <span class="meta">({{ berichten|length }})</span></h3>
             <a href="#" class="headerdate" id="headerdate">
                 <img src="/img/kalender.png" class="kalender-icon" style="width: 16px"><span class="meta">{{ __('kies andere dag') }}</span>
             </a>
-            {#<a href="{{ volgende }}" class="fade-click"><i class="fa fa-chevron-right"></i></a>#}
         </div>
     </nav>

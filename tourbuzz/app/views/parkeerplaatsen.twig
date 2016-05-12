@@ -17,43 +17,44 @@
 {% endblock %}
 
 {% block main %}
-<main class="wrapper">
-    <section class="buzz">
+    <main class="wrapper">
+        <section class="buzz">
 
-        <article>
-            <p>{{ __('Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven.') }}</p>
-            <p><a href="/downloads">{{ __('Download bestanden voor GPS navigatie') }}</a></p>
-        </article>
+            <article>
+                <p>{{ __('Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven.') }}</p>
+                <p><a href="/downloads">{{ __('Download bestanden voor GPS navigatie') }}</a></p>
+            </article>
 
-        <section class="kaartmap wrapper">
-            <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
-            {% for parkeerplaats in parkeerplaatsen %}
-                {% if parkeerplaats.rel_loc is not empty %}
-                    <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" style="top: {{ parkeerplaats.rel_loc.dY }}%; left: {{ parkeerplaats.rel_loc.dX }}%; {% if not parkeerplaats.beschikbaar %}opacity: 0.5{% endif %}">
-                        <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p" style="width: 50%">
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </section>
-
-        <ol>
-        {% for parkeerplaats in parkeerplaatsen %}
-        <li style="position: relative; padding-left: 45px">
-            <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}">
-                <div>
-                    <span class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</span>
-                    <span>{{ parkeerplaats.naam }}</span><br>
-                    {% if parkeerplaats.beschikbaar %}
-                        <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
-                    {% else %}
-                      <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+            <section class="kaartmap wrapper">
+                <img src="{% include 'partials/googlemap.empty.twig' %}">
+                {% for parkeerplaats in parkeerplaatsen %}
+                    {% if parkeerplaats.rel_loc is not empty %}
+                        <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" style="top: {{ parkeerplaats.rel_loc.dY }}%; left: {{ parkeerplaats.rel_loc.dX }}%; {% if not parkeerplaats.beschikbaar %}opacity: 0.5{% endif %}">
+                            <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p" style="width: 50%">
+                        </a>
                     {% endif %}
-                    <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span> {# FIXME #}
-                </div>
-            </a>
-        </li>
-        {% endfor %}
-        </ol>
-    </section>
-</main>
+                {% endfor %}
+            </section>
+
+            <ol>
+            {% for parkeerplaats in parkeerplaatsen %}
+                <li style="position: relative; padding-left: 45px">
+                    <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}">
+                        <div>
+                            <span class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</span>
+                            <span>{{ parkeerplaats.naam }}</span><br>
+                            {% if parkeerplaats.beschikbaar %}
+                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
+                            {% else %}
+                              <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                            {% endif %}
+                            <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+            </ol>
+
+        </section>
+    </main>
 {% endblock %}

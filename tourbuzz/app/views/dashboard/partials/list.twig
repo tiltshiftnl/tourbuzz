@@ -1,5 +1,6 @@
 <form method="post" action="/dashboard/berichten/verwijderen">
     <button type="submit" class="verwijderen">Verwijderen</button>
+
     <h2>Actieve berichten</h2>
     <table>
         <tr>
@@ -10,15 +11,16 @@
             <th style="width: 15%">T/m</th>
         </tr>
         {% for record in berichten if record.status == "active" %}
-        <tr {% if not record.is_live %}class="draft"{% endif %}>
-            <td><input type="checkbox" name="ids[]" value="{{ record.id }}"></td>
-            <td><span class="nr">{{ loop.index }}</span></td>
-            <td><a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a></td>
-            <td><span class="meta">{{ record.startdate|date('d-m-Y') }}</span></td>
-            <td><span class="meta">{{ record.enddate|date('d-m-Y') }}</span></td>
-        </tr>
+            <tr {% if not record.is_live %}class="draft"{% endif %}>
+                <td><input type="checkbox" name="ids[]" value="{{ record.id }}"></td>
+                <td><span class="nr">{{ loop.index }}</span></td>
+                <td><a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a></td>
+                <td><span class="meta">{{ record.startdate|date('d-m-Y') }}</span></td>
+                <td><span class="meta">{{ record.enddate|date('d-m-Y') }}</span></td>
+            </tr>
         {% endfor %}
     </table>
+
     <h2>Geplande berichten</h2>
     <table>
         <tr>
@@ -29,15 +31,16 @@
             <th style="width: 15%">T/m</th>
         </tr>
         {% for record in berichten if record.status == "scheduled" %}
-        <tr {% if not record.is_live %}class="draft"{% endif %}>
-            <td><input type="checkbox" name="ids[]" value="{{ record.id }}"></td>
-            <td><span class="nr">{{ loop.index }}</span></td>
-            <td><a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a></td>
-            <td><span class="meta">{{ record.startdate|date('d-m-Y') }}</span></td>
-            <td><span class="meta">{{ record.enddate|date('d-m-Y') }}</span></td>
-        </tr>
+            <tr {% if not record.is_live %}class="draft"{% endif %}>
+                <td><input type="checkbox" name="ids[]" value="{{ record.id }}"></td>
+                <td><span class="nr">{{ loop.index }}</span></td>
+                <td><a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a></td>
+                <td><span class="meta">{{ record.startdate|date('d-m-Y') }}</span></td>
+                <td><span class="meta">{{ record.enddate|date('d-m-Y') }}</span></td>
+            </tr>
         {% endfor %}
     </table>
+
     <h2>Gearchiveerde berichten</h2>
     <table>
         <tr>
@@ -48,14 +51,13 @@
             <th style="width: 15%">T/m</th>
         </tr>
         {% for record in berichten if record.status == "archived" %}
-        <tr {% if not record.is_live %}class="draft"{% endif %}>
-            <td><input type="checkbox" name="ids[]" value="{{ record.id }}"></td>
-            <td><span class="nr">{{ loop.index }}</span></td>
-            <td><a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a></td>
-            <td><span class="meta">{{ record.startdate|date('d-m-Y') }}</span></td>
-            <td><span class="meta">{{ record.enddate|date('d-m-Y') }}</span></td>
-        </tr>
+            <tr {% if not record.is_live %}class="draft"{% endif %}>
+                <td><input type="checkbox" name="ids[]" value="{{ record.id }}"></td>
+                <td><span class="nr">{{ loop.index }}</span></td>
+                <td><a href="/dashboard/berichten/{{ record.id }}">{{ record.title }}</a></td>
+                <td><span class="meta">{{ record.startdate|date('d-m-Y') }}</span></td>
+                <td><span class="meta">{{ record.enddate|date('d-m-Y') }}</span></td>
+            </tr>
         {% endfor %}
     </table>
 </form>
-

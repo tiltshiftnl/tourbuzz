@@ -1,29 +1,29 @@
 {% extends 'base/base.twig' %}
 
 {% block main %}
+    <main class="wrapper">
+        <section class="buzz">
+            <h2 class="halte-link">{{ record.haltenummer }}</h2>
+            <span>{{ record.straat }}</span>
+            <a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>
 
-<main class="wrapper">
-
-    <section class="buzz">
-    <h2 class="halte-link">{{ record.haltenummer }}</h2>&nbsp;&nbsp;<span>{{ record.straat }}</span>&nbsp;&nbsp;<span class="kaart-link"><a href="{{ record.mapsUrl }}">Google Maps</a></span><br>
-    {% if record.beschikbaar %}
-        <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span><br>
-    {% else %}
-        <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
-    {% endif %}
-    <p class="meta">{{ record.locatie }}</p>
-    <section class="kaartmap wrapper">
-        <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
-        {% for halte in haltes %}
-            {% if halte.rel_loc is not empty %}
-                <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%; {% if not halte.beschikbaar %}opacity: 0.5{% endif %}">
-                    <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h large">
-                </a>
+            {% if record.beschikbaar %}
+                <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span>
+            {% else %}
+                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span>
             {% endif %}
-        {% endfor %}
-    </section>
 
-    </section>
-</main>
-
+            <p class="meta">{{ record.locatie }}</p>
+            <section class="kaartmap wrapper">
+                <img src="{% include 'partials/googlemap.empty.twig' %}">
+                {% for halte in haltes %}
+                    {% if halte.rel_loc is not empty %}
+                        <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%; {% if not halte.beschikbaar %}opacity: 0.5{% endif %}">
+                            <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h large">
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </section>
+        </section>
+    </main>
 {% endblock %}

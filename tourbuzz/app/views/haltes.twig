@@ -17,54 +17,55 @@
 {% endblock %}
 
 {% block main %}
-<main class="wrapper">
-    <section class="buzz">
+    <main class="wrapper">
+        <section class="buzz">
 
-        <article>
-            <p>{{ __('Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan.') }}</p>
-            <p><a href="/downloads">{{ __('Download bestanden voor GPS navigatie') }}</a></p
-        </article>
+            <article>
+                <p>{{ __('Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan.') }}</p>
+                <p><a href="/downloads">{{ __('Download bestanden voor GPS navigatie') }}</a></p>
+            </article>
 
-        <section class="kaartmap wrapper">
-            <img src="{% include 'partials/googlemap.empty.twig' %}" style="width: 100%">
+            <section class="kaartmap wrapper">
+                <img src="{% include 'partials/googlemap.empty.twig' %}">
+                {% for halte in haltes %}
+                    {% if halte.rel_loc is not empty %}
+
+                        {% if halte.rel_loc.dY < 0 %}{% set dy %}0{% endset %}
+                        {% elseif halte.rel_loc.dY > 100 %}{% set dy %}100{% endset %}
+                        {% else %}{% set dy %}{{ halte.rel_loc.dY }}{% endset %}
+                        {% endif %}
+
+                        {% if halte.rel_loc.dX < 0 %}{% set dx %}0{% endset %}
+                        {% elseif halte.rel_loc.dX > 100 %}{% set dx %}100{% endset %}
+                        {% else %}{% set dx %}{{ halte.rel_loc.dX }}{% endset %}
+                        {% endif %}
+
+                        <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ dy }}%; left: {{ dx }}%; {% if not halte.beschikbaar %}opacity: 0.5{% endif %}">
+                            <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h">
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </section>
+
+            <ol>
             {% for halte in haltes %}
-                {% if halte.rel_loc is not empty %}
-
-                    {% if halte.rel_loc.dY < 0 %}{% set dy %}0{% endset %}
-                    {% elseif halte.rel_loc.dY > 100 %}{% set dy %}100{% endset %}
-                    {% else %}{% set dy %}{{ halte.rel_loc.dY }}{% endset %}
-                    {% endif %}
-
-                    {% if halte.rel_loc.dX < 0 %}{% set dx %}0{% endset %}
-                    {% elseif halte.rel_loc.dX > 100 %}{% set dx %}100{% endset %}
-                    {% else %}{% set dx %}{{ halte.rel_loc.dX }}{% endset %}
-                    {% endif %}
-
-                    <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ dy }}%; left: {{ dx }}%; {% if not halte.beschikbaar %}opacity: 0.5{% endif %}">
-                        <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h">
+                <li style="position: relative; padding-left: 45px">
+                    <a href="/haltes/{{ halte.haltenummer }}">
+                        <div>
+                            <span class="halte-link" style="position: absolute; left: 0; {% if not halte.beschikbaar %}opacity: 0.2{% endif %}">{{ halte.haltenummer }}</span>
+                            <span>{{ halte.straat }}</span><br>
+                            {% if halte.beschikbaar %}
+                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+                            {% else %}
+                                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                            {% endif %}
+                            <span class="meta">{{ halte.locatie }}</span>
+                        </div>
                     </a>
-                {% endif %}
+                </li>
             {% endfor %}
-        </section>
+            </ol>
 
-        <ol>
-        {% for halte in haltes %}
-        <li style="position: relative; padding-left: 45px">
-            <a href="/haltes/{{ halte.haltenummer }}">
-                <div>
-                    <span class="halte-link" style="position: absolute; left: 0; {% if not halte.beschikbaar %}opacity: 0.2{% endif %}">{{ halte.haltenummer }}</span>
-                    <span>{{ halte.straat }}</span><br>
-                    {% if halte.beschikbaar %}
-                        <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
-                    {% else %}
-                        <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
-                    {% endif %}
-                    <span class="meta">{{ halte.locatie }}</span>
-                </div>
-            </a>
-        </li>
-        {% endfor %}
-        </ol>
-    </section>
-</main>
+        </section>
+    </main>
 {% endblock %}

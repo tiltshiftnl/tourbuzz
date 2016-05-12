@@ -33,9 +33,7 @@
         {% endset %}
 
         <article data-id="{{ record.id }}" data-titel="{{ record.title }}">
-            <h3 class="bericht-header">
-                <span class="nr">{{ loop.index }}</span> {{ title }}
-            </h3>
+            <h3 class="bericht-header"><span class="nr">{{ loop.index }}</span> {{ title }}</h3>
             <p>{{ body|raw }}</p>
             {% if advice|trim is not empty %}
                 <section class="advies">
