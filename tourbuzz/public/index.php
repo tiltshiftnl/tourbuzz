@@ -1,7 +1,7 @@
 <?php
 
-ini_set("error_reporting", E_ALL);
-ini_set("display_errors", 1);
+//ini_set("error_reporting", E_ALL);
+//ini_set("display_errors", 1);
 
 session_cache_limiter(false);
 session_start();
@@ -9,7 +9,7 @@ session_start();
 require "../vendor/autoload.php";
 
 /**
- * Twig plugin inladen.
+ * Load Twig plugin.
  */
 $app = new \Slim\Slim(["view" => new \Slim\Views\Twig()]);
 $view = $app->view();
@@ -18,6 +18,8 @@ $view->parserExtensions = [new \Slim\Views\TwigExtension()];
 
 function translate($msg) {
     $translationsJson = file_get_contents("../app/translations/translations.json");
+
+    // Fixes UTF-8 conversion issues.
     $translationsJson =  mb_convert_encoding($translationsJson, 'UTF-8', mb_detect_encoding($translationsJson, 'UTF-8, ISO-8859-1', true));
 
     $translations = json_decode($translationsJson);
@@ -26,7 +28,11 @@ function translate($msg) {
         $msg;
 }
 
-function maand($m) {
+
+/**
+ * Returns translated month name for input month number.
+ */
+function month($m) {
 
     if ( empty($m) ) {
         return "Geen datum";
@@ -49,16 +55,10 @@ function maand($m) {
     return translate($month[(int)$m - 1]);
 }
 
-function markerLabel($index) {
 
-    $labels = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-
-    if ($index > 9) {
-        return $labels[$index-10];
-    }
-    return $index;
-}
-
+/**
+ * Replace urls in text with web links.
+ */
 function insertLinks($text) {
     $text = preg_replace(
         "/((H|h)[0-9]+)/",
@@ -77,9 +77,8 @@ function insertLinks($text) {
 
 $twig = $app->view()->getEnvironment();
 $twig->addFunction('__', new Twig_Function_Function('translate'));
-$twig->addFunction('maand', new Twig_Function_Function('maand'));
+$twig->addFunction('maand', new Twig_Function_Function('month'));
 $twig->addFunction('insertlinks', new Twig_Function_Function('insertLinks'));
-$twig->addFunction('markerlabel', new Twig_Function_Function('markerLabel'));
 
 require_once "routes.php"; // System routes
 
@@ -89,5 +88,4 @@ require_once "../app/routes.php"; // Project routes
  * Run!
  */
 $app->run();
-
 
