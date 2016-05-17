@@ -44,6 +44,16 @@
                                 <p>
                                     {{ bericht.body }}
                                 </p>
+                                <h2>Advies</h2>
+                                <p>
+                                    {{ bericht.advice }}
+                                </p>
+                                {% if bericht.link is not empty %}
+                                    <h2>Meer informatie</h2>
+                                    <p>
+                                        <a href="{{ bericht.link }}">{{ bericht.link}}</a>
+                                    </p>
+                                {% endif %}
                                 <p>Voor meer touringcarnieuws uit Amsterdam kijk je op <a href="http://www.tourbuzz.nl">www.tourbuzz.nl</a>.</p>
                                 <footer>
                                     <p>Voor meer touringcarnieuws uit Amsterdam kijk je op <a href="http://www.tourbuzz.nl">www.tourbuzz.nl</a>.</p>
