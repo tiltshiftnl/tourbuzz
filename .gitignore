@@ -1,2 +1,4 @@
 vendor
+tourbuzz/app/config/config.php
+.idea
 .DS_Store
