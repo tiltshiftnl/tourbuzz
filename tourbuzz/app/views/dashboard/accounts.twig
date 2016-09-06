@@ -1,0 +1,43 @@
+{% extends 'base/base.twig' %}
+
+{% block header %}
+    {% include 'dashboard/partials/header.twig' %}
+{% endblock %}
+
+{% block topselectie %}{% endblock %}
+
+{% block main %}
+<main class="wrapper">
+    <div class="col-1-1">
+
+    {#<button onclick="#">Nieuw account</button>#}
+
+    <form class="form-styles" method="post">
+        <h2 style="margin-bottom: 10px">Nieuw account</h2>
+        <input type="text" placeholder="Gebruikersnaam" name="username" autocomplete="off">
+        <input type="text" placeholder="E-mail" name="mail" autocomplete="off">
+        <input type="password" placeholder="Wachtwoord" name="password" autocomplete="off">
+        <input type="password" placeholder="Wachtwoord herhalen" name="password-check" autocomplete="off">
+        <button type="submit" name="submit" value="toevoegen">Toevoegen</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Naam</th>
+            <th>E-mail</th>
+            <th>&nbsp;</th>
+        </tr>
+        {% for account in accounts %}
+        <tr>
+            <td>{{ account.username }}</td>
+            <td>{{ account.mail }}</td>
+            <td><a href="#" class="actie">bewerk</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}{% endblock %}

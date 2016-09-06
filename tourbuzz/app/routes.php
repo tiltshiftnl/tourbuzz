@@ -365,9 +365,64 @@ $app->post('/dashboard/login', function () use ($app) {
     } else {
         $target = "/dashboard/berichten";
     }
-    
+
     $app->redirect($target);
 });
+
+
+/**
+ * Wachtwoord vergeten
+ */
+$app->get('/dashboard/wachtwoord-vergeten', function () {
+
+    render("dashboard/wachtwoord-vergeten.twig");
+});
+
+
+/**
+ * Accounts
+ */
+$app->get('/dashboard/accounts', function () use ($app) {
+
+    $accounts = $app->api->get("accounts?token={$_SESSION['auth_token']}");
+
+    $data = [
+        "navsection" => "Accounts",
+        "accounts" => $accounts,
+        "username" => $_SESSION['username'],
+        "template" => "dashboard/accounts.twig",
+    ];
+
+    render($data["template"], $data);
+});
+
+
+/**
+ * Add new account.
+ */
+$app->post('/dashboard/accounts', function () use ($app) {
+
+    $fields = array(
+        'username' => $app->request->post('username'),
+        'password' => $app->request->post('password'),
+        'mail' => $app->request->post('mail'),
+    );
+
+    $token = $_SESSION['auth_token'];
+
+    $app->api->setToken($_SESSION['auth_token']);
+    $res = $app->api->post("accounts", $fields);
+
+    if (!$res) {
+        $app->flash('error', 'Het is niet gelukt helaas');
+    } else {
+        $app->flash('success', 'Account aangemaakt');
+    }
+
+    $app->redirect("/dashboard/accounts");
+
+});
+
 
 
 /**
@@ -618,7 +673,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "m" => $m,
         "Y" => $y,
         "image_api" => $image_api,
-        "timestamp" => $res['_timestamp'],
+        //"timestamp" => $res['_timestamp'],
         "map" => $mapOptions,
         "adamlogo" => true,
         "analytics" => $analytics,
@@ -688,7 +743,7 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
         "m" => $m,
         "Y" => $y,
         "image_api" => $image_api,
-        "timestamp" => $res['_timestamp'],
+        //"timestamp" => $res['_timestamp'],
         "map" => $mapOptions,
         "analytics" => $analytics,
         "template" => "details.twig",

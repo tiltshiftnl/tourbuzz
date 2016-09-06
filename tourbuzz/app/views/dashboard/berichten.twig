@@ -32,15 +32,7 @@ $(function() {
 {% endblock %}
 
 {% block header %}
-    <header class="main-header dashboard">
-        <div class="wrapper">
-            <a href="/" class="home"><img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
-            <h2>
-                <a href="/dashboard/berichten">Tour Buzz <span>Dashboard</span></a>
-            </h2>
-            <a href="/dashboard/logout" class="logout">Afmelden ({{ username }})</a>
-        </div>
-    </header>
+    {% include 'dashboard/partials/header.twig' %}
 {% endblock %}
 
 {% block topselectie %}{% endblock %}
@@ -48,6 +40,10 @@ $(function() {
 {% block main %}
 <main class="wrapper">
     <div class="col-1-1">
+
+    <div>
+        <a href="/dashboard/accounts">Accounts</a>
+    </div>
 
     {% if bericht.id is empty and not show_form %}
         <button onclick="$('form').css({position: 'relative', left: 0}); $(this).hide()">Nieuw bericht</button>
