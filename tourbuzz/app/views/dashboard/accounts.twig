@@ -12,18 +12,17 @@
 
     {#<button onclick="#">Nieuw account</button>#}
 
-    <form class="form-styles" method="post">
+    <form class="form-styles" method="post" autocomplete="false">
         <h2 style="margin-bottom: 10px">Nieuw account</h2>
-        <input type="text" placeholder="Gebruikersnaam" name="username" autocomplete="off">
-        <input type="text" placeholder="E-mail" name="mail" autocomplete="off">
-        <input type="password" placeholder="Wachtwoord" name="password" autocomplete="off">
-        <input type="password" placeholder="Wachtwoord herhalen" name="password-check" autocomplete="off">
+        <input type="text" placeholder="Gebruikersnaam" name="username">
+        <input type="text" placeholder="E-mail" name="mail">
+        <input type="password" placeholder="Wachtwoord" name="password">
         <button type="submit" name="submit" value="toevoegen">Toevoegen</button>
     </form>
 
     <table>
         <tr>
-            <th>Naam</th>
+            <th>Gebruikersnaam</th>
             <th>E-mail</th>
             <th>&nbsp;</th>
         </tr>

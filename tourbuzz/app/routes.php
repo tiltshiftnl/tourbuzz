@@ -384,6 +384,12 @@ $app->get('/dashboard/wachtwoord-vergeten', function () {
  */
 $app->get('/dashboard/accounts', function () use ($app) {
 
+    if ( empty($_SESSION['username']) ) {
+        $_SESSION['redirect_url'] = "/dashboard/accounts";
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
     $accounts = $app->api->get("accounts?token={$_SESSION['auth_token']}");
 
     $data = [
