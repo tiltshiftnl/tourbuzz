@@ -39,7 +39,7 @@ $result = [
     "_datum" => date("Y-m-d"),
 	"_uri" => $uriParts,
 	"_bron" => $sourceUrl,
-	"_pogingen" => $tries,
+	"_pogingen" => 0,
 ];
 
 foreach ($jsonData->in_uitstaphaltes as $data) {
