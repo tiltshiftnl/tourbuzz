@@ -100,5 +100,15 @@ class ApiClient {
 
         return true;
     }
+
+    public function deleteNew($uri) {
+        $requestUri = "{$this->_apiRoot}{$uri}";
+        try {
+            $res = $this->_guzzle->request('DELETE', $requestUri);
+        } catch (BadResponseException $exception) {
+            return null;
+        }
+        return new ApiResponse($res);
+    }
 }
 

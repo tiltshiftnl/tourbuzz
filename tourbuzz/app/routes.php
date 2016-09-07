@@ -532,13 +532,13 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
         $app->redirect("/dashboard/login");
     }
 
-
-    die ("Verwijderen");
-    $token = $_SESSION['auth_token'];
     $app->api->setToken($_SESSION['auth_token']);
-    //$res = $app->api->delete("accounts", $fields);
+    /**
+     * @var ApiResponse $apiResponse
+     */
+    $apiResponse = $app->api->deleteNew("accounts/" . $slug);
 
-    if (!$res) {
+    if (200 !== $apiResponse->getStatusCode()) {
         $app->flash('error', 'Het is niet gelukt helaas');
     } else {
         $app->flash('success', 'Account is verwijderd');
