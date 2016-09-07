@@ -18,7 +18,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 }
 
-@mixin grayscale { 
+@mixin grayscale {
   -webkit-filter: grayscale(50%);
   -moz-filter: grayscale(50%);
   -ms-filter: grayscale(50%);
