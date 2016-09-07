@@ -1,6 +1,7 @@
 <?php
 
 class ApiResponse {
+
     /**
      * @var int $statusCode
      */
@@ -15,20 +16,5 @@ class ApiResponse {
         $this->statusCode = $res->getStatusCode();
         $this->body       = json_decode($res->getBody(), true);
     }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode() {
-        return $this->statusCode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBody() {
-        return $this->body;
-    }
-
 
 }
