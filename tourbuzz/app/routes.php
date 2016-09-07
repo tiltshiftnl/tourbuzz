@@ -556,7 +556,7 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
 $app->get('/dashboard/logout', function () use ($app) {
 
     if ( !empty($_SESSION['auth_token']) ) {
-        $res = $app->api->delete("auth?token={$_SESSION['auth_token']}");
+        $res = $app->api->deleteNew("auth?token={$_SESSION['auth_token']}");
         unset($_SESSION['auth_token']);
         unset($_SESSION['username']);
         session_destroy();
