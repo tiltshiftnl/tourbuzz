@@ -373,9 +373,49 @@ $app->post('/dashboard/login', function () use ($app) {
 /**
  * Wachtwoord vergeten
  */
-$app->get('/dashboard/wachtwoord-vergeten', function () {
+$app->get('/wachtwoordvergeten', function () use ($app) {
 
-    render("dashboard/wachtwoord-vergeten.twig");
+    $data = [
+        "template" => "dashboard/wachtwoord-vergeten.twig",
+    ];
+
+    render($data["template"], $data);
+
+});
+
+/**
+ * Wachtwoord vergeten post
+ */
+$app->post('/wachtwoordvergeten', function () use ($app) {
+
+    $fields = array(
+        'username' => $app->request->post('username'),
+    );
+
+    $res = $app->api->post("vergeten", $fields);
+
+    if (!$res) {
+        $app->flash('success', 'Mail verzonden');
+    } else {
+        $app->flash('success', 'Mail verzonden?');
+    }
+
+    $app->redirect("/wachtwoordvergeten");
+
+});
+
+/**
+ * Wachtwoord vergeten
+ */
+$app->get('/wachtwoordvergeten/:token', function ($token) use ($app) {
+
+    $data = [
+        "token" => $token,
+        "template" => "dashboard/wachtwoord-instellen.twig",
+    ];
+
+    render($data["template"], $data);
+
 });
 
 
@@ -393,6 +433,7 @@ $app->get('/dashboard/accounts', function () use ($app) {
     $accounts = $app->api->get("accounts?token={$_SESSION['auth_token']}");
 
     $data = [
+        "token" => $_SESSION['auth_token'],
         "navsection" => "Accounts",
         "accounts" => $accounts,
         "username" => $_SESSION['username'],
@@ -423,6 +464,84 @@ $app->post('/dashboard/accounts', function () use ($app) {
         $app->flash('error', 'Het is niet gelukt helaas');
     } else {
         $app->flash('success', 'Account aangemaakt');
+    }
+
+    $app->redirect("/dashboard/accounts");
+
+});
+
+
+/**
+ * Account detail
+ */
+$app->get('/dashboard/accounts/:slug', function ($slug) use ($app) {
+
+    if ( empty($_SESSION['username']) ) {
+        $_SESSION['redirect_url'] = "/dashboard/accounts";
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
+    $account = $app->api->get("accounts/{$slug}?token={$_SESSION['auth_token']}");
+
+    $data = [
+        "navsection" => "Accounts",
+        "account" => $account,
+        "username" => $_SESSION['username'],
+        "template" => "dashboard/account-bewerken.twig",
+    ];
+
+    render($data["template"], $data);
+});
+
+
+
+/**
+ * Edit account
+ */
+$app->post('/dashboard/accounts/:slug', function ($slug) use ($app) {
+
+   $fields = array(
+        'username' => $app->request->post('username'),
+        'password' => $app->request->post('password'),
+        'mail' => $app->request->post('mail'),
+    );
+
+    $token = $_SESSION['auth_token'];
+    $app->api->setToken($_SESSION['auth_token']);
+    $res = $app->api->put("accounts", $fields);
+
+    if (!$res) {
+        $app->flash('error', 'Het is niet gelukt helaas');
+    } else {
+        $app->flash('success', 'Account aangepast');
+    }
+
+    $app->redirect("/dashboard/accounts");
+
+});
+
+/**
+ * Account verwijderen
+ */
+$app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
+
+    if ( empty($_SESSION['username']) ) {
+        $_SESSION['redirect_url'] = "/dashboard/accounts";
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
+
+    die ("Verwijderen");
+    $token = $_SESSION['auth_token'];
+    $app->api->setToken($_SESSION['auth_token']);
+    //$res = $app->api->delete("accounts", $fields);
+
+    if (!$res) {
+        $app->flash('error', 'Het is niet gelukt helaas');
+    } else {
+        $app->flash('success', 'Account is verwijderd');
     }
 
     $app->redirect("/dashboard/accounts");
@@ -614,6 +733,13 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
     $app->redirect("/dashboard/berichten");
 });
 
+
+/**
+ * Current token
+ */
+$app->get('/token', function () use ($app) {
+    die($_SESSION['auth_token']);
+});
 
 /**
  * Dashboard wildcard redirect.

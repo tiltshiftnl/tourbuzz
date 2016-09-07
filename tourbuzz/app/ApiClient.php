@@ -48,6 +48,21 @@ class ApiClient {
         return json_decode($res->getBody(), true);
     }
 
+    public function put($uri, $fields) {
+        $requestUri = "{$this->_apiRoot}{$uri}";
+        if (!empty($this->_token)) {
+            $requestUri .= "?token={$this->_token}";
+        }
+        try {
+            $res = $this->_guzzle->request('PUT', $requestUri, [
+                'form_params' => $fields
+            ]);
+        } catch (BadResponseException $exception) {
+            return null;
+        }
+        return json_decode($res->getBody(), true);
+    }
+
     public function delete($uri, $ids = []) {
 
         // To remove authentication token for login.
