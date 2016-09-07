@@ -5,6 +5,7 @@
       <input type="hidden" name="image_url" value="{{ bericht.image_url }}">
   {% else %}
       <input type="file" onchange="asyncImageUpload(this)">
+      <input type="hidden" name="image_url" value="">
   {% endif %}
 </div>
 
@@ -35,7 +36,7 @@
 	}
 	
 	function asyncImageUploadReset() {
-	  el.innerHTML = '<input type="file" onchange="asyncImageUpload(this)">';
+	  el.innerHTML = '<input type="file" onchange="asyncImageUpload(this)"><input type="hidden" name="image_url" value="">';
 	}
 </script>
 
