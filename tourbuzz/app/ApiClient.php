@@ -1,5 +1,7 @@
 <?php
 
+require_once "ApiResponse.php";
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
