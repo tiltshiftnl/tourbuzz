@@ -120,8 +120,8 @@ $app->get('/', function () use ($app, $apiRoot) {
  */
 $app->get('/haltes', function () use ($app, $analytics) {
 
-    $res = $app->api->get("haltes");
-    $haltes = $res['haltes'];
+    $apiResponse = $app->api->get("haltes");
+    $haltes = $apiResponse->getBody()['haltes'];
 
     // Amsterdam Center Point.
     $center = [
@@ -160,8 +160,8 @@ $app->get('/haltes', function () use ($app, $analytics) {
  */
 $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
 
-    $res = $app->api->get("haltes");
-    $haltes = $res['haltes'];
+    $apiResponse = $app->api->get("haltes");
+    $haltes = $apiResponse->getBody()['haltes'];
     $halte = $haltes[$slug];
 
     $center = $halte['location'];
@@ -198,8 +198,8 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
  */
 $app->get('/parkeren', function () use ($app, $analytics) {
 
-    $res = $app->api->get("parkeerplaatsen");
-    $parkeerplaatsen = $res['parkeerplaatsen'];
+    $apiResponse = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $apiResponse->getBody()['parkeerplaatsen'];
 
     // Amsterdam Center Point.
     $center = [
@@ -238,8 +238,8 @@ $app->get('/parkeren', function () use ($app, $analytics) {
  */
 $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
 
-    $res = $app->api->get("parkeerplaatsen");
-    $parkeerplaatsen = $res['parkeerplaatsen'];
+    $apiResponse = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $apiResponse->getBody()['parkeerplaatsen'];
     $parkeerplaats = $parkeerplaatsen[$slug];
 
     $center = $parkeerplaats['location'];
@@ -293,9 +293,9 @@ $app->get('/rss', function () use ($app) {
     list($Y, $m, $d) = explode("-", date("Y-m-d"));
     $dateurlstring = "{$Y}/{$m}/{$d}";
 
-    $res = $app->api->get("berichten/{$dateurlstring}");
+    $apiResponse = $app->api->get("berichten/{$dateurlstring}");
 
-    $berichten = array_filter($res['messages'], function ($bericht) {
+    $berichten = array_filter($apiResponse->getBody()['messages'], function ($bericht) {
         return !empty($bericht['is_live']);
     });
 
@@ -348,25 +348,30 @@ $app->post('/dashboard/login', function () use ($app) {
         'password' => $app->request->post('password')
     );
 
-    $res = $app->api->post("auth", $fields);
-    if (!$res) {
-        $app->flash('error', 'Onjuiste inloggegevens');
-        $app->redirect("/dashboard/login");
+    $apiResponse = $app->api->post("auth", $fields);
+    $statusCode = $apiResponse->getStatusCode();
+
+    switch ($statusCode) {
+        case '200':
+            $_SESSION['auth_token'] = $apiResponse->getBody()['token'];
+            $_SESSION['username']   = $app->request->post('username');
+
+            if ( !empty($_SESSION['redirect_url']) ) {
+                $target = $_SESSION['redirect_url'];
+                unset($_SESSION['redirect_url']);
+            } else {
+                $target = "/dashboard/berichten";
+            }
+
+            $app->flash('success', 'Je bent nu ingelogd');
+            $app->redirect($target);
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
+            $app->redirect("/dashboard/login");
     }
 
-    $_SESSION['auth_token'] = $res['token'];
-    $_SESSION['username']   = $app->request->post('username');
-
-    $app->flash('success', 'Je bent ingelogd');
-
-    if ( !empty($_SESSION['redirect_url']) ) {
-        $target = $_SESSION['redirect_url'];
-        unset($_SESSION['redirect_url']);
-    } else {
-        $target = "/dashboard/berichten";
-    }
-
-    $app->redirect($target);
 });
 
 
@@ -392,12 +397,16 @@ $app->post('/wachtwoordvergeten', function () use ($app) {
         'username' => $app->request->post('username'),
     );
 
-    $res = $app->api->post("vergeten", $fields);
+    $apiResponse = $app->api->post("vergeten", $fields);
+    $statusCode = $apiResponse->getStatusCode();
 
-    if (!$res) {
-        $app->flash('success', 'Mail verzonden');
-    } else {
-        $app->flash('success', 'Mail verzonden?');
+    switch ($statusCode) {
+        case '200':
+            $app->flash('success', 'Mail verzonden');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
     }
 
     $app->redirect("/wachtwoordvergeten");
@@ -430,7 +439,8 @@ $app->get('/dashboard/accounts', function () use ($app) {
         $app->redirect("/dashboard/login");
     }
 
-    $accounts = $app->api->get("accounts?token={$_SESSION['auth_token']}");
+    $apiResponse = $app->api->get("accounts?token={$_SESSION['auth_token']}");
+    $accounts = $apiResponse->getBody();
 
     $data = [
         "token" => $_SESSION['auth_token'],
@@ -455,16 +465,17 @@ $app->post('/dashboard/accounts', function () use ($app) {
         'mail' => $app->request->post('mail'),
     );
 
-    $token = $_SESSION['auth_token'];
-
     $app->api->setToken($_SESSION['auth_token']);
+    $apiResponse = $app->api->post("accounts", $fields);
+    $statusCode = $apiResponse->getStatusCode();
 
-    $res = $app->api->post("accounts", $fields);
+    switch ($statusCode) {
+        case '200':
+            $app->flash('success', 'Account is aangemaakt');
+            break;
 
-    if (!$res) {
-        $app->flash('error', 'Het is niet gelukt helaas');
-    } else {
-        $app->flash('success', 'Account aangemaakt');
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
     }
 
     $app->redirect("/dashboard/accounts");
@@ -483,7 +494,8 @@ $app->get('/dashboard/accounts/:slug', function ($slug) use ($app) {
         $app->redirect("/dashboard/login");
     }
 
-    $account = $app->api->get("accounts/{$slug}?token={$_SESSION['auth_token']}");
+    $apiResponse = $app->api->get("accounts/{$slug}?token={$_SESSION['auth_token']}");
+    $account = $apiResponse->getBody();
 
     $data = [
         "navsection" => "Accounts",
@@ -508,14 +520,17 @@ $app->post('/dashboard/accounts/:slug', function ($slug) use ($app) {
         'mail' => $app->request->post('mail'),
     );
 
-    $token = $_SESSION['auth_token'];
     $app->api->setToken($_SESSION['auth_token']);
-    $res = $app->api->put("accounts", $fields);
+    $apiResponse = $app->api->put("accounts", $fields);
+    $statusCode = $apiResponse->getStatusCode();
 
-    if (!$res) {
-        $app->flash('error', 'Het is niet gelukt helaas');
-    } else {
-        $app->flash('success', 'Account aangepast');
+    switch ($statusCode) {
+        case '200':
+            $app->flash('success', 'Account aangepast!');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
     }
 
     $app->redirect("/dashboard/accounts");
@@ -534,15 +549,16 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
     }
 
     $app->api->setToken($_SESSION['auth_token']);
-    /**
-     * @var ApiResponse $apiResponse
-     */
     $apiResponse = $app->api->delete("accounts/" . $slug);
+    $statusCode = $apiResponse->getStatusCode();
 
-    if (200 !== $apiResponse->getStatusCode()) {
-        $app->flash('error', 'Het is niet gelukt helaas');
-    } else {
-        $app->flash('success', 'Account is verwijderd');
+    switch ($statusCode) {
+        case '200':
+            $app->flash('success', 'Account is verwijderd!');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
     }
 
     $app->redirect("/dashboard/accounts");
@@ -557,7 +573,7 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
 $app->get('/dashboard/logout', function () use ($app) {
 
     if ( !empty($_SESSION['auth_token']) ) {
-        $res = $app->api->delete("auth?token={$_SESSION['auth_token']}");
+        $apiResponse = $app->api->delete("auth?token={$_SESSION['auth_token']}");
         unset($_SESSION['auth_token']);
         unset($_SESSION['username']);
         session_destroy();
@@ -573,30 +589,22 @@ $app->get('/dashboard/logout', function () use ($app) {
 /**
  * Overview of messages (berichten).
  */
-$app->get('/dashboard/berichten', function () use (
-    $app,
-    $image_api // Needed for image upload.
-) {
+$app->get('/dashboard/berichten', function () use ($app, $image_api) {
 
-    // Check token.
-    if ( empty($_SESSION['auth_token']) ) {
+    if ( empty($_SESSION['username']) ) {
+        $_SESSION['redirect_url'] = "/dashboard/berichten";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
     }
 
-    $res = $app->api->get("auth?token={$_SESSION['auth_token']}");
-    if (!$res) {
-        $app->redirect("/dashboard/logout");
-    }
-
-    $res = $app->api->get("berichten");
+    $apiResponse = $app->api->get("berichten");
 
     $data = [
         "bericht" => [ // Default values for new message (bericht).
             "startdate" => date("Y-m-d"),
             "enddate" => date("Y-m-d"),
         ],
-        "berichten" => $res['messages'],
+        "berichten" => $apiResponse->getBody()['messages'],
         "image_api" => $image_api,
         "username" => $_SESSION['username'],
         "template" => "dashboard/berichten.twig",
@@ -645,10 +653,11 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
     if ( empty ($fields['title']) ) {
         $app->flashNow('error', 'Titel is niet ingevuld');
 
-        $berichten = $app->api->get("berichten");
+        $apiResponse = $app->api->get("berichten");
+        $berichten = $apiResponse->getBody()['messages'];
 
         $data = [
-            "berichten" => $berichten['messages'],
+            "berichten" => $berichten,
             "bericht" => $fields,
             "image_api" => $image_api,
             "username" => $_SESSION['username'],
@@ -659,13 +668,18 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         render($data['template'], $data);
     } else {
 
-        $token = $_SESSION['auth_token'];
-
         $app->api->setToken($_SESSION['auth_token']);
-        $res = $app->api->post("berichten", $fields);
-        if (!$res) {
-            $app->flash('error', 'Mag niet! Unauthorized');
-            $app->redirect("/dashboard/berichten");
+        $apiResponse = $app->api->post("berichten", $fields);
+        $statusCode = $apiResponse->getStatusCode();
+
+        switch ($statusCode) {
+            case '200':
+                $app->flash('success', 'Bericht toegevoegd');
+                break;
+
+            default:
+                $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
+                $app->redirect("/dashboard/berichten");
         }
 
         // Mail when a new bericht is added successfully.
@@ -677,7 +691,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
             if ( empty($fields['title_de']) ) {
                 $notes .= " NOTE: Geen Duitse vertaling.";
             }
-            sendNewBerichtMail($res['id'], $fields['title']);
+            //sendNewBerichtMail($apiResponse->getBody()['id'], $fields['title']);
             $app->flash('success', 'Bericht toegevoegd.' . $notes);
         } else if ($app->request->post("submit") === "dupliceren") {
             $app->flash('success', 'Bericht gedupliceerd');
@@ -695,17 +709,18 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
  */
 $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
 
-    $berichten = $app->api->get("berichten");
-
     if ( empty($_SESSION['username']) ) {
         $_SESSION['redirect_url'] = "/dashboard/berichten/{$id}";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
     }
 
+    $apiResponse = $app->api->get("berichten");
+    $berichten = $apiResponse->getBody()['messages'];
+
     $data = [
-        "bericht" => $berichten['messages'][$id],
-        "berichten" => $berichten['messages'],
+        "bericht" => $berichten[$id],
+        "berichten" => $berichten,
         "image_api" => $image_api,
         "username" => $_SESSION['username'],
         "template" => "dashboard/berichten.twig",
@@ -724,7 +739,7 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
     $token = $_SESSION['auth_token'];
 
     $app->api->setToken($_SESSION['auth_token']);
-    $res = $app->api->deleteBerichten("berichten", $ids);
+    $res = $app->api->deleteBerichten("berichten", $ids); // FIXME
     if (!$res) {
         $app->flash('error', 'Mag niet! Unauthorized');
         $app->redirect("/dashboard/berichten");
@@ -755,9 +770,11 @@ $app->get('/dashboard/(:wildcard+)', function () use ($app) {
  */
 $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
 
-    $res = $app->api->get("berichten/{$y}/{$m}/{$d}");
+    //$res = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
-    $berichten = array_filter($res['messages'], function ($bericht) {
+    $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
+
+    $berichten = array_filter($apiResponse->getBody()['messages'], function ($bericht) {
         return !empty($bericht['is_live']);
     });
 
@@ -822,9 +839,9 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
  */
 $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $image_api) {
 
-    $res = $app->api->get("berichten/{$y}/{$m}/{$d}");
+    $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
-    $berichten = array_filter($res['messages'], function ($bericht) {
+    $berichten = array_filter($apiResponse->getBody()['messages'], function ($bericht) {
         return !empty($bericht['is_live']);
     });
 
@@ -891,10 +908,11 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
  */
 $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
 
-    $res = $app->api->get("berichten/{$id}");
+    $apiResponse = $app->api->get("berichten/{$id}");
+    $bericht = $apiResponse->getBody()['messages'];
 
     $data = [
-        "bericht" => $res['message'],
+        "bericht" => $bericht,
         "analytics" => $analytics,
         "template" => "bericht.twig",
     ];

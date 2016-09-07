@@ -27,42 +27,67 @@ class ApiClient {
 
     public function get($uri) {
         $requestUri = "{$this->_apiRoot}{$uri}";
+
         try {
-            $res = $this->_guzzle->request('GET', $requestUri);
+            $res = $this->_guzzle->request('GET', $requestUri, [
+                'http_errors' => false
+            ]);
         } catch (BadResponseException $exception) {
             return null;
         }
-        return json_decode($res->getBody(), true);
+
+        return new ApiResponse($res);
     }
 
     public function post($uri, $fields) {
         $requestUri = "{$this->_apiRoot}{$uri}";
+
         if (!empty($this->_token)) {
             $requestUri .= "?token={$this->_token}";
         }
+
         try {
             $res = $this->_guzzle->request('POST', $requestUri, [
-                'form_params' => $fields
+                'form_params' => $fields,
+                'http_errors' => false
             ]);
         } catch (BadResponseException $exception) {
             return null;
         }
-        return json_decode($res->getBody(), true);
+
+        return new ApiResponse($res);
     }
 
     public function put($uri, $fields) {
         $requestUri = "{$this->_apiRoot}{$uri}";
+
         if (!empty($this->_token)) {
             $requestUri .= "?token={$this->_token}";
         }
+
         try {
             $res = $this->_guzzle->request('PUT', $requestUri, [
-                'form_params' => $fields
+                'form_params' => $fields,
+                'http_errors' => false
             ]);
         } catch (BadResponseException $exception) {
             return null;
         }
-        return json_decode($res->getBody(), true);
+
+        return new ApiResponse($res);
+    }
+
+    public function delete($uri) {
+        $requestUri = "{$this->_apiRoot}{$uri}";
+        try {
+            $res = $this->_guzzle->request('DELETE', $requestUri, [
+                'http_errors' => false
+            ]);
+        } catch (BadResponseException $exception) {
+            return null;
+        }
+
+        return new ApiResponse($res);
     }
 
     /* FIXME */
@@ -92,14 +117,5 @@ class ApiClient {
         return true;
     }
 
-    public function delete($uri) {
-        $requestUri = "{$this->_apiRoot}{$uri}";
-        try {
-            $res = $this->_guzzle->request('DELETE', $requestUri);
-        } catch (BadResponseException $exception) {
-            return null;
-        }
-        return new ApiResponse($res);
-    }
 }
 

@@ -12,9 +12,9 @@
 
     <h2>Account bewerken voor {{ account.username }}</h2>
     <form class="form-styles" method="post" autocomplete="false">
-        <input type="hidden" value="{{ account.username }}">
-        <input type="text" placeholder="E-mail" name="new-mail" value="{{ account.mail }}">
-        <input type="password" placeholder="Wachtwoord" name="new-password" value="">
+        <input type="hidden" name="username" value="{{ account.username }}">
+        <input type="text" placeholder="E-mail" name="mail" value="{{ account.mail }}">
+        <input type="password" placeholder="Wachtwoord" name="password" value="">
         <button type="submit" name="submit" value="toevoegen">Aanpassen</button>
     </form>
 
