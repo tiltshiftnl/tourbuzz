@@ -65,19 +65,8 @@ class ApiClient {
         return json_decode($res->getBody(), true);
     }
 
-    public function delete($uri, $ids = []) {
-
-        // To remove authentication token for login.
-        //FIXME Create specific function deleteSession for this.
-        if (substr($uri, 0, 5) === "auth?") {
-            $requestUri = "{$this->_apiRoot}{$uri}";
-            try {
-               $this->_guzzle->request('DELETE', $requestUri);
-            } catch (BadResponseException $exception) {
-                return null;
-            }
-            return true;
-        }
+    /* FIXME */
+    public function deleteBerichten($uri, $ids = []) {
 
         // Url-ify the data for the POST (ids to delete).
         $fieldsString = '';
@@ -103,7 +92,7 @@ class ApiClient {
         return true;
     }
 
-    public function deleteNew($uri) {
+    public function delete($uri) {
         $requestUri = "{$this->_apiRoot}{$uri}";
         try {
             $res = $this->_guzzle->request('DELETE', $requestUri);

@@ -458,6 +458,7 @@ $app->post('/dashboard/accounts', function () use ($app) {
     $token = $_SESSION['auth_token'];
 
     $app->api->setToken($_SESSION['auth_token']);
+
     $res = $app->api->post("accounts", $fields);
 
     if (!$res) {
@@ -536,7 +537,7 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
     /**
      * @var ApiResponse $apiResponse
      */
-    $apiResponse = $app->api->deleteNew("accounts/" . $slug);
+    $apiResponse = $app->api->delete("accounts/" . $slug);
 
     if (200 !== $apiResponse->getStatusCode()) {
         $app->flash('error', 'Het is niet gelukt helaas');
@@ -556,7 +557,7 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
 $app->get('/dashboard/logout', function () use ($app) {
 
     if ( !empty($_SESSION['auth_token']) ) {
-        $res = $app->api->deleteNew("auth?token={$_SESSION['auth_token']}");
+        $res = $app->api->delete("auth?token={$_SESSION['auth_token']}");
         unset($_SESSION['auth_token']);
         unset($_SESSION['username']);
         session_destroy();
@@ -723,7 +724,7 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
     $token = $_SESSION['auth_token'];
 
     $app->api->setToken($_SESSION['auth_token']);
-    $res = $app->api->delete("berichten", $ids);
+    $res = $app->api->deleteBerichten("berichten", $ids);
     if (!$res) {
         $app->flash('error', 'Mag niet! Unauthorized');
         $app->redirect("/dashboard/berichten");
