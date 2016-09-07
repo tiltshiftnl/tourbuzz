@@ -121,7 +121,7 @@ $app->get('/', function () use ($app, $apiRoot) {
 $app->get('/haltes', function () use ($app, $analytics) {
 
     $apiResponse = $app->api->get("haltes");
-    $haltes = $apiResponse->getBody()['haltes'];
+    $haltes = $apiResponse->body['haltes'];
 
     // Amsterdam Center Point.
     $center = [
@@ -161,7 +161,7 @@ $app->get('/haltes', function () use ($app, $analytics) {
 $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
 
     $apiResponse = $app->api->get("haltes");
-    $haltes = $apiResponse->getBody()['haltes'];
+    $haltes = $apiResponse->body['haltes'];
     $halte = $haltes[$slug];
 
     $center = $halte['location'];
@@ -199,7 +199,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
 $app->get('/parkeren', function () use ($app, $analytics) {
 
     $apiResponse = $app->api->get("parkeerplaatsen");
-    $parkeerplaatsen = $apiResponse->getBody()['parkeerplaatsen'];
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
 
     // Amsterdam Center Point.
     $center = [
@@ -239,7 +239,7 @@ $app->get('/parkeren', function () use ($app, $analytics) {
 $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
 
     $apiResponse = $app->api->get("parkeerplaatsen");
-    $parkeerplaatsen = $apiResponse->getBody()['parkeerplaatsen'];
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
     $parkeerplaats = $parkeerplaatsen[$slug];
 
     $center = $parkeerplaats['location'];
@@ -295,7 +295,7 @@ $app->get('/rss', function () use ($app) {
 
     $apiResponse = $app->api->get("berichten/{$dateurlstring}");
 
-    $berichten = array_filter($apiResponse->getBody()['messages'], function ($bericht) {
+    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
         return !empty($bericht['is_live']);
     });
 
@@ -349,11 +349,10 @@ $app->post('/dashboard/login', function () use ($app) {
     );
 
     $apiResponse = $app->api->post("auth", $fields);
-    $statusCode = $apiResponse->getStatusCode();
 
-    switch ($statusCode) {
+    switch ($apiResponse->statusCode) {
         case '200':
-            $_SESSION['auth_token'] = $apiResponse->getBody()['token'];
+            $_SESSION['auth_token'] = $apiResponse->body['token'];
             $_SESSION['username']   = $app->request->post('username');
 
             if ( !empty($_SESSION['redirect_url']) ) {
@@ -368,7 +367,7 @@ $app->post('/dashboard/login', function () use ($app) {
             break;
 
         default:
-            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
             $app->redirect("/dashboard/login");
     }
 
@@ -398,15 +397,14 @@ $app->post('/wachtwoordvergeten', function () use ($app) {
     );
 
     $apiResponse = $app->api->post("vergeten", $fields);
-    $statusCode = $apiResponse->getStatusCode();
 
-    switch ($statusCode) {
+    switch ($apiResponse->statusCode) {
         case '200':
             $app->flash('success', 'Mail verzonden');
             break;
 
         default:
-            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
     }
 
     $app->redirect("/wachtwoordvergeten");
@@ -440,7 +438,7 @@ $app->get('/dashboard/accounts', function () use ($app) {
     }
 
     $apiResponse = $app->api->get("accounts?token={$_SESSION['auth_token']}");
-    $accounts = $apiResponse->getBody();
+    $accounts = $apiResponse->body;
 
     $data = [
         "token" => $_SESSION['auth_token'],
@@ -467,15 +465,14 @@ $app->post('/dashboard/accounts', function () use ($app) {
 
     $app->api->setToken($_SESSION['auth_token']);
     $apiResponse = $app->api->post("accounts", $fields);
-    $statusCode = $apiResponse->getStatusCode();
 
-    switch ($statusCode) {
+    switch ($apiResponse->statusCode) {
         case '200':
             $app->flash('success', 'Account is aangemaakt');
             break;
 
         default:
-            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
     }
 
     $app->redirect("/dashboard/accounts");
@@ -495,7 +492,7 @@ $app->get('/dashboard/accounts/:slug', function ($slug) use ($app) {
     }
 
     $apiResponse = $app->api->get("accounts/{$slug}?token={$_SESSION['auth_token']}");
-    $account = $apiResponse->getBody();
+    $account = $apiResponse->body;
 
     $data = [
         "navsection" => "Accounts",
@@ -522,15 +519,14 @@ $app->post('/dashboard/accounts/:slug', function ($slug) use ($app) {
 
     $app->api->setToken($_SESSION['auth_token']);
     $apiResponse = $app->api->put("accounts", $fields);
-    $statusCode = $apiResponse->getStatusCode();
 
-    switch ($statusCode) {
+    switch ($apiResponse->statusCode) {
         case '200':
             $app->flash('success', 'Account aangepast!');
             break;
 
         default:
-            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
     }
 
     $app->redirect("/dashboard/accounts");
@@ -550,15 +546,14 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
 
     $app->api->setToken($_SESSION['auth_token']);
     $apiResponse = $app->api->delete("accounts/" . $slug);
-    $statusCode = $apiResponse->getStatusCode();
 
-    switch ($statusCode) {
+    switch ($apiResponse->statusCode) {
         case '200':
             $app->flash('success', 'Account is verwijderd!');
             break;
 
         default:
-            $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
     }
 
     $app->redirect("/dashboard/accounts");
@@ -604,7 +599,7 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
             "startdate" => date("Y-m-d"),
             "enddate" => date("Y-m-d"),
         ],
-        "berichten" => $apiResponse->getBody()['messages'],
+        "berichten" => $apiResponse->body['messages'],
         "image_api" => $image_api,
         "username" => $_SESSION['username'],
         "template" => "dashboard/berichten.twig",
@@ -654,7 +649,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         $app->flashNow('error', 'Titel is niet ingevuld');
 
         $apiResponse = $app->api->get("berichten");
-        $berichten = $apiResponse->getBody()['messages'];
+        $berichten = $apiResponse->body['messages'];
 
         $data = [
             "berichten" => $berichten,
@@ -670,15 +665,14 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
 
         $app->api->setToken($_SESSION['auth_token']);
         $apiResponse = $app->api->post("berichten", $fields);
-        $statusCode = $apiResponse->getStatusCode();
 
-        switch ($statusCode) {
+        switch ($apiResponse->statusCode) {
             case '200':
                 $app->flash('success', 'Bericht toegevoegd');
                 break;
 
             default:
-                $app->flash('error', 'Het is niet gelukt helaas: '.$statusCode);
+                $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
                 $app->redirect("/dashboard/berichten");
         }
 
@@ -691,7 +685,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
             if ( empty($fields['title_de']) ) {
                 $notes .= " NOTE: Geen Duitse vertaling.";
             }
-            //sendNewBerichtMail($apiResponse->getBody()['id'], $fields['title']);
+            //sendNewBerichtMail($apiResponse->body['id'], $fields['title']);
             $app->flash('success', 'Bericht toegevoegd.' . $notes);
         } else if ($app->request->post("submit") === "dupliceren") {
             $app->flash('success', 'Bericht gedupliceerd');
@@ -716,7 +710,7 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
     }
 
     $apiResponse = $app->api->get("berichten");
-    $berichten = $apiResponse->getBody()['messages'];
+    $berichten = $apiResponse->body['messages'];
 
     $data = [
         "bericht" => $berichten[$id],
@@ -774,7 +768,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
 
     $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
-    $berichten = array_filter($apiResponse->getBody()['messages'], function ($bericht) {
+    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
         return !empty($bericht['is_live']);
     });
 
@@ -841,7 +835,7 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
 
     $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
-    $berichten = array_filter($apiResponse->getBody()['messages'], function ($bericht) {
+    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
         return !empty($bericht['is_live']);
     });
 
@@ -909,7 +903,7 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
 $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
 
     $apiResponse = $app->api->get("berichten/{$id}");
-    $bericht = $apiResponse->getBody()['messages'];
+    $bericht = $apiResponse->body['messages'];
 
     $data = [
         "bericht" => $bericht,

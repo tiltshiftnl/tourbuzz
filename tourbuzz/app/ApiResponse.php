@@ -4,12 +4,12 @@ class ApiResponse {
     /**
      * @var int $statusCode
      */
-    protected $statusCode;
+    public $statusCode;
 
     /**
      * @var string $body
      */
-    protected $body;
+    public $body;
 
     public function __construct($res) {
         $this->statusCode = $res->getStatusCode();
