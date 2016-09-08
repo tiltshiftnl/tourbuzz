@@ -271,6 +271,65 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
 });
 
 
+
+/******************************
+ * Wachtwoord vergeten Routes *
+ ******************************/
+
+
+
+/**
+ * Wachtwoord vergeten
+ */
+$app->get('/wachtwoordvergeten', function () use ($app) {
+
+    $data = [
+        "template" => "dashboard/wachtwoord-vergeten.twig",
+    ];
+
+    render($data["template"], $data);
+
+});
+
+/**
+ * Wachtwoord vergeten post
+ */
+$app->post('/wachtwoordvergeten', function () use ($app) {
+
+    $fields = array(
+        'username' => $app->request->post('username'),
+    );
+
+    $apiResponse = $app->api->post("vergeten", $fields);
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'Mail verzonden');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+    }
+
+    $app->redirect("/wachtwoordvergeten");
+
+});
+
+/**
+ * Wachtwoord vergeten
+ */
+$app->get('/wachtwoordvergeten/:token', function ($token) use ($app) {
+
+    $data = [
+        "token" => $token,
+        "template" => "dashboard/wachtwoord-instellen.twig",
+    ];
+
+    render($data["template"], $data);
+
+});
+
+
 /**
  * Overview of downloadable formats for GPS navigation.
  */
@@ -315,9 +374,9 @@ $app->get('/rss', function () use ($app) {
 });
 
 
-/****************
- * Admin Routes *
- ****************/
+/********************
+ * Dashboard Routes *
+ *******************/
 
 
 /**
@@ -375,55 +434,27 @@ $app->post('/dashboard/login', function () use ($app) {
 
 
 /**
- * Wachtwoord vergeten
+ * Logout.
  */
-$app->get('/wachtwoordvergeten', function () use ($app) {
+$app->get('/dashboard/logout', function () use ($app) {
 
-    $data = [
-        "template" => "dashboard/wachtwoord-vergeten.twig",
-    ];
+    if ( !empty($_SESSION['auth_token']) ) {
+        $apiResponse = $app->api->delete("auth?token={$_SESSION['auth_token']}");
+        unset($_SESSION['auth_token']);
+        unset($_SESSION['username']);
+        session_destroy();
 
-    render($data["template"], $data);
-
-});
-
-/**
- * Wachtwoord vergeten post
- */
-$app->post('/wachtwoordvergeten', function () use ($app) {
-
-    $fields = array(
-        'username' => $app->request->post('username'),
-    );
-
-    $apiResponse = $app->api->post("vergeten", $fields);
-
-    switch ($apiResponse->statusCode) {
-        case '200':
-            $app->flash('success', 'Mail verzonden');
-            break;
-
-        default:
-            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+        session_start();
+        $app->flash('success', 'Je bent nu uitgelogd. Tot kijk!');
     }
 
-    $app->redirect("/wachtwoordvergeten");
-
+    $app->redirect("/dashboard/login");
 });
 
-/**
- * Wachtwoord vergeten
- */
-$app->get('/wachtwoordvergeten/:token', function ($token) use ($app) {
 
-    $data = [
-        "token" => $token,
-        "template" => "dashboard/wachtwoord-instellen.twig",
-    ];
-
-    render($data["template"], $data);
-
-});
+/************
+ * Accounts *
+ ***********/
 
 
 /**
@@ -505,7 +536,6 @@ $app->get('/dashboard/accounts/:slug', function ($slug) use ($app) {
 });
 
 
-
 /**
  * Edit account
  */
@@ -532,6 +562,7 @@ $app->post('/dashboard/accounts/:slug', function ($slug) use ($app) {
     $app->redirect("/dashboard/accounts");
 
 });
+
 
 /**
  * Account verwijderen
@@ -562,23 +593,10 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
 
 
 
-/**
- * Logout.
- */
-$app->get('/dashboard/logout', function () use ($app) {
+/***********************
+ * Dashboard berichten *
+ ***********************/
 
-    if ( !empty($_SESSION['auth_token']) ) {
-        $apiResponse = $app->api->delete("auth?token={$_SESSION['auth_token']}");
-        unset($_SESSION['auth_token']);
-        unset($_SESSION['username']);
-        session_destroy();
-
-        session_start();
-        $app->flash('success', 'Je bent nu uitgelogd. Tot kijk!');
-    }
-
-    $app->redirect("/dashboard/login");
-});
 
 
 /**
@@ -762,6 +780,79 @@ $app->get('/dashboard/(:wildcard+)', function () use ($app) {
 });
 
 
+
+/***************
+ * Nieuwsbrief *
+ ***************/
+
+
+/**
+ * Nieuwsbrief aanmelden.
+ */
+$app->get('/nieuwsbrief', function () use ($app) {
+
+    $data = [
+        "lang" => $_SESSION['lang'],
+        "template" => "nieuwsbrief-aanmelden.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Nieuwsbrief aanmelden.
+ */
+$app->post('/nieuwsbrief', function () use ($app) {
+
+    $fields = array(
+        'mail' => $app->request->post('mail'),
+      	'name' => $app->request->post('name'),
+      	'language' => $app->request->post('language'),
+    );
+
+    $app->api->setToken($_SESSION['auth_token']);
+    $apiResponse = $app->api->post("mail", $fields);
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'We hebben u een mail gestuurd');
+            break;
+        case '406':
+            $app->flash('success', 'Email adres is al aangemeld');
+            $app->redirect('/nieuwsbrief');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+            $app->redirect("/nieuwsbrief");
+    }
+
+    $app->redirect(date('/Y/m/d'));
+});
+
+
+/**
+ * Nieuwsbrief bevestigen.
+ */
+$app->get('/mailbevestigen/:token', function ($token) use ($app) {
+
+    $apiResponse = $app->api->get("mail/{$token}");
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'Dank voor uw aanmelding');
+            $app->redirect(date('/Y/m/d'));
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+            $app->redirect("/nieuwsbrief");
+    }
+
+});
+
+
 /**
  * Overview of messages for a single day.
  */
@@ -897,35 +988,6 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
     ];
 
     render($data['template'], $data);
-});
-
-/**
- * Nieuwsbrief aanmelden.
- */
-$app->get('/nieuwsbrief', function () use ($app) {
-
-    $data = [
-        "lang" => $_SESSION['lang'],
-        "template" => "nieuwsbrief-aanmelden.twig",
-    ];
-
-    render($data['template'], $data);
-});
-
-
-/**
- * Nieuwsbrief aanmelden.
- */
-$app->post('/nieuwsbrief', function () use ($app) {
-
-    $fields = array(
-        'mail' => $app->request->post('mail'),
-      	'name' => $app->request->post('name'),
-      	'lang' => $app->request->post('lang'),
-    );
-
-    $app->flash('success', 'Dank voor je aanmelding (TEST)');
-    $app->redirect(date('/Y/m/d'));
 });
 
 /**
