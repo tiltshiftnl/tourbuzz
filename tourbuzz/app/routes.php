@@ -854,6 +854,67 @@ $app->get('/mailbevestigen/:token', function ($token) use ($app) {
 
 
 /**
+ * Nieuwsbrief afmelden.
+ */
+$app->get('/nieuwsbrief-afmelden', function () use ($app) {
+
+    $data = [
+        "template" => "nieuwsbrief-afmelden.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Nieuwsbrief afmelden.
+ */
+$app->post('/nieuwsbrief-afmelden', function () use ($app) {
+
+    $fields = array(
+        'mail' => $app->request->post('mail'),
+    );
+
+    $app->api->setToken($_SESSION['auth_token']);
+    $apiResponse = $app->api->post("mail/unsubscribe", $fields);
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'We hebben u een mail gestuurd');
+            break;
+
+        default:
+            //die(print_r($apiResponse->body));
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+            $app->redirect("/nieuwsbrief-afmelden");
+    }
+
+    $app->redirect('/nieuwsbrief-afmelden');
+});
+
+
+/**
+ * Nieuwsbrief afmelden bevestigen.
+ */
+$app->get('/mailannuleren/:token', function ($token) use ($app) {
+
+    $apiResponse = $app->api->get("mail/unsubscribe/{$token}");
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'Uw afmelding is verwerkt');
+            $app->redirect('/nieuwsbrief');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+            $app->redirect("/nieuwsbrief");
+    }
+
+});
+
+
+/**
  * Overview of messages for a single day.
  */
 $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
