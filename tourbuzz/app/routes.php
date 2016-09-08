@@ -1007,3 +1007,40 @@ $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
     render($data["template"], $data);
 });
 
+/**
+ * Single message (bericht).
+ */
+$app->get('/mail/csv', function () use ($app) {
+    if (empty($_SESSION['auth_token'])) {
+        $app->redirect('/dashboard/login');
+    }
+
+    /**
+     * @var ApiResponse $apiResponse
+     */
+    $apiResponse = $app->api->get('mail?token=' . $_SESSION['auth_token']);
+
+    if (200 !== $apiResponse->statusCode) {
+        $app->redirect('/dashboard/login');
+    }
+
+    $out = fopen('php://output', 'w');
+
+    fputcsv($out, ['id', 'mail','naam', 'aangemaakt', 'bevestigd', 'verwijdering aangevraagd']);
+
+    header("Content-type: text/csv");
+    header("Content-Disposition: attachment; filename=maillijst.csv");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    foreach ($apiResponse->body as $row) {
+        fputcsv($out, [
+            $row['id'],
+            $row['name'],
+            $row['created']['date'],
+            $row['confirmed']['date'],
+            $row['unsubscribeRequest']['date']
+        ]);
+    }
+});
+
