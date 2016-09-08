@@ -41,10 +41,6 @@ $(function() {
 <main class="wrapper">
     <div class="col-1-1">
 
-    <div>
-        <a href="/dashboard/accounts">Accounts</a>
-    </div>
-
     {% if bericht.id is empty and not show_form %}
         <button onclick="$('form').css({position: 'relative', left: 0}); $(this).hide()">Nieuw bericht</button>
     {% endif %}

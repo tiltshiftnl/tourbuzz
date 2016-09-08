@@ -441,10 +441,10 @@ $app->get('/dashboard/accounts', function () use ($app) {
     $accounts = $apiResponse->body;
 
     $data = [
-        "token" => $_SESSION['auth_token'],
         "navsection" => "Accounts",
         "accounts" => $accounts,
         "username" => $_SESSION['username'],
+        "activetab" => "accounts",
         "template" => "dashboard/accounts.twig",
     ];
 
@@ -495,9 +495,9 @@ $app->get('/dashboard/accounts/:slug', function ($slug) use ($app) {
     $account = $apiResponse->body;
 
     $data = [
-        "navsection" => "Accounts",
         "account" => $account,
         "username" => $_SESSION['username'],
+        "activetab" => "accounts",
         "template" => "dashboard/account-bewerken.twig",
     ];
 
@@ -602,6 +602,7 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
         "berichten" => $apiResponse->body['messages'],
         "image_api" => $image_api,
         "username" => $_SESSION['username'],
+        "activetab" => "berichten",
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -657,6 +658,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
             "image_api" => $image_api,
             "username" => $_SESSION['username'],
             "template" => "dashboard/berichten.twig",
+            "activetab" => "berichten",
             "show_form" => true,
         ];
 
@@ -717,6 +719,7 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
         "berichten" => $berichten,
         "image_api" => $image_api,
         "username" => $_SESSION['username'],
+        "activetab" => "berichten",
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -896,6 +899,17 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
     render($data['template'], $data);
 });
 
+/**
+ * Nieuwsbrief aanmelden.
+ */
+$app->get('/nieuwsbrief', function () use ($app) {
+
+    $data = [
+        "template" => "nieuwsbrief-aanmelden.twig",
+    ];
+
+    render($data['template'], $data);
+});
 
 /**
  * Single message (bericht).
