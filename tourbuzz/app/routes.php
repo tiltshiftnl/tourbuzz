@@ -905,10 +905,27 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
 $app->get('/nieuwsbrief', function () use ($app) {
 
     $data = [
+        "lang" => $_SESSION['lang'],
         "template" => "nieuwsbrief-aanmelden.twig",
     ];
 
     render($data['template'], $data);
+});
+
+
+/**
+ * Nieuwsbrief aanmelden.
+ */
+$app->post('/nieuwsbrief', function () use ($app) {
+
+    $fields = array(
+        'mail' => $app->request->post('mail'),
+      	'name' => $app->request->post('name'),
+      	'lang' => $app->request->post('lang'),
+    );
+
+    $app->flash('success', 'Dank voor je aanmelding (TEST)');
+    $app->redirect(date('/Y/m/d'));
 });
 
 /**
