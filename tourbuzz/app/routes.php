@@ -1008,7 +1008,7 @@ $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
 });
 
 /**
- * Single message (bericht).
+ * Mail lijst csv
  */
 $app->get('/mail/csv', function () use ($app) {
     if (empty($_SESSION['auth_token'])) {
