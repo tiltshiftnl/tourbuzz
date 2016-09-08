@@ -452,6 +452,37 @@ $app->get('/dashboard/logout', function () use ($app) {
 });
 
 
+
+/************
+ * Abonnees *
+ ***********/
+
+/**
+ * Accounts
+ */
+$app->get('/dashboard/abonnees', function () use ($app) {
+
+    if ( empty($_SESSION['username']) ) {
+        $_SESSION['redirect_url'] = "/dashboard/abonnees";
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
+    $apiResponse = $app->api->get("mail?token={$_SESSION['auth_token']}");
+    $abonnees = $apiResponse->body;
+
+    $data = [
+        "abonnees" => $abonnees,
+        "username" => $_SESSION['username'],
+        "activetab" => "abonnees",
+        "template" => "dashboard/abonnees.twig",
+    ];
+
+    render($data["template"], $data);
+});
+
+
+
 /************
  * Accounts *
  ***********/
