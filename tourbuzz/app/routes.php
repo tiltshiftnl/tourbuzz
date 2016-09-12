@@ -1105,3 +1105,40 @@ $app->get('/mail/csv', function () use ($app) {
     }
 });
 
+/**
+ * poi
+ */
+$app->get('/poi', function () use ($app) {
+    header("Content-type: text/csv");
+    header("Content-Disposition: attachment; filename=touringcar.csv");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    $out = fopen('php://output', 'w');
+
+    /**
+     * @var ApiResponse $apiResponse;
+     */
+    $apiResponse = $app->api->get('haltes');
+    $rs = $apiResponse->body;
+    foreach ($rs['haltes'] as $halte) {
+        fputcsv($out, [
+            $halte['location']['lng'],
+            $halte['location']['lat'],
+            $halte['haltenummer'],
+            'halte',
+        ]);
+    }
+
+    $apiResponse = $app->api->get('parkeerplaatsen');
+    $rs = $apiResponse->body;
+    foreach ($rs['parkeerplaatsen'] as $parkeerplaats) {
+        if (!$parkeerplaats['naam']) $parkeerplaats['naam'] = $parkeerplaats['nummer'];
+        fputcsv($out, [
+            $parkeerplaats['location']['lng'],
+            $parkeerplaats['location']['lat'],
+            $parkeerplaats['naam'],
+            'parkeerplaats',
+        ]);
+    }
+});
