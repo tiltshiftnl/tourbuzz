@@ -1,0 +1,35 @@
+{% extends 'base/base.twig' %}
+
+{% block header %}
+    {% include 'dashboard/partials/header.twig' %}
+{% endblock %}
+
+{% block topselectie %}{% endblock %}
+
+{% block main %}
+<main class="wrapper">
+    <div class="col-1-1">
+    <a href="/mail/csv" class="button">Download als CSV</a>
+
+    <div style="margin-top: 20px">
+        <table>
+            <tr>
+                <th>E-mail</th>
+                <th>Naam</th>
+                <th>Datum</th>
+            </tr>
+            {% for record in abonnees if record.mail %}
+            <tr>
+                <td>{{ record.mail }}</td>
+                <td>{{ record.name }}</td>
+                <td>{{ record.created.date|date('d-m-Y') }} om {{ record.created.date|date('H:i') }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}{% endblock %}
