@@ -10,16 +10,13 @@
 <main class="wrapper">
     <div class="col-1-1">
 
-    <h2>Wachtwoord instellen {{ token }}</h2>
+    <h2>Wachtwoord instellen voor {{ user.username }}</h2>
     <form class="form-styles" method="post" autocomplete="false">
-        <input type="hidden" name="token" value="{{ token }}">
+        <input type="hidden" name="username" value="{{ user.username }}">
+        <input type="hidden" name="mail" value="{{ user.mail }}">
         <input type="password" placeholder="Wachtwoord" name="password" value="">
         <button type="submit" name="submit" value="toevoegen">Aanpassen</button>
     </form>
-
-    <div>
-        <a href="">Instellen</a>
-    </div>
 
     </div>
 </main>

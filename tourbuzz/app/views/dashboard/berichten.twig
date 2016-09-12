@@ -42,7 +42,7 @@ $(function() {
     <div class="col-1-1">
 
     {% if bericht.id is empty and not show_form %}
-        <button onclick="$('form').css({position: 'relative', left: 0}); $(this).hide()">Nieuw bericht</button>
+        <button onclick="$('form').css({position: 'relative', left: 0}); $(this).hide()" class="button">Nieuw bericht</button>
     {% endif %}
 
     <form class="form-styles" method="post" action="/dashboard/berichten" {% if bericht.id is empty and not show_form %}style="position: absolute; left: -200%"{% endif %}>

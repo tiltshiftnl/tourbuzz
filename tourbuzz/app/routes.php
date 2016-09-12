@@ -277,7 +277,6 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
  ******************************/
 
 
-
 /**
  * Wachtwoord vergeten
  */
@@ -315,17 +314,51 @@ $app->post('/wachtwoordvergeten', function () use ($app) {
 
 });
 
+
 /**
- * Wachtwoord vergeten
+ * Wachtwoord vergeten instellen.
  */
 $app->get('/wachtwoordvergeten/:token', function ($token) use ($app) {
 
+    $apiResponse = $app->api->get("vergeten/{$token}");
+
+    if ( empty($apiResponse->body['username']) ) {
+        $app->flash('error', 'Ongeldige of verlopen token');
+        $app->redirect('/wachtwoordvergeten');
+    } else {
+        $_SESSION['user'] = $apiResponse->body;
+        $_SESSION['auth_token'] = $token;
+    }
+
     $data = [
-        "token" => $token,
+        "user" => $_SESSION['user'],
         "template" => "dashboard/wachtwoord-instellen.twig",
     ];
 
     render($data["template"], $data);
+});
+
+
+/**
+ * Wachtwoord instellen
+ */
+$app->post('/wachtwoordvergeten/:token', function ($token) use ($app) {
+
+    $fields = $_SESSION['user'];
+
+    $app->api->setToken($_SESSION['auth_token']);
+    $apiResponse = $app->api->put("accounts", $fields);
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'Account aangepast!');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+    }
+
+    $app->redirect("/wachtwoordinstellen/{$token}");
 
 });
 
@@ -458,7 +491,7 @@ $app->get('/dashboard/logout', function () use ($app) {
  ***********/
 
 /**
- * Accounts
+ * Abonnees
  */
 $app->get('/dashboard/abonnees', function () use ($app) {
 
