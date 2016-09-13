@@ -283,7 +283,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
 $app->get('/wachtwoordvergeten', function () use ($app) {
 
     $data = [
-        "template" => "dashboard/wachtwoord-vergeten.twig",
+        "template" => "wachtwoord-vergeten.twig",
     ];
 
     render($data["template"], $data);
@@ -328,7 +328,7 @@ $app->get('/wachtwoordvergeten/:token', function ($token) use ($app) {
     }
 
     $data = [
-        "template" => "dashboard/wachtwoord-instellen.twig",
+        "template" => "wachtwoord-instellen.twig",
     ];
 
     render($data["template"], $data);
