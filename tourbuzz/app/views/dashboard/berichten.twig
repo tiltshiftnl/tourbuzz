@@ -1,4 +1,4 @@
-{% extends 'base/base.twig' %}
+{% extends 'base/base.dashboard.twig' %}
 
 {% block scripts %}
 <script>
@@ -30,12 +30,6 @@ $(function() {
 });
 </script>
 {% endblock %}
-
-{% block header %}
-    {% include 'dashboard/partials/header.twig' %}
-{% endblock %}
-
-{% block topselectie %}{% endblock %}
 
 {% block main %}
 <main class="wrapper">
