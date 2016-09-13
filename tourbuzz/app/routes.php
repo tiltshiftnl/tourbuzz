@@ -874,7 +874,7 @@ $app->post('/nieuwsbrief', function () use ($app) {
       	'language' => $app->request->post('language'),
     );
 
-    $app->api->setToken($_SESSION['auth_token']);
+    //$app->api->setToken($_SESSION['auth_token']);
     $apiResponse = $app->api->post("mail", $fields);
 
     switch ($apiResponse->statusCode) {
@@ -938,7 +938,7 @@ $app->post('/nieuwsbrief-afmelden', function () use ($app) {
         'mail' => $app->request->post('mail'),
     );
 
-    $app->api->setToken($_SESSION['auth_token']);
+    //$app->api->setToken($_SESSION['auth_token']);
     $apiResponse = $app->api->post("mail/unsubscribe", $fields);
 
     switch ($apiResponse->statusCode) {
