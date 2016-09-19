@@ -1,0 +1,51 @@
+<style type="text/css">
+  #map { height: 400px; width: 100%; }
+</style>
+
+<div id="map"></div>
+
+<script>
+
+function initMap() {
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: {lat: 52.372981, lng: 4.901327},
+        mapTypeControl: false,
+        streetViewControl: false,
+
+        styles: [
+        {
+          featureType: 'all',
+          stylers: [
+            { saturation: -50 }
+          ]
+        }
+        ]
+    });
+
+    var markers = [];
+
+    {% for halte in haltes %}
+    var image = {
+        url: 'http://www.tourbuzz.nl/img/haltes/{{ halte.haltenummer|lower }}.png',
+    };
+
+    var marker = new google.maps.Marker({
+        position: {lat: {{ halte.location.lat }}, lng: {{ halte.location.lng }}},
+        map: map,
+        icon: image,
+        title: 'Halte'
+    });
+
+    markers.push(marker);
+    {% endfor %}
+
+    var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'img/clusters/m'});
+
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap"
+async defer>
+</script>
