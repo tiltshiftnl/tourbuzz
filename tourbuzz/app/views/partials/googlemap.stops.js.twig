@@ -45,6 +45,29 @@ function initMap() {
     {% endfor %}
 
 
+    {% for parkeerplaats in parkeerplaatsen %}
+        image = {
+            url: 'http://www.tourbuzz.nl/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png',
+            //size: new google.maps.Size(49,45), // the orignal size
+            //scaledSize: new google.maps.Size(24,22), // the new size you want to use
+            //origin: new google.maps.Point(0,22) // position in the sprite
+        };
+
+        marker = new google.maps.Marker({
+            position: {lat: {{ parkeerplaats.location.lat }}, lng: {{ parkeerplaats.location.lng }}},
+            map: map,
+            icon: image,
+            title: 'Halte',
+            nummer: '{{ parkeerplaats.nummer }}'
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            window.location = '/parkeerplaatsen/{{ parkeerplaats.nummer }}';
+        });
+
+        markers.push(marker);
+    {% endfor %}
+
     $(document).ready(function() {
         var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'img/clusters/m'});
     });

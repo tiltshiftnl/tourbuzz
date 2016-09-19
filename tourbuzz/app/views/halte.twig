@@ -8,7 +8,7 @@
             <a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>
 
             {% if record.beschikbaar %}
-                <span class="capaciteit">{{ record.capaciteit }} {{ __('plaatsen') }}</span>
+                <span class="capaciteit">{{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}</span>
             {% else %}
                 <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span>
             {% endif %}
