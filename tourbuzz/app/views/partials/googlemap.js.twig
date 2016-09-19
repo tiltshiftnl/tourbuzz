@@ -5,7 +5,6 @@
 <div id="map"></div>
 
 <script>
-
 function initMap() {
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -28,7 +27,7 @@ function initMap() {
     var markers = [];
     var marker;
 
-    {% for halte in haltes|slice %}
+    {% for halte in haltes %}
     image = {
         url: 'http://www.tourbuzz.nl/img/haltes/{{ halte.haltenummer|lower }}.png',
     };
@@ -37,15 +36,21 @@ function initMap() {
         position: {lat: {{ halte.location.lat }}, lng: {{ halte.location.lng }}},
         map: map,
         icon: image,
-        title: 'Halte'
-    }).addListener('click', function() {
-        	window.location = "http://www.reddit.com";
+        title: 'Halte',
+        haltenummer: '{{ halte.haltenummer }}'
+    });
+
+    google.maps.event.addListener(marker, 'click', function () {
+        window.location = '/haltes/{{ halte.haltenummer }}';
     });
 
     markers.push(marker);
     {% endfor %}
 
-    var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'img/clusters/m'});
+
+    $(document).ready(function() {
+        var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'img/clusters/m'});
+    });
 
     /*google.maps.event.addListener(marker, 'onclick', function() {
         alert("I have been clicked");
@@ -53,7 +58,6 @@ function initMap() {
 }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap"
-async defer>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap">
 </script>
 <script src="/js/js-marker-clusterer/markerclusterer.js"></script>
