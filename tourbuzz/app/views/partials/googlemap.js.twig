@@ -28,7 +28,7 @@ function initMap() {
     var markers = [];
     var marker;
 
-    {% for halte in haltes|slice %}
+    {% for halte in haltes %}
     image = {
         url: 'http://www.tourbuzz.nl/img/haltes/{{ halte.haltenummer|lower }}.png',
     };
