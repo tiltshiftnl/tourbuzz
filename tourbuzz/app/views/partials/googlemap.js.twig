@@ -24,18 +24,22 @@ function initMap() {
         ]
     });
 
+    var image;
     var markers = [];
+    var marker;
 
-    {% for halte in haltes %}
-    var image = {
+    {% for halte in haltes|slice %}
+    image = {
         url: 'http://www.tourbuzz.nl/img/haltes/{{ halte.haltenummer|lower }}.png',
     };
 
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
         position: {lat: {{ halte.location.lat }}, lng: {{ halte.location.lng }}},
         map: map,
         icon: image,
         title: 'Halte'
+    }).addListener('click', function() {
+        	window.location = "http://www.reddit.com";
     });
 
     markers.push(marker);
@@ -43,9 +47,13 @@ function initMap() {
 
     var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'img/clusters/m'});
 
+    /*google.maps.event.addListener(marker, 'onclick', function() {
+        alert("I have been clicked");
+    });*/
 }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap"
 async defer>
 </script>
+<script src="/js/js-marker-clusterer/markerclusterer.js"></script>
