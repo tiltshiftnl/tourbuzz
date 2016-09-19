@@ -137,7 +137,7 @@ $app->get('/haltes', function () use ($app, $analytics) {
         "center" => $center,
     ];
 
-    $haltes = locationItemsToMap($haltes, $mapOptions, true);
+    //$haltes = locationItemsToMap($haltes, $mapOptions, true);
 
     $data = [
         "m" => date('m'),
@@ -148,6 +148,7 @@ $app->get('/haltes', function () use ($app, $analytics) {
         "haltes" => $haltes,
         "map" => $mapOptions,
         "analytics" => $analytics,
+        "apikey" => "AIzaSyDlLcl2JExZANAIdG7UVcpqj3iTT1KL76Q",
         "template" => "haltes.twig",
     ];
 
@@ -1240,36 +1241,4 @@ $app->get('/ov2', function () use ($app) {
     header("Content-Disposition: attachment; filename=touringcars.ov2");
     header("Content-Transfer-Encoding: binary");
     echo $poiFile->content;
-});
-
-/**
- * Map test
- */
-$app->get('/maptest', function () use ($app) {
-
-    $apiResponse = $app->api->get("haltes");
-    $haltes = $apiResponse->body['haltes'];
-
-    // Amsterdam Center Point.
-    $center = [
-        "lat" => 52.372981,
-        "lng" => 4.901327,
-    ];
-
-    $mapOptions = [
-        "width" => 420,
-        "height" => 350,
-        "zoom" => 14, // Google Maps zoom level.
-        "scale" => 2, // Double resolution for retina display.
-        "center" => $center,
-    ];
-
-    $data = [
-        "haltes" => $haltes,
-        "mapOptions" => $mapOptions,
-        "apikey" => "AIzaSyDlLcl2JExZANAIdG7UVcpqj3iTT1KL76Q",
-        "template" => "testmap.twig",
-    ];
-
-    render($data["template"], $data);
 });
