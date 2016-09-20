@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ lang }}"{% if appCachePath is defined %} manifest="/appcache/{{ appCachePath }}"{% endif %}>
+<html lang="{{ lang }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1">
@@ -41,6 +41,18 @@
         <script src="/js/owl-carousel/owl.carousel.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
         <script src="/js/pico-ui.js"></script>
+
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/offline.js').then(function(registration) {
+                    console.log('Service worker registered for' + registration.scope);
+                });
+            }
+            else {
+                console.log('Service worker not supported');
+            }
+        </script>
+
         {% block scripts %}
             {# Page specific scripts go here. #}
         {% endblock %}
