@@ -10,8 +10,6 @@ if (file_exists($localConfigFilePath)) {
 
 require_once("ApiClient.php");
 
-const APP_CACHE_SEPARATOR = '_';
-
 $app->container->singleton('api', function () use ($apiRoot) {
     return new ApiClient($apiRoot);
 });
@@ -31,14 +29,6 @@ function sendNewBerichtMail($berichtId, $berichtTitle) {
         "Reply-To: noreply@{$buzzUri}\r\n" .
         "X-Mailer: PHP/" . phpversion()
    );
-}
-
-function getAppCachePath($app) {
-    /**
-     * @var \Slim\Http\Request $request
-     */
-    $request = $app->request;
-    return str_replace('/',APP_CACHE_SEPARATOR,$request->getPath());
 }
 
 
@@ -113,15 +103,6 @@ $app->hook('slim.before', function() use ($app) {
     if (isset($lang) && in_array($lang, array('nl','de','en'))) {
         $_SESSION['lang'] = $lang;
     }
-});
-
-/**
- * Appcache
- */
-$app->get('/appcache/:path', function ($path) {
-    header("Content-type: text/cache-manifest");
-    $path = str_replace(APP_CACHE_SEPARATOR,'/',$path);
-    render('appcache.twig', ['path' => $path]);
 });
 
 /**
@@ -1122,8 +1103,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "map" => $mapOptions,
         "adamlogo" => true,
         "analytics" => $analytics,
-        "template" => "home.twig",
-        "appCachePath" => getAppCachePath($app)
+        "template" => "home.twig"
     ];
 
     render($data['template'], $data);
