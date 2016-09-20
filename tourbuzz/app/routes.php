@@ -919,12 +919,50 @@ $app->post('/sms-aanmelden', function () use ($app) {
 
     switch ($apiResponse->statusCode) {
         case '200':
-            $app->flash('success', 'We hebben uw nummer toegevoegd');
+            $app->flash('success', 'U bent nu aangemeld voor SMS berichten van Tour Buzz');
             break;
 
         default:
             $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
             $app->redirect("/sms-aanmelden");
+    }
+
+    $app->redirect(date('/Y/m/d'));
+});
+
+
+/**
+ * SMS afmelden.
+ */
+$app->get('/sms-afmelden', function () use ($app) {
+
+    $data = [
+        "lang" => $_SESSION['lang'],
+        "template" => "sms-afmelden.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+/**
+ * SMS afmelden.
+ */
+$app->post('/sms-afmelden', function () use ($app) {
+
+    $fields = array(
+        'number' => $app->request->post('number'),
+    );
+
+    $apiResponse = $app->api->delete("telefoon", $fields);
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'We hebben uw nummer verwijderd');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+            $app->redirect("/sms-afmelden");
     }
 
     $app->redirect(date('/Y/m/d'));

@@ -77,10 +77,11 @@ class ApiClient {
         return new ApiResponse($res);
     }
 
-    public function delete($uri) {
+    public function delete($uri, $fields = array()) {
         $requestUri = "{$this->_apiRoot}{$uri}";
         try {
             $res = $this->_guzzle->request('DELETE', $requestUri, [
+                'form_params' => $fields,
                 'http_errors' => false
             ]);
         } catch (BadResponseException $exception) {
