@@ -42,6 +42,17 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
         <script src="/js/pico-ui.js"></script>
 
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/offline.js').then(function(registration) {
+                    console.log('Service worker registered for' + registration.scope);
+                });
+            }
+            else {
+                console.log('Service worker not supported');
+            }
+        </script>
+
         {% block scripts %}
             {# Page specific scripts go here. #}
         {% endblock %}
