@@ -40,17 +40,6 @@
             {% endfor %}
         </ol>
 
-        <section class="kaartmap wrapper">
-            <img src="{% include 'partials/googlemap.empty.twig' %}">
-            {% for record in berichten %}
-                {% if record.rel_loc is not empty %}
-                    <a href="/{{ Y }}/{{ m }}/{{ d }}/details#slide{{ loop.index }}" style="top: {{ record.rel_loc.dY }}%; left: {{ record.rel_loc.dX }}%">
-                        <img src="/img/markers/{{ loop.index }}.png" class="maplink-m">
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </section>
-
     </section>
 
 </main>
