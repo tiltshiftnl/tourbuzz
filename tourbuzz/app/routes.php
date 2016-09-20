@@ -1331,9 +1331,15 @@ $app->get('/ov2', function () use ($app) {
  */
 $app->get('/fallback', function () use ($app) {
 
-    // Controller logic here
-    
+    list($Y, $m, $d) = explode("-", date("Y-m-d"));
+    $dateurlstring = "{$Y}/{$m}/{$d}";
+
+    $apiResponse = $app->api->get("berichten/{$dateurlstring}");
+    $berichten = $apiResponse->body['messages'];
+
     $data = [
+        "berichten" => $berichten,
+        "lang" => $_SESSION['lang'],
         "template" => "fallback.twig",
     ];
 

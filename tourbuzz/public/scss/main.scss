@@ -714,7 +714,7 @@ input.disabled {
     }
 }
 
-.flashmessages {
+.flashmessages, .notice {
     clear: both;
     @extend .group;
     margin-top: 0px;

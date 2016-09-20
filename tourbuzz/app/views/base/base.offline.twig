@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="{{ lang }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+
+        <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+        <link rel="apple-touch-icon" href="/img/buzz-icon.png">
+
+        {% block meta %}
+        <link rel="image_src" href="/img/tourbuzz_fb_preview.png">
+        <link rel="canonical" href="http://www.tourbuzz.nl">
+
+        <title>Tour Buzz</title>
+        <meta name="title" content="Tour Buzz">
+        <meta name="description" content="Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
+        <meta name="keywords" content="amsterdam, touringcar, nieuws">
+
+        <meta property="og:title" content="Tour Buzz">
+        <meta property="og:url" content="http://www.tourbuzz.nl">
+        <meta property="og:description" content="Tour Buzz - Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
+        <meta property="og:site_name" content="Tour Buzz">
+        <meta property="og:image" content="http://www.tourbuzz.nl/img/tourbuzz_fb_preview.png">
+        {% endblock %}
+
+        {#<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//fast.fonts.net/cssapi/7cd4c080-5246-49b1-8f48-530e9d1829a6.css">#}
+        <link rel="stylesheet" href="/css/scss/main.scss">
+        <link rel="stylesheet" href="/js/owl-carousel/owl.carousel.css">
+        <link rel="stylesheet" href="/js/owl-carousel/owl.theme.css">
+        <link rel="stylesheet" href="/js/pikaday/css/pikaday.css">
+        <link rel="stylesheet" href="/css/pikaday/buzz-theme.css">
+        {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>#}
+        {#<script type="text/javascript" src='http://maps.google.com/maps/api/js?libraries=places&key=AIzaSyA_o88ovC0-TE8YyYqtIXFQIkRPeJX2VKU'></script>#}
+        <script src="/js/locationpicker/locationpicker.jquery.min.js"></script>
+        <script src="/js/owl-carousel/owl.carousel.min.js"></script>
+        {#<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>#}
+        {% block scripts %}
+            {# Page specific scripts go here. #}
+        {% endblock %}
+
+    </head>
+    <body>
+
+        {% block header %}
+            <header class="main-header">
+                <div class="wrapper">
+                    {% if adamlogo %}<img src="/img/adam-logo.png" class="adam-logo">{% endif %}
+                    <a href="/" class="home"><img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
+                    <h2>
+                        <a href="/"><img src="/img/tour-buzz.png" alt="Tour Buzz" class="title-logo"></a>
+                    </h2>
+                    <nav class="taalswitch group" pico-toggle-class="open">
+                        <div class="dropdown group">
+                            {% if lang == 'nl' %}
+                                <a href="#" class="active"><img src="/img/taal/nl.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
+                                <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
+                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag"></a>
+                            {% elseif lang == 'en' %}
+                                <a href="#" class="active"><img src="/img/taal/en.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
+                                <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag"></a>
+                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag"></a>
+                            {% elseif lang == 'de' %}
+                                <a href="#" class="active"><img src="/img/taal/de.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
+                                <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag"></a>
+                                <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
+                            {% endif %}
+                        </div>
+                    </nav>
+
+                </div>
+            </header>
+        {% endblock %}
+
+        {% block flashmessages %}
+            {% if flash is not empty %}
+                <section class="flashmessages">
+                    {% for type, message in flash %}
+                        <p class="{{ type }}">{{ message }}</p>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endblock %}
+
+        {% block topselectie %}
+        <section class="notice">
+           <div class="wrapper">
+                <p class="error">LET OP: U bent offline en ziet een aangepaste versie van Tour Buzz.</p>
+           </div>
+        </section>
+        {% endblock %}
+
+        {% block slider %}{% endblock %}
+
+        {% block main %}{% endblock %}
+
+        {% block footer %}
+            <footer>
+                <p>{{ __('Meer info') }}: <a href="//www.amsterdam.nl/touringcars" target="_blank">www.amsterdam.nl/touringcars</a></p>
+                <p style="font-weight: normal">{{ __('Feedback of vragen kunt u sturen naar') }}<br>Mark Sloothaak: <a href="mailto:touringcar@amsterdam.nl">touringcar@amsterdam.nl</a></p>
+
+                {% if timestamp is not empty %}
+                    <p>{{ __('Laatste wijziging') }}: {{ timestamp|date('d-m-Y') }}</p>
+                {% endif %}
+
+                <center style="margin-top: 10px"><div class="fb-like" data-share="false" data-width="240" data-show-faces="false"></div></center>
+
+            </footer>
+        {% endblock %}
+
+    </body>
+</html>
