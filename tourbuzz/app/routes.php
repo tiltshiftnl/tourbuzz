@@ -891,6 +891,26 @@ $app->get('/dashboard/(:wildcard+)', function () use ($app) {
 
 
 /***************
+ * SMS *
+ ***************/
+
+
+/**
+ * SMS aanmelden.
+ */
+$app->get('/sms-aanmelden', function () use ($app) {
+
+    $data = [
+        "lang" => $_SESSION['lang'],
+        "template" => "sms-aanmelden.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+
+/***************
  * Nieuwsbrief *
  ***************/
 

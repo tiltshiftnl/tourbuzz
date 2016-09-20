@@ -55,6 +55,22 @@ function render($template, $data = [], $headers = []) {
         }
     }
 
+    if (isset($_GET['routes'])) {
+        $routes_dump = RouteDumper::getAllRoutes();
+        $routes = array();
+        $i = 0;
+        foreach ($routes_dump as $route) {
+            $routes[$i]['pattern'] = $route->getPattern();
+            $routes[$i]['name'] = $route->getName();
+            $i++;
+        }
+        $data = [
+            "routes" => $routes,
+            "template" => "routes.twig",
+            "test" => "world",
+        ];
+    }
+
     // Add custom headers to response.
     foreach ($headers as $key => $value) {
         $app->response->headers->set($key, $value);

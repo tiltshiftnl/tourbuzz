@@ -80,6 +80,16 @@ $twig->addFunction('__', new Twig_Function_Function('translate'));
 $twig->addFunction('maand', new Twig_Function_Function('month'));
 $twig->addFunction('insertlinks', new Twig_Function_Function('insertLinks'));
 
+/**
+ * Quick fix for route dump
+ */
+Class RouteDumper extends \Slim\Router {
+    public static function getAllRoutes() {
+        $slim = \Slim\Slim::getInstance();
+        return $slim->router->routes;
+    }
+}
+
 require_once "routes.php"; // System routes
 
 require_once "../app/routes.php"; // Project routes
