@@ -44,12 +44,7 @@
 
         <script>
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/offline.js').then(function(registration) {
-                    console.log('Service worker registered for' + registration.scope);
-                });
-            }
-            else {
-                console.log('Service worker not supported');
+                navigator.serviceWorker.register('/offline.js');
             }
         </script>
 
