@@ -1,0 +1,80 @@
+<script>
+function initMap() {
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: {lat: 52.372981, lng: 4.901327},
+        mapTypeControl: false,
+        streetViewControl: false,
+
+        styles: [
+        {
+          featureType: 'all',
+          stylers: [
+            { saturation: -50 }
+          ]
+        }
+        ]
+    });
+
+    var image;
+    var markers = [];
+    var marker;
+
+    {% for halte in haltes %}
+        image = {
+            url: 'http://www.tourbuzz.nl/img/haltes/{{ halte.haltenummer|lower }}.png',
+            //size: new google.maps.Size(49,45), // the orignal size
+            //scaledSize: new google.maps.Size(24,22), // the new size you want to use
+            //origin: new google.maps.Point(0,22) // position in the sprite
+        };
+
+        marker = new google.maps.Marker({
+            position: {lat: {{ halte.location.lat }}, lng: {{ halte.location.lng }}},
+            map: map,
+            icon: image,
+            title: 'Halte',
+            haltenummer: '{{ halte.haltenummer }}'
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            window.location = '/haltes/{{ halte.haltenummer }}';
+        });
+
+        markers.push(marker);
+    {% endfor %}
+
+
+    {% for parkeerplaats in parkeerplaatsen %}
+        image = {
+            url: 'http://www.tourbuzz.nl/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png',
+            //size: new google.maps.Size(49,45), // the orignal size
+            //scaledSize: new google.maps.Size(24,22), // the new size you want to use
+            //origin: new google.maps.Point(0,22) // position in the sprite
+        };
+
+        marker = new google.maps.Marker({
+            position: {lat: {{ parkeerplaats.location.lat }}, lng: {{ parkeerplaats.location.lng }}},
+            map: map,
+            icon: image,
+            title: 'Halte',
+            nummer: '{{ parkeerplaats.nummer }}'
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            window.location = '/parkeerplaatsen/{{ parkeerplaats.nummer }}';
+        });
+
+        markers.push(marker);
+    {% endfor %}
+
+    $(document).ready(function() {
+        var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'img/clusters/m'});
+    });
+
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap">
+</script>
+<script src="/js/js-marker-clusterer/markerclusterer.js"></script>

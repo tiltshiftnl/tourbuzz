@@ -104,8 +104,9 @@
             <nav class="main-nav">
                 <div class="wrapper">
                         <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{#<img src="/img/buzz-icon-g.png" class="buzz-icon">#}{{ __('Berichten') }}</a>
-                        <a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('Haltes') }}</a>
-                        <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('Parkeren') }}</a>
+                        {#<a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('Haltes') }}</a>
+                        <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('Parkeren') }}</a>#}
+                        <a href="/haltes-parkeerplaatsen" class="{% if activetab == 'haltes-parkeerplaatsen' %}active{% endif %}">{{ __('Haltes & Parkeren') }}</a>
                 </div>
             </nav>
         {% endblock %}

@@ -137,18 +137,64 @@ $app->get('/haltes', function () use ($app, $analytics) {
         "center" => $center,
     ];
 
-    $haltes = locationItemsToMap($haltes, $mapOptions, true);
+    //$haltes = locationItemsToMap($haltes, $mapOptions, true);
 
     $data = [
         "m" => date('m'),
         "d" => date('d'),
         "Y" => date('Y'),
         "lang" => $_SESSION['lang'],
-        "activetab" => "haltes",
+        "activetab" => "haltes-parkeerplaatsen",
         "haltes" => $haltes,
         "map" => $mapOptions,
         "analytics" => $analytics,
+        "apikey" => "AIzaSyDlLcl2JExZANAIdG7UVcpqj3iTT1KL76Q",
         "template" => "haltes.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Alles
+ */
+$app->get('/haltes-parkeerplaatsen', function () use ($app, $analytics) {
+
+    $apiResponse = $app->api->get("haltes");
+    $haltes = $apiResponse->body['haltes'];
+
+    $apiResponse = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
+
+    // Amsterdam Center Point.
+    $center = [
+        "lat" => 52.372981,
+        "lng" => 4.901327,
+    ];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 14, // Google Maps zoom level.
+        "scale" => 2, // Double resolution for retina display.
+        "center" => $center,
+    ];
+
+    //$haltes = locationItemsToMap($haltes, $mapOptions, true);
+
+    $data = [
+        "m" => date('m'),
+        "d" => date('d'),
+        "Y" => date('Y'),
+        "lang" => $_SESSION['lang'],
+        "activetab" => "haltes-parkeerplaatsen",
+        "haltes" => $haltes,
+        "parkeerplaatsen" => $parkeerplaatsen,
+        "map" => $mapOptions,
+        "analytics" => $analytics,
+        "apikey" => "AIzaSyDlLcl2JExZANAIdG7UVcpqj3iTT1KL76Q",
+        "template" => "haltes-parkeerplaatsen.twig",
     ];
 
     render($data['template'], $data);
@@ -181,7 +227,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
         "d" => date('d'),
         "Y" => date('Y'),
         "lang" => $_SESSION['lang'],
-        "activetab" => "haltes",
+        "activetab" => "haltes-parkeerplaatsen",
         "record" => $halte,
         "haltes" => $haltes,
         "map" => $mapOptions,
@@ -222,7 +268,7 @@ $app->get('/parkeren', function () use ($app, $analytics) {
         "d" => date('d'),
         "Y" => date('Y'),
         "lang" => $_SESSION['lang'],
-        "activetab" => "parkeren",
+        "activetab" => "haltes-parkeerplaatsen",
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
         "analytics" => $analytics,
@@ -259,7 +305,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
         "d" => date('d'),
         "Y" => date('Y'),
         "lang" => $_SESSION['lang'],
-        "activetab" => "parkeren",
+        "activetab" => "haltes-parkeerplaatsen",
         "record" => $parkeerplaats,
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
@@ -1240,44 +1286,4 @@ $app->get('/ov2', function () use ($app) {
     header("Content-Disposition: attachment; filename=touringcars.ov2");
     header("Content-Transfer-Encoding: binary");
     echo $poiFile->content;
-});
-
-/**
- * Map test
- */
-$app->get('/maptest', function () use ($app) {
-
-    $apiResponse = $app->api->get("haltes");
-    $haltes = $apiResponse->body['haltes'];
-
-    // Amsterdam Center Point.
-    $center = [
-        "lat" => 52.372981,
-        "lng" => 4.901327,
-    ];
-
-    $mapOptions = [
-        "width" => 420,
-        "height" => 350,
-        "zoom" => 14, // Google Maps zoom level.
-        "scale" => 2, // Double resolution for retina display.
-        "center" => $center,
-    ];
-
-    $data = [
-        "haltes" => $haltes,
-        "mapOptions" => $mapOptions,
-        "apikey" => "AIzaSyDlLcl2JExZANAIdG7UVcpqj3iTT1KL76Q",
-        "template" => "testmap.twig",
-    ];
-
-    render($data["template"], $data);
-});
-
-
-/**
- * Fallback page
- */
-$app->get('/fallback', function () use ($app) {
-    render('fallback.twig', []);
 });

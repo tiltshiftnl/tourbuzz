@@ -1,0 +1,88 @@
+{% extends 'base/base.twig' %}
+
+{% block meta %}
+    <link rel="image_src" href="/img/haltes_fb_preview.png">
+    <link rel="canonical" href="http://www.tourbuzz.nl/haltes">
+
+    <title>Tour Buzz Haltes</title>
+    <meta name="title" content="Tour Buzz Haltes">
+    <meta name="description" content="Alle touringcar haltes in Amsterdam.">
+    <meta name="keywords" content="amsterdam, touringcar, haltes">
+
+    <meta property="og:title" content="Tour Buzz Haltes">
+    <meta property="og:url" content="http://www.tourbuzz.nl/haltes">
+    <meta property="og:description" content="Tour Buzz Haltes - Alle touringcar haltes in Amsterdam.">
+    <meta property="og:site_name" content="Tour Buzz Haltes">
+    <meta property="og:image" content="http://www.tourbuzz.nl/img/haltes_fb_preview.png">
+{% endblock %}
+
+
+{% block main %}
+    <main class="wrapper">
+        <section class="buzz">
+
+            {#<article>
+                <h1>Haltes en parkeerplaatsen</h1>
+            </article>#}
+
+            <section class="kaartmap wrapper">
+                <div id="map"></div>
+                {% include 'partials/googlemap.stops.js.twig' %}
+            </section>
+
+            <section class="legenda">
+                <a href="#haltes" class="type">
+                    <img src="/img/haltes/h1.png">
+                    <h3>Haltes</h3>
+                    <p>{{ __('Op deze locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan.') }}</p>
+                </a>
+                <a href="#parkeerplaatsen" class="type">
+                    <img src="/img/parkeerplaatsen/p1.png">
+                    <h3>Parkeerplaatsen</h3>
+                    <p>{{ __('Op deze locaties kunt u uw bus parkeren. Klik hier voor de tarieven.') }}</p>
+                </a>
+            </section>
+
+            <h2><a name="haltes">Haltes (max. 10 min)</a></h2>
+            <ol>
+            {% for halte in haltes %}
+                <li style="position: relative; padding-left: 45px">
+                    <a href="/haltes/{{ halte.haltenummer }}">
+                        <div>
+                            <span class="halte-link" style="position: absolute; left: 0; {% if not halte.beschikbaar %}opacity: 0.2{% endif %}">{{ halte.haltenummer }}</span>
+                            <span>{{ halte.straat }}</span><br>
+                            {% if halte.beschikbaar %}
+                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+                            {% else %}
+                                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                            {% endif %}
+                            <span class="meta">{{ halte.locatie }}</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+            </ol>
+
+            <h2><a name="parkeerplaatsen">Parkeerplaatsen</a></h2>
+            <ol>
+            {% for parkeerplaats in parkeerplaatsen %}
+                <li style="position: relative; padding-left: 45px">
+                    <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}">
+                        <div>
+                            <span class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</span>
+                            <span>{{ parkeerplaats.naam }}</span><br>
+                            {% if parkeerplaats.beschikbaar %}
+                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
+                            {% else %}
+                              <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                            {% endif %}
+                            <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+            </ol>
+
+        </section>
+    </main>
+{% endblock %}
