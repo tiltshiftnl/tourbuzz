@@ -906,7 +906,29 @@ $app->get('/sms-aanmelden', function () use ($app) {
     render($data['template'], $data);
 });
 
+/**
+ * SMS aanmelden.
+ */
+$app->post('/sms-aanmelden', function () use ($app) {
 
+    $fields = array(
+        'number' => $app->request->post('number'),
+    );
+
+    $apiResponse = $app->api->post("telefoon", $fields);
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'We hebben uw nummer toegevoegd');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+            $app->redirect("/sms-aanmelden");
+    }
+
+    $app->redirect(date('/Y/m/d'));
+});
 
 /***************
  * Nieuwsbrief *
