@@ -1273,3 +1273,11 @@ $app->get('/maptest', function () use ($app) {
 
     render($data["template"], $data);
 });
+
+
+/**
+ * Fallback page
+ */
+$app->get('/fallback', function () use ($app) {
+    render('fallback.twig', []);
+});
