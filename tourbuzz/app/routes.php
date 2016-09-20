@@ -1325,3 +1325,17 @@ $app->get('/ov2', function () use ($app) {
     header("Content-Transfer-Encoding: binary");
     echo $poiFile->content;
 });
+
+/**
+ * Fallback
+ */
+$app->get('/fallback', function () use ($app) {
+
+    // Controller logic here
+    
+    $data = [
+        "template" => "fallback.twig",
+    ];
+
+    render($data["template"], $data);
+});
