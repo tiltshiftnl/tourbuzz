@@ -21,9 +21,11 @@ var paths = [
     '/img/markers/13.png',
     '/img/markers/14.png',
     '/img/markers/15.png',
-    '/fallback',
+    '/offline',
     '/css/scss/main.scss'
 ];
+
+var refreshed = 0;
 
 //
 // // Set the callback for the install step
@@ -41,6 +43,9 @@ self.addEventListener('install', function(event) {
                 return cache.addAll(paths);
             })
     );
+
+    refreshed = Date.now();
+    console.log('Refreshed: ' + refreshed);
     event.waitUntil(self.skipWaiting());
 });
 
@@ -54,9 +59,19 @@ self.addEventListener('fetch', function(event) {
     if (-1 == paths.indexOf(requestURL.pathname)) {
         event.respondWith(
             fetch(event.request).catch(function() {
-                return caches.match('/fallback');
+                return caches.match('/offline');
             })
         );
+        var now = Date.now();
+        //console.log('Refreshed2: ' + refreshed + ' ' + 'Now: ' + now);
+        if (refreshed+60000 < now) {
+            caches.open('offline').then(function(cache) {
+                cache.delete('/offline');
+                cache.add('/offline');
+            })
+            console.log('Refreshed offline');
+            refreshed = Date.now();
+        }
         return;
     }
 

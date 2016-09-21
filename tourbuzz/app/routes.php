@@ -1367,9 +1367,9 @@ $app->get('/ov2', function () use ($app) {
 });
 
 /**
- * Fallback
+ * Offline version
  */
-$app->get('/fallback', function () use ($app) {
+$app->get('/offline', function () use ($app) {
 
     list($Y, $m, $d) = explode("-", date("Y-m-d"));
     $dateurlstring = "{$Y}/{$m}/{$d}";
@@ -1380,7 +1380,7 @@ $app->get('/fallback', function () use ($app) {
     $data = [
         "berichten" => $berichten,
         "lang" => $_SESSION['lang'],
-        "template" => "fallback.twig",
+        "template" => "offline.twig",
     ];
 
     render($data["template"], $data);
