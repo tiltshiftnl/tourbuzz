@@ -547,8 +547,12 @@ $app->get('/dashboard/abonnees', function () use ($app) {
     $apiResponse = $app->api->get("mail?token={$_SESSION['auth_token']}");
     $abonnees = $apiResponse->body;
 
+    $apiResponse = $app->api->get("telefoon?token={$_SESSION['auth_token']}");
+    $nummers = count($apiResponse->body);
+
     $data = [
         "abonnees" => $abonnees,
+        "nummers" => $nummers,
         "username" => $_SESSION['username'],
         "activetab" => "abonnees",
         "template" => "dashboard/abonnees.twig",
