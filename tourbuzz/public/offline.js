@@ -1,4 +1,3 @@
-// A list of paths to cache
 var paths = [
     '/img/buzzlogo-w.png',
     '/img/tour-buzz.png',
@@ -27,15 +26,6 @@ var paths = [
 
 var refreshed = 0;
 
-//
-// // Set the callback for the install step
-// self.addEventListener('install', function(event) {
-//     // Open the cache (and name it)
-//     caches.open('offline').then(function(cache) {
-//         return cache.addAll(paths);
-//     });
-// });
-
 self.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open('offline')
@@ -45,7 +35,6 @@ self.addEventListener('install', function(event) {
     );
 
     refreshed = Date.now();
-    console.log('Refreshed: ' + refreshed);
     event.waitUntil(self.skipWaiting());
 });
 
@@ -63,7 +52,6 @@ self.addEventListener('fetch', function(event) {
             })
         );
         var now = Date.now();
-        //console.log('Refreshed2: ' + refreshed + ' ' + 'Now: ' + now);
         if (refreshed+60000 < now) {
             caches.open('offline').then(function(cache) {
                 cache.delete('/offline');
