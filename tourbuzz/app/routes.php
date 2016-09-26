@@ -999,6 +999,7 @@ $app->post('/nieuwsbrief', function () use ($app) {
     $fields = array(
         'mail' => $app->request->post('mail'),
       	'name' => $app->request->post('name'),
+      	'organisation' => $app->request->post('organisation'),
       	'language' => $app->request->post('language'),
     );
 
