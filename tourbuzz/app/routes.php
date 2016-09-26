@@ -955,7 +955,7 @@ $app->get('/sms-afmelden', function () use ($app) {
 $app->post('/sms-afmelden', function () use ($app) {
 
     $fields = array(
-        'number' => $app->request->post('number'),
+        'number' => $app->request->post('international'), // gebruik de hidden value van getNumber
     );
 
     $apiResponse = $app->api->delete("telefoon", $fields);

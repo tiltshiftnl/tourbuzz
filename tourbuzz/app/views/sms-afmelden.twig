@@ -1,5 +1,25 @@
 {% extends 'base/base.twig' %}
 
+{% block scripts %}
+<link rel="stylesheet" href="/css/intl-tel-input/intlTelInput.css">
+<script src="/js/intl-tel-input/intlTelInput.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#phone").intlTelInput({
+        initialCountry: "nl",
+        preferredCountries: ["nl","be","de","pl","fr","it"],
+        utilsScript: "/js/intl-tel-input/utils.js"
+    });
+
+    // update the hidden input on submit
+    $("form").submit(function() {
+      $("#international").val($("#phone").intlTelInput("getNumber"));
+    });
+});
+
+</script>
+{% endblock %}
+
 {% block topselectie %}{% endblock %}
 
 {% block main %}
@@ -9,8 +29,8 @@
                 <h2>SMS alert</h2>
                 <p>Vul hieronder het mobiele nummer in, dat u wilt afmelden.</p>
             </article>
-            <input type="text" placeholder="Telefoon nr" name="number">
-            {#<input type="hidden" placeholder="taal" name="language" value="{{ lang }}">#}
+            <input id="phone" type="tel" name="number">
+            <input type="hidden" name="international" id="international">
             <button type="submit">Afmelden</button>
         </form>
         <article>Aanmelden? Klik <a href="/sms-aanmelden">hier</a></article>
