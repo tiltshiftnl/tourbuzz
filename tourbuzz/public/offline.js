@@ -56,7 +56,7 @@ self.addEventListener('fetch', function(event) {
             caches.open('offline').then(function(cache) {
                 cache.delete('/offline');
                 cache.add('/offline');
-            })
+            });
             console.log('Refreshed offline');
             refreshed = Date.now();
         }
