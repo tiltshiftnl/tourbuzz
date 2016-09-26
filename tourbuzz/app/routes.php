@@ -916,7 +916,7 @@ $app->get('/sms-aanmelden', function () use ($app) {
 $app->post('/sms-aanmelden', function () use ($app) {
 
     $fields = array(
-        'number' => $app->request->post('number'),
+        'number' => $app->request->post('international'), // gebruik de hidden value van getNumber
     );
 
     $apiResponse = $app->api->post("telefoon", $fields);
