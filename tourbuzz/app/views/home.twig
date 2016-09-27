@@ -41,6 +41,8 @@
             {% endfor %}
         </ol>
 
+        {% include 'partials/banner.twig' %}
+
         <section class="kaartmap wrapper">
             <img src="{% include 'partials/googlemap.empty.twig' %}">
             {% for record in berichten %}

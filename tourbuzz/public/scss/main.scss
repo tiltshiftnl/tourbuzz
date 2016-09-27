@@ -15,7 +15,8 @@ body {
     font-family: sans-serif;
     font-size: 16px;
     line-height: 1.5em;
-    min-height: 100vh;
+    //min-height: 100vh;
+    @extend group;
 }
 
 main {
@@ -124,6 +125,7 @@ table {
 }
 
 .dagselectie {
+    position: relative;
     .kalender-icon {
         margin-right: 5px;
         vertical-align: middle;
@@ -133,18 +135,22 @@ table {
         font-size: 20px;
         color: #555;
         text-transform: capitalize;
+        margin-top: 10px;
     }
     a {
         color: #aaa;
         display: inline-block;
-        padding: 0 10px;
+        padding: 0 10px 0 0;
+        position: relative;
+        top: -4px;
     }
+    .meta { font-weight: normal }
 }
 
 h3.dag { // FIXME
     margin-bottom: 5px;
     color: #555;
-    text-align: center;
+    //text-align: center;
 }
 
 .headerdate {
@@ -162,7 +168,7 @@ h3.dag { // FIXME
     //top: 20px;
     float: none;
     height: 30px;
-    margin: 20px 0;
+    margin: 20px 0 10px;
     border-bottom: 1px solid #ccc;
 
     a {
@@ -235,7 +241,7 @@ h3.dag { // FIXME
     h3 {
         margin-bottom: 5px;
         color: #333;
-        text-align: center;
+        //text-align: center;
     }
     li {
         border-top: 1px solid #eee;
@@ -733,6 +739,14 @@ input.disabled {
         padding: 5px;
         font-weight: bold;
     }
+}
+
+.banner {
+    background: #EEFBFC;
+    color: rgba(0,0,0,0.6);
+    padding: 15px;
+    margin-bottom: 20px;
+    a { text-decoration: underline; }
 }
 
 footer {

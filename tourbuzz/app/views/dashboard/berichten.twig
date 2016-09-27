@@ -75,6 +75,16 @@ $(function() {
             </div>
         </nav>
 
+        <div class="grid-row">
+            <input type="checkbox" name="" value=""> SMS alert
+        </div>
+        <div class="grid-row">
+            <p>Note: SMS berichten max 115 karakters. Kosten per bericht circa &euro; 0,10</p>
+            <textarea name="sms_nl" placeholder="SMS (nl)">{{ bericht.sms_nl }}</textarea>
+            <textarea name="sms_en" placeholder="SMS (en)">{{ bericht.sms_en }}</textarea>
+            <textarea name="sms_de" placeholder="SMS (de)">{{ bericht.sms_de }}</textarea>
+        </div>
+
         {#<span class="maxchars">Max 200 karakters</span>#}
 
         <div class="grid-row">

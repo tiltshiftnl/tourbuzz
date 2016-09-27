@@ -762,6 +762,9 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
         'important' => $app->request->post('important'),
         'is_live' => $app->request->post('is_live'),
         'include_map' => !!$app->request->post('include_map'),
+      	'sms_nl' => $app->request->post('sms_nl'),
+      	'sms_en' => $app->request->post('sms_en'),
+      	'sms_de' => $app->request->post('sms_de'),
     );
 
     // If not "dupliceren", then use the available id (if set) to update existing message.
@@ -1370,6 +1373,18 @@ $app->get('/ov2', function () use ($app) {
     header("Content-Disposition: attachment; filename=touringcars.ov2");
     header("Content-Transfer-Encoding: binary");
     echo $poiFile->content;
+});
+
+/**
+ * Styleguide
+ */
+$app->get('/styleguide', function () use ($app) {
+
+    $data = [
+        "template" => "styleguide.twig",
+    ];
+
+    render($data["template"], $data);
 });
 
 /**

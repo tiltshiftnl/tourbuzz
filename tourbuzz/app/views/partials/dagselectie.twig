@@ -1,16 +1,21 @@
-    {% set dagnotatie %}
+    {# set dagnotatie %}
         {% if now|date('y-m-d') == datestring|date('y-m-d') %}
             {{ __('Vandaag') }}
         {% else %}
             {{ dag }} {{ j }} {{ maand(m) }}
         {% endif %}
+    {% endset #}
+
+    {% set dagnotatie %}
+        {{ dag }} {{ j }} {{ maand(m) }}
     {% endset %}
+
 
     <nav class="dagselectie">
         <div class="inner group">
-            <h3 class="dag">{{ dagnotatie }} <span class="meta">({{ berichten|length }})</span></h3>
             <a href="#" class="headerdate" id="headerdate">
-                <img src="/img/kalender.png" class="kalender-icon" style="width: 16px"><span class="meta">{{ __('kies andere dag') }}</span>
+                <img src="/img/kalender.png" class="kalender-icon" style="width: 16px"><span class="meta">{{ __('Dag selecteren') }}</span>
             </a>
+            <h3 class="dag">{{ dagnotatie }} <span class="meta">({{ berichten|length }})</span></h3>
         </div>
     </nav>
