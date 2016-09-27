@@ -9,6 +9,10 @@
         {% include 'partials/dagselectie.twig' %}
 
         <ol class="berichten">
+            {% if berichten is empty %}
+                <p>Geen berichten.</p>
+            {% endif %}
+
             {% for record in berichten %}
 
                 {% set title %}
