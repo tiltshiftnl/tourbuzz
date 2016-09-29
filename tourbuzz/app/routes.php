@@ -977,18 +977,18 @@ $app->post('/sms-afmelden', function () use ($app) {
 });
 
 /***************
- * Nieuwsbrief *
+ * Berichten *
  ***************/
 
 
 /**
- * Nieuwsbrief aanmelden.
+ * berichtenservice aanmelden.
  */
-$app->get('/nieuwsbrief', function () use ($app) {
+$app->get('/berichtenservice', function () use ($app) {
 
     $data = [
         "lang" => $_SESSION['lang'],
-        "template" => "nieuwsbrief-aanmelden.twig",
+        "template" => "berichtenservice-aanmelden.twig",
     ];
 
     render($data['template'], $data);
@@ -998,7 +998,7 @@ $app->get('/nieuwsbrief', function () use ($app) {
 /**
  * Nieuwsbrief aanmelden.
  */
-$app->post('/nieuwsbrief', function () use ($app) {
+$app->post('/berichtenservice', function () use ($app) {
 
     $fields = array(
         'mail' => $app->request->post('mail'),
@@ -1012,16 +1012,16 @@ $app->post('/nieuwsbrief', function () use ($app) {
 
     switch ($apiResponse->statusCode) {
         case '200':
-            $app->flash('success', 'We hebben u een mail gestuurd');
+            $app->flash('success', 'We hebben u een mail gestuurd. Klik op de link in uw mailbericht.');
             break;
         case '406':
-            $app->flash('success', 'Email adres is al aangemeld');
-            $app->redirect('/nieuwsbrief');
+            $app->flash('success', 'Dit email adres is al aangemeld');
+            $app->redirect('/berichtenservice');
             break;
 
         default:
             $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
-            $app->redirect("/nieuwsbrief");
+            $app->redirect("/berichtenservice");
     }
 
     $app->redirect(date('/Y/m/d'));
@@ -1029,7 +1029,7 @@ $app->post('/nieuwsbrief', function () use ($app) {
 
 
 /**
- * Nieuwsbrief bevestigen.
+ * berichtenservice mail bevestigen.
  */
 $app->get('/mailbevestigen/:token', function ($token) use ($app) {
 
@@ -1037,13 +1037,13 @@ $app->get('/mailbevestigen/:token', function ($token) use ($app) {
 
     switch ($apiResponse->statusCode) {
         case '200':
-            $app->flash('success', 'Dank voor uw aanmelding');
+            $app->flash('success', 'Dank voor uw bevestiging. U ontvangt nu tweewekelijks Tour Buzz berichten.');
             $app->redirect(date('/Y/m/d'));
             break;
 
         default:
             $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
-            $app->redirect("/nieuwsbrief");
+            $app->redirect("/berichtenservice");
     }
 
 });
@@ -1052,10 +1052,10 @@ $app->get('/mailbevestigen/:token', function ($token) use ($app) {
 /**
  * Nieuwsbrief afmelden.
  */
-$app->get('/nieuwsbrief-afmelden', function () use ($app) {
+$app->get('/berichtenservice-afmelden', function () use ($app) {
 
     $data = [
-        "template" => "nieuwsbrief-afmelden.twig",
+        "template" => "berichtenservice-afmelden.twig",
     ];
 
     render($data['template'], $data);
@@ -1065,7 +1065,7 @@ $app->get('/nieuwsbrief-afmelden', function () use ($app) {
 /**
  * Nieuwsbrief afmelden.
  */
-$app->post('/nieuwsbrief-afmelden', function () use ($app) {
+$app->post('/berichtenservice-afmelden', function () use ($app) {
 
     $fields = array(
         'mail' => $app->request->post('mail'),
@@ -1076,21 +1076,21 @@ $app->post('/nieuwsbrief-afmelden', function () use ($app) {
 
     switch ($apiResponse->statusCode) {
         case '200':
-            $app->flash('success', 'We hebben u een mail gestuurd');
+            $app->flash('success', 'We hebben u een mail gestuurd. Klik op de link in uw mailbericht.');
             break;
 
         default:
             //die(print_r($apiResponse->body));
             $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
-            $app->redirect("/nieuwsbrief-afmelden");
+            $app->redirect("/berichtenservice-afmelden");
     }
 
-    $app->redirect('/nieuwsbrief-afmelden');
+    $app->redirect('/berichtenservice-afmelden');
 });
 
 
 /**
- * Nieuwsbrief afmelden bevestigen.
+ * berichtenservice afmelden bevestigen.
  */
 $app->get('/mailannuleren/:token', function ($token) use ($app) {
 
@@ -1099,12 +1099,12 @@ $app->get('/mailannuleren/:token', function ($token) use ($app) {
     switch ($apiResponse->statusCode) {
         case '200':
             $app->flash('success', 'Uw afmelding is verwerkt');
-            $app->redirect('/nieuwsbrief');
+            $app->redirect('/berichtenservice');
             break;
 
         default:
             $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
-            $app->redirect("/nieuwsbrief");
+            $app->redirect("/berichtenservice");
     }
 
 });

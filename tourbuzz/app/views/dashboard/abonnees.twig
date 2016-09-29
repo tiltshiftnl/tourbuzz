@@ -17,13 +17,14 @@
             <tr>
                 <th>E-mail</th>
                 <th>Naam</th>
-                <th>Datum</th>
+                <th>Organisatie</th>
             </tr>
             {% for record in abonnees %}
             <tr>
                 <td>{{ record.mail }}</td>
                 <td>{{ record.name }}</td>
-                <td>{{ record.created.date|date('d-m-Y') }} om {{ record.created.date|date('H:i') }}</td>
+                <td>{{ record.organisation }}</td>
+                {#<td>{{ record.created.date|date('d-m-Y') }} om {{ record.created.date|date('H:i') }}</td>#}
             </tr>
             {% endfor %}
         </table>
