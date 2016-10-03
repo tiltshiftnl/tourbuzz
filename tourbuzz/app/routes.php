@@ -758,7 +758,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
       	'startdate' => $app->request->post('startdate'),
       	'enddate' => $app->request->post('enddate'),
         'link' => $app->request->post('link'),
-        'image_url' => $app->request->post('image_url'),
+        'image_id' => $app->request->post('image_id'),
         'important' => $app->request->post('important'),
         'is_live' => $app->request->post('is_live'),
         'include_map' => !!$app->request->post('include_map'),
