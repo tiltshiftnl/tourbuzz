@@ -39,6 +39,12 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+    if ('GET' != event.request.method) {
+        fetch(event.request);
+        console.log('Altijd doorgeven');
+        return;
+    }
+
     var requestURL = new URL(event.request.url);
 
     /**
