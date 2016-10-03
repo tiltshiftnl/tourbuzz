@@ -11,8 +11,8 @@
 
 <script>
 	var uri = "{{ image_api }}";
-  var el = document.getElementById("asyncImageUpload");
-	
+    var el = document.getElementById("asyncImageUpload");
+
 	function asyncImageUpload(fileInputElement) {
 		var file = fileInputElement.files[0];
 		if (file.type !== "image/jpeg" &&
@@ -27,14 +27,15 @@
 			if (xhr.readyState !== XMLHttpRequest.DONE) {
 				return;
 			}
-            var image_url = uri + '/' + xhr.responseText;
+            var image_id = xhr.responseText;
+            var image_url = uri + '/' + image_id;
 		  el.innerHTML =
 		    '<img src="' + image_url + '">' +
             '<a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>' +
-            '<input type="hidden" name="image_url" value="' + image_url + '">';
+            '<input type="hidden" name="image_id" value="' + image_id + '">';
 		}
 	}
-	
+
 	function asyncImageUploadReset() {
 	  el.innerHTML = '<input type="file" onchange="asyncImageUpload(this)"><input type="hidden" name="image_url" value="">';
 	}
