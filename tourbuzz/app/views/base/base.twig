@@ -131,9 +131,15 @@
                 <p>{{ __('Meer info') }}: <a href="//www.amsterdam.nl/touringcars" target="_blank">www.amsterdam.nl/touringcars</a></p>
                 <p style="font-weight: normal">{{ __('Feedback of vragen kunt u sturen naar') }}<br> <a href="mailto:touringcar@amsterdam.nl">touringcar@amsterdam.nl</a></p>
 
-                <p style="font-weight: normal">Meld u dan aan voor de <a href="/nieuwsbrief">berichtenservice</a> en <a href="/sms-aanmelden">SMS alerts</a>.</p>
-                {#<p style="font-weight: normal"><a href="/nieuwsbrief">{{ __('Meld u aan voor de Tour Buzz berichtenservice') }}</a></p>
-                <p style="font-weight: normal"><a href="/sms-aanmelden">{{ __('Meld u aan voor SMS alerts') }}</a></p>#}
+                <p style="font-weight: normal">
+                    {% if lang == 'nl' %}
+                    Wilt u automatisch op de hoogte blijven van Tour Buzz berichten? Meld u aan voor de <a href="/berichtenservice">berichtenservice</a> en <a href="/sms-aanmelden">SMS alerts</a>.
+                    {% elseif lang == 'de' %}
+                    Möchten sie automatisch informiert bleiben von Tour Buzz-Nachrichten? Registrieren Sie sich für den <a href="/berichtenservice">Tour Buzz nachrichten</a> und <a href="/sms-aanmelden">SMS-alerts</a>.
+                    {% elseif lang == 'en' %}
+                    Want to stay automatically informed about Tour Buzz messages? Subscribe to the <a href="/berichtenservice">message service</a> and <a href="/sms-aanmelden">SMS alerts</a>.
+                    {% endif %}
+                </p>
 
                 {% if timestamp is not empty %}
                     <p>{{ __('Laatste wijziging') }}: {{ timestamp|date('d-m-Y') }}</p>
