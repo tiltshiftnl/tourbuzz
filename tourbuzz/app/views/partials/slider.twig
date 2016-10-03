@@ -47,8 +47,8 @@
                 <a href="{{ record.link }}" class="extern" target="_blank">{{ record.link }}</a>
             {% endif %}
 
-            {% if record.image_url is not empty %}
-                <img src="{{ record.image_url }}/?width=800&method=fit">
+            {% if record.image_id is not empty %}
+                <img src="{{ record.image_id }}/?width=800&method=fit">
             {% endif %}
 
             {% if record.location is not empty %}

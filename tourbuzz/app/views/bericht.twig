@@ -65,8 +65,8 @@
                 <a href="{{ bericht.link }}" class="extern" target="_blank">{{ bericht.link }}</a>
             {% endif %}
 
-            {% if bericht.image_url is not empty %}
-                <img src="{{ bericht.image_url }}/?width=800&method=fit">
+            {% if bericht.image_id is not empty %}
+                <img src="{{ bericht.image_id }}/?width=800&method=fit">
             {% endif %}
 
             <p><a href="/">{{ __('Meer nieuws') }}</a></p>
