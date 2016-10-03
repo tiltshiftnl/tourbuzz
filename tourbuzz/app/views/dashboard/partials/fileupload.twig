@@ -2,10 +2,9 @@
   {% if bericht.image_url is not empty %}
       <img src="{{ bericht.image_url }}">
       <a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>
-      <input type="hidden" name="image_url" value="{{ bericht.image_url }}">
+      <input type="hidden" name="image_id" value="{{ bericht.image_id }}">
   {% else %}
       <input type="file" onchange="asyncImageUpload(this)">
-      <input type="hidden" name="image_url" value="">
   {% endif %}
 </div>
 
@@ -42,7 +41,7 @@
 	}
 
 	function asyncImageUploadReset() {
-	  el.innerHTML = '<input type="file" onchange="asyncImageUpload(this)"><input type="hidden" name="image_url" value="">';
+	  el.innerHTML = '<input type="file" onchange="asyncImageUpload(this)">';
 	}
 </script>
 
