@@ -22,7 +22,9 @@
 		}
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", uri, true);
-		xhr.send(file);
+        var formData = new FormData();
+        formData.append("file", file);
+		xhr.send(formData);
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState !== XMLHttpRequest.DONE) {
 				return;
