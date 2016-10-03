@@ -20,22 +20,25 @@
 			fileInputElement.value = "";
 			return;
 		}
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", uri, true);
-        var formData = new FormData();
-        formData.append("file", file);
-		xhr.send(formData);
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState !== XMLHttpRequest.DONE) {
-				return;
-			}
-            var image_id = xhr.responseText;
-            var image_url = uri + '/' + image_id;
-		  el.innerHTML =
-		    '<img src="' + image_url + '">' +
-            '<a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>' +
-            '<input type="hidden" name="image_id" value="' + image_id + '">';
-		}
+
+          var formData = new FormData();
+          formData.append("file", file);
+
+          $.ajax({
+                type: 'post',
+                url: uri,
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                      var image_url = uri + '/' + response.id;
+                      el.innerHTML =
+                              '<img src="' + image_url + '">' +
+                              '<a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>' +
+                              '<input type="hidden" name="image_id" value="' + response.id + '">';
+                }
+          });
 	}
 
 	function asyncImageUploadReset() {
