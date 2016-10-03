@@ -26,15 +26,25 @@ $(document).ready(function() {
     <main class="wrapper">
         <form class="form-styles" method="post">
             <article>
-                <h2>SMS alert</h2>
-                <p>Vul hieronder uw mobiele nummer in om belangrijke Tour Buzz meldingen te ontvangen per SMS.</p>
+                <h2>SMS alerts</h2>
+                <p>{{ __('Vul hieronder uw mobiele nummer in om belangrijke Tour Buzz meldingen te ontvangen per SMS.') }}</p>
             </article>
             <input id="phone" type="tel" name="number">
             <input type="hidden" name="international" id="international">
             <input type="hidden" placeholder="taal" name="language" value="{{ lang }}">
-            <button type="submit">Aanmelden</button>
+            <button type="submit">{{ __('Aanmelden') }}</button>
         </form>
-        <article>Afmelden? Klik <a href="/sms-afmelden">hier</a></article>
+        <article>
+            <p>
+            {% if lang == 'nl' %}
+                Afmelden? Klik <a href="/sms-afmelden">hier</a>
+            {% elseif lang == 'en' %}
+                Unsubscribe? Click <a href="/sms-afmelden">here</a>
+            {% elseif lang == 'de' %}
+                Abmelden? <a href="/sms-afmelden">Hier</a> klicken
+            {% endif %}
+            </p>
+        </article>
     </main>
 {% endblock %}
 

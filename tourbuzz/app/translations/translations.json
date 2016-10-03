@@ -105,7 +105,7 @@
         "de" : "Letzte Änderung",
         "fr" : "dernière mise a jour"
     },
-    "kies andere dag" : {
+    "Dag selecteren" : {
         "en" : "pick a day",
         "de" : "Wählen Sie einen Tag"
     },
@@ -188,7 +188,7 @@
     },
     "Aanmelden" : {
         "en" : "Signup",
-        "de" : "Anmelden"
+        "de" : "Registrieren"
     },
     "Afmelden" : {
         "en" : "Unsubscribe",
@@ -225,6 +225,18 @@
     "Vul hieronder uw email adres in om af te melden bij de Tour Buzz berichtenservice." : {
         "en" : "Enter your email below to unsubscribe for  the Tour Buzz messages service.",
         "de" : "Geben Sie Ihre e-Mail für abmelden von der Tour Buzz nachrichten."
+    },
+    "We hebben u een mail gestuurd. Klik op de link in het mailbericht." : {
+        "en" : "We've sent you an email. Click on the link in this message.",
+        "de" : "Wir haben Ihnen eine E-Mail gesendet. Klicken Sie auf den link in das email"
+    },
+    "Vul hieronder uw mobiele nummer in om belangrijke Tour Buzz meldingen te ontvangen per SMS." : {
+        "en" : "Enter your mobile number to receive important Tour Buzz notifications by SMS.",
+        "de" : "Geben Sie Ihre handynummer ein um wichtige Tour-Buzz- nachrichten zu erhalten per SMS."
+    },
+    "Vul hieronder het mobiele nummer in, dat u wilt afmelden." : {
+        "en" : "Enter your mobile number that you want to unsubscribe.",
+        "de" : "Geben Sie Ihre handynummer, die Sie sich möchten abmelden."
     }
   }
 }
