@@ -6,14 +6,14 @@
     <main class="wrapper">
         <form class="form-styles" method="post">
             <article>
-                <h2>Berichtenservice</h2>
-                <p>Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.</p>
+                <h2>{{ __('Tourbuzz Berichtenservice') }}</h2>
+                <p>{{ __('Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.') }}</p>
             </article>
             <input type="text" placeholder="E-mail" name="mail">
             <input type="text" placeholder="Naam" name="name">
             <input type="text" placeholder="Organisatie" name="organisation">
             <input type="hidden" placeholder="taal" name="language" value="{{ lang }}">
-            <button type="submit">Aanmelden</button>
+            <button type="submit">{{ __('Aanmelden') }}</button>
         </form>
         <article>Afmelden? Klik <a href="/berichtenservice-afmelden">hier</a></article>
     </main>
