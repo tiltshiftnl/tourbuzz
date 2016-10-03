@@ -1012,10 +1012,10 @@ $app->post('/berichtenservice', function () use ($app) {
 
     switch ($apiResponse->statusCode) {
         case '200':
-            $app->flash('success', 'We hebben u een mail gestuurd. Klik op de link in uw mailbericht.');
+            $app->flash('success', translate('We hebben u een mail gestuurd. Klik op de link in het mailbericht.'));
             break;
         case '406':
-            $app->flash('success', 'Dit email adres is al aangemeld');
+            $app->flash('error', 'Dit email adres is al aangemeld');
             $app->redirect('/berichtenservice');
             break;
 
