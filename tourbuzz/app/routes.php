@@ -1055,6 +1055,7 @@ $app->get('/mailbevestigen/:token', function ($token) use ($app) {
 $app->get('/berichtenservice-afmelden', function () use ($app) {
 
     $data = [
+        "lang" => $_SESSION['lang'],
         "template" => "berichtenservice-afmelden.twig",
     ];
 
