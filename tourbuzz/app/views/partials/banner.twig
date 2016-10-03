@@ -1,4 +1,11 @@
 <section class="banner">
-    <p>Wilt u automatisch op de hoogte blijven van Tour Buzz berichten?
-    Meld u dan aan voor de <a href="/berichtenservice">berichtenservice</a> en <a href="/sms-aanmelden">SMS&nbsp;alerts</a>.</p>
+    <p>
+        {% if lang == 'nl' %}
+        Wilt u automatisch op de hoogte blijven van Tour Buzz berichten? Meld u aan voor de <a href="/berichtenservice">berichtenservice</a> en <a href="/sms-aanmelden">SMS alerts</a>.
+        {% elseif lang == 'de' %}
+        Möchten sie automatisch informiert bleiben von Tour Buzz-Nachrichten? Registrieren Sie sich für den <a href="/berichtenservice">Tour Buzz nachrichten</a> und <a href="/sms-aanmelden">SMS-alerts</a>.
+        {% elseif lang == 'en' %}
+        Want to stay automatically informed about Tour Buzz messages? Subscribe to the <a href="/berichtenservice">message service</a> and <a href="/sms-aanmelden">SMS alerts</a>.
+        {% endif %}
+    </p>
 </section>
