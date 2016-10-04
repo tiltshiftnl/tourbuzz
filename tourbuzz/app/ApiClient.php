@@ -79,6 +79,11 @@ class ApiClient {
 
     public function delete($uri, $fields = array()) {
         $requestUri = "{$this->_apiRoot}{$uri}";
+
+        if (!empty($this->_token)) {
+            $requestUri .= "?token={$this->_token}";
+        }
+
         try {
             $res = $this->_guzzle->request('DELETE', $requestUri, [
                 'form_params' => $fields,
