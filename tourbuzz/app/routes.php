@@ -775,6 +775,8 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
     if ($app->request->post('include_location')) {
         $fields['location_lat'] = $app->request->post('location_lat');
         $fields['location_lng'] = $app->request->post('location_lng');
+    } else {
+        $fields['include_map'] = false;
     }
 
     // Title is a required field.
