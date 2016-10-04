@@ -1208,6 +1208,8 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
 
     $dag = translate($day[(int)$N - 1]);
 
+    $mapOptions = [];
+
     foreach ($berichten as &$bericht) {
         if ( !empty($bericht['location']) ) {
             $center = $bericht['location'];
