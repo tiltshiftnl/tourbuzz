@@ -23,10 +23,7 @@ function initMap() {
 
     {% for halte in haltes %}
         image = {
-            url: 'http://www.tourbuzz.nl/img/haltes/{{ halte.haltenummer|lower }}.png',
-            //size: new google.maps.Size(49,45), // the orignal size
-            //scaledSize: new google.maps.Size(24,22), // the new size you want to use
-            //origin: new google.maps.Point(0,22) // position in the sprite
+            url: 'https://www.tourbuzz.nl/img/haltes/{{ halte.haltenummer|lower }}.png',
         };
 
         marker = new google.maps.Marker({
@@ -47,10 +44,7 @@ function initMap() {
 
     {% for parkeerplaats in parkeerplaatsen %}
         image = {
-            url: 'http://www.tourbuzz.nl/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png',
-            //size: new google.maps.Size(49,45), // the orignal size
-            //scaledSize: new google.maps.Size(24,22), // the new size you want to use
-            //origin: new google.maps.Point(0,22) // position in the sprite
+            url: 'https://www.tourbuzz.nl/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png',
         };
 
         marker = new google.maps.Marker({
