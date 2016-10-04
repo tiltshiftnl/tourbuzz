@@ -1120,6 +1120,8 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
 
     //$res = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
+    list($d) = explode('?', $d);
+
     $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
     $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
