@@ -19,14 +19,14 @@
                     {% if lang == 'nl' %}{{ record.title }}{% endif %}
 
                     {% if lang == 'en' %}
-                        {% if record.title_en %}{{ record.title_en }}
+                        {% if record.title_en  is not empty %}{{ record.title_en }}
                         {% else %}{{ record.title }} <span class="meta">(translation unavailable)</span>
                         {% endif %}
                     {% endif %}
 
                     {% if lang == 'de' %}
-                        {% if record.title_de %}{{ record.title_de }}
-                        {% else %}{{ record.title_en }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+                        {% if record.title_de  is not empty %}{{ record.title_de }}
+                        {% else %}{{ record.title }} <span class="meta">(Übersetzung nicht verfügbar)</span>
                         {% endif %}
                     {% endif %}
                 {% endset %}
