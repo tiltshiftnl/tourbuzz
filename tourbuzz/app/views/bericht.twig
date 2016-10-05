@@ -35,18 +35,26 @@
                 {% else %}{{ bericht.title_en }} <span class="meta">(Übersetzung nicht verfügbar)</span>
                 {% endif %}
             {% endif %}
+
+            {% if lang == 'es' %}
+                {% if bericht.title_es %}{{ bericht.title_es }}
+                {% else %}{{ bericht.title_en }} <span class="meta">(Traducción no está disponible)</span>
+                {% endif %}
+            {% endif %}
         {% endset %}
 
         {% set body %}
             {% if lang == 'nl' %}{{ insertlinks(bericht.body)|raw }}{% endif %}
             {% if lang == 'en' %}{{ insertlinks(bericht.body_en)|raw }}{% endif %}
             {% if lang == 'de' %}{{ insertlinks(bericht.body_de)|raw }}{% endif %}
+            {% if lang == 'es' %}{{ insertlinks(bericht.body_es)|raw }}{% endif %}
         {% endset %}
 
         {% set advice %}
             {% if lang == 'nl' %}{{ insertlinks(bericht.advice)|raw }}{% endif %}
             {% if lang == 'en' %}{{ insertlinks(bericht.advice_en)|raw }}{% endif %}
             {% if lang == 'de' %}{{ insertlinks(bericht.body_de)|raw }}{% endif %}
+            {% if lang == 'es' %}{{ insertlinks(bericht.body_es)|raw }}{% endif %}
         {% endset %}
 
         <article data-id="{{ bericht.id }}" data-titel="{{ bericht.title }}">
