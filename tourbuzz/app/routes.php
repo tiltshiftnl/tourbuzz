@@ -1260,7 +1260,8 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
 $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
 
     $apiResponse = $app->api->get("berichten/{$id}");
-    $bericht = $apiResponse->body['messages'];
+    //var_dump($apiResponse);
+    $bericht = $apiResponse->body;
 
     $data = [
         "bericht" => $bericht,
