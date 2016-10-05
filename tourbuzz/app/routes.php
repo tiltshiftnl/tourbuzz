@@ -824,6 +824,9 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
             if ( empty($fields['title_de']) ) {
                 $notes .= " NOTE: Geen Duitse vertaling.";
             }
+            if ( empty($fields['title_de']) ) {
+                $notes .= " NOTE: Geen Spaanse vertaling.";
+            }
             //sendNewBerichtMail($apiResponse->body['id'], $fields['title']);
             $app->flash('success', 'Bericht toegevoegd.' . $notes);
         } else if ($app->request->post("submit") === "dupliceren") {
