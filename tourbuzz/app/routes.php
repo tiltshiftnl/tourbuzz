@@ -100,7 +100,7 @@ $app->hook('slim.before', function() use ($app) {
         $_SESSION['lang'] = 'nl';
     }
     $lang = $app->request()->params('lang');
-    if (isset($lang) && in_array($lang, array('nl','de','en'))) {
+    if (isset($lang) && in_array($lang, array('nl','de','en','es'))) {
         $_SESSION['lang'] = $lang;
     }
 });

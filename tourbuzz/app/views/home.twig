@@ -29,12 +29,19 @@
                         {% else %}{{ record.title }} <span class="meta">(Übersetzung nicht verfügbar)</span>
                         {% endif %}
                     {% endif %}
+
+                    {% if lang == 'es' %}
+                        {% if record.title_es  is not empty %}{{ record.title_es }}
+                        {% else %}{{ record.title }} <span class="meta">(Traducción no está disponible)</span>
+                        {% endif %}
+                    {% endif %}
                 {% endset %}
 
                 {% set body %}
                     {% if lang == 'nl' %}{{ record.body|raw }}{% endif %}
                     {% if lang == 'en' %}{{ record.body_en|raw }}{% endif %}
                     {% if lang == 'de' %}{{ record.body_de|raw }}{% endif %}
+                    {% if lang == 'es' %}{{ record.body_es|raw }}{% endif %}
                 {% endset %}
 
                 <li>
