@@ -57,6 +57,9 @@ $(function() {
                 <li>
                     <a pico-toggle-class pico-id="tab-de" href="#tab-de">Deutsch</a>
                 </li>
+                <li>
+                    <a pico-toggle-class pico-id="tab-es" href="#tab-es">Español</a>
+                </li>
             </ul>
             <div class="tab active" pico-id="tab-nl">
                 <input type="text" name="title" placeholder="Headline" value="{{ bericht.title }}">
@@ -72,6 +75,11 @@ $(function() {
                 <input type="text" name="title_de" placeholder="Headline (duits)" value="{{ bericht.title_de }}">
                 <textarea name="body_de" placeholder="Situatie (duits)">{{ bericht.body_de }}</textarea>
                 <textarea name="advice_de" placeholder="Advies (duits)">{{ bericht.advice_de }}</textarea>
+            </div>
+            <div class="tab" pico-id="tab-es">
+                <input type="text" name="title_es" placeholder="Headline (spaans)" value="{{ bericht.title_es }}">
+                <textarea name="body_es" placeholder="Situatie (spaans)">{{ bericht.body_es }}</textarea>
+                <textarea name="advice_es" placeholder="Advies (spaans)">{{ bericht.advice_es }}</textarea>
             </div>
         </nav>
 
