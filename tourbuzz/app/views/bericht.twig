@@ -32,13 +32,13 @@
 
             {% if lang == 'de' %}
                 {% if bericht.title_de %}{{ bericht.title_de }}
-                {% else %}{{ bericht.title_en }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+                {% else %}{{ bericht.title }} <span class="meta">(Übersetzung nicht verfügbar)</span>
                 {% endif %}
             {% endif %}
 
             {% if lang == 'es' %}
                 {% if bericht.title_es %}{{ bericht.title_es }}
-                {% else %}{{ bericht.title_en }} <span class="meta">(Traducción no está disponible)</span>
+                {% else %}{{ bericht.title }} <span class="meta">(Traducción no está disponible)</span>
                 {% endif %}
             {% endif %}
         {% endset %}

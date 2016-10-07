@@ -3,240 +3,294 @@
     "maandag": {
     	"en": "monday",
         "de": "Montag",
-    	"fr": "Lu"
+    	"fr": "Lu",
+        "es": "lunes"
     },
     "dinsdag": {
     	"en": "tuesday",
         "de": "Dienstag",
-    	"fr": "Ma"
+    	"fr": "Ma",
+        "es": "martes"
     },
     "woensdag": {
     	"en": "wednesday",
         "de": "Mittwoch",
-    	"fr": "Me"
+    	"fr": "Me",
+        "es": "miércoles"
     },
     "donderdag": {
     	"en": "thursday",
         "de": "Donnerstag",
-    	"fr": "Jeu"
+    	"fr": "Jeu",
+        "es": "jeuves"
     },
     "vrijdag": {
     	"en": "friday",
         "de": "Freitag",
-    	"fr": "Ve"
+    	"fr": "Ve",
+        "es": "viernes"
     },
     "zaterdag": {
     	"en": "saturday",
         "de": "Samstag",
-    	"fr": "Sa"
+    	"fr": "Sa",
+        "es": "sábado"
     },
     "zondag": {
     	"en": "sunday",
         "de": "Sonntag",
-    	"fr": "mD"
+    	"fr": "mD",
+        "es": "domingo"
     },
     "januari" : {
         "en" : "january",
         "de" : "Januar",
-        "fr" : "jan"
+        "fr" : "jan",
+        "es": "enero"
     },
     "februari" : {
-        "en" : "february",
-        "de" : "Februar",
-        "fr" : "fév"
+        "en": "february",
+        "de": "Februar",
+        "fr": "fév",
+        "es": "febrero"
     },
     "maart" : {
-        "en" : "march",
-        "de" : "März",
-        "fr" : "mar"
+        "en": "march",
+        "de": "März",
+        "fr": "mar",
+        "es": "marzo"
     },
     "april" : {
         "en" : "april",
         "de" : "April",
-        "fr" : "avr"
+        "fr" : "avr",
+        "es": "abril"
     },
     "mei" : {
         "en" : "may",
         "de" : "Mai",
-        "fr" : "mai"
+        "fr" : "mai",
+        "es": "mayo"
     },
     "juni" : {
         "en" : "june",
         "de" : "Juni",
-        "fr" : "jun"
+        "fr" : "jun",
+        "es": "junio"
     },
     "juli" : {
         "en" : "july",
         "de" : "Juli",
-        "fr" : "jul"
+        "fr" : "jul",
+        "es" : "julio"
     },
     "augustus" : {
         "en" : "august",
         "de" : "August",
-        "fr" : "aoû"
+        "fr" : "aoû",
+        "es" : "agosto"
     },
     "september" : {
         "en" : "september",
         "de" : "September",
-        "fr" : "sep"
+        "fr" : "sep",
+        "es" : "septiembre"
     },
     "oktober" : {
         "en" : "october",
         "de" : "Oktober",
-        "fr" : "oct"
+        "fr" : "oct",
+        "es" : "octubre"
     },
     "november" : {
         "en" : "november",
         "de" : "November",
-        "fr" : "nov"
+        "fr" : "nov",
+        "es" : "noviembre"
     },
     "december" : {
         "en" : "december",
         "de" : "Dezember",
-        "fr" : "déc"
+        "fr" : "déc",
+        "es" : "diciembre"
     },
     "Meer info" : {
         "en" : "More info",
         "de" : "Mehr Informationen",
-        "fr" : "Plus d'info"
+        "fr" : "Plus d'info",
+        "es" : "Más info"
     },
     "Laatste wijziging" : {
         "en" : "Last updated",
         "de" : "Letzte Änderung",
-        "fr" : "dernière mise a jour"
+        "fr" : "dernière mise a jour",
+        "es" : "Último cambio"
     },
     "Dag selecteren" : {
         "en" : "pick a day",
-        "de" : "Wählen Sie einen Tag"
+        "de" : "Wählen Sie einen Tag",
+        "es" : "Seleccione el día"
     },
     "Vandaag" : {
         "en" : "Today",
         "de" : "Heute",
-        "fr" : "Aujourd'hui"
+        "fr" : "Aujourd'hui",
+        "es" : "Hoy"
     },
     "Kies een bestemming" : {
         "en" : "Choose your destination",
-        "fr" : "Choisissez votre destination"
+        "fr" : "Choisissez votre destination",
+        "es" : "Elija un destino"
     },
     "Kies een andere bestemming" : {
         "en" : "Choose a different destination",
-        "fr" : "Choisissez une autre destination"
+        "fr" : "Choisissez une autre destination",
+        "es" : "Elige un nuevo destino"
     },
     "Toon op kaart" : {
         "en" : "Show on map",
-        "fr" : "Montrer sur la carte"
+        "fr" : "Montrer sur la carte",
+        "es" : "Mostrar en el mapa"
     },
     "Alternatieve haltes" : {
         "en" : "Alternative stops",
-        "fr" : "Alternatif arrêt"
+        "fr" : "Alternatif arrêt",
+        "es" : "Paradas de autobuses alternativos"
     },
     "Haltes in de buurt" : {
         "en" : "Nearby stops",
-        "fr" : "Arrêts à proximité"
+        "fr" : "Arrêts à proximité",
+        "es" : "Paradas de autobús cercanas"
     },
     "Afstand" : {
         "en" : "Distance",
-        "fr" : "Distance"
+        "fr" : "Distance",
+        "es" : "Distancia"
     },
     "Bestemmingen in de buurt" : {
         "en" : "Nearby destinations",
-        "fr" : "Les destinations proches"
+        "fr" : "Les destinations proches",
+        "es" : "Destinos cercanos"
     },
     "Advies" : {
-      "en" : "Advice",
-      "de" : "Hinweis"
+        "en" : "Advice",
+        "de" : "Hinweis",
+        "es" : "Asesoramiento"
     },
     "Berichten" : {
         "en" : "Messages",
-        "de" : "Berichte"
+        "de" : "Berichte",
+        "es" : "Mensajes"
     },
     "Haltes" : {
         "en" : "Stops",
-        "de" : "Bushaltestellen"
+        "de" : "Bushaltestellen",
+        "es" : "Paradas de autobús"
     },
     "Parkeren" : {
         "en" : "Parkings",
-        "de" : "Parkplatz"
+        "de" : "Parkplatz",
+        "es" : "Aparcamiento"
     },
     "plaatsen" : {
         "en" : "spots",
-        "de" : "Plätze"
+        "de" : "Plätze",
+        "es" : "cursos"
     },
     "Meer informatie" : {
         "en" : "More info",
-        "de" : "Mehr info"
+        "de" : "Mehr info",
+        "es" : "Más información"
     },
     "Bekijk op Google maps" : {
         "en" : "View on Google maps",
-        "de" : "Auf Google Maps"
+        "de" : "Auf Google Maps",
+        "es" : "Ver en Google Maps"
     },
     "Is deze informatie nuttig?" : {
         "en" : "Was this helpful?",
-        "de" : "War dies hilfreich?"
+        "de" : "War dies hilfreich?",
+        "es" : "¿Es útil esta información?"
     },
     "niet beschikbaar" : {
         "en" : "not available",
-        "de" : "nicht nutzbar"
+        "de" : "nicht nutzbar",
+        "es" : "no disponible"
     },
     "Ja" : {
         "en" : "Yes",
-        "de" : "Ja"
+        "de" : "Ja",
+        "es" : "Sí"
     },
     "Nee" : {
         "en" : "No",
-        "de" : "Nein"
+        "de" : "Nein",
+        "es" : "no"
     },
     "Aanmelden" : {
         "en" : "Signup",
-        "de" : "Registrieren"
+        "de" : "Registrieren",
+        "es" : "Registro"
     },
     "Afmelden" : {
         "en" : "Unsubscribe",
-        "de" : "Abmelden"
+        "de" : "Abmelden",
+        "es" : "Darse de baja"
     },
     "Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan." : {
         "en" : "See below for locations of stops where you can drop off and pick up your passengers. If a stop is occupied, please continue to the next one on your route. You are allowed a maximum time of 10 minutes on these stops.",
-        "de" : "An diesen Stellen können die Passagiere an Bord und von Bord gehen. In einem belebten Bahnhof, fahren Sie mit dem nächsten auf der Reiseroute. Hinweis: Stopp bis zu 10 min."
+        "de" : "An diesen Stellen können die Passagiere an Bord und von Bord gehen. In einem belebten Bahnhof, fahren Sie mit dem nächsten auf der Reiseroute. Hinweis: Stopp bis zu 10 min.",
+        "es" : "En estos lugares, puede acercarse y dejar que sus pasajeros se bajan. Línea a la estación ocupada, si es posible por el siguiente en el itinerario. Nota: dejar de hasta 10 min."
     },
     "Op onderstaande locaties kunt u uw bus parkeren. Onder de kaart vindt u de tarieven." : {
         "en" : "You can park touringcars on these locations. For prices, see below the map.",
-        "de" : "An diesen Stellen können Sie Ihren Bus parken. Unter der Karte sind die Preise."
+        "de" : "An diesen Stellen können Sie Ihren Bus parken. Unter der Karte sind die Preise.",
+        "es" : "En estos lugares se puede aparcar el autobús. Debajo del mapa se encuentran las tasas."
     },
     "Feedback of vragen kunt u sturen naar" : {
         "en" : "For questions and feedback please contact",
-        "de" : "Bei Fragen und Anregungen wenden Sie sich bitte an"
+        "de" : "Bei Fragen und Anregungen wenden Sie sich bitte an",
+        "es" : "Comentarios o preguntas pueden ser enviadas a"
     },
     "Bedankt voor uw feedback." : {
         "en" : "Thank you for your feedback.",
-        "de" : "Vielen Dank für Ihr Feedback."
+        "de" : "Vielen Dank für Ihr Feedback.",
+        "es" : "Gracias por su colaboración."
     },
     "Download bestanden voor GPS navigatie" : {
         "en" : "Download GPS navigation files",
-        "de" : "Download GPS navigation files"
+        "de" : "Download GPS navigation files",
+        "es" : "Descargar archivos de navegación GPS"
     },
     "Tourbuzz Berichtenservice" : {
         "en" : "Tourbuzz message service",
-        "de" : "Tour Buzz nachrichten"
+        "de" : "Tour Buzz nachrichten",
+        "es" : "Tourbuzz mensajería"
     },
     "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail." : {
         "en" : "Enter your details below and you will receive every two weeks Tour Buzz posts by email.",
-        "de" : "Geben Sie Ihre details unten und Sie bekommen jedes zwei wochen Tour Buzz nachrichten per E-Mail."
+        "de" : "Geben Sie Ihre details unten und Sie bekommen jedes zwei wochen Tour Buzz nachrichten per E-Mail.",
+        "es" : "Rellene sus datos a continuación y recibirá mensajes quincenales Información del zumbido por correo electrónico."
     },
     "Vul hieronder uw email adres in om af te melden bij de Tour Buzz berichtenservice." : {
         "en" : "Enter your email below to unsubscribe for  the Tour Buzz messages service.",
-        "de" : "Geben Sie Ihre e-Mail für abmelden von der Tour Buzz nachrichten."
+        "de" : "Geben Sie Ihre e-Mail für abmelden von der Tour Buzz nachrichten.",
+        "es" : "Introduzca su dirección de correo electrónico para cerrar la sesión del servicio de mensajería tour Buzz."
     },
     "We hebben u een mail gestuurd. Klik op de link in het mailbericht." : {
         "en" : "We've sent you an email. Click on the link in this message.",
-        "de" : "Wir haben Ihnen eine E-Mail gesendet. Klicken Sie auf den link in das email"
+        "de" : "Wir haben Ihnen eine E-Mail gesendet. Klicken Sie auf den link in das email",
+        "es" : "Te hemos enviado un correo electrónico. Haga clic en el enlace del correo electrónico."
     },
     "Vul hieronder uw mobiele nummer in om belangrijke Tour Buzz meldingen te ontvangen per SMS." : {
         "en" : "Enter your mobile number to receive important Tour Buzz notifications by SMS.",
-        "de" : "Geben Sie Ihre handynummer ein um wichtige Tour-Buzz- nachrichten zu erhalten per SMS."
+        "de" : "Geben Sie Ihre handynummer ein um wichtige Tour-Buzz- nachrichten zu erhalten per SMS.",
+        "es" : "Introduzca su número de móvil para recibir notificaciones importantes tour zumbido por SMS."
     },
     "Vul hieronder het mobiele nummer in, dat u wilt afmelden." : {
         "en" : "Enter your mobile number that you want to unsubscribe.",
-        "de" : "Geben Sie Ihre handynummer, die Sie sich möchten abmelden."
+        "de" : "Geben Sie Ihre handynummer, die Sie sich möchten abmelden.",
+        "es" : "Introduzca el número de móvil que desea registrar."
     }
   }
 }

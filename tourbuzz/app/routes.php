@@ -100,7 +100,7 @@ $app->hook('slim.before', function() use ($app) {
         $_SESSION['lang'] = 'nl';
     }
     $lang = $app->request()->params('lang');
-    if (isset($lang) && in_array($lang, array('nl','de','en'))) {
+    if (isset($lang) && in_array($lang, array('nl','de','en','es'))) {
         $_SESSION['lang'] = $lang;
     }
 });
@@ -823,6 +823,9 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
             }
             if ( empty($fields['title_de']) ) {
                 $notes .= " NOTE: Geen Duitse vertaling.";
+            }
+            if ( empty($fields['title_de']) ) {
+                $notes .= " NOTE: Geen Spaanse vertaling.";
             }
             //sendNewBerichtMail($apiResponse->body['id'], $fields['title']);
             $app->flash('success', 'Bericht toegevoegd.' . $notes);

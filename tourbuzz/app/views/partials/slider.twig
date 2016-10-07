@@ -15,7 +15,13 @@
 
             {% if lang == 'de' %}
                 {% if record.title_de %}{{ record.title_de }}
-                {% else %}{{ record.title_en }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+                {% else %}{{ record.title }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+                {% endif %}
+            {% endif %}
+
+            {% if lang == 'es' %}
+                {% if record.title_es %}{{ record.title_es }}
+                {% else %}{{ record.title }} <span class="meta">(Traducción no está disponible)</span>
                 {% endif %}
             {% endif %}
         {% endset %}
@@ -24,12 +30,14 @@
             {% if lang == 'nl' %}{{ insertlinks(record.body)|raw }}{% endif %}
             {% if lang == 'en' %}{{ insertlinks(record.body_en)|raw }}{% endif %}
             {% if lang == 'de' %}{{ insertlinks(record.body_de)|raw }}{% endif %}
+            {% if lang == 'es' %}{{ insertlinks(record.body_es)|raw }}{% endif %}
         {% endset %}
 
         {% set advice %}
             {% if lang == 'nl' %}{{ insertlinks(record.advice)|raw }}{% endif %}
             {% if lang == 'en' %}{{ insertlinks(record.advice_en)|raw }}{% endif %}
             {% if lang == 'de' %}{{ insertlinks(record.body_de)|raw }}{% endif %}
+            {% if lang == 'es' %}{{ insertlinks(record.body_es)|raw }}{% endif %}
         {% endset %}
 
         <article data-id="{{ record.id }}" data-titel="{{ record.title }}">
