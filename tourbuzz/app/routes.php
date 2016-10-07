@@ -1263,7 +1263,6 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
 $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
 
     $apiResponse = $app->api->get("berichten/{$id}");
-    //var_dump($apiResponse);
     $bericht = $apiResponse->body;
 
     $data = [
@@ -1408,6 +1407,14 @@ $app->get('/offline', function () use ($app) {
 
     $apiResponse = $app->api->get("berichten/{$dateurlstring}");
     $berichten = $apiResponse->body['messages'];
+
+    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
 
     $data = [
         "berichten" => $berichten,
