@@ -237,6 +237,14 @@
         "de" : "Abmelden",
         "es" : "Darse de baja"
     },
+    "Naam" : {
+        "en" : "Name",
+        "de" : "Name"
+    },
+    "Organisatie" : {
+        "en" : "Organisation",
+        "de" : "Organisation"
+    },
     "Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan." : {
         "en" : "See below for locations of stops where you can drop off and pick up your passengers. If a stop is occupied, please continue to the next one on your route. You are allowed a maximum time of 10 minutes on these stops.",
         "de" : "An diesen Stellen können die Passagiere an Bord und von Bord gehen. In einem belebten Bahnhof, fahren Sie mit dem nächsten auf der Reiseroute. Hinweis: Stopp bis zu 10 min.",
@@ -266,6 +274,14 @@
         "en" : "Tourbuzz message service",
         "de" : "Tour Buzz nachrichten",
         "es" : "Tourbuzz mensajería"
+    },
+    "Aanmelden niet gelukt. Email is verplicht" : {
+        "en" : "Email is required.",
+        "de" : "E-Mail ist erforderlich."
+    },
+    "Dit email adres is al aangemeld" : {
+        "en" : "This email address is already subscribed",
+        "de" : "Diese E-Mail-Adresse ist bereits abonniert"
     },
     "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail." : {
         "en" : "Enter your details below and you will receive every two weeks Tour Buzz posts by email.",

@@ -1023,7 +1023,11 @@ $app->post('/berichtenservice', function () use ($app) {
             $app->flash('success', translate('We hebben u een mail gestuurd. Klik op de link in het mailbericht.'));
             break;
         case '406':
-            $app->flash('error', 'Dit email adres is al aangemeld');
+            $app->flash('error', translate('Dit email adres is al aangemeld'));
+            $app->redirect('/berichtenservice');
+            break;
+        case '500':
+            $app->flash('error', translate('Aanmelden niet gelukt. Email is verplicht.')); // FIXME
             $app->redirect('/berichtenservice');
             break;
 
@@ -1085,7 +1089,7 @@ $app->post('/berichtenservice-afmelden', function () use ($app) {
 
     switch ($apiResponse->statusCode) {
         case '200':
-            $app->flash('success', 'We hebben u een mail gestuurd. Klik op de link in uw mailbericht.');
+            $app->flash('success', translate('We hebben u een mail gestuurd. Klik op de link in het mailbericht.'));
             break;
 
         default:
