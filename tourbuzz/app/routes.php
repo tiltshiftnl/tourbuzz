@@ -1300,7 +1300,7 @@ $app->get('/mail/csv', function () use ($app) {
 
     $out = fopen('php://output', 'w');
 
-    fputcsv($out, ['id', 'mail','naam', 'aangemaakt', 'bevestigd', 'verwijdering aangevraagd']);
+    fputcsv($out, ['id', 'mail','naam', 'aangemaakt', 'bevestigd', 'verwijdering aangevraagd', 'organisatie']);
 
     header("Content-type: text/csv");
     header("Content-Disposition: attachment; filename=maillijst.csv");
@@ -1310,10 +1310,12 @@ $app->get('/mail/csv', function () use ($app) {
     foreach ($apiResponse->body as $row) {
         fputcsv($out, [
             $row['id'],
+            $row['mail'],
             $row['name'],
             $row['created']['date'],
             $row['confirmed']['date'],
-            $row['unsubscribeRequest']['date']
+            $row['unsubscribeRequest']['date'],
+            $row['organisation'],
         ]);
     }
 });
