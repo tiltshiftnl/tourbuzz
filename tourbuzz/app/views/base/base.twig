@@ -82,23 +82,22 @@
                                 <a href="#" class="active"><img src="/img/taal/nl.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
                                 <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
                                 <a href="?lang=de"><img src="/img/taal/de.png" class="vlag"></a>
-                                {#<a href="?lang=es"><img src="/img/taal/es.png" class="vlag"></a>#}
+                                <a href="?lang=es"><img src="/img/taal/es.png" class="vlag"></a>
                             {% elseif lang == 'en' %}
                                 <a href="#" class="active"><img src="/img/taal/en.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
                                 <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag"></a>
                                 <a href="?lang=de"><img src="/img/taal/de.png" class="vlag"></a>
-                                {#<a href="?lang=es"><img src="/img/taal/es.png" class="vlag"></a>#}
+                                <a href="?lang=es"><img src="/img/taal/es.png" class="vlag"></a>
                             {% elseif lang == 'de' %}
                                 <a href="#" class="active"><img src="/img/taal/de.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
                                 <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag"></a>
                                 <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
-                                {#<a href="?lang=es"><img src="/img/taal/es.png" class="vlag"></a>#}
-                            {#
-                            {% elseif lang == 'es' %}ddd
+                                <a href="?lang=es"><img src="/img/taal/es.png" class="vlag"></a>
+                            {% elseif lang == 'es' %}
                                 <a href="#" class="active"><img src="/img/taal/es.png" class="vlag"><img src="/img/down-w.png" class="down-w"></a>
                                 <a href="?lang=nl"><img src="/img/taal/nl.png" class="vlag"></a>
                                 <a href="?lang=en"><img src="/img/taal/en.png" class="vlag"></a>
-                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag"></a>#}
+                                <a href="?lang=de"><img src="/img/taal/de.png" class="vlag"></a>
                             {% endif %}
                         </div>
                     </nav>
@@ -123,7 +122,7 @@
                         <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{#<img src="/img/buzz-icon-g.png" class="buzz-icon">#}{{ __('Berichten') }}</a>
                         {#<a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('Haltes') }}</a>
                         <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('Parkeren') }}</a>#}
-                        <a href="/haltes-parkeerplaatsen" class="{% if activetab == 'haltes-parkeerplaatsen' %}active{% endif %}">{{ __('Haltes & Parkeren') }}</a>
+                        <a href="/haltes-parkeerplaatsen" class="{% if activetab == 'haltes-parkeerplaatsen' %}active{% endif %}">{{ __('Haltes') }} & {{ __('Parkeren') }}</a>
                         {#<a href="/abonneren" class="{% if activetab == 'abonneren' %}active{% endif %}">{{ __('Abonneren') }}</a>#}
                 </div>
             </nav>
