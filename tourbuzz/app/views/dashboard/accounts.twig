@@ -4,11 +4,20 @@
 <main class="wrapper">
     <div class="col-1-1">
 
+    {#<h2>Nieuw account</h2>#}
     <form class="form-styles" method="post" autocomplete="false">
-        <h2 style="margin-bottom: 10px">Nieuw account</h2>
-        <input type="text" placeholder="Gebruikersnaam" name="username">
-        <input type="text" placeholder="" name="mail">
-        <input type="password" placeholder="Wachtwoord" name="password">
+        <div class="formrow">
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" name="username">
+        </div>
+        <div class="formrow">
+            <label for="mail">E-mail</label>
+            <input type="text" name="mail">
+        </div>
+        <div class="formrow">
+            <label for="password">Wachtwoord</label>
+            <input type="password" name="password">
+        </div>
         <button type="submit" name="submit" value="toevoegen">Toevoegen</button>
     </form>
 
@@ -16,12 +25,14 @@
         <tr>
             <th>Gebruikersnaam</th>
             <th>E-mail</th>
+            <th>Notifications</th>
             <th>&nbsp;</th>
         </tr>
         {% for account in accounts %}
         <tr>
             <td>{{ account.username }}</td>
             <td>{{ account.mail }}</td>
+            <td>{% if account.create_notifications %}✓{% else %}-{% endif %}
             <td><a href="/dashboard/accounts/{{ account.username }}" class="actie">bewerk</a></td>
         </tr>
         {% endfor %}

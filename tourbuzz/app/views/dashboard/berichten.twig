@@ -27,6 +27,94 @@ $(function() {
             $('input[name=location_lat]').val(location.latitude);
         }
     });
+
+    // Translate
+    $('.translate').click(function (e) {
+
+        var lang = $(this).data("lang");
+        console.log(lang);
+
+        var titleNL  = $('input[name=title]').val();
+        var bodyNL   = $('textarea[name=body]').val();
+        var adviceNL = $('textarea[name=advice]').val();
+
+        if (titleNL) {
+            url = '/translate/' + lang + '/' + titleNL;
+
+            $.ajax(url, {
+                success: function(data) {
+                    switch(lang) {
+                        case 'en':
+                            $('input[name=title_en]').val(data);
+                            break;
+                        case 'de':
+                            $('input[name=title_de]').val(data);
+                            break;
+                        case 'es':
+                            $('input[name=title_es]').val(data);
+                            break;
+                        default:
+                            alert("Taal onbekend");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(textStatus + ': ' + errorThrown);
+                }
+            });
+        }
+
+        if (bodyNL) {
+            url = '/translate/' + lang + '/' + bodyNL;
+
+            $.ajax(url, {
+                success: function(data) {
+                    switch(lang) {
+                        case 'en':
+                            $('textarea[name=body_en]').val(data);
+                            break;
+                        case 'de':
+                            $('textarea[name=body_de]').val(data);
+                            break;
+                        case 'es':
+                            $('textarea[name=body_es]').val(data);
+                            break;
+                        default:
+                            alert("Taal onbekend");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(textStatus + ': ' + errorThrown);
+                }
+            });
+        } else { alert('Geen body'); }
+
+        if (adviceNL) {
+            url = '/translate/' + lang + '/' + adviceNL;
+
+            $.ajax(url, {
+                success: function(data) {
+                    switch(lang) {
+                        case 'en':
+                            $('textarea[name=advice_en]').val(data);
+                            break;
+                        case 'de':
+                            $('textarea[name=advice_de]').val(data);
+                            break;
+                        case 'es':
+                            $('textarea[name=advice_es]').val(data);
+                            break;
+                        default:
+                            alert("Taal onbekend");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(textStatus + ': ' + errorThrown);
+                }
+            });
+        }
+
+    });
+
 });
 </script>
 {% endblock %}
@@ -67,36 +155,36 @@ $(function() {
                 <textarea name="advice" placeholder="Advies">{{ bericht.advice }}</textarea>
             </div>
             <div class="tab" pico-id="tab-en">
+                <a href="#" class="translate" data-lang="en">Vertaal met Google Translate</a>
                 <input type="text" name="title_en" placeholder="Headline (engels)" value="{{ bericht.title_en }}">
                 <textarea name="body_en" placeholder="Situatie (engels)">{{ bericht.body_en }}</textarea>
                 <textarea name="advice_en" placeholder="Advies (engels)">{{ bericht.advice_en }}</textarea>
             </div>
             <div class="tab" pico-id="tab-de">
+                <a href="#" class="translate" data-lang="de">Vertaal met Google Translate</a>
                 <input type="text" name="title_de" placeholder="Headline (duits)" value="{{ bericht.title_de }}">
                 <textarea name="body_de" placeholder="Situatie (duits)">{{ bericht.body_de }}</textarea>
                 <textarea name="advice_de" placeholder="Advies (duits)">{{ bericht.advice_de }}</textarea>
             </div>
             <div class="tab" pico-id="tab-es">
+                <a href="#" class="translate" data-lang="es">Vertaal met Google Translate</a>
                 <input type="text" name="title_es" placeholder="Headline (spaans)" value="{{ bericht.title_es }}">
                 <textarea name="body_es" placeholder="Situatie (spaans)">{{ bericht.body_es }}</textarea>
                 <textarea name="advice_es" placeholder="Advies (spaans)">{{ bericht.advice_es }}</textarea>
             </div>
         </nav>
 
-        {#<div class="grid-row">
-            <input type="checkbox" name="" value=""> SMS alert
-        </div>
-        <div class="grid-row">
-            <p>Note: SMS berichten max 115 karakters. Kosten per bericht circa &euro; 0,10</p>
-            <textarea name="sms_nl" placeholder="SMS (nl)">{{ bericht.sms_nl }}</textarea>
-            <textarea name="sms_en" placeholder="SMS (en)">{{ bericht.sms_en }}</textarea>
-            <textarea name="sms_de" placeholder="SMS (de)">{{ bericht.sms_de }}</textarea>
-        </div>#}
-
-        {#<span class="maxchars">Max 200 karakters</span>#}
-
         <div class="grid-row">
             <input type="checkbox" name="important" value="important" {% if bericht.important is not empty %}checked=checked{% endif %}> Belangrijk bericht
+        </div>
+
+        <div class="grid-row">
+            <section style="padding-left: 20px" id="sms-panel">
+                <p style="font-size: 13px">Note: SMS berichten max 115 karakters. Kosten per bericht circa &euro; 0,10</p>
+                <textarea name="sms_nl" placeholder="SMS (nl)">{{ bericht.sms_nl }}</textarea>
+                <textarea name="sms_en" placeholder="SMS (en)">{{ bericht.sms_en }}</textarea>
+                <textarea name="sms_de" placeholder="SMS (de)">{{ bericht.sms_de }}</textarea>
+            </section>
         </div>
 
         <div class="grid-row group">

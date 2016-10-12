@@ -7,8 +7,17 @@
     <h2>Account bewerken voor {{ account.username }}</h2>
     <form class="form-styles" method="post" autocomplete="false">
         <input type="hidden" name="username" value="{{ account.username }}">
-        <input type="text" placeholder="E-mail" name="mail" value="{{ account.mail }}">
-        <input type="password" placeholder="Wachtwoord" name="password" value="">
+        <div class="formrow">
+            <label for="mail">E-mail</label>
+            <input type="text" name="mail" value="{{ account.mail }}">
+        </div>
+        <div class="formrow">
+            <label for="password">Wachtwoord</label>
+            <input type="password" name="password" value="">
+        </div>
+        <div class="formrow">
+            <label><input type="checkbox" name="create_notifications" value="create_notifications" {% if account.create_notifications %}checked{% endif %}> Stuur notificatie nieuw aangemaakte berichten</label>
+        </div>
         <button type="submit" name="submit" value="toevoegen">Aanpassen</button>
     </form>
 

@@ -656,6 +656,7 @@ $app->post('/dashboard/accounts/:slug', function ($slug) use ($app) {
         'username' => $app->request->post('username'),
         'password' => $app->request->post('password'),
         'mail' => $app->request->post('mail'),
+        'create_notifications' => $app->request->post('create_notifications')
     );
 
     $app->api->setToken($_SESSION['auth_token']);
@@ -732,6 +733,7 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
         "image_api" => $image_api,
         "username" => $_SESSION['username'],
         "activetab" => "berichten",
+        "token" => $_SESSION['auth_token'],
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -893,6 +895,18 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
 $app->get('/token', function () use ($app) {
     die($_SESSION['auth_token']);
 });
+
+/**
+ * Translate helper
+ */
+$app->get('/translate/:lang/:string', function ($lang, $string) use ($app) {
+    $translation = 'Geen vertaling mogelijk';
+    $translate_url = 'translate/'.$lang.'/'.$string.'?token='.$_SESSION["auth_token"];
+    $apiResponse = $app->api->get($translate_url);
+    $translation = $apiResponse->body['string'];
+    die($translation);
+});
+
 
 /**
  * Dashboard wildcard redirect.
