@@ -38,7 +38,7 @@ $(function() {
         var adviceNL = $('textarea[name=advice]').val();
 
         if (titleNL) {
-            url = '/translate/' + lang + '/' + encodeURI(titleNL);
+            url = '/translate/' + lang + '/' + encodeURIComponent(titleNL);
 
             $.ajax(url, {
                 method: "POST",
@@ -64,7 +64,7 @@ $(function() {
         }
 
         if (bodyNL) {
-            url = '/translate/' + lang + '/' + encodeURI(bodyNL);
+            url = '/translate/' + lang + '/' + encodeURIComponent(bodyNL);
 
             $.ajax(url, {
                 method: "POST",
@@ -90,7 +90,7 @@ $(function() {
         } else { alert('Geen body'); }
 
         if (adviceNL) {
-            url = '/translate/' + lang + '/' + encodeURI(adviceNL);
+            url = '/translate/' + lang + '/' + encodeURIComponent(adviceNL);
 
             $.ajax(url, {
                 method: "POST",

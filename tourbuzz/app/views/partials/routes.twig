@@ -6,15 +6,15 @@ td, th { text-align: left; vertical-align: top; padding: 2px 10px; border: 1px s
 </style>
 <table>
     <tr>
+        <th>Methods</th>
         <th>Pattern</th>
-        <th>Name</th>
-        {#<th>Methods</th>#}
+        {#<th>Name</th>#}
     </tr>
 {% for record in routes %}
 <tr>
+    <td>{{ record.methods|join(", ") }}</td>
     <td><a href="{{ record.pattern }}">{{ record.pattern }}</a></td>
-    <td>{{ record.name }}</td>
-    {#<td>{{ record.methods }}</td>#}
+    {#<td>{{ record.name }}</td>#}
 </tr>
 {% endfor %}
 </table>

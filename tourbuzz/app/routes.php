@@ -191,7 +191,7 @@ $app->get('/haltes-parkeerplaatsen', function () use ($app, $analytics) {
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
         "analytics" => $analytics,
-        "apikey" => "AIzaSyDlLcl2JExZANAIdG7UVcpqj3iTT1KL76Q",
+        "apikey" => "AIzaSyDbdT24XheIFcsXjZhNRI9KMG806-feOr4",
         "template" => "haltes-parkeerplaatsen.twig",
     ];
 
@@ -896,12 +896,14 @@ $app->get('/token', function () use ($app) {
     die($_SESSION['auth_token']);
 });
 
+
 /**
  * Translate helper
  */
-$app->post('/translate/:lang/:string', function ($lang, $string) use ($app) {
+$app->any('/translate/:lang/:string', function ($lang, $string) use ($app) {
+    die("MATCH!");
     $translation = 'Geen vertaling mogelijk';
-    $translate_url = 'translate/'.$lang.'/'.$string.'?token='.$_SESSION["auth_token"];
+    $translate_url = 'translate/'.$lang.'/'.rawurlencode($string).'?token='.$_SESSION["auth_token"];
     $apiResponse = $app->api->get($translate_url);
     $translation = $apiResponse->body['string'];
     die($translation);
