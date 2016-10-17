@@ -18,12 +18,14 @@
                 <th>E-mail</th>
                 <th>Naam</th>
                 <th>Organisatie</th>
+                <th>Bevestigd</th>
             </tr>
             {% for record in abonnees %}
             <tr>
                 <td>{{ record.mail }}</td>
                 <td>{{ record.name }}</td>
                 <td>{{ record.organisation }}</td>
+                <td>{{ record.confirmed.date|date('d-m-Y') }}</td>
                 {#<td>{{ record.created.date|date('d-m-Y') }} om {{ record.created.date|date('H:i') }}</td>#}
             </tr>
             {% endfor %}
