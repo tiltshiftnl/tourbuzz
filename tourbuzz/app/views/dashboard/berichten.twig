@@ -32,16 +32,16 @@ $(function() {
     $('.translate').click(function (e) {
 
         var lang = $(this).data("lang");
-        console.log(lang);
 
         var titleNL  = $('input[name=title]').val();
         var bodyNL   = $('textarea[name=body]').val();
         var adviceNL = $('textarea[name=advice]').val();
 
         if (titleNL) {
-            url = '/translate/' + lang + '/' + titleNL;
+            url = '/translate/' + lang + '/' + encodeURI(titleNL);
 
             $.ajax(url, {
+                method: "POST",
                 success: function(data) {
                     switch(lang) {
                         case 'en':
@@ -64,9 +64,10 @@ $(function() {
         }
 
         if (bodyNL) {
-            url = '/translate/' + lang + '/' + bodyNL;
+            url = '/translate/' + lang + '/' + encodeURI(bodyNL);
 
             $.ajax(url, {
+                method: "POST",
                 success: function(data) {
                     switch(lang) {
                         case 'en':
@@ -89,9 +90,10 @@ $(function() {
         } else { alert('Geen body'); }
 
         if (adviceNL) {
-            url = '/translate/' + lang + '/' + adviceNL;
+            url = '/translate/' + lang + '/' + encodeURI(adviceNL);
 
             $.ajax(url, {
+                method: "POST",
                 success: function(data) {
                     switch(lang) {
                         case 'en':
