@@ -899,7 +899,7 @@ $app->get('/token', function () use ($app) {
 /**
  * Translate helper
  */
-$app->get('/translate/:lang/:string', function ($lang, $string) use ($app) {
+$app->post('/translate/:lang/:string', function ($lang, $string) use ($app) {
     $translation = 'Geen vertaling mogelijk';
     $translate_url = 'translate/'.$lang.'/'.$string.'?token='.$_SESSION["auth_token"];
     $apiResponse = $app->api->get($translate_url);
