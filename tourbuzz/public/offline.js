@@ -1,3 +1,5 @@
+var versions = 2;
+
 var paths = [
     '/img/buzzlogo-w.png',
     '/img/tour-buzz.png',
@@ -30,6 +32,13 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open('offline')
             .then(function(cache) {
+
+                cache.keys().then(function(keys) {
+                    keys.forEach(function(request, index, array) {
+                        cache.delete(request);
+                    });
+                });
+
                 return cache.addAll(paths);
             })
     );
