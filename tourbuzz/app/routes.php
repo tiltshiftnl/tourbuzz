@@ -1278,6 +1278,16 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
     render($data['template'], $data);
 });
 
+
+/**
+ * Redirect link vanuit SMS alert
+ */
+$app->get('/s/:id', function ($id) use ($app) {
+    $bericht = base_convert($id, 36, 10);
+    $app->redirect('/bericht/'.$bericht);
+});
+
+
 /**
  * Single message (bericht).
  */
@@ -1294,6 +1304,7 @@ $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
 
     render($data["template"], $data);
 });
+
 
 /**
  * Mail lijst csv
