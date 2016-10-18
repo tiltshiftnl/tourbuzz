@@ -900,10 +900,13 @@ $app->get('/token', function () use ($app) {
 /**
  * Translate helper
  */
-$app->post('/translate/:lang/:string', function ($lang, $string) use ($app) {
+$app->post('/translate', function () use ($app) {
     $translation = 'Geen vertaling mogelijk';
-    $translate_url = 'translate/'.$lang.'/'.rawurlencode($string).'?token='.$_SESSION["auth_token"];
-    $apiResponse = $app->api->get($translate_url);
+    $translate_url = 'translate?token='.$_SESSION["auth_token"];
+    $apiResponse = $app->api->post($translate_url, [
+        'lang' => $app->request->post('lang'),
+        'string' => $app->request->post('string')
+    ]);
     $translation = $apiResponse->body['string'];
     die($translation);
 });
