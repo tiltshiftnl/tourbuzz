@@ -33,7 +33,7 @@
                 <th>Organisatie</th>
                 <th>Bevestigd</th>
             </tr>
-            {% for record in abonnees %}
+            {% for record in abonnees if record.confirmed is not null %}
             <tr>
                 <td>{{ record.mail }}</td>
                 <td>{{ record.name }}</td>
