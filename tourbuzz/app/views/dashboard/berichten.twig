@@ -40,7 +40,7 @@ $(function() {
         if (titleNL) {
             $.ajax('/translate', {
                 method: "POST",
-                data: { lang: lang, string: adviceNL},
+                data: { lang: lang, string: titleNL},
                 success: function(data) {
                     switch(lang) {
                         case 'en':
@@ -63,11 +63,9 @@ $(function() {
         }
 
         if (bodyNL) {
-            url = '/translate/' + lang + '/' + encodeURIComponent(bodyNL);
-
             $.ajax('/translate', {
                 method: "POST",
-                data: { lang: lang, string: adviceNL},
+                data: { lang: lang, string: bodyNL},
                 success: function(data) {
                     switch(lang) {
                         case 'en':
@@ -87,7 +85,7 @@ $(function() {
                     alert(textStatus + ': ' + errorThrown);
                 }
             });
-        } else { alert('Geen body'); }
+        }
 
         if (adviceNL) {
             $.ajax('/translate', {
