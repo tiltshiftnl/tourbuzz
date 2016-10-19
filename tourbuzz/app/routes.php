@@ -1303,11 +1303,19 @@ $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
     $apiResponse = $app->api->get("berichten/{$id}");
     $bericht = $apiResponse->body;
 
-    $data = [
-        "bericht" => $bericht,
-        "analytics" => $analytics,
-        "template" => "bericht.twig",
-    ];
+
+    if ($bericht['is_live']) {
+        $data = [
+            "bericht" => $bericht,
+            "analytics" => $analytics,
+            "template" => "bericht.twig",
+        ];
+    } else {
+        $app->flashNow('error', 'Dit bericht is niet gepubliceerd');
+        $data = [
+            "template" => "bericht-not-live.twig",
+        ];
+    }
 
     render($data["template"], $data);
 });
