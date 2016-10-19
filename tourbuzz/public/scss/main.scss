@@ -535,6 +535,13 @@ ol.berichten {
     background: #fafafa;
     color: #888;
 
+    .form-row {
+        margin-bottom: 10px;
+        &.error input { border: 1px solid red; margin-bottom: 3px}
+        label { display: block; } // tmp
+        .note { font-size: 13px; color: red}
+    }
+
     h3 {
         margin-bottom: $margin-small;
         color: #888;
@@ -757,6 +764,10 @@ input.disabled {
     padding: 15px;
     margin-bottom: 20px;
     a { text-decoration: underline; }
+}
+
+.unconfirmed td {
+    color: #aaa;
 }
 
 footer {

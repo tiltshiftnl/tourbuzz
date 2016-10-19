@@ -12,7 +12,7 @@
 
     <div style="margin-top: 15px">
         <h3>Nieuwsbrief</h3>
-        <p>{{ abonnees|length }} abonnees.</p>
+        <p>{{ abonnees|length }} aanmeldingen.</p>
     </div>
 
     </div>
@@ -31,14 +31,16 @@
                 <th>E-mail</th>
                 <th>Naam</th>
                 <th>Organisatie</th>
+                {#<th>Taal</th>#}
                 <th>Bevestigd</th>
             </tr>
-            {% for record in abonnees if record.confirmed is not null %}
-            <tr>
+            {% for record in abonnees %}
+            <tr {% if record.confirmed is null %}class="unconfirmed"{% endif %}>
                 <td>{{ record.mail }}</td>
                 <td>{{ record.name }}</td>
                 <td>{{ record.organisation }}</td>
-                <td>{{ record.confirmed.date|date('d-m-Y') }} om {{ record.confirmed.date|date('H:i') }}</td>
+                {#<td>{{ record.language }}</td>#}
+                <td>{% if record.confirmed is not null %}{{ record.confirmed.date|date('d-m-Y') }} om {{ record.confirmed.date|date('H:i') }}{% endif %}</td>
             </tr>
             {% endfor %}
         </table>
