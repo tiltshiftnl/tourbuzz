@@ -1109,6 +1109,9 @@ $app->post('/berichtenservice-afmelden', function () use ($app) {
         case '200':
             $app->flash('success', translate('We hebben u een mail gestuurd. Klik op de link in het mailbericht.'));
             break;
+        case '406':
+            $app->flash('error', translate('Dit email adres is niet bekend'));
+            break;
 
         default:
             //die(print_r($apiResponse->body));
@@ -1423,6 +1426,7 @@ $app->get('/ov2', function () use ($app) {
     echo $poiFile->content;
 });
 
+
 /**
  * Styleguide
  */
@@ -1434,6 +1438,7 @@ $app->get('/styleguide', function () use ($app) {
 
     render($data["template"], $data);
 });
+
 
 /**
  * Offline version
