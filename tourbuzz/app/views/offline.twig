@@ -3,7 +3,6 @@
 {% block main %}
 
 <main class="wrapper">
-
     <section class="buzz">
 
         <h2>{{ now|date('d-M-Y') }}</h2>
@@ -33,7 +32,7 @@
                 {% endset %}
 
                 <li>
-                    <a href="/{{ Y }}/{{ m }}/{{ d }}/details#slide{{ loop.index }}" class="slide-link">
+                    <a href="#" class="slide-link">
                         <span class="nr">{{ loop.index }}</span>{{ title }}
                     </a>
                 </li>
