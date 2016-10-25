@@ -766,6 +766,10 @@ input.disabled {
     a { text-decoration: underline; }
 }
 
+.link {
+    color: $link-color;
+}
+
 .unconfirmed td {
     color: #aaa;
 }
