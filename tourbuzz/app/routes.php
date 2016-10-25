@@ -1447,6 +1447,45 @@ $app->get('/styleguide', function () use ($app) {
     render($data["template"], $data);
 });
 
+/**
+ * Widget
+ */
+$app->get('/widget/:y/:m/:d', function ($y,$m,$d) use ($app) {
+
+    $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
+
+    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
+
+    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
+    $j = date('j', strtotime("{$y}-{$m}-{$d}"));
+
+    $day = array(
+        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
+    );
+
+    $dag = translate($day[(int)$N - 1]);
+
+    $data = [
+        "lang" => $_SESSION['lang'],
+        "berichten" => $berichten,
+        "datestring" => "{$y}-{$m}-{$d}",
+        "dag" => $dag,
+        "j" => $j,
+        "d" => $d,
+        "m" => $m,
+        "Y" => $y,
+        "template" => "widget.twig"
+    ];
+
+    render($data['template'], $data);
+});
+
 
 /**
  * Offline version
