@@ -7,23 +7,9 @@ var paths = [
     '/img/taal/de.png',
     '/img/taal/en.png',
     '/img/down-w.png',
-    '/img/markers/1.png',
-    '/img/markers/2.png',
-    '/img/markers/3.png',
-    '/img/markers/4.png',
-    '/img/markers/5.png',
-    '/img/markers/6.png',
-    '/img/markers/7.png',
-    '/img/markers/8.png',
-    '/img/markers/9.png',
-    '/img/markers/10.png',
-    '/img/markers/11.png',
-    '/img/markers/12.png',
-    '/img/markers/13.png',
-    '/img/markers/14.png',
-    '/img/markers/15.png',
     '/offline',
-    '/css/scss/main.scss'
+    '/css/scss/main.scss',
+    '/js/jquery-2.2.4.min.js'
 ];
 
 var refreshed = 0;

@@ -1457,7 +1457,6 @@ $app->get('/offline', function () use ($app) {
     $dateurlstring = "{$Y}/{$m}/{$d}";
 
     $apiResponse = $app->api->get("berichten/{$dateurlstring}");
-    $berichten = $apiResponse->body['messages'];
 
     $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
         return !empty($bericht['is_live']);
@@ -1467,10 +1466,19 @@ $app->get('/offline', function () use ($app) {
         return $b1['important'] < $b2['important'];
     });
 
+    $apiResponse = $app->api->get("haltes");
+    $haltes = $apiResponse->body['haltes'];
+
+    $apiResponse = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
+
+
     $data = [
-        "berichten" => $berichten,
-        "lang" => $_SESSION['lang'],
-        "template" => "offline.twig",
+        "berichten"       => $berichten,
+        "haltes"          => $haltes,
+        "parkeerplaatsen" => $parkeerplaatsen,
+        "lang"            => $_SESSION['lang'],
+        "template"        => "offline.twig",
     ];
 
     render($data["template"], $data);

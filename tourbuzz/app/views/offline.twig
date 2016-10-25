@@ -40,6 +40,46 @@
             {% endfor %}
         </ol>
 
+        <h2><a name="haltes">Haltes (max. 10 min)</a></h2>
+        <ol>
+            {% for halte in haltes %}
+                <li style="position: relative; padding-left: 45px">
+                    <a>
+                        <div>
+                            <span class="halte-link" style="position: absolute; left: 0; {% if not halte.beschikbaar %}opacity: 0.2{% endif %}">{{ halte.haltenummer }}</span>
+                            <span>{{ halte.straat }}</span><br>
+                            {% if halte.beschikbaar %}
+                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+                            {% else %}
+                                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                            {% endif %}
+                            <span class="meta">{{ halte.locatie }}</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ol>
+
+        <h2><a name="parkeerplaatsen">Parkeerplaatsen</a></h2>
+        <ol>
+            {% for parkeerplaats in parkeerplaatsen %}
+                <li style="position: relative; padding-left: 45px">
+                    <a>
+                        <div>
+                            <span class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</span>
+                            <span>{{ parkeerplaats.naam }}</span><br>
+                            {% if parkeerplaats.beschikbaar %}
+                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
+                            {% else %}
+                                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                            {% endif %}
+                            <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ol>
+
     </section>
 
 </main>
