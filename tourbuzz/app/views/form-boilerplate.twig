@@ -1,0 +1,46 @@
+{% extends 'base/base.twig' %}
+
+{% block topselectie %}{% endblock %}
+
+{% block main %}
+    <main class="wrapper">
+        {% if errors is not empty %}<section class="flashmessages"><p class="error">Niet alle velden zijn correct ingevuld</p></section>{% endif %}
+        <form class="form-styles" method="post">
+
+            <div class="form-row {% if errors.username %}error{% endif %}">
+                <h3>Gebruikersnaam*</h3>
+                <input type="text" name="username" value="{{ form.username }}">
+                {% if errors.username %}<p class="note">{{ errors.username }}</p>{% endif %}
+            </div>
+
+            <div class="form-row {% if errors.email %}error{% endif %}">
+                <h3>Email*</h3>
+                <input type="text" name="email" value="{{ form.email }}">
+                {% if errors.email %}<p class="note">{{ errors.email }}</p>{% endif %}
+            </div>
+
+            <div class="form-row">
+                <h3>Checkboxes</h3>
+                <label><input type="checkbox" name="keuzes[]" value="a" {% if 'a' in form.keuzes %}checked{% endif %}> Optie A</input></label>
+                <label><input type="checkbox" name="keuzes[]" value="b" {% if 'b' in form.keuzes %}checked{% endif %}> Optie B</input></label>
+                <label><input type="checkbox" name="keuzes[]" value="c" {% if 'c' in form.keuzes %}checked{% endif %}> Optie C</input></label>
+                <label><input type="checkbox" name="keuzes[]" value="d" {% if 'd' in form.keuzes %}checked{% endif %}> Optie D</input></label>
+            </div>
+
+            <div class="form-row">
+                <h3>Radiobuttons</h3>
+                <label><input type="radio" name="keuze" value="a" {% if form.keuze == 'a' %}checked{% endif %}> Optie A</input></label>
+                <label><input type="radio" name="keuze" value="b" {% if form.keuze == 'b' %}checked{% endif %}> Optie B</input></label>
+                <label><input type="radio" name="keuze" value="c" {% if form.keuze == 'c' %}checked{% endif %}> Optie C</input></label>
+                <label><input type="radio" name="keuze" value="d" {% if form.keuze == 'd' %}checked{% endif %}> Optie D</input></label>
+            </div>
+
+            <button type="submit">Verstuur</button>
+            <p>* Verplicht veld</p>
+            <div class="form-row" style="margin-top: 10px">
+                <input type="checkbox" name="debug" {% if form.debug %}checked{% endif %}> Debug
+            </div>
+
+        </form>
+    </main>
+{% endblock %}

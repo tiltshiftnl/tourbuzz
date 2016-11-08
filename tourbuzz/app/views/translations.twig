@@ -1,0 +1,13 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+<main class="wrapper">
+{% for key,string in translations %}
+NL: {{ key }}<br>
+EN: {{ string.en }}<br>
+DE: {{ string.de }}<br>
+ES: {{ string.es }}<br>
+---------<br>
+{% endfor %}
+</main>
+{% endblock %}

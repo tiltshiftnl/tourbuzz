@@ -10,21 +10,6 @@ $app->notFound(function () use ($app) {
 
 
 /**
- * Robots.txt
- */
-$app->get('/robots.txt', function () use ($app) {
-
-    header("Content-type: text/plain");
-    if ( $_SERVER['HTTP_HOST'] == 'www.tourbuzz.nl' ) {
-        readfile('robots.live.txt');
-    } else {
-        readfile('robots.dev.txt');
-    }
-    die;
-});
-
-
-/**
  * Render wrapper to add debug utilities.
  */
 function render($template, $data = [], $headers = []) {
@@ -55,8 +40,8 @@ function render($template, $data = [], $headers = []) {
         $data['routes'] = $routes;
     }
 
-    if (isset($_GET['debug'])) {
-        switch ($_GET['debug']) {
+    if (isset($_REQUEST['debug'])) {
+        switch ($_REQUEST['debug']) {
             case 'json':
                 header('Content-type: application/json');
                 echo json_encode($data);

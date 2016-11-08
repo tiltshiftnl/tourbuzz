@@ -1,0 +1,46 @@
+<style>
+    .bars {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        margin-bottom: 40px;
+        top: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
+    .bars div {
+        background-color: #86BB80;
+        width: 10px;
+        position: absolute;
+        bottom: 0;
+        margin-right: 2px;
+    }
+</style>
+{% set offset = 12 %}
+    <h2 style="font-weight: normal; font-size: 14px; border-bottom: 1px solid #eee; margin-bottom: 5px">Halte drukte</h2>
+
+<section class="bars">
+    <div style="height: 30px; left: {{ 0 * offset }}px"></div>
+    <div style="height: 25px; left: {{ 1 * offset }}px"></div>
+    <div style="height: 40px; left: {{ 2 * offset }}px"></div>
+    <div style="height: 63px; left: {{ 3 * offset }}px"></div>
+    <div style="height: 80px; left: {{ 4 * offset }}px"></div>
+    <div style="height: 110px; left: {{ 5 * offset }}px"></div>
+    <div style="height: 60px; left: {{ 6 * offset }}px"></div>
+    <div style="height: 57px; left: {{ 7 * offset }}px"></div>
+    <div style="height: 100px; left: {{ 8 * offset }}px"></div>
+    <div style="height: 70px; left: {{ 9 * offset }}px"></div>
+    <div style="height: 81px; left: {{ 10 * offset }}px"></div>
+    <div style="height: 60px; left: {{ 11 * offset }}px"></div>
+    <div style="height: 42px; left: {{ 12 * offset }}px"></div>
+    <div style="height: 40px; left: {{ 13 * offset }}px"></div>
+    <div style="height: 80px; left: {{ 14 * offset }}px"></div>
+    <div style="height: 90px; left: {{ 15 * offset }}px"></div>
+    <div style="height: 38px; left: {{ 16 * offset }}px"></div>
+    <div style="height: 29px; left: {{ 17 * offset }}px"></div>
+    <div style="height: 20px; left: {{ 18 * offset }}px"></div>
+    <div style="height: 19px; left: {{ 19 * offset }}px"></div>
+    <div style="height: 32px; left: {{ 20 * offset }}px"></div>
+    <div style="height: 18px; left: {{ 21 * offset }}px"></div>
+    <div style="height: 10px; left: {{ 22 * offset }}px"></div>
+    <div style="height: 8px; left: {{ 23 * offset }}px"></div>
+</section>

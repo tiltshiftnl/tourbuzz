@@ -8,6 +8,7 @@ session_start();
 
 require "../vendor/autoload.php";
 
+
 /**
  * Load Twig plugin.
  */
@@ -90,9 +91,9 @@ Class RouteDumper extends \Slim\Router {
     }
 }
 
+require_once "../app/bootstrap.php"; // Bootstrap
 require_once "routes.php"; // System routes
-
-require_once "../app/routes.php"; // Project routes
+require_once "../app/routes/index.php"; // Project routes
 
 /**
  * Run!

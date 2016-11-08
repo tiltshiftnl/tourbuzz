@@ -1,0 +1,41 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+    <main class="wrapper">
+        <section class="buzz">
+            <div style="background: #f8f8f8; padding: 10px 10px 0">
+            <h2 class="halte-link" style="margin-top: 0; padding: 5px 7px; margin-right: 8px">{{ record.haltenummer }}</h2>
+            <span style="font-weight: bold; color: rgba(0,0,0,0.8)">{{ record.straat }}</span><br>
+            <p class="meta" style="position: relative; left: 63px; top: -15px">{{ record.locatie }}</p>
+            </div>
+
+            <div style="position: relative">
+            {% if record.beschikbaar %}
+                <span class="capaciteit" style="position: absolute; background: #fff; top: 8px; right: 5px; border: 0">{{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}</span>
+            {% else %}
+                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span>
+            {% endif %}
+            </div>
+
+
+            <img src="/img/haltefoto.png" style="width: 100%; display: block; margin-bottom: 20px">
+
+
+
+            <section class="kaartmap wrapper">
+                <img src="{% include 'partials/googlemap.empty.twig' %}">
+                {% for halte in haltes %}
+                    {% if halte.rel_loc is not empty %}
+                        <a href="/haltes/{{ halte.haltenummer }}" style="top: {{ halte.rel_loc.dY }}%; left: {{ halte.rel_loc.dX }}%; {% if not halte.beschikbaar %}opacity: 0.5{% endif %}">
+                            <img src="/img/haltes/{{ halte.haltenummer|lower }}.png" class="maplink-h large">
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </section>
+            {#<a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>#}
+
+            {% include 'partials/mockup-bars.twig' %}
+
+        </section>
+    </main>
+{% endblock %}
