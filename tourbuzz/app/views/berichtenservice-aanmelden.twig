@@ -9,11 +9,22 @@
                 <h2>{{ __('Tourbuzz Berichtenservice') }}</h2>
                 <p>{{ __('Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.') }}</p>
             </article>
-            <input type="text" placeholder="E-mail" name="mail">
-            <input type="text" placeholder="{{ __('Naam') }}" name="name">
-            <input type="text" placeholder="{{ __('Organisatie') }}" name="organisation">
+            <div class="form-row {% if errors.mail %}error{% endif %}">
+                <h3>E-mail*</h3>
+                <input type="text" name="mail" value="{{ form.mail }}">
+                {% if errors.mail %}<p class="note">{{ errors.mail }}</p>{% endif %}
+            </div>
+            <div class="form-row">
+                <h3>{{ __('Naam') }}</h3>
+                <input type="text" name="name" value="{{ form.name }}">
+            </div>
+            <div class="form-row">
+                <h3>{{ __('Organisatie') }}</h3>
+                <input type="text" name="organisation" value="{{ form.organisation }}">
+            </div>
             <input type="hidden" placeholder="taal" name="language" value="{{ lang }}">
             <button type="submit">{{ __('Aanmelden') }}</button>
+            <p style="margin-top: 10px; font-size: 12px">* Verplicht veld</p>
         </form>
         <article>
             <p>

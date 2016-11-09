@@ -31,27 +31,48 @@ $app->post('/berichtenservice', function () use ($app) {
       	'language' => $app->request->post('language'),
     );
 
-    $apiResponse = $app->api->post("mail", $fields);
+    $errors = array();
 
-    switch ($apiResponse->statusCode) {
-        case '200':
-            $app->flash('success', translate('We hebben u een mail gestuurd. Klik op de link in het mailbericht.'));
-            break;
-        case '406':
-            $app->flash('error', translate('Dit email adres is al aangemeld'));
-            $app->redirect('/berichtenservice');
-            break;
-        case '500':
-            $app->flash('error', translate('Aanmelden niet gelukt. Email is verplicht.')); // FIXME
-            $app->redirect('/berichtenservice');
-            break;
-
-        default:
-            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
-            $app->redirect("/berichtenservice");
+    // Validate email
+    if (empty($fields['mail'])) {
+        $errors['mail'] = translate('Verplicht veld');
+    } elseif (!filter_var($fields['mail'], FILTER_VALIDATE_EMAIL)) {
+        $errors['mail'] = translate('Vul een geldig email adres in');
     }
 
-    $app->redirect(date('/Y/m/d'));
+    // Perform API call if fields pass validation
+    if ( !empty($errors) ) {
+        $app->flashNow('error', translate('Niet alle velden zijn goed ingevuld.'));
+    } else {
+        $apiResponse = $app->api->post("mail", $fields);
+        switch ($apiResponse->statusCode) {
+            case '200':
+                $app->flash('success', translate('We hebben u een mail gestuurd. Klik op de link in het mailbericht.'));
+                $app->redirect(date('/Y/m/d'));
+
+            case '406':
+                $app->flashNow('error', translate('Dit email adres is al aangemeld'));
+                break;
+
+            case '500':
+                $app->flashNow('error', translate('Aanmelden niet gelukt.'));
+                break;
+
+            default:
+                $app->flashNow('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+                break;
+        }
+    }
+
+    $data = [
+        "lang" => $_SESSION['lang'],
+        "errors" => $errors,
+        "form" => $fields,
+        "template" => "berichtenservice-aanmelden.twig",
+    ];
+
+    render($data["template"], $data);
+
 });
 
 
