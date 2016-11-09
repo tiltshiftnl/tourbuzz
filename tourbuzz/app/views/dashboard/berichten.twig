@@ -44,13 +44,19 @@ $(function() {
                 success: function(data) {
                     switch(lang) {
                         case 'en':
-                            $('input[name=title_en]').val(data);
+                            if( $('input[name=title_en]').val() == '' ) {
+                                $('input[name=title_en]').val(data);
+                            }
                             break;
                         case 'de':
-                            $('input[name=title_de]').val(data);
+                            if( $('input[name=title_de]').val() == '' ) {
+                                $('input[name=title_de]').val(data);
+                            }
                             break;
                         case 'es':
-                            $('input[name=title_es]').val(data);
+                            if( $('input[name=title_es]').val() == '' ) {
+                                $('input[name=title_es]').val(data);
+                            }
                             break;
                         default:
                             alert("Taal onbekend");
@@ -69,13 +75,19 @@ $(function() {
                 success: function(data) {
                     switch(lang) {
                         case 'en':
-                            $('textarea[name=body_en]').val(data);
+                            if( $('textarea[name=body_en]').val() == '' ) {
+                                $('textarea[name=body_en]').val(data);
+                            }
                             break;
                         case 'de':
-                            $('textarea[name=body_de]').val(data);
+                            if( $('textarea[name=body_de]').val() == '' ) {
+                                $('textarea[name=body_de]').val(data);
+                            }
                             break;
                         case 'es':
-                            $('textarea[name=body_es]').val(data);
+                            if( $('textarea[name=body_es]').val() == '' ) {
+                                $('textarea[name=body_es]').val(data);
+                            }
                             break;
                         default:
                             alert("Taal onbekend");
@@ -94,13 +106,19 @@ $(function() {
                 success: function(data) {
                     switch(lang) {
                         case 'en':
-                            $('textarea[name=advice_en]').val(data);
+                            if( $('textarea[name=advice_en]').val() == '' ) {
+                                $('textarea[name=advice_en]').val(data);
+                            }
                             break;
                         case 'de':
-                            $('textarea[name=advice_de]').val(data);
+                            if( $('textarea[name=advice_de]').val() == '' ) {
+                                $('textarea[name=advice_de]').val(data);
+                            }
                             break;
                         case 'es':
-                            $('textarea[name=advice_es]').val(data);
+                            if( $('textarea[name=advice_es]').val() == '' ) {
+                                $('textarea[name=advice_es]').val(data);
+                            }
                             break;
                         default:
                             alert("Taal onbekend");
