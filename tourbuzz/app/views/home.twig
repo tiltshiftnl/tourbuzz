@@ -10,7 +10,7 @@
 
         <ol class="berichten">
             {% if berichten is empty %}
-                <p>Geen berichten.</p>
+                <p>{{ __('Geen berichten. Goede rit toegewenst!') }} <img src="/img/geen-berichten.png" style="width: 32px; height: 32px; vertical-align: middle"></p>
             {% endif %}
 
             {% for record in berichten %}

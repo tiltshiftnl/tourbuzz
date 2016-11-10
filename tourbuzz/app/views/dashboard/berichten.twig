@@ -192,16 +192,25 @@ $(function() {
         </nav>
 
         <div class="grid-row">
-            <input type="checkbox" name="important" value="important" {% if bericht.important is not empty %}checked=checked{% endif %}> Belangrijk bericht
+            <input type="checkbox" name="important" value="important" {% if bericht.important is not empty %}checked=checked{% endif %}> Belangrijk bericht <span style="font-size: 13px">(Komt bovenaan de lijst te staan)</span>
         </div>
 
         <div class="grid-row">
+            <input type="checkbox" id="toggle-send-sms" name="sms-versturen-toggle"> Verstuur SMS <span style="font-size: 13px">(Note: SMS berichten max 115 karakters. Kosten per bericht circa &euro; 0,10)</span>
+
             <section style="padding-left: 20px" id="sms-panel">
-                <p style="font-size: 13px">Note: SMS berichten max 115 karakters. Kosten per bericht circa &euro; 0,10</p>
+                {#<h3>SMS (nl)</h3>#}
                 <textarea name="sms_nl" placeholder="SMS (nl)">{{ bericht.sms_nl }}</textarea>
+                {#<h3>SMS (en)</h3>#}
                 <textarea name="sms_en" placeholder="SMS (en)">{{ bericht.sms_en }}</textarea>
+                {#<h3>SMS (de)</h3>#}
                 <textarea name="sms_de" placeholder="SMS (de)">{{ bericht.sms_de }}</textarea>
             </section>
+            <script>
+              $("#toggle-send-sms").click(function () {
+                $("#sms-panel").toggle();
+            });
+            </script>
         </div>
 
         <div class="grid-row group">

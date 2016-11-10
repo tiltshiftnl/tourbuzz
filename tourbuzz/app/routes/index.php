@@ -169,11 +169,14 @@ $app->get('/bericht/:id', function ($id) use ($app, $analytics) {
     render($data["template"], $data);
 });
 
-
 /**
  * Widget
  */
-$app->get('/widget/:y/:m/:d', function ($y,$m,$d) use ($app) {
+$app->get('/widget', function () use ($app) {
+
+    $y = date('Y');
+    $m = date('m');
+    $d = date('d');
 
     $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
 

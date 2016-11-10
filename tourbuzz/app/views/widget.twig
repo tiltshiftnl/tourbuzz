@@ -44,12 +44,12 @@
                 {% endset %}
 
                 <li>
-                    <a href="/{{ Y }}/{{ m }}/{{ d }}/details#slide{{ loop.index }}" class="slide-link">
+                    <a href="/{{ Y }}/{{ m }}/{{ d }}/details#slide{{ loop.index }}" class="slide-link" target="_blank">
                         <span class="nr">{{ loop.index }}</span>{{ title }}
                     </a>
                 </li>
             {% endfor %}
         </ol>
-        <a href="https://www.tourbuzz.nl" style="font-size: 12px; color: #aaa; display: block; margin-top: 10px; text-align: right">Powered by Tour Buzz</a>
+        <a href="https://www.tourbuzz.nl" style="font-size: 12px; color: #aaa; display: block; margin-top: 10px; text-align: right" target="_blank">Powered by Tour Buzz</a>
 </section>
 {% endblock %}
