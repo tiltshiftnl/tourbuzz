@@ -312,6 +312,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
       	'sms_nl' => $app->request->post('sms_nl'),
       	'sms_en' => $app->request->post('sms_en'),
       	'sms_de' => $app->request->post('sms_de'),
+        'sms_es' => $app->request->post('sms_es'),        
     );
 
     // If not "dupliceren", then use the available id (if set) to update existing message.
@@ -426,6 +427,78 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
 
     $app->flash('success', 'Bericht(en) verwijderd');
     $app->redirect("/dashboard/berichten");
+});
+
+
+/**
+ * Mapping parkeerplaatsen.
+ */
+$app->get('/dashboard/mapping-parkeren', function () use ($app) {
+   
+   if ( empty($_SESSION['username']) ) {
+        $_SESSION['redirect_url'] = "/dashboard/berichten/{$id}";
+        $app->flash('error', 'Eerst inloggen');
+        $app->redirect("/dashboard/login");
+    }
+
+    $apiResponse = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
+
+    $app->api->setToken($_SESSION['auth_token']);
+    $apiResponse = $app->api->get("vialis");
+    $vialis = $apiResponse->body;
+
+    $data = [
+        "parkeerplaatsen" => $parkeerplaatsen,
+        "vialis" => $vialis,
+        "username" => $_SESSION['username'],
+        "activetab" => "mapping-parkeren",
+        "template" => "dashboard/mapping-parkeren.twig",
+    ];
+
+    render($data['template'], $data);
+});
+
+
+/**
+ * Mapping parkeerplaatsen post.
+ */
+$app->post('/dashboard/mapping-parkeren', function () use ($app) {
+   
+    $apiResponse = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
+
+    $token = $_SESSION['auth_token'];
+    $app->api->setToken($token);
+    $apiResponse = $app->api->get("vialis");
+    $vialis = $apiResponse->body;
+
+    foreach ($parkeerplaatsen as $parkeerplaats) {
+        
+        if ( !empty($app->request->post($parkeerplaats['nummer'])) ) {
+            $vialis_id = $app->request->post($parkeerplaats['nummer']);
+        } else {
+            $vialis_id = 'NULL';
+        }
+
+        $fields = array(
+            'parkeerplaats' => $parkeerplaats['nummer'],
+            'id' => $vialis_id
+        );
+        $app->api->setToken($token);        
+        $apiResponse = $app->api->post("vialis", $fields);
+    }
+
+    switch ($apiResponse->statusCode) {
+        case '200':
+            $app->flash('success', 'Koppeling opgeslagen!');
+            break;
+
+        default:
+            $app->flash('error', 'Het is niet gelukt helaas: '.$apiResponse->statusCode);
+    }
+
+    $app->redirect("/dashboard/mapping-parkeren");
 });
 
 

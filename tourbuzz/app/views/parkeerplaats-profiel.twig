@@ -1,0 +1,44 @@
+{% extends 'base/base.twig' %}
+
+{% block main %}
+    <main class="wrapper">
+        <section class="buzz">
+            <h2 class="parkeerplaats-link">{{ record.nummer }}</h2>
+            <span>{{ record.naam }}</span>
+
+
+            {#<a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>
+            {% if record.beschikbaar %}
+                <span class="capaciteit">{{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}</span>
+            {% else %}
+                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span>
+            {% endif %}#}
+            <p class="meta">{{ record._origineel.Bijzonderheden }}</p>
+
+            <section style="padding: 1px 20px 10px 20px; background: #EBF5FB; margin: 20px 0">
+                {#<h2 style="margin-top: 0">Huidige beschikbaarheid</h2>#}
+                <h2>Vrije plaatsen</h2>
+                <p>{{ record.vialis.vacant }} / {{ record.vialis.capacity }}</p>
+                {#<ul>
+                    <li>Short {{ beschikbaar.FreeSpaceShort }} / {{ beschikbaar.ShortCapacity }}</li>
+                    <li>Long {{ beschikbaar.FreeSpaceLong }} / {{ beschikbaar.LongCapacity }}</li>
+                </ul>#}
+                <p class="meta" style="margin-top: 10px">Updated: Testdata: {{ record.vialis.name }} - {{ record.vialis.last_updated|date('d-m-Y H:i:s') }}</p>
+            </section>
+            <section class="kaartmap wrapper">
+                <img src="{% include 'partials/googlemap.empty.twig' %}">
+                {% for parkeerplaats in parkeerplaatsen %}
+                    {% if parkeerplaats.rel_loc is not empty %}
+                        <a href="/parkeerplaatsen/{{ parkeerplaats.nummer }}" style="top: {{ parkeerplaats.rel_loc.dY }}%; left: {{ parkeerplaats.rel_loc.dX }}%; {% if not parkeerplaats.beschikbaar %}opacity: 0.5{% endif %}">
+                            <img src="/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png" class="maplink-p large">
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </section>
+
+            <img src="/img/parkeerprofiel.png">
+
+            <a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>
+        </section>
+    </main>
+{% endblock %}

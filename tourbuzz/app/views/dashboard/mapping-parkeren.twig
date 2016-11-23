@@ -1,0 +1,27 @@
+{% extends 'base/base.dashboard.twig' %}
+
+{% block main %}
+<main class="wrapper">
+    <div class="col-1-1">
+
+    <form class="form-styles" method="post" autocomplete="false">
+        <h1>Koppeling Vialis</h1>
+        {% for record in parkeerplaatsen %}
+        <div class="formrow">
+            <label style="display: inline-block; width: 33%">{{ record.nummer }} - {{ record.naam }}</label>
+            <select name="{{ record.nummer }}">
+                <option value="0"></option>
+                {% for option in vialis %} 
+                <option value="{{ option.id }}" {% if record.vialis.id == option.id %}selected{% endif %}>{{ option.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endfor %}
+        <button type="submit" name="submit" value="toevoegen">Toevoegen</button>
+    </form>
+
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}{% endblock %}

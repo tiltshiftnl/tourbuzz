@@ -28,6 +28,10 @@ class ApiClient {
     public function get($uri) {
         $requestUri = "{$this->_apiRoot}{$uri}";
 
+        if (!empty($this->_token)) {
+            $requestUri .= "?token={$this->_token}";
+        }
+
         try {
             $res = $this->_guzzle->request('GET', $requestUri, [
                 'http_errors' => false

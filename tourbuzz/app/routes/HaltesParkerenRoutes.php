@@ -162,3 +162,46 @@ $app->get('/halteprofiel/:slug', function ($slug) use ($app, $analytics) {
 
     render($data['template'], $data);
 });
+
+
+/**
+ * Single busparking (parkeerplaats).
+ */
+$app->get('/parkeerplaatsprofiel/:slug', function ($slug) use ($app, $analytics) {
+
+    $apiResponse = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
+    $parkeerplaats = $parkeerplaatsen[$slug];
+
+    $center = $parkeerplaats['location'];
+
+    $mapOptions = [
+        "width" => 420,
+        "height" => 350,
+        "zoom" => 15,
+        "scale" => 2,
+        "center" => $center,
+    ];
+
+    $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
+
+    // Vialis data
+    //$beschikbaar = file_get_contents('http://opd.it-t.nl/data/amsterdam/ParkingLocation.json');
+    //$beschikbaar = json_decode($beschikbaar, true);
+
+    $data = [
+        "m" => date('m'),
+        "d" => date('d'),
+        "Y" => date('Y'),
+        //"beschikbaar" => $beschikbaar['features'][1]['properties'],
+        "lang" => $_SESSION['lang'],
+        "activetab" => "haltes-parkeerplaatsen",
+        "record" => $parkeerplaats,
+        "parkeerplaatsen" => $parkeerplaatsen,
+        "map" => $mapOptions,
+        "analytics" => $analytics,
+        "template" => "parkeerplaats-profiel.twig",
+    ];
+
+    render($data['template'], $data);
+});
