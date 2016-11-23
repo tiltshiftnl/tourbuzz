@@ -2,115 +2,115 @@
 "translations" : {
     "maandag": {
     	"en": "monday",
-        "de": "Montag",
+        "de": "montag",
     	"fr": "Lu",
         "es": "lunes"
     },
     "dinsdag": {
     	"en": "tuesday",
-        "de": "Dienstag",
+        "de": "dienstag",
     	"fr": "Ma",
         "es": "martes"
     },
     "woensdag": {
     	"en": "wednesday",
-        "de": "Mittwoch",
+        "de": "mittwoch",
     	"fr": "Me",
         "es": "miércoles"
     },
     "donderdag": {
     	"en": "thursday",
-        "de": "Donnerstag",
+        "de": "donnerstag",
     	"fr": "Jeu",
         "es": "jeuves"
     },
     "vrijdag": {
     	"en": "friday",
-        "de": "Freitag",
+        "de": "freitag",
     	"fr": "Ve",
         "es": "viernes"
     },
     "zaterdag": {
     	"en": "saturday",
-        "de": "Samstag",
+        "de": "samstag",
     	"fr": "Sa",
         "es": "sábado"
     },
     "zondag": {
     	"en": "sunday",
-        "de": "Sonntag",
+        "de": "sonntag",
     	"fr": "mD",
         "es": "domingo"
     },
     "januari" : {
         "en" : "january",
-        "de" : "Januar",
+        "de" : "januar",
         "fr" : "jan",
         "es": "enero"
     },
     "februari" : {
         "en": "february",
-        "de": "Februar",
+        "de": "februar",
         "fr": "fév",
         "es": "febrero"
     },
     "maart" : {
         "en": "march",
-        "de": "März",
+        "de": "märz",
         "fr": "mar",
         "es": "marzo"
     },
     "april" : {
         "en" : "april",
-        "de" : "April",
+        "de" : "april",
         "fr" : "avr",
         "es": "abril"
     },
     "mei" : {
         "en" : "may",
-        "de" : "Mai",
+        "de" : "mai",
         "fr" : "mai",
         "es": "mayo"
     },
     "juni" : {
         "en" : "june",
-        "de" : "Juni",
+        "de" : "juni",
         "fr" : "jun",
         "es": "junio"
     },
     "juli" : {
         "en" : "july",
-        "de" : "Juli",
+        "de" : "juli",
         "fr" : "jul",
         "es" : "julio"
     },
     "augustus" : {
         "en" : "august",
-        "de" : "August",
+        "de" : "august",
         "fr" : "aoû",
         "es" : "agosto"
     },
     "september" : {
         "en" : "september",
-        "de" : "September",
+        "de" : "september",
         "fr" : "sep",
         "es" : "septiembre"
     },
     "oktober" : {
         "en" : "october",
-        "de" : "Oktober",
+        "de" : "oktober",
         "fr" : "oct",
         "es" : "octubre"
     },
     "november" : {
         "en" : "november",
-        "de" : "November",
+        "de" : "november",
         "fr" : "nov",
         "es" : "noviembre"
     },
     "december" : {
         "en" : "december",
-        "de" : "Dezember",
+        "de" : "dezember",
         "fr" : "déc",
         "es" : "diciembre"
     },
@@ -139,17 +139,20 @@
     },
     "Kies een bestemming" : {
         "en" : "Choose your destination",
+        "de" : "Wählen Sie ein Reiseziel",
         "fr" : "Choisissez votre destination",
         "es" : "Elija un destino"
     },
     "Kies een andere bestemming" : {
         "en" : "Choose a different destination",
+        "de" : "Wählen Sie ein anderes Reiseziel",        
         "fr" : "Choisissez une autre destination",
         "es" : "Elige un nuevo destino"
     },
     "Toon op kaart" : {
         "en" : "Show on map",
         "fr" : "Montrer sur la carte",
+        "de" : "Auf der Karte anzeigen",
         "es" : "Mostrar en el mapa"
     },
     "Alternatieve haltes" : {
@@ -239,11 +242,13 @@
     },
     "Naam" : {
         "en" : "Name",
-        "de" : "Name"
+        "de" : "Name",
+        "es" : "Nombre"
     },
     "Organisatie" : {
         "en" : "Organisation",
-        "de" : "Organisation"
+        "de" : "Organisation",
+        "es" : "Organización"
     },
     "Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan." : {
         "en" : "See below for locations of stops where you can drop off and pick up your passengers. If a stop is occupied, please continue to the next one on your route. You are allowed a maximum time of 10 minutes on these stops.",
@@ -256,8 +261,14 @@
         "es" : "En estos lugares se puede aparcar el autobús. Debajo del mapa se encuentran las tasas."
     },
     "Alleen passagiers in- en uit laten stappen. Let op: max 10 min." : {
+        "en" : "Only drop off and pick up passengers. Please: max. 10 min.",
+        "de" : "Nur Drop-off und abholen passagiere. Hinweis: max 10 min. ",
+        "es" : "Sólo dejar y recoger pasajeros. Por favor: máx 10 min "
     },
     "Op deze locaties kunt u uw bus parkeren. Klik hier voor de tarieven." : {
+        "en" : "On these locations you can park your coach. Click here for the rates. ",
+        "de" : "Auf diesen Seiten können Sie Ihren Bus parken. Klicken Sie hier für Preise.",
+        "es" : "En estos sitios se puede aparcar el autobús. Haga clic aquí para las tarifas."
     },
     "Feedback of vragen kunt u sturen naar" : {
         "en" : "For questions and feedback please contact",
@@ -281,11 +292,13 @@
     },
     "Aanmelden niet gelukt. Email is verplicht" : {
         "en" : "Email is required.",
-        "de" : "E-Mail ist erforderlich."
+        "de" : "E-Mail ist erforderlich.",
+        "es" : "Inicia sesión fallido. Se requiere email "
     },
     "Dit email adres is al aangemeld" : {
         "en" : "This email address is already subscribed",
-        "de" : "Diese E-Mail-Adresse ist bereits abonniert"
+        "de" : "Diese E-Mail-Adresse ist bereits abonniert",
+        "en" : "Este email ya está suscrito"
     },
     "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail." : {
         "en" : "Enter your details below and you will receive every two weeks Tour Buzz posts by email.",
@@ -313,6 +326,9 @@
         "es" : "Introduzca el número de móvil que desea registrar."
     },
     "Geen berichten. Goede rit toegewenst!" : {
+        "en" : "No messages. Have a good trip!",
+        "de" : "Keine Posts. Gute Reise! ",
+        "es" : "No hay mensajes. Buen viaje a todos!"
     }
   }
 }
