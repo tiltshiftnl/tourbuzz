@@ -55,6 +55,11 @@
         {% include 'partials/banner.twig' %}
 
         <section class="kaartmap wrapper">
+            <div id="map"></div>
+            {% include 'partials/googlemap.home.js.twig' %}
+        </section>
+
+        {#<section class="kaartmap wrapper">
             <img src="{% include 'partials/googlemap.empty.twig' %}">
             {% for record in berichten %}
                 {% if record.rel_loc is not empty %}
@@ -63,7 +68,7 @@
                     </a>
                 {% endif %}
             {% endfor %}
-        </section>
+        </section>#}
 
     </section>
 
