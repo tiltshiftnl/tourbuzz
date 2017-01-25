@@ -1,0 +1,15 @@
+
+{#
+0 - in sleep mode
+1 - car detected
+2 - truck detected
+3 - car in violation
+4 - truck in violation
+#}
+
+{% set haltestatus %}{% if haltestatus > 0 %}bezet{% else %}vrij{% endif %}{% endset %}
+
+<section class="halte-vrij" style="margin: 10px 0; padding: 5px 10px; background: #eee ">
+    <p>Halte status: <b>{{ haltestatus }}</b></p>
+    <p class="meta">Laatste update: {{ now|date('d-m-Y h:i:s') }}
+</section>

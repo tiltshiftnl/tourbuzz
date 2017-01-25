@@ -127,6 +127,55 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
 
 
 /**
+ * Huidige haltestatus (Glimworm API).
+ */
+$app->get('/async/haltestatus/:slug', function ($slug) use ($app, $analytics) {
+
+    /* Glimworm */
+
+    $glimworm = file_get_contents('http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last');
+    if (!empty($glimworm)) {
+        $glimworm = json_decode($glimworm, true);
+        $glimworm = $glimworm["results"][0]["series"][0]["values"][0][11]; // @FIXME
+    } else {
+        $glimworm = NULL;
+    }
+
+    render("partials/haltestatus.twig", $glimworm);
+});
+
+
+/**
+ * History haltestatus (Glimwom API).
+ */
+$app->get('/async/histogram/:slug', function ($slug) use ($app, $analytics) {
+    //http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last/1d/graph/10m
+
+});
+
+
+/**
+ * Huidige haltestatus (Glimworm API).
+ */
+$app->get('/async/parkeerplaats-status/:slug', function ($slug) use ($app, $analytics) {
+    $apiResponse = $app->api->get("parkeerplaatsen");
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
+    $parkeerplaats = $parkeerplaatsen[$slug];
+
+    render("partials/parkeerplaats-status.twig", $parkeerplaats);
+});
+
+
+/**
+ * Test async.
+ */
+$app->get('/async/parkeerplaats/test', function () use ($app, $analytics) {
+    //http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last/1d/graph/10m
+    render("partials/haltestatus.twig");
+});
+
+
+/**
  * Mockup halteprofiel.
  */
 $app->get('/halteprofiel/:slug', function ($slug) use ($app, $analytics) {
@@ -147,6 +196,25 @@ $app->get('/halteprofiel/:slug', function ($slug) use ($app, $analytics) {
 
     $haltes = locationItemsToMap($haltes, $mapOptions);
 
+    /* Glimworm */
+
+    /*$glimworm = file_get_contents('http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last');
+    if (!empty($glimworm)) {
+        $glimworm = json_decode($glimworm, true);
+        $glimworm = $glimworm["results"][0]["series"][0]["values"][0][11]; // @FIXME
+    } else {
+        $glimworm = NULL;
+    }*/
+
+    /* Histogram */
+
+    /*$histogram = file_get_contents('http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last/1d/graph/10m');
+    if (!empty($histogram)) {
+        $histogram = json_decode($histogram, true);
+    } else {
+        $histogram = NULL;
+    }*/
+
     $data = [
         "m" => date('m'),
         "d" => date('d'),
@@ -157,6 +225,8 @@ $app->get('/halteprofiel/:slug', function ($slug) use ($app, $analytics) {
         "haltes" => $haltes,
         "map" => $mapOptions,
         "analytics" => $analytics,
+        //"glimworm" => $glimworm,
+        //"histogram" => $histogram,
         "template" => "halte-profiel.twig",
     ];
 
@@ -168,7 +238,7 @@ $app->get('/halteprofiel/:slug', function ($slug) use ($app, $analytics) {
  * Single busparking (parkeerplaats).
  */
 $app->get('/parkeerplaatsprofiel/:slug', function ($slug) use ($app, $analytics) {
-
+    //die("meteen");
     $apiResponse = $app->api->get("parkeerplaatsen");
     $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
     $parkeerplaats = $parkeerplaatsen[$slug];
@@ -183,7 +253,7 @@ $app->get('/parkeerplaatsprofiel/:slug', function ($slug) use ($app, $analytics)
         "center" => $center,
     ];
 
-    $parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
+    //$parkeerplaatsen = locationItemsToMap($parkeerplaatsen, $mapOptions);
 
     // Vialis data
     //$beschikbaar = file_get_contents('http://opd.it-t.nl/data/amsterdam/ParkingLocation.json');

@@ -17,10 +17,33 @@
             {% endif %}
             </div>
 
+            {% if record.haltenummer == 'H11' %}
 
-            <img src="/img/haltefoto.png" style="width: 100%; display: block; margin-bottom: 20px">
+            <script>
 
+            var pollingInterval = null;
 
+            function doPoll(){
+                $.get('/async/haltestatus/{{ record.nummer }}', function(data) {
+                    $('#poll-container').html(data);
+                    pollingInterval = setTimeout(doPoll,5000);
+                });
+            }
+
+            $(document).ready(function () {
+                doPoll();
+                $('[data-stop-polling]').on('click', function(e)  {
+                    e.preventDefault();
+                    clearInterval(pollingInterval); // stop the interval
+                    console.log('stopped');
+                });
+            });
+
+            </script>
+            <div id="poll-container">
+                {% include 'partials/haltestatus.twig' %}
+            </div>
+            {% endif %}
 
             <section class="kaartmap wrapper">
                 <img src="{% include 'partials/googlemap.empty.twig' %}">
@@ -32,9 +55,12 @@
                     {% endif %}
                 {% endfor %}
             </section>
-            {#<a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>#}
 
-            {% include 'partials/mockup-bars.twig' %}
+            {#<img src="/img/haltefoto.png" style="width: 100%; display: block; margin-bottom: 20px">#}
+
+            <a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>
+
+            {#{% include 'partials/mockup-bars.twig' %}#}
 
         </section>
     </main>

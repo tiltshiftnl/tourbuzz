@@ -15,16 +15,40 @@
             {% endif %}#}
             <p class="meta">{{ record._origineel.Bijzonderheden }}</p>
 
-            <section style="padding: 1px 20px 10px 20px; background: #EBF5FB; margin: 20px 0">
-                {#<h2 style="margin-top: 0">Huidige beschikbaarheid</h2>#}
+
+            <script>
+
+            var pollingInterval = null;
+
+            function doPoll(){
+                $.get('/async/parkeerplaats-status/{{ record.nummer }}', function(data) {
+                    $('#poll-container').html(data);
+                    pollingInterval = setTimeout(doPoll,5000);
+                });
+            }
+
+            $(document).ready(function () {
+                doPoll();
+                $('[data-stop-polling]').on('click', function(e)  {
+                    e.preventDefault();
+                    clearInterval(pollingInterval); // stop the interval
+                    console.log('stopped');
+                });
+            });
+
+            </script>
+
+            {#<a href="#" data-stop-polling class="button">Stop polling</a>#}
+            <div id="poll-container">
+                {% include 'partials/parkeerplaats-status.twig' with {'vialis': record.vialis } %}
+            </div>
+
+            {#<section style="padding: 1px 20px 10px 20px; background: #EBF5FB; margin: 20px 0">
                 <h2>Vrije plaatsen</h2>
                 <p>{{ record.vialis.vacant }} / {{ record.vialis.capacity }}</p>
-                {#<ul>
-                    <li>Short {{ beschikbaar.FreeSpaceShort }} / {{ beschikbaar.ShortCapacity }}</li>
-                    <li>Long {{ beschikbaar.FreeSpaceLong }} / {{ beschikbaar.LongCapacity }}</li>
-                </ul>#}
                 <p class="meta" style="margin-top: 10px">Updated: Testdata: {{ record.vialis.name }} - {{ record.vialis.last_updated|date('d-m-Y H:i:s') }}</p>
-            </section>
+            </section>#}
+
             <section class="kaartmap wrapper">
                 <img src="{% include 'partials/googlemap.empty.twig' %}">
                 {% for parkeerplaats in parkeerplaatsen %}
@@ -37,7 +61,7 @@
             </section>
             <a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>
 
-            <img src="/img/parkeerprofiel.png">
+            {#<img src="/img/parkeerprofiel.png">#}
 
         </section>
     </main>
