@@ -3,17 +3,23 @@
 {% block main %}
     <main class="wrapper">
         <section class="buzz">
-            <h2 class="parkeerplaats-link">{{ record.nummer }}</h2>
+
+            <div style="position: relative">
+             {% if record.beschikbaar %}
+                <span class="capaciteit" style="position: absolute; background: #fff; top: 10px; right: 10px; border: 0">{{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}</span>
+            {% else %}
+                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span>
+            {% endif %}
+            <div style="background: #f8f8f8; padding: 10px 10px">
+
+            <h2 class="parkeerplaats-link" style="margin-top: 0; padding: 5px 7px; margin-right: 8px">{{ record.nummer }}</h2>
             <span>{{ record.naam }}</span>
 
 
-            {#<a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>
-            {% if record.beschikbaar %}
-                <span class="capaciteit">{{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}</span>
-            {% else %}
-                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span>
-            {% endif %}#}
+
+
             <p class="meta">{{ record._origineel.Bijzonderheden }}</p>
+            </div>
 
 
             <script>
