@@ -23,7 +23,7 @@ function initMap() {
 
     {% for record in berichten %}
         image = {
-            url: 'http://www.tourbuzz.nl/img/markers/{{ loop.index }}.png',
+            url: 'https://www.tourbuzz.nl/img/markers/{{ loop.index }}.png',
             //size: new google.maps.Size(49,45), // the orignal size
             //scaledSize: new google.maps.Size(24,22), // the new size you want to use
             //origin: new google.maps.Point(0,22) // position in the sprite
@@ -46,7 +46,7 @@ function initMap() {
 
 
     $(document).ready(function() {
-        var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'img/clusters/m'});
+        var markerCluster = new MarkerClusterer(map, markers, {imagePath: '/img/clusters/m'});
     });
 
 }
