@@ -145,7 +145,7 @@
     },
     "Kies een andere bestemming" : {
         "en" : "Choose a different destination",
-        "de" : "Wählen Sie ein anderes Reiseziel",        
+        "de" : "Wählen Sie ein anderes Reiseziel",
         "fr" : "Choisissez une autre destination",
         "es" : "Elige un nuevo destino"
     },
@@ -329,6 +329,46 @@
         "en" : "No messages. Have a good trip!",
         "de" : "Keine Posts. Gute Reise! ",
         "es" : "No hay mensajes. Buen viaje a todos!"
+    },
+    "404 - Pagina niet gevonden!" : {
+        "en" : "404 - Page not found",
+        "de" : "",
+        "es" : ""
+    },
+    "Downloads" : {
+        "en" : "Downloads",
+        "de" : "",
+        "es" : ""
+    },
+    "Downloads voor navigatiesystemen" : {
+        "en" : "Downloads voor navigatiesystemen",
+        "de" : "",
+        "es" : ""
+    },
+    "Halte status" : {
+        "en" : "",
+        "de" : "",
+        "es" : ""
+    },
+    "Laatste update" : {
+        "en" : "Last update",
+        "de" : "",
+        "es" : ""
+    },
+    "vrij" : {
+        "en" : "free",
+        "de" : "",
+        "es" : ""
+    },
+    "bezet" : {
+        "en" : "occupied",
+        "de" : "",
+        "es" : ""
+    },
+    "onbekend" : {
+        "en" : "unknown",
+        "de" : "",
+        "es" : ""
     }
   }
 }

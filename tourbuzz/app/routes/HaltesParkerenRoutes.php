@@ -162,6 +162,16 @@ $app->get('/async/parkeerplaats-status/:slug', function ($slug) use ($app, $anal
     $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
     $parkeerplaats = $parkeerplaatsen[$slug];
 
+    $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20Museumplein%20Touringcars.json');
+    //$vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20R%20Zeeburg%20Touringcars.json');
+
+    if (!empty($vialis)) {
+        $vialis = json_decode($vialis, true);
+    } else {
+        $vialis = NULL;
+    }
+
+    $parkeerplaats["dynvialis"] = $vialis;
     render("partials/parkeerplaats-status.twig", $parkeerplaats);
 });
 

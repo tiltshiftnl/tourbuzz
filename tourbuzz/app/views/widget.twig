@@ -9,7 +9,7 @@
 
         <ol class="berichten">
             {% if berichten is empty %}
-                <p>Geen berichten.</p>
+                <p>{{ __('Geen berichten.') }}</p>
             {% endif %}
 
             {% for record in berichten %}
