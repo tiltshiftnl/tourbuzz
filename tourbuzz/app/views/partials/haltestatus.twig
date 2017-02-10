@@ -12,6 +12,6 @@
 <section class="halte-vrij" style="margin: 10px 0; padding: 10px 10px; background: #f8f8f8">
     beta
 
-    <p>Halte status: <b>{{ haltestatus }}</b></p>
-    <p class="meta">Laatste update: {{ now|date('d-m-Y H:i:s') }}
+    <p>{{ __('Halte status') }}: <b>{{ haltestatus }}</b></p>
+    <p class="meta">{{ __('Laatste update') }}: {{ now|date('d-m-Y H:i:s') }}
 </section>

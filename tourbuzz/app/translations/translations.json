@@ -162,16 +162,19 @@
     },
     "Haltes in de buurt" : {
         "en" : "Nearby stops",
+        "de" : "Haltestellen in der nähe",
         "fr" : "Arrêts à proximité",
         "es" : "Paradas de autobús cercanas"
     },
     "Afstand" : {
         "en" : "Distance",
         "fr" : "Distance",
+        "de" : "Abstand",
         "es" : "Distancia"
     },
     "Bestemmingen in de buurt" : {
         "en" : "Nearby destinations",
+        "de" : "Umliegenden destinationen",
         "fr" : "Les destinations proches",
         "es" : "Destinos cercanos"
     },
@@ -332,43 +335,43 @@
     },
     "404 - Pagina niet gevonden!" : {
         "en" : "404 - Page not found",
-        "de" : "",
-        "es" : ""
+        "de" : "404 - Seite nicht gefunden",
+        "es" : "404 - Página no encontrada"
     },
     "Downloads" : {
         "en" : "Downloads",
-        "de" : "",
-        "es" : ""
+        "de" : "Downloads",
+        "es" : "Dedescargas"
     },
     "Downloads voor navigatiesystemen" : {
-        "en" : "Downloads voor navigatiesystemen",
-        "de" : "",
-        "es" : ""
+        "en" : "Downloads for navigation",
+        "de" : "Downloads für navigationssysteme",
+        "es" : "Descargas para sistemas de navegación"
     },
     "Halte status" : {
-        "en" : "",
-        "de" : "",
-        "es" : ""
+        "en" : "Bus stop status",
+        "de" : "Status bushaltestelle",
+        "es" : "Estado de parada"
     },
     "Laatste update" : {
         "en" : "Last update",
-        "de" : "",
-        "es" : ""
+        "de" : "letzte Aktualisierung",
+        "es" : "última actualización"
     },
     "vrij" : {
         "en" : "free",
-        "de" : "",
-        "es" : ""
+        "de" : "frei",
+        "es" : "libre"
     },
     "bezet" : {
         "en" : "occupied",
-        "de" : "",
-        "es" : ""
+        "de" : "besetzt",
+        "es" : "ocupado "
     },
     "onbekend" : {
         "en" : "unknown",
-        "de" : "",
-        "es" : ""
+        "de" : "unbekannt",
+        "es" : "ignoto"
     }
   }
 }
