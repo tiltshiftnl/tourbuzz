@@ -91,7 +91,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
 /**
  * Single busparking (parkeerplaats).
  */
-$app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
+$app->get('/old-parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
 
     $apiResponse = $app->api->get("parkeerplaatsen");
     $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
@@ -162,8 +162,12 @@ $app->get('/async/parkeerplaats-status/:slug', function ($slug) use ($app, $anal
     $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
     $parkeerplaats = $parkeerplaatsen[$slug];
 
-    $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20Museumplein%20Touringcars.json');
-    //$vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20R%20Zeeburg%20Touringcars.json');
+    // FIXME hardcoded
+    if ($slug == 'P3') {
+        $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20Museumplein%20Touringcars.json');
+    } else if ($slug == 'P1') {
+        $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20R%20Zeeburg%20Touringcars.json');
+    }
 
     if (!empty($vialis)) {
         $vialis = json_decode($vialis, true);
@@ -247,7 +251,7 @@ $app->get('/halteprofiel/:slug', function ($slug) use ($app, $analytics) {
 /**
  * Single busparking (parkeerplaats).
  */
-$app->get('/parkeerplaatsprofiel/:slug', function ($slug) use ($app, $analytics) {
+$app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
     //die("meteen");
     $apiResponse = $app->api->get("parkeerplaatsen");
     $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
