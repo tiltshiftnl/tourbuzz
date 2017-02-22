@@ -73,6 +73,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "map" => $mapOptions,
         "adamlogo" => true,
         "analytics" => $analytics,
+        "apikey" => "AIzaSyDbdT24XheIFcsXjZhNRI9KMG806-feOr4",
         "template" => "home.twig"
     ];
 

@@ -22,6 +22,7 @@ function initMap() {
     var marker;
 
     {% for record in berichten %}
+        {% if record.location.lat is defined %}
         image = {
             url: 'https://www.tourbuzz.nl/img/markers/{{ loop.index }}.png',
             //size: new google.maps.Size(49,45), // the orignal size
@@ -42,6 +43,7 @@ function initMap() {
         });
 
         markers.push(marker);
+        {% endif %}
     {% endfor %}
 
 
