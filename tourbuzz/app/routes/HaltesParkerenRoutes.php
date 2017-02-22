@@ -133,15 +133,16 @@ $app->get('/async/haltestatus/:slug', function ($slug) use ($app, $analytics) {
 
     /* Glimworm */
 
+    /*
     $glimworm = file_get_contents('http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last');
     if (!empty($glimworm)) {
         $glimworm = json_decode($glimworm, true);
         $glimworm = $glimworm["results"][0]["series"][0]["values"][0][11]; // @FIXME
     } else {
         $glimworm = NULL;
-    }
+    }*/
 
-    render("partials/haltestatus.twig", $glimworm);
+    render("partials/haltestatus.twig", ['haltestatus' => 'Onbekend']);
 });
 
 
