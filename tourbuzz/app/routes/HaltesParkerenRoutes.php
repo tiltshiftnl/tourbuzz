@@ -9,7 +9,7 @@
  * Haltes en parkeerplaatsen
  */
 $app->get('/haltes-parkeerplaatsen', function () use ($app, $analytics) {
-
+    die("Haltes en parkeerplaatsen zijn tijdelijk niet beschikbaar. Onze excuses voor het ongemak, we werken aan een oplossing.");
     $apiResponse = $app->api->get("haltes");
     $haltes = $apiResponse->body['haltes'];
 

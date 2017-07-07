@@ -262,17 +262,17 @@ $app->get('/offline', function () use ($app) {
         return $b1['important'] < $b2['important'];
     });
 
-    $apiResponse = $app->api->get("haltes");
+    /*$apiResponse = $app->api->get("haltes");
     $haltes = $apiResponse->body['haltes'];
 
     $apiResponse = $app->api->get("parkeerplaatsen");
-    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
+    $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];*/
 
 
     $data = [
         "berichten"       => $berichten,
-        "haltes"          => $haltes,
-        "parkeerplaatsen" => $parkeerplaatsen,
+        //"haltes"          => $haltes,
+        //"parkeerplaatsen" => $parkeerplaatsen,
         "lang"            => $_SESSION['lang'],
         "template"        => "offline.twig",
     ];
