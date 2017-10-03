@@ -4,7 +4,7 @@
       <a onclick="asyncImageUploadReset()" href="#" class="close" data-close><i class="fa fa-close"></i></a>
       <input type="hidden" name="image_id" value="{{ bericht.image_id }}">
   {% else %}
-      <input type="file" onchange="asyncImageUpload(this)">
+      <input type="file" name="image_id" onchange="asyncImageUpload(this)">
   {% endif %}
 </div>
 
