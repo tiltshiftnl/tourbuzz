@@ -28,5 +28,6 @@ RUN wget https://getcomposer.org/composer.phar \
   && sed -e 's/;clear_env = no/clear_env = no/' -i /etc/php/7.0/fpm/pool.d/www.conf
 
 COPY Docker/docker-entrypoint.sh /docker-entrypoint.sh
+COPY Docker/config.php /srv/web/tourbuzz/tourbuzz/app/config/
 RUN chmod +x /docker-entrypoint.sh
 CMD /docker-entrypoint.sh
