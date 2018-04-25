@@ -24,7 +24,7 @@ node {
 
     stage("Build image") {
         tryStep "build", {
-            def image = docker.build("build.app.amsterdam.nl:5000/fixxx/tourbuzz-front:${env.BUILD_NUMBER}")
+            def image = docker.build("build.app.amsterdam.nl:5000/fixxx/tourbuzz:${env.BUILD_NUMBER}")
             image.push()
         }
     }
