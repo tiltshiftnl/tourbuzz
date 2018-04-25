@@ -3,7 +3,7 @@ server {
   listen [::]:80 default_server;
 
   root /srv/web/tourbuzz/tourbuzz/public;
-  index index.php;
+  index index.html;
 
   location / {
     try_files $uri /index.php$is_args$args;
