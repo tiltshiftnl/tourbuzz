@@ -17,15 +17,16 @@ $view = $app->view();
 $view->setTemplatesDirectory("../app/views");
 $view->parserExtensions = [new \Slim\Views\TwigExtension()];
 
-function translate($msg) {
+function translate($msg, $lang = null) {
+    $lang = $lang === null ? $_SESSION['lang'] : $lang;
     $translationsJson = file_get_contents("../app/translations/translations.json");
 
     // Fixes UTF-8 conversion issues.
     $translationsJson =  mb_convert_encoding($translationsJson, 'UTF-8', mb_detect_encoding($translationsJson, 'UTF-8, ISO-8859-1', true));
 
     $translations = json_decode($translationsJson);
-    return !empty($translations->translations->$msg) && !empty($translations->translations->$msg->{$_SESSION['lang']}) ?
-        $translations->translations->$msg->{$_SESSION['lang']} :
+    return !empty($translations->translations->$msg) && !empty($translations->translations->$msg->{$lang}) ?
+        $translations->translations->$msg->{$lang} :
         $msg;
 }
 
