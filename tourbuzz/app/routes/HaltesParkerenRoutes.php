@@ -85,7 +85,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
     ];
 
     render($data['template'], $data);
-});
+})->name('halte');
 
 
 /**
@@ -123,7 +123,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
     ];
 
     render($data['template'], $data);
-});
+})->name('parkeerplaats');
 
 
 /**
