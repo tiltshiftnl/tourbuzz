@@ -265,11 +265,11 @@
     },
     "Alleen passagiers in- en uit laten stappen. Let op: max 10 min." : {
         "en" : "Only drop off and pick up passengers. Please: max. 10 min.",
-        "de" : "Nur Drop-off und abholen passagiere. Hinweis: max 10 min. ",
-        "es" : "Sólo dejar y recoger pasajeros. Por favor: máx 10 min "
+        "de" : "Nur Drop-off und abholen passagiere. Hinweis: max 10 min.",
+        "es" : "Sólo dejar y recoger pasajeros. Por favor: máx 10 min."
     },
     "Op deze locaties kunt u uw bus parkeren. Klik hier voor de tarieven." : {
-        "en" : "On these locations you can park your coach. Click here for the rates. ",
+        "en" : "On these locations you can park your coach. Click here for the rates.",
         "de" : "Auf diesen Seiten können Sie Ihren Bus parken. Klicken Sie hier für Preise.",
         "es" : "En estos sitios se puede aparcar el autobús. Haga clic aquí para las tarifas."
     },
