@@ -155,15 +155,19 @@ $app->get('/async/histogram/:slug', function ($slug) use ($app, $analytics) {
 
 
 /**
- * Huidige haltestatus (Glimworm API).
+ * Huidige parkeerplaats status
  */
 $app->get('/async/parkeerplaats-status/:slug', function ($slug) use ($app, $analytics) {
     $apiResponse = $app->api->get("parkeerplaatsen");
     $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
     $parkeerplaats = $parkeerplaatsen[$slug];
 
-    $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20Museumplein%20Touringcars.json');
-    //$vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20R%20Zeeburg%20Touringcars.json');
+    // FIXME hardcoded
+    if ($slug == 'P3') {
+        $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20Museumplein%20Touringcars.json');
+    } else if ($slug == 'P1') {
+        $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20R%20Zeeburg%20Touringcars.json');
+    }
 
     if (!empty($vialis)) {
         $vialis = json_decode($vialis, true);
