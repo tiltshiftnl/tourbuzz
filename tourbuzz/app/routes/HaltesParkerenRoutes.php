@@ -119,7 +119,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
         "analytics" => $analytics,
-        "template" => "parkeerplaats.twig",
+        "template" => "parkeerplaats-profiel.twig",
     ];
 
     render($data['template'], $data);
