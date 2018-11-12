@@ -1,7 +1,9 @@
 <h3 style="margin: 20px 0 0">Live status <span class="meta" style="background: #888; color: #fff; font-size: 12px; padding: 0px 5px; margin-bottom: 10px; display: inline-block; border-radius: 5px">beta</span></h3>
 <section class="halte-vrij" style="margin: 0 0 15px; padding: 10px 10px; background: #f8f8f8">
-    <p><b>{{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.vacantSpaces }} / {{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.parkingCapacity }}</b> {{ __('plaatsen') }} {{ __('vrij') }}</p>
-
-    {#<p><b>Current: {{ vialis.vacant }}</b> / {{ vialis.capacity }} parkeerplaatsen vrij</p>#}
+    {% if dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.vacantSpaces is not empty %}
+        <p><b>{{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.vacantSpaces }} / {{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.parkingCapacity }}</b> {{ __('plaatsen') }} {{ __('vrij') }}</p>
+    {% else %}
+        <p><b>{{ __('onbekend') }}</b></p>
+    {% endif %}
     <p class="meta">{{ __('Laatste update') }}: {{ now|date('d-m-Y H:i:s') }}</p>
 </section>

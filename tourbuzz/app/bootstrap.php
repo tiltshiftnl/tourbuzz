@@ -14,6 +14,9 @@ $app->container->singleton('api', function () use ($apiRoot) {
     return new ApiClient($apiRoot);
 });
 
+// Environment variables loading
+$dotenv = new Dotenv\Dotenv(__DIR__.'/../');
+$dotenv->load();
 
 /**
  * Adds relative positions to items based on Google Maps zoom-level.

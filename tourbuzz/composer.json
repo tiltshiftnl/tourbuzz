@@ -5,7 +5,8 @@
 		"twig/twig": "1.18.*",
 		"intervention/image": "^2.3",
 		"leafo/scssphp": "0.0.*",
-		"guzzlehttp/guzzle": "^6.1"
+		"guzzlehttp/guzzle": "^6.1",
+        "vlucas/phpdotenv": "^2.5"
 	},
 	"autoload": {
 		"psr-4": {

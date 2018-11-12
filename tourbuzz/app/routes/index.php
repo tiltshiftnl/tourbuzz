@@ -73,7 +73,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "map" => $mapOptions,
         "adamlogo" => true,
         "analytics" => $analytics,
-        "apikey" => "AIzaSyDbdT24XheIFcsXjZhNRI9KMG806-feOr4",
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "home.twig"
     ];
 
@@ -139,6 +139,7 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
         "image_api" => $image_api,
         "map" => $mapOptions,
         "analytics" => $analytics,
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "details.twig",
     ];
 

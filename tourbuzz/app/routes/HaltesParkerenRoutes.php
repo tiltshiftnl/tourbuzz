@@ -42,7 +42,7 @@ $app->get('/haltes-parkeerplaatsen', function () use ($app, $analytics) {
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
         "analytics" => $analytics,
-        "apikey" => "AIzaSyDbdT24XheIFcsXjZhNRI9KMG806-feOr4",
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "haltes-parkeerplaatsen.twig",
     ];
 
@@ -81,6 +81,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
         "haltes" => $haltes,
         "map" => $mapOptions,
         "analytics" => $analytics,
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "halte.twig",
     ];
 
@@ -119,6 +120,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
         "analytics" => $analytics,
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "parkeerplaats-profiel.twig",
     ];
 
@@ -163,10 +165,12 @@ $app->get('/async/parkeerplaats-status/:slug', function ($slug) use ($app, $anal
     $parkeerplaats = $parkeerplaatsen[$slug];
 
     // FIXME hardcoded
-    if ($slug == 'P3') {
-        $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20Museumplein%20Touringcars.json');
-    } else if ($slug == 'P1') {
+    if ($slug == 'P1') {
         $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20R%20Zeeburg%20Touringcars.json');
+    //} else if ($slug == 'P2') {
+    //    $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/02900c40-0e95-4369-b9c4-22b2233a3440.json');
+    } else if ($slug == 'P3') {
+        $vialis = file_get_contents('http://opd.it-t.nl/data/amsterdam/dynamic/P%20Museumplein%20Touringcars.json');
     }
 
     if (!empty($vialis)) {
@@ -241,6 +245,7 @@ $app->get('/halteprofiel/:slug', function ($slug) use ($app, $analytics) {
         "analytics" => $analytics,
         //"glimworm" => $glimworm,
         //"histogram" => $histogram,
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "halte-profiel.twig",
     ];
 
