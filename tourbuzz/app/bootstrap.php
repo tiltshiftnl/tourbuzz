@@ -15,8 +15,10 @@ $app->container->singleton('api', function () use ($apiRoot) {
 });
 
 // Environment variables loading
-$dotenv = new Dotenv\Dotenv(__DIR__.'/../');
-$dotenv->load();
+$envFile = __DIR__."/../.env";
+if (file_exists($envFile)) {
+    (new Dotenv\Dotenv(dirname($envFile)))->load();
+}
 
 /**
  * Adds relative positions to items based on Google Maps zoom-level.
