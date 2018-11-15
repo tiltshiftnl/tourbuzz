@@ -4,5 +4,3 @@ tourbuzz/app/config/config.php
 .DS_Store
 .project
 .settings/
-.buildpath
-.env
