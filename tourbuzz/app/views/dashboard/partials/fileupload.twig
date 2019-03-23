@@ -9,23 +9,24 @@
 </div>
 
 <script>
-	var uri = "{{ image_api }}";
+    var uri = "{{ image_api }}";
+    var token = '{{ token }}';
     var el = document.getElementById("asyncImageUpload");
 
-	function asyncImageUpload(fileInputElement) {
-		var file = fileInputElement.files[0];
-		if (file.type !== "image/jpeg" &&
-		    file.type !== "image/png") {
-			fileInputElement.value = "";
-			return;
-		}
+    function asyncImageUpload(fileInputElement) {
+        var file = fileInputElement.files[0];
+        if (file.type !== "image/jpeg" &&
+            file.type !== "image/png") {
+            fileInputElement.value = "";
+            return;
+        }
 
           var formData = new FormData();
           formData.append("file", file);
 
           $.ajax({
                 type: 'post',
-                url: uri,
+                url: uri + '?token=' + token,
                 data: formData,
                 cache: false,
                 contentType: false,
