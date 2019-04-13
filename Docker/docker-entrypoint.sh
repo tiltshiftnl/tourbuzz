@@ -11,6 +11,7 @@ EOF
 
 
 tail -f /var/log/php7.0-fpm.log &
+tail -f /srv/web/tourbuzz/tourbuzz/logs/app.log &
 
 service php7.0-fpm start
 nginx -g "daemon off;"
