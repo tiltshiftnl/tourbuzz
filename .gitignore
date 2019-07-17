@@ -1,6 +1,7 @@
 vendor
 tourbuzz/app/config/config.php
 tourbuzz/logs/app.php
+tourbuzz/logs/
 .idea
 .DS_Store
 .project

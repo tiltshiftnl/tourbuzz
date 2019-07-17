@@ -61,6 +61,80 @@ $app->get('/dump-translations', function () use ($app) {
     render($data['template'], $data);
 });
 
+/**
+ * Returns days with message startDate in given month
+ */
+$app->get('/calendar-highlights/:y/:m', function ($y, $m) use ($app) {
+
+    $apiResponse = $app->api->get("berichten");
+    $berichten = $apiResponse->body['messages'];
+
+    $prefix = $y.'-'.$m.'-';
+    $length = strlen($prefix);
+    foreach($berichten as $bericht) {
+        if ($prefix === substr($bericht['startdate'], 0, $length)) {
+            echo "found: ".$bericht['startdate']. "<br>";
+        }
+    }
+    die("done");
+});
+
+/**
+ * Calendar data
+ */
+$app->get('/calendar/:y/:m/:d', function ($y, $m, $d) use ($app) {
+
+    if(!checkdate($m, 1, $y)) {
+        return false;
+    }
+
+    // Determine the starting day of this month
+    $firstDayOfMonth = $y."-".$m."-01";
+    $unixTimestamp = strtotime($firstDayOfMonth);
+    $firstDayOfWeek = date("N", $unixTimestamp);
+
+    // Last day this month
+    $daysInMonth = date("t", $unixTimestamp);
+
+    // check if today is within the current month
+    $today = NULL;
+
+    $weekList = [];
+    $dayOfWeek = 1; // Monday
+    $weekNr = 0;
+
+    for($dayOfWeek = 1; $dayOfWeek < $firstDayOfWeek; $dayOfWeek++) {
+        $weekList[$weekNr][]['day'] = '';
+    }
+
+    for($i = 1; $i <= $daysInMonth; $i++) {
+        $weekList[$weekNr][]['day'] = $i;
+        $dayOfWeek++;
+        if ($dayOfWeek > 7) {
+            $dayOfWeek = 1;
+            $weekNr++;
+        }
+    }
+
+    $prev_month_y = $m == 1 ? $y - 1 : $y;
+    $next_month_y = $m == 12 ? $y + 1 : $y;
+
+    $prev_month = $m == 1 ? 12 : $m - 1;
+    $next_month = $m == 12 ? 1 : $m + 1;
+
+    $data = [
+        "d" => $d,
+        "m" => $m,
+        "y" => $y,
+        "today" => NULL,
+        "prev_month" => $prev_month_y."/".$prev_month,
+        "next_month" => $next_month_y."/".$next_month,
+        "week_list" => $weekList,
+        "template" => "web/partials/calendar-block.twig"
+    ];
+
+    render($data['template'], $data);
+});
 
 /**
  * Styleguide

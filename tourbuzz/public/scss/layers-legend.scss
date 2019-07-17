@@ -1,0 +1,174 @@
+.layers-legend {
+    background: #fff;
+    //margin-top: 20px;
+    @include box-shadow;
+}
+
+.layers-legend.-active {
+    width: 280px;
+}
+
+.layers-legend-header {
+    background: #fff;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.layers-legend.-active .layers-legend-header {
+    background: $Neutral-Grey1;
+    border-bottom: 2px solid #aaa;
+}
+
+.layers-legend-title {
+    pointer-events: none;
+}
+
+.layers-legend-header-title-text {
+    display: none;
+}
+
+.layers-legend-list {
+    display: none;
+}
+
+.layers-legend.-active .layers-legend-list {
+    display: block;
+    padding: 15px;
+}
+
+.layers-legend-view-icon {
+    display: inline-block;
+    width: 27px;
+    vertical-align: middle;
+    margin-right: 5px;
+    opacity: 0.7;
+}
+
+.layers-legend-arrow-icon {
+    pointer-events: none;
+    display: inline-block;
+    background-image: url('/img/icons/arrow-down.svg');
+    width: 27px;
+    height: 27px;
+    opacity: 0.7;
+}
+
+.layers-legend.-active .layers-legend-arrow-icon {
+    display: inline-block;
+    background-image: url('/img/icons/arrow-up.svg');
+    width: 27px;
+    height: 27px;
+    opacity: 0.7;
+}
+
+.layers-legend.-active .layers-legend-header-title-text {
+    display: inline-block;
+    @include text-title;
+    position: relative;
+    top: 2px;
+}
+
+.layers-legend-toggle {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.layers-legend-toggle > * {
+    pointer-events: none;
+}
+
+.layers-legend-box {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    background-color: #fff;
+    text-align: center;
+    border: 1px solid #888;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-red {
+    border-color: $Primary-Red;
+    background-color: $Primary-Red;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-black {
+    border-color: $Primary-Black;
+    background-color: $Primary-Black;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-darkblue {
+    border-color: $Primary-Darkblue;
+    background-color: $Primary-Darkblue;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-purple {
+    border-color: $Supplement-Purple;
+    background-color: $Supplement-Purple;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-pink {
+    border-color: $Supplement-Pink;
+    background-color: $Supplement-Pink;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-orange {
+    border-color: $Supplement-Orange;
+    background-color: $Supplement-Orange;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-yellow {
+    border-color: $Supplement-Yellow;
+    background-color: $Supplement-Yellow;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-lightgreen {
+    border-color: $Supplement-Lightgreen;
+    background-color: $Supplement-Lightgreen;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-darkgreen {
+    border-color: $Supplement-Darkgreen;
+    background-color: $Supplement-Darkgreen;
+}
+
+.layers-legend-toggle.-active .layers-legend-box.-lightblue {
+    border-color: $Supplement-Lightblue;
+    background-color: $Supplement-Lightblue;
+}
+
+.layers-legend-name {
+    @include text-body;
+    font-size: 17px;
+    width: 220px;
+    flex: 1;
+}
+
+.layers-legend-tick {
+    display: none;
+}
+
+.layers-legend-toggle.-active .layers-legend-name {
+    //font-weight: bold;
+}
+
+.layers-legend-toggle.-active .layers-legend-tick {
+    display: block;
+    width: 14px;
+}
+
+.layers-legend-icon {
+    display: none;
+}
+
+.layers-legend-toggle.-active .layers-legend-icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+}

@@ -12,7 +12,7 @@ $app->get('/berichtenservice', function () use ($app) {
 
     $data = [
         "lang" => $_SESSION['lang'],
-        "template" => "berichtenservice-aanmelden.twig",
+        "template" => "web/berichten-service.twig",
     ];
 
     render($data['template'], $data);
@@ -68,7 +68,7 @@ $app->post('/berichtenservice', function () use ($app) {
         "lang" => $_SESSION['lang'],
         "errors" => $errors,
         "form" => $fields,
-        "template" => "berichtenservice-aanmelden.twig",
+        "template" => "web/berichten-service.twig",
     ];
 
     render($data["template"], $data);

@@ -1,0 +1,72 @@
+.park-detail {
+
+}
+
+.park-detail-body {
+    padding: $spacing;
+}
+
+.park-detail-title-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing;
+}
+
+.park-detail-header {
+    flex: 1;
+    display: flex;
+}
+
+.park-detail-spots-badge {
+    background: $Supplement-Lightblue;
+    @include text-title;
+    font-size: 14px;
+    color: #fff;
+    padding: 2px 8px;
+}
+
+.park-detail-nr {
+    background: $Primary-Black;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    @include avenir-demi;
+    font-size: 12px;
+    text-align: center;
+    line-height: 32px;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.park-detail-title {
+    margin-top: 3px;
+    @include text-title;
+    flex: 1;
+}
+
+.park-detail-info {
+    background: $Neutral-Grey1;
+    padding: $spacing;
+}
+
+.park-detail-img-container {
+    margin-bottom: 2 * $spacing;
+}
+
+.park-detail-img-frame {
+    width: 100%;
+    min-height: 200px;
+    background: $Neutral-Grey3;
+}
+
+.park-detail-img {
+    display: block;
+}
+
+.park-detail-description {
+    @include text-body;
+}
+
+.park-detail-hr {
+    @include hr;
+}

@@ -1,0 +1,43 @@
+.main-header {
+    background: #fff;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-header-logo-link {
+    display: inline-block;
+}
+
+.main-header-logo-img {
+    display: inline-block;
+    width: 12px;
+    height: 41px;
+    vertical-align: top;
+}
+
+.main-header-logo-text {
+    display: inline-block;
+    @include avenir-demi;
+    font-size: 14px;
+    color: #EC0000;
+    letter-spacing: 0;
+    line-height: 14px;
+    text-align: left;
+}
+
+.main-header-title {
+    @include text-title;
+    font-size: 30px; // FIXME: uitzoeken in design system;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    left: -20px; // FIXME
+}
+
+.main-header-include.-lang-switch {
+    padding-top: 5px;
+}

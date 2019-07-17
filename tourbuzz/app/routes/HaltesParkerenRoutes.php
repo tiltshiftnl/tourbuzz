@@ -82,7 +82,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
         "map" => $mapOptions,
         "analytics" => $analytics,
         "apikey" => getenv('GOOGLEMAPS_API_KEY'),
-        "template" => "halte.twig",
+        "template" => "web/partials/halte-detail.twig",
     ];
 
     render($data['template'], $data);
@@ -121,7 +121,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
         "map" => $mapOptions,
         "analytics" => $analytics,
         "apikey" => getenv('GOOGLEMAPS_API_KEY'),
-        "template" => "parkeerplaats-profiel.twig",
+        "template" => "web/partials/park-detail.twig",
     ];
 
     render($data['template'], $data);

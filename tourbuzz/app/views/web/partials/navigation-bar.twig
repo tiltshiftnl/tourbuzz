@@ -1,0 +1,7 @@
+<section class="navigation-bar" data-navigation-bar>
+    <nav class="navigation-bar-wrapper">
+        <a href="/" class="navigation-bar-link {% if activetab == 'berichten' %}-active {% endif %}" data-js-click="navBerichten">{{ __('Berichten') }}</a>
+        <a href="/haltes-parkeren" class="navigation-bar-link {% if activetab == 'haltes-parkeren' %}-active {% endif %}" data-js-click="navHaltesParkeren">{{ __('Haltes') }} & {{ __('Parkeren') }}</a>
+        <a href="/routes" class="navigation-bar-link {% if activetab == 'routes' %}-active {% endif %}" data-js-click="navRoutes">{{ __('Routes') }}</a>
+    </nav>
+</section>

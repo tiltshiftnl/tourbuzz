@@ -1,0 +1,65 @@
+.halte-detail {
+
+}
+
+.halte-detail-body {
+    padding: $spacing;
+}
+
+.halte-detail-title-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing;
+}
+
+.halte-detail-nr {
+    background: $Supplement-Lightblue;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    @include avenir-demi;
+    font-size: 12px;
+    text-align: center;
+    line-height: 32px;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.halte-detail-title {
+    margin-top: 3px;
+    @include text-title;
+    flex: 1;
+}
+
+.halte-detail-info {
+    background: $Neutral-Grey1;
+    padding: $spacing;
+}
+
+.halte-detail-img-container {
+    //margin-bottom: 2 * $spacing;
+}
+
+.halte-detail-img-frame {
+    width: 100%;
+    min-height: 200px;
+    background: $Neutral-Grey3;
+}
+
+.halte-detail-img {
+    display: block;
+}
+
+.halte-detail-description {
+    @include text-body;
+}
+
+.halte-detail-hr {
+    @include hr;
+}
+
+.halte-detail-text-link {
+    @include text-body;
+    text-decoration: underline;
+    display: block;
+}

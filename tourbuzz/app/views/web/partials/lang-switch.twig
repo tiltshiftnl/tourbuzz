@@ -1,0 +1,48 @@
+<section class="lang-switch" data-lang-switch>
+    <div class="lang-switch-box">
+        <div>
+            <div class="lang-switch-container" data-js-click="toggleLanguageSwitch">
+                {% if lang == 'nl' %}
+                    <a href="#" class="lang-switch-toggle">
+                        <img src="/img/taal/nl.png" class="lang-switch-flag">
+                    </a>
+                {% elseif lang == 'en' %}
+                    <a href="#" class="lang-switch-toggle">
+                        <img src="/img/taal/en.png" class="lang-switch-flag">
+                    </a>
+                {% elseif lang == 'de' %}
+                    <a href="#" class="lang-switch-toggle">
+                        <img src="/img/taal/de.png" class="lang-switch-flag">
+                    </a>
+                {% elseif lang == 'es' %}
+                    <a href="#" class="lang-switch-toggle">
+                        <img src="/img/taal/es.png" class="lang-switch-flag">
+                    </a>
+                {% endif %}
+            </div>
+            <div class="lang-switch-choices">
+                {% if lang != 'nl' %}
+                    <a href="?lang=nl" class="lang-switch-toggle" data-js-click="langRedirect">
+                        <img src="/img/taal/nl.png" class="lang-switch-flag">
+                    </a>
+                {% endif %}
+                {% if lang != 'en' %}
+                    <a href="?lang=en" class="lang-switch-toggle" data-js-click="langRedirect">
+                        <img src="/img/taal/en.png" class="lang-switch-flag">
+                    </a>
+                {% endif %}
+                {% if lang != 'de' %}
+                    <a href="?lang=de" class="lang-switch-toggle" data-js-click="langRedirect">
+                        <img src="/img/taal/de.png" class="lang-switch-flag">
+                    </a>
+                {% endif %}
+                {% if lang != 'es' %}
+                    <a href="?lang=es" class="lang-switch-toggle" data-js-click="langRedirect">
+                        <img src="/img/taal/es.png" class="lang-switch-flag">
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        <img src="/img/icons/arrow-down.svg" class="lang-switch-arrow"  data-js-click="toggleLanguageSwitch">
+    </div>
+</section>

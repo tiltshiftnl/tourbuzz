@@ -1,0 +1,197 @@
+////////////
+// Colors //
+////////////
+
+$Primary-Black: rgb(0,0,0);
+$Primary-Red: rgb(236,0,0);
+$Primary-Darkblue: rgb(0,70,153);
+$Neutral-Grey1: rgb(245, 245, 245);
+$Neutral-Grey2: rgb(230, 230, 230);
+$Neutral-Grey3: rgb(180, 180, 180);
+$Neutral-Grey4: rgb(118, 118, 118);
+$Neutral-Grey5: rgb(50, 50, 50);
+$Support-Focus: rgb(254, 200, 19);
+$Supplement-Purple: rgb(160, 0, 120);
+$Supplement-Pink: rgb(229, 0, 130);
+$Supplement-Orange: rgb(255, 145, 0);
+$Supplement-Yellow: rgb(255, 230, 0);
+$Supplement-Lightgreen: rgb(190, 210, 0);
+$Supplement-Darkgreen: rgb(0, 160, 60);
+$Supplement-Lightblue: rgb(0, 157, 236);
+
+////////////////
+// Typography //
+////////////////
+
+@mixin avenir-regular() {
+    font-family:'AvenirNextLTW01-Regular', sans-serif;
+}
+
+@mixin avenir-demi() {
+    font-family:'Avenir Next LT W01 Demi', sans-serif;
+}
+
+@mixin text-body() {
+    @include avenir-regular;
+    font-size: 16px;
+    line-height: 22px;
+    color: $Primary-Black;
+}
+
+@mixin text-title() {
+    @include avenir-demi;
+    font-size: 18px;
+    line-height: 25px;
+    color: $Primary-Black;
+}
+
+@mixin text-title-lg() {
+    @include avenir-demi;
+    font-size: 22px;
+    line-height: 28px;
+    color: $Primary-Black;
+}
+
+@mixin text-note() {
+    @include avenir-regular;
+    font-size: 14px;
+    line-height: 18px;
+    color: $Neutral-Grey4;
+}
+
+//////////
+// Misc //
+//////////
+
+@mixin box-shadow() {
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+@mixin hr() {
+    border: 0;
+    border-top: 2px solid $Neutral-Grey2;
+    margin-top: 2 * $spacing;
+    margin-bottom: 2 * $spacing;
+}
+
+//////////
+// Grid //
+//////////
+
+@mixin grid-wrapper() {
+    padding-left: $spacing;
+    padding-right: $spacing;
+    display: flex;
+    flex-direction: column;
+}
+
+//////////
+// Form //
+//////////
+
+@mixin form() {
+    background: $Neutral-Grey1;
+    padding: $spacing;
+}
+
+@mixin form-row() {
+    margin-bottom: $spacing;
+}
+
+@mixin form-label() {
+    @include text-title;
+    margin-bottom: 10px;
+    display: block;
+}
+
+@mixin form-input-text() {
+    border: 1px solid $Neutral-Grey4;
+    height: 44px;
+    min-width: 70px;
+    width: 100%;
+    padding: 9px 9px 11px 9px;
+    @extend text-body;
+}
+
+////////////
+// Button //
+////////////
+
+@mixin button-red {
+    background: $Primary-Red;
+    padding: $mini-spacing $spacing;
+    @include text-title;
+    color: #fff;
+    border: 0;
+    display: inline-block;
+}
+
+/////////////////////////////
+// Spacing and positioning //
+/////////////////////////////
+
+$z-index-header: 9999;
+$popup-content-width: 200px;
+$date-picker-width: 260px;
+
+$spacing: 15px;
+$mini-spacing: 5px;
+
+/////////////
+// Loading //
+/////////////
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  margin: 3px;
+  border: 3px solid #ccc;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #aaa transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

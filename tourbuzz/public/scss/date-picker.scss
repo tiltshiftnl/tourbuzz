@@ -1,0 +1,120 @@
+.date-picker {
+    position: relative;
+    z-index: 9999;
+}
+
+.date-picker-calendar {
+    display: none;
+    position: absolute;
+    top: 37px;
+    left: 0;
+    background: #fff;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    @include box-shadow;
+}
+
+.date-picker.-active .date-picker-calendar {
+    display: block;
+}
+
+.date-picker-today {
+    display: flex;
+    width: 100%;
+    height: 40px;
+}
+
+.date-picker-today-link {
+    @include text-body;
+    text-transform: lowercase;
+    background: $Neutral-Grey1;
+    text-align: center;
+    padding: 2px 5px;
+    margin: auto;
+    border: 1px solid $Neutral-Grey2;
+}
+
+.date-picker-loading {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    > * {
+        margin: auto;
+    }
+}
+
+
+.date-picker-input {
+    cursor: pointer;
+    @include avenir-demi;
+    border: 1px solid $Neutral-Grey3;
+    display: inline-block;
+    padding: 8px;
+    background-image: url('/img/icons/Calendar.svg');
+    background-position: $date-picker-width - 32px center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    width: $date-picker-width;
+}
+
+.date-picker-input:focus {
+    outline: 2px solid $Support-Focus;
+}
+
+.date-picker-month-select {
+    background: $Neutral-Grey1;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: $date-picker-width;
+    text-align: center;
+}
+
+.date-picker-nav-link {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    //background: black;
+}
+
+.date-picker-icon {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    pointer-events: none;
+}
+
+.date-picker-month {
+    display: inline-block;
+    @include text-title;
+    flex: 1;
+}
+
+.date-picker-calendar-zone {
+    width: $date-picker-width;
+    //border: 1px solid @Neutral-Grey2;
+    border-top: 0;
+    th {
+        @include avenir-demi;
+        text-align: right;
+        padding: 5px;
+    }
+    td {
+        @include text-body;
+        text-align: center;
+        padding: 5px;
+    }
+    .prev, .next {
+        color: $Neutral-Grey3;
+    }
+    .message {
+        background: $Primary-Red;
+        color: #fff;
+        @include avenir-demi;
+        border-radius: 50%;
+    }
+    .today {
+        text-decoration: underline;
+    }
+}

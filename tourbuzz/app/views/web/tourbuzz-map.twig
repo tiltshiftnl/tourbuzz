@@ -1,0 +1,37 @@
+{% extends 'base/base.web.twig' %}
+
+{% block main %}
+    <section class="tourbuzz-map" data-lang="{{ lang }}">
+        {% include 'web/partials/main-header.twig' %}
+        {% include 'web/partials/navigation-bar.twig' %}
+
+        <div class="tourbuzz-map-page-container" data-page-container>
+            <div class="tourbuzz-map-infopanel-container"
+                 data-infopanel
+                 data-js-ready="loadInfopanel"
+                 data-infopanel-url="{{ infopanel_url }}">
+                <div class="tourbuzz-map-infopanel-loading -active" data-infopanel-loading>
+                    {% include 'web/partials/loading-indicator.twig' %}
+                </div>
+                <div data-infopanel-content></div>
+            </div>
+            <div class="tourbuzz-map-mapview-container" data-mapview-container>
+                <div class="tourbuzz-map-leaflet-zone">
+                    <div class="tourbuzz-map-leaflet-container"
+                          data-mapview
+                          data-js-ready="updateMap"
+                          data-activate-layers="{{ activatelayers }}"
+                          data-center-lat="{{ center_lat }}"
+                          data-center-lon="{{ center_lon }}"
+                          data-zoom="{{ zoom }}"
+                          data-mapview-day="/{{ Y }}/{{ m }}/{{ d }}">
+                    </div>
+                    <div class="tourbuzz-map-container -layers-legend">
+                        {% include 'web/partials/layers-legend.twig' with layers_legend %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#<button id="whereami" class="tourbuzz-map-whereami">Waar ben ik?</button>#}
+    </section>
+{% endblock %}

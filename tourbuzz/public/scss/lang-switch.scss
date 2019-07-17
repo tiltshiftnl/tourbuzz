@@ -1,0 +1,72 @@
+.lang-switch {
+    display: block;
+    position: relative;
+}
+
+.lang-switch-container img  {
+    pointer-events: none;
+}
+
+/*
+.lang-switch-link {
+    .text-body;
+    display: flex;
+    align-items: center;
+    color: @Primary-Black;
+    font-size: 14px;
+}
+
+.lang-switch-icon {
+    width: 5px;
+    margin-right: 5px;
+}
+
+.lang-switch-link-text {
+    flex: 1;
+}
+*/
+
+.lang-switch-toggle {
+
+}
+
+.lang-switch-flag {
+    display: inline-block;
+    margin-right: 5px;
+    width: 30px;
+    margin-bottom: 5px;
+}
+
+.lang-switch-arrow {
+    display: inline-block;
+    width: 20px;
+    //flex: 1;
+}
+
+.lang-switch-box {
+    display: flex;
+    align-items: flex-start;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 65px;
+    background: #fff;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.lang-switch.-active .lang-switch-box {
+    @include box-shadow;
+}
+
+.lang-switch-choices {
+    display: none;
+}
+
+.lang-switch.-active .lang-switch-choices {
+    display: block;
+}
+
+.lang-switch-container {
+    flex: 1;
+}

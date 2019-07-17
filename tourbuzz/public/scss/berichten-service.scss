@@ -1,0 +1,65 @@
+.berichten-service {
+
+}
+
+.berichten-service-container {
+    padding-top: $spacing;
+    padding-bottom: $spacing;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.berichten-service-wrapper {
+    @include grid-wrapper;
+    justify-content: center;
+}
+
+.berichten-service-header {
+    padding-top:  $spacing;
+    padding-bottom: 2 * $spacing;
+}
+
+.berichten-service-title {
+    @include text-title-lg;
+    margin-bottom: $mini-spacing;
+}
+
+.berichten-service-intro {
+    @include text-body;
+   // margin-bottom: $spacing;
+}
+
+.berichten-service-form {
+    @include form;
+    margin-bottom: $spacing;
+}
+
+.berichten-service-form-row {
+    @include form-row;
+}
+
+.berichten-service-label {
+    @include form-label;
+}
+
+.berichten-service-input {
+    @include form-input-text;
+}
+
+.berichten-service-button {
+    @include button-red;
+}
+
+.berichten-service-note {
+    @include text-note;
+}
+
+.berichten-service-unsubscribe {
+    @include text-body;
+    padding-top: 2 * $spacing;
+}
+
+.berichten-service-unsubscribe a {
+    text-decoration: underline;
+}

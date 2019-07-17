@@ -1,0 +1,37 @@
+<div class="calendar-block">
+    <nav class="date-picker-month-select">
+        <a href="#" class="date-picker-nav-link" data-js-click="monthSelect" data-month="/calendar/{{ prev_month }}/01">
+            <img src="/img/icons/Chevron-Left.svg" class="date-picker-icon">
+        </a>
+        <div class="date-picker-month">{{ maand(m) }} {{ y }}</div>
+        <a href="#" class="date-picker-nav-link" data-js-click="monthSelect" data-month="/calendar/{{ next_month }}/01">
+            <img src="/img/icons/Chevron-Right.svg" class="date-picker-icon">
+        </a>
+    </nav>
+    <div class="date-picker-today">
+        <a href="/{{ now|date('Y') }}/{{ now|date('m') }}/{{ now|date('d') }}" class="date-picker-today-link">{{ __('Vandaag') }}</a>
+    </div>
+    <table class="date-picker-calendar-zone">
+        <tr>
+            <th>ma</th>
+            <th>di</th>
+            <th>wo</th>
+            <th>do</th>
+            <th>vr</th>
+            <th>za</th>
+            <th>zo</th>
+        </tr>
+        {% for week in week_list %}
+            <tr>
+                {% for item in week %}
+                    <td class="{{ item.class|default("") }} {{ item.today|default("") }} {{ item.selected|default("") }}">
+                        <a href="/{{ y }}/{{ m }}/{{ item.day }}" data-js-day="{{ y }}-{{ m }}-{{ item.day }}">{{ item.day }}</a>
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="date-picker-loading" data-loading-calendar-block>
+        {% include 'web/partials/loading-indicator.twig' %}
+    </div>
+</div>
