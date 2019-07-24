@@ -32,6 +32,10 @@
     margin-bottom: $spacing;
 }
 
+.footer-block-text-link {
+    text-decoration: underline;
+}
+
 .footer-block-link {
     @include text-body;
     display: block;

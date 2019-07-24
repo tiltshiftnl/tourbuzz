@@ -110,7 +110,7 @@ $Supplement-Lightblue: rgb(0, 157, 236);
     min-width: 70px;
     width: 100%;
     padding: 9px 9px 11px 9px;
-    @extend text-body;
+    @include text-body;
 }
 
 ////////////

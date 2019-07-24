@@ -12,7 +12,8 @@ $app->get('/sms-aanmelden', function () use ($app) {
 
     $data = [
         "lang" => $_SESSION['lang'],
-        "template" => "sms-aanmelden.twig",
+        "aanmelden" => true,
+        "template" => "web/sms-alerts.twig",
     ];
 
     render($data['template'], $data);
@@ -52,7 +53,8 @@ $app->get('/sms-afmelden', function () use ($app) {
 
     $data = [
         "lang" => $_SESSION['lang'],
-        "template" => "sms-afmelden.twig",
+        "afmelden" => true,
+        "template" => "web/sms-alerts.twig",
     ];
 
     render($data['template'], $data);

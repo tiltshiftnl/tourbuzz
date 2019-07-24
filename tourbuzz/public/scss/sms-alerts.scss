@@ -1,8 +1,8 @@
-.berichten-service {
+.sms-alerts {
     min-height: 80vh;
 }
 
-.berichten-service-container {
+.sms-alerts-container {
     padding-top: $spacing;
     padding-bottom: $spacing;
     max-width: 640px;
@@ -10,56 +10,56 @@
     margin-right: auto;
 }
 
-.berichten-service-wrapper {
+.sms-alerts-wrapper {
     @include grid-wrapper;
     justify-content: center;
 }
 
-.berichten-service-header {
+.sms-alerts-header {
     padding-top:  $spacing;
     padding-bottom: 2 * $spacing;
 }
 
-.berichten-service-title {
+.sms-alerts-title {
     @include text-title-lg;
     margin-bottom: $mini-spacing;
 }
 
-.berichten-service-intro {
+.sms-alerts-intro {
     @include text-body;
    // margin-bottom: $spacing;
 }
 
-.berichten-service-form {
+.sms-alerts-form {
     @include form;
     margin-bottom: $spacing;
 }
 
-.berichten-service-form-row {
+.sms-alerts-form-row {
     @include form-row;
 }
 
-.berichten-service-label {
+.sms-alerts-label {
     @include form-label;
 }
 
-.berichten-service-input {
+.sms-alerts-input {
     @include form-input-text;
 }
 
-.berichten-service-button {
+.sms-alerts-button {
     @include button-red;
 }
 
-.berichten-service-note {
+.sms-alerts-note {
     @include text-note;
 }
 
-.berichten-service-unsubscribe {
+.sms-alerts-unsubscribe {
     @include text-body;
     padding-top: 2 * $spacing;
 }
 
-.berichten-service-unsubscribe a {
+.sms-alerts-unsubscribe a {
     text-decoration: underline;
 }

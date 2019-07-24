@@ -6,37 +6,47 @@
         {% include 'web/partials/navigation-bar.twig' %}
         <div class="berichten-service-wrapper">
             <div class="berichten-service-container">
-                <div class="berichten-service-header">
-                    <h1 class="berichten-service-title">{{ __('Tourbuzz Berichtenservice') }}</h1>
-                    <p class="berichten-service-intro">{{ __('Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.') }}</p>
-                </div>
-                <form class="berichten-service-form">
-                    <div class="berichten-service-form-row">
-                        <label class="berichten-service-label">E-mail*</label>
-                        <input class="berichten-service-input" type="text" name="mail" value="{{ form.mail }}">
-                        {% if errors.mail %}<p class="note">{{ errors.mail }}</p>{% endif %}
+                {% if aanmelden %}
+                    <div class="berichten-service-header">
+                        <h1 class="berichten-service-title">{{ __('Tourbuzz Berichtenservice') }}</h1>
+                        <p class="berichten-service-intro">{{ __('Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.') }}</p>
                     </div>
-                    <div class="berichten-service-form-row">
-                        <label class="berichten-service-label">{{ __('Naam') }}</label>
-                        <input class="berichten-service-input" type="text" name="name" value="{{ form.name }}">
+                    <form class="berichten-service-form">
+                        <div class="berichten-service-form-row">
+                            <label class="berichten-service-label">E-mail*</label>
+                            <input class="berichten-service-input" type="text" name="mail" value="{{ form.mail }}">
+                            {% if errors.mail %}<p class="note">{{ errors.mail }}</p>{% endif %}
+                        </div>
+                        <div class="berichten-service-form-row">
+                            <label class="berichten-service-label">{{ __('Naam') }}</label>
+                            <input class="berichten-service-input" type="text" name="name" value="{{ form.name }}">
+                        </div>
+                        <div class="berichten-service-form-row">
+                            <label class="berichten-service-label">{{ __('Organisatie') }}</label>
+                            <input class="berichten-service-input" type="text" name="organisation" value="{{ form.organisation }}">
+                        </div>
+                        <input type="hidden" placeholder="taal" name="language" value="{{ lang }}">
+                        <button class="berichten-service-button" type="submit">{{ __('Aanmelden') }}</button>
+                    </form>
+                    <p class="berichten-service-note">* Verplicht veld</p>
+                    <p class="berichten-service-unsubscribe">
+                        <a href="/berichtenservice-afmelden">{{ __('Afmelden voor de berichtenservice') }}</a>
+                    </p>
+                {% elseif afmelden %}
+                    <div class="berichten-service-header">
+                        <h1 class="berichten-service-title">{{ __('Tourbuzz Berichtenservice') }}</h1>
+                        <p class="berichten-service-intro">{{ __('Vul hieronder uw email adres in om af te melden bij de Tour Buzz berichtenservice.') }}</p>
                     </div>
-                    <div class="berichten-service-form-row">
-                        <label class="berichten-service-label">{{ __('Organisatie') }}</label>
-                        <input class="berichten-service-input" type="text" name="organisation" value="{{ form.organisation }}">
-                    </div>
-                    <input type="hidden" placeholder="taal" name="language" value="{{ lang }}">
-                    <button class="berichten-service-button" type="submit">{{ __('Aanmelden') }}</button>
-                </form>
-                <p class="berichten-service-note">* Verplicht veld</p>
-                <p class="berichten-service-unsubscribe">
-                    {% if lang == 'nl' %}
-                        Afmelden? Klik <a href="/berichtenservice-afmelden">hier</a>
-                    {% elseif lang == 'en' %}
-                        Unsubscribe? Click <a href="/berichtenservice-afmelden">here</a>
-                    {% elseif lang == 'de' %}
-                        Abmelden? <a href="/berichtenservice-afmelden">Hier</a> klicken
-                    {% endif %}
-                </p>
+                    <form class="berichten-service-form">
+                        <div class="berichten-service-form-row">
+                            <label class="berichten-service-label">E-mail*</label>
+                            <input class="berichten-service-input" type="text" name="mail" value="{{ form.mail }}">
+                            {% if errors.mail %}<p class="note">{{ errors.mail }}</p>{% endif %}
+                        </div>
+                        <button class="berichten-service-button" type="submit">{{ __('Afmelden') }}</button>
+                    </form>
+                    <p class="berichten-service-note">* Verplicht veld</p>
+                {% endif %}
             </div>
         </div>
     </section>
