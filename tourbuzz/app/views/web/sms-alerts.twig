@@ -11,7 +11,12 @@
                         <h1 class="sms-alerts-title">SMS alerts</h1>
                         <p class="sms-alerts-intro">{{ __('Vul hieronder uw mobiele nummer in om belangrijke Tour Buzz meldingen te ontvangen per SMS.') }}</p>
                     </div>
-                    <form class="sms-alerts-form">
+
+                    {% if flash is not empty %}
+                        {% include 'web/partials/flash-messages.twig' %}
+                    {% endif %}
+
+                    <form class="sms-alerts-form" method="post">
                         <div class="sms-alerts-form-row">
                             {#<label class="sms-alerts-label">Tel*</label>#}
                             <input class="sms-alerts-input" id="phone" type="tel" name="number">
@@ -29,7 +34,12 @@
                         <h1 class="sms-alerts-title">SMS alerts</h1>
                         <p class="sms-alerts-intro">{{ __('Vul hieronder het mobiele nummer in, dat u wilt afmelden.') }}</p>
                     </div>
-                    <form class="sms-alerts-form">
+
+                    {% if flash is not empty %}
+                        {% include 'web/partials/flash-messages.twig' %}
+                    {% endif %}
+
+                    <form class="sms-alerts-form" method="post">
                         <div class="sms-alerts-form-row">
                             {#<label class="sms-alerts-label">Tel*</label>#}
                             <input class="sms-alerts-input" id="phone" type="tel" name="number">

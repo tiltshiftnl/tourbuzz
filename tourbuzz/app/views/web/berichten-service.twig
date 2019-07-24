@@ -11,7 +11,12 @@
                         <h1 class="berichten-service-title">{{ __('Tourbuzz Berichtenservice') }}</h1>
                         <p class="berichten-service-intro">{{ __('Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.') }}</p>
                     </div>
-                    <form class="berichten-service-form">
+
+                    {% if flash is not empty %}
+                        {% include 'web/partials/flash-messages.twig' %}
+                    {% endif %}
+
+                    <form class="berichten-service-form" method="post">
                         <div class="berichten-service-form-row">
                             <label class="berichten-service-label">E-mail*</label>
                             <input class="berichten-service-input" type="text" name="mail" value="{{ form.mail }}">
@@ -37,7 +42,12 @@
                         <h1 class="berichten-service-title">{{ __('Tourbuzz Berichtenservice') }}</h1>
                         <p class="berichten-service-intro">{{ __('Vul hieronder uw email adres in om af te melden bij de Tour Buzz berichtenservice.') }}</p>
                     </div>
-                    <form class="berichten-service-form">
+
+                    {% if flash is not empty %}
+                        {% include 'web/partials/flash-messages.twig' %}
+                    {% endif %}
+
+                    <form class="berichten-service-form" method="post">
                         <div class="berichten-service-form-row">
                             <label class="berichten-service-label">E-mail*</label>
                             <input class="berichten-service-input" type="text" name="mail" value="{{ form.mail }}">

@@ -1,0 +1,7 @@
+<section class="flash-messages">
+    <div class="flash-messages-box">
+        {% for type, message in flash %}
+            <p class="flash-messages-text -{{ type }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+</section>
