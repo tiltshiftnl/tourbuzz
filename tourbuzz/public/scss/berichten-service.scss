@@ -53,6 +53,7 @@
 
 .berichten-service-note {
     @include text-note;
+    margin-top: $spacing;
 }
 
 .berichten-service-unsubscribe {

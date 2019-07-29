@@ -20,7 +20,7 @@
                         <div class="berichten-service-form-row">
                             <label class="berichten-service-label">E-mail*</label>
                             <input class="berichten-service-input" type="text" name="mail" value="{{ form.mail }}">
-                            {% if errors.mail %}<p class="note">{{ errors.mail }}</p>{% endif %}
+                            {% if errors.mail %}<p class="berichten-service-note">{{ errors.mail }}</p>{% endif %}
                         </div>
                         <div class="berichten-service-form-row">
                             <label class="berichten-service-label">{{ __('Naam') }}</label>

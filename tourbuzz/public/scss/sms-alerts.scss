@@ -53,6 +53,7 @@
 
 .sms-alerts-note {
     @include text-note;
+    margin-top: $spacing;
 }
 
 .sms-alerts-unsubscribe {
