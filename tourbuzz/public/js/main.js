@@ -74,6 +74,16 @@ function removeAllLayers () {
     removeLayer('milieuzone');
 }
 
+//////////////////////
+// Current location //
+//////////////////////
+
+function getLocation(callback) {
+    navigator.geolocation.getCurrentPosition(function (data) {
+        var jsonLocation = [data.coords.latitude, data.coords.longitude];
+        callback(jsonLocation);
+    });
+}
 
 ////////////////
 // Layer data //
@@ -83,16 +93,20 @@ function addCurrentLocation (targetMap) {
     var lat = 52.3616339;
     var lon = 4.905583;
 
-    var customIcon = new L.divIcon({
-        iconSize: [36, 39],
-        iconAnchor: [18, 39],
-        popupAnchor: [0, -40],
-        className: 'custom-icon-whereami'
+    getLocation(function(position) {
+        lat = position[0];
+        lng = position[1];
+        var customIcon = new L.divIcon({
+            iconSize: [36, 39],
+            iconAnchor: [18, 39],
+            popupAnchor: [0, -40],
+            className: 'custom-icon-whereami'
+        });
+
+        var popupHTML = '<p>U bent hier</p>';
+
+        L.marker([lat, lng], {icon: customIcon}).bindPopup(popupHTML).addTo(targetMap);
     });
-
-    var popupHTML = '<p>U bent hier</p>';
-
-    L.marker([lat, lon], {icon: customIcon}).bindPopup(popupHTML).addTo(targetMap);
 }
 
 function addBerichten (targetMap) {
@@ -207,7 +221,8 @@ function addBestemmingsverkeer (targetMap) {
                 opacity: 1,
                 color: '#FF9100'
             };
-            mapLayers['bestemmingsverkeer'] = L.geoJSON(res, {style: styles} ).addTo(targetMap);
+            var popupHTML = '<p>Bestemmingsverkeer</p>';
+            mapLayers['bestemmingsverkeer'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
             targetMap.fitBounds(mapLayers['bestemmingsverkeer'].getBounds());
         });
 }
@@ -222,7 +237,8 @@ function addAanbevolenroutes (targetMap) {
                 opacity: 1,
                 color: '#BED200'
             };
-            mapLayers['aanbevolenroutes'] = L.geoJSON(res, {style: styles} ).addTo(targetMap);
+            var popupHTML = '<p>Aanbevolen route</p>';
+            mapLayers['aanbevolenroutes'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
             targetMap.fitBounds(mapLayers['aanbevolenroutes'].getBounds());
         });
 }
@@ -237,7 +253,9 @@ function addVerplichteroutes(targetMap) {
                 opacity: 1,
                 color: '#00A03C'
             };
-            mapLayers['verplichteroutes'] = L.geoJSON(res, {style: styles} ).addTo(targetMap);
+
+            var popupHTML = '<p>Verplichte route</p>';
+            mapLayers['verplichteroutes'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
             targetMap.fitBounds(mapLayers['verplichteroutes'].getBounds());
         });
 }
