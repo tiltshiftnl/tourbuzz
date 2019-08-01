@@ -42,7 +42,7 @@
                 {% if lang == 'es' %}{{ insertlinks(record.body_es)|raw }}{% endif %}
             {% endset %}#}
 
-            <a href="#" data-js-click="loadBericht" data-bericht-id="{{ record.id }}" data-day="/{{ Y }}/{{ m }}/{{ d }}" class="message-overview-item">
+            <a href="/bericht/{{ record.id }}{% if Y %}/{{ Y }}/{{ m }}/{{ d }}{% endif %}" data-js-click="loadBericht" data-bericht-id="{{ record.id }}" class="message-overview-item">
                 <div class="message-overview-nr">{{ record.sort_order }}</div>
                 <h2 class="message-overview-item-title">{{ title }}</h2>
             </a>

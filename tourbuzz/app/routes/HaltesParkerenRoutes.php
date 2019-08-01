@@ -22,16 +22,6 @@ $app->get('/haltes-parkeerplaatsen', function () use ($app, $analytics) {
         "lng" => 4.901327,
     ];
 
-    $mapOptions = [
-        "width" => 420,
-        "height" => 350,
-        "zoom" => 14, // Google Maps zoom level.
-        "scale" => 2, // Double resolution for retina display.
-        "center" => $center,
-    ];
-
-    //$haltes = locationItemsToMap($haltes, $mapOptions, true);
-
     $data = [
         "m" => date('m'),
         "d" => date('d'),
@@ -40,11 +30,19 @@ $app->get('/haltes-parkeerplaatsen', function () use ($app, $analytics) {
         "activetab" => "haltes-parkeerplaatsen",
         "haltes" => $haltes,
         "parkeerplaatsen" => $parkeerplaatsen,
-        "map" => $mapOptions,
         "analytics" => $analytics,
         "apikey" => getenv('GOOGLEMAPS_API_KEY'),
-        "template" => "haltes-parkeerplaatsen.twig",
+        "date_picker" => [],
+        "layers_legend" => getData('layer_list.json'),
+        "infopanel_url" => "/haltes-parkeerplaatsen?partial=panel",
+        "activatelayers" => "haltes,parkeren",
+        "panel_reverse_order" => true,
+        "template" => "web/tourbuzz-map.twig"
     ];
+
+    if (isset($_REQUEST['partial'])) {
+        $data["template"] = "web/partials/haltes-parkeren.twig";
+    }
 
     render($data['template'], $data);
 });
@@ -82,8 +80,15 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
         "map" => $mapOptions,
         "analytics" => $analytics,
         "apikey" => getenv('GOOGLEMAPS_API_KEY'),
-        "template" => "web/partials/halte-detail.twig",
+        "layers_legend" => getData('layer_list.json'),
+        "infopanel_url" => "/haltes/{$slug}?partial=panel",
+        "activatelayers" => "haltes,parkeren",
+        "template" => "web/tourbuzz-map.twig",
     ];
+
+    if (isset($_REQUEST['partial'])) {
+        $data["template"] = "web/partials/halte-detail.twig";
+    }
 
     render($data['template'], $data);
 })->name('halte');
@@ -120,41 +125,18 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
         "parkeerplaatsen" => $parkeerplaatsen,
         "map" => $mapOptions,
         "analytics" => $analytics,
-        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
-        "template" => "web/partials/park-detail.twig",
+        "layers_legend" => getData('layer_list.json'),
+        "infopanel_url" => "/parkeerplaatsen/{$slug}?partial=panel",
+        "activatelayers" => "haltes,parkeren",
+        "template" => "web/tourbuzz-map.twig",
     ];
+
+    if (isset($_REQUEST['partial'])) {
+        $data["template"] = "web/partials/park-detail.twig";
+    }
 
     render($data['template'], $data);
 })->name('parkeerplaats');
-
-
-/**
- * Huidige haltestatus (Glimworm API).
- */
-$app->get('/async/haltestatus/:slug', function ($slug) use ($app, $analytics) {
-
-    /* Glimworm */
-
-    $glimworm = file_get_contents('http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last');
-    if (!empty($glimworm)) {
-        $glimworm = json_decode($glimworm, true);
-        $glimworm = $glimworm["results"][0]["series"][0]["values"][0][11]; // @FIXME
-    } else {
-        $glimworm = NULL;
-    }
-
-    render("partials/haltestatus.twig", $glimworm);
-});
-
-
-/**
- * History haltestatus (Glimwom API).
- */
-$app->get('/async/histogram/:slug', function ($slug) use ($app, $analytics) {
-    //http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last/1d/graph/10m
-
-});
-
 
 /**
  * Huidige parkeerplaats status
@@ -182,16 +164,6 @@ $app->get('/async/parkeerplaats-status/:slug', function ($slug) use ($app, $anal
     $parkeerplaats["dynvialis"] = $vialis;
     render("partials/parkeerplaats-status.twig", $parkeerplaats);
 });
-
-
-/**
- * Test async.
- */
-$app->get('/async/parkeerplaats/test', function () use ($app, $analytics) {
-    //http://dev.ibeaconlivinglab.com:1888/getparkingdata/1/last/1d/graph/10m
-    render("partials/haltestatus.twig");
-});
-
 
 /**
  * Mockup halteprofiel.

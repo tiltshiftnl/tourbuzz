@@ -1,8 +1,8 @@
-{% for bericht in berichten if bericht.current_message %}
+{# for bericht in berichten if bericht.current_message #}
 
 <section class="message-detail" data-message-detail data-message-lat="{{ bericht.location.lat }}" data-message-lon="{{ bericht.location.lng }}">
     <div class="message-detail-include -date-picker">
-        {% include 'web/partials/date-picker.twig' %}
+        {% include 'web/partials/date-picker.twig' with {'d': d, 'm': m, 'Y': Y} %}
     </div>
 
     <div class="message-detail-include -message-nav">
@@ -47,7 +47,7 @@
 
     <div class="message-detail-body">
         <div class="message-detail-title-container">
-            <div class="message-detail-nr">{{ bericht.sort_order }}</div>
+            <div class="message-detail-nr">{{ sort_order }}</div>
             <h1 class="message-detail-title">{{ title }}</h1>
         </div>
         <div class="message-detail-article-zone">
@@ -79,4 +79,4 @@
         </div>#}
     </div>
 </section>
-{% endfor %}
+{# endfor #}

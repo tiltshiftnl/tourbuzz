@@ -203,6 +203,11 @@
         "de" : "Plätze",
         "es" : "cursos"
     },
+    "plaats(en)" : {
+        "en" : "spot(s)",
+        "de" : "Plätz(e)",
+        "es" : "lugar(es)"
+    },
     "Meer informatie" : {
         "en" : "More info",
         "de" : "Mehr info",
@@ -372,6 +377,22 @@
         "en" : "unknown",
         "de" : "unbekannt",
         "es" : "ignoto"
-    }
-  }
+    },
+    "Routes": {
+        "en" : "Routes",
+        "de" : "Routen",
+        "es" : "Rutas",
+    },
+    "Route informatie": {
+        "en" : "Route information",
+        "de" : "Routeninformationen",
+        "es" : "Información de la ruta"
+    },
+    ""
+    "U bevindt zich hier": {
+        "en" : "You are here",
+        "de" : "Du bist hier",
+        "es" : "Tu estas aqui"
+    },
+}
 }

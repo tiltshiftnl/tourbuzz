@@ -1,0 +1,49 @@
+<section class="haltes-parkeren">
+
+    <div class="haltes-parkeren-list">
+        <h3 class="haltes-parkeren-title">{{ __('Haltes') }}</h3>
+        {#<p class="haltes-parkeren-text">{{ __('Alleen passagiers in- en uit laten stappen. Let op: max 10 min.') }}</p>#}
+        <hr class="haltes-parkeren-hr">
+        {% for record in haltes %}
+            <a href="/haltes/{{ record.haltenummer }}" class="halte-detail-title-container">
+                <div class="park-detail-header">
+                    <div class="halte-detail-nr">{{ record.haltenummer }}</div>
+                    <h1 class="halte-detail-title">{{ record.straat }}</h1>
+                </div>
+                <div class="park-detail-spots">
+                    <div class="park-detail-spots-badge {% if not record.beschikbaar %}-unavailable{% endif %}">
+                        {% if record.beschikbaar %}
+                            {{ record.capaciteit }}&nbsp;{{ __('plaats(en)') }}
+                        {% else %}
+                            {{ __('niet beschikbaar') }}
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="haltes-parkeren-list">
+        <h3 class="haltes-parkeren-title">{{ __('Parkeren') }}</h3>
+        {#<p class="haltes-parkeren-text">{{ __('Op deze locaties kunt u uw bus parkeren. Klik hier voor de tarieven.') }}</p>#}
+        <hr class="haltes-parkeren-hr">
+        {% for record in parkeerplaatsen %}
+            <a href="/parkeerplaats/{{ record.nummer }}" class="halte-detail-title-container">
+                <div class="park-detail-header">
+                    <div class="park-detail-nr">{{ record.nummer }}</div>
+                    <h1 class="park-detail-title">{{ record.naam }}</h1>
+                </div>
+                <div class="park-detail-spots">
+                    <div class="park-detail-spots-badge {% if not record.beschikbaar %}-unavailable{% endif %}">
+                        {% if record.beschikbaar %}
+                            {{ record.capaciteit }}&nbsp;{{ __('plaats(en)') }}
+                        {% else %}
+                            {{ __('niet beschikbaar') }}
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+</section>

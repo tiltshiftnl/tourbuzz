@@ -25,7 +25,7 @@
             <tr>
                 {% for item in week %}
                     <td class="{{ item.class|default("") }} {{ item.today|default("") }} {{ item.selected|default("") }}">
-                        <a href="/{{ y }}/{{ m }}/{{ item.day }}" data-js-day="{{ y }}-{{ m }}-{{ item.day }}">{{ item.day }}</a>
+                        <a href="/{{ y }}/{{ m }}/{{ item.day }}">{{ item.day }}</a>
                     </td>
                 {% endfor %}
             </tr>

@@ -79,10 +79,12 @@ function removeAllLayers () {
 //////////////////////
 
 function getLocation(callback) {
-    navigator.geolocation.getCurrentPosition(function (data) {
-        var jsonLocation = [data.coords.latitude, data.coords.longitude];
-        callback(jsonLocation);
-    });
+    if (navigator.getLocation) {
+        navigator.geolocation.getCurrentPosition(function (data) {
+            var jsonLocation = [data.coords.latitude, data.coords.longitude];
+            callback(jsonLocation);
+        });
+    }
 }
 
 ////////////////
@@ -110,8 +112,8 @@ function addCurrentLocation (targetMap) {
 }
 
 function addBerichten (targetMap) {
-    var el = document.querySelector('[data-mapview-day]');
-    var day = el.getAttribute('data-mapview-day');
+    var dayEl = document.querySelector('[data-day]');
+    var day = dayEl.getAttribute('data-day');
     var dataUrl = '/json/message-overview' + day;
 
     axios.get(dataUrl)
@@ -128,7 +130,7 @@ function addBerichten (targetMap) {
                         html: '<span>' + res.berichten[i].sort_order + '</span>'
                     });
                     popupHTML = "<h3 class='custom-marker-title'>" + res.berichten[i].title + "</h3>";
-                    popupHTML += "<a href='#' data-js-click='loadBericht' data-day='"+ day +"' data-bericht-id='"+ res.berichten[i].id + "' class='custom-marker-link'>details</a>";
+                    popupHTML += "<a href='/bericht/" + res.berichten[i].id + "' data-js-click='loadBericht' data-bericht-id='"+ res.berichten[i].id + "' class='custom-marker-link'>details</a>";
                     markerArray.push(L.marker([res.berichten[i].location_lat, res.berichten[i].location_lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
                 }
             }
@@ -301,31 +303,39 @@ function createMap (el, lat, lon, zoom) {
     return newMap;
 }
 
+function repositionMap (lat, lng) {
+    var markerBounds = L.latLngBounds( [ lat, lng ]);
+    tbmap.fitBounds(markerBounds);
+}
+
 function updateMap (el) {
 
-    var lat = el.getAttribute('data-center-lat');
-    var lon = el.getAttribute('data-center-lon');
+    var centerLat = el.getAttribute('data-center-lat');
+    var centerLng = el.getAttribute('data-center-lng');
     var zoom = el.getAttribute('data-zoom');
 
     if (!tbmap) {
-        tbmap = createMap(el, lat, lon, zoom);
+        tbmap = createMap(el, centerLat, centerLng, zoom);
         tbmap.scrollWheelZoom.disable();
         addCurrentLocation(tbmap);
     }
 
     var activateLayersString = el.getAttribute('data-activate-layers');
-    var activateLayers = activateLayersString.split(",");
 
-    //mapLayers = []; // reset all layers
-    var layers = document.querySelectorAll('[data-layer]');
-    for (var i = 0; i < layers.length; i++) {
-        currentLayerId = layers[i].getAttribute('data-layer');
-        if (activateLayers.indexOf(currentLayerId) !== -1) {
-            layers[i].classList.add('-active');
-            addLayer(currentLayerId);
-        } else {
-            layers[i].classList.remove('-active');
-            removeLayer(currentLayerId);
+    if ( activateLayersString ) {
+        var activateLayers = activateLayersString.split(",");
+
+        //mapLayers = []; // reset all layers
+        var layers = document.querySelectorAll('[data-layer]');
+        for (var i = 0; i < layers.length; i++) {
+            currentLayerId = layers[i].getAttribute('data-layer');
+            if (activateLayers.indexOf(currentLayerId) !== -1) {
+                layers[i].classList.add('-active');
+                addLayer(currentLayerId);
+            } else {
+                layers[i].classList.remove('-active');
+                removeLayer(currentLayerId);
+            }
         }
     }
 }
@@ -339,30 +349,58 @@ function navBerichten (el) {
     var currentNav = document.querySelector('[data-navigation-bar] .-active');
     currentNav.classList.remove('-active');
     el.classList.add('-active');
+    history.pushState(null, 'Berichten', '/');
+
+    var pageContentOrder = document.querySelector('[data-page-content-order]');
+    pageContentOrder.classList.remove('-reverse');
 
     var mapView = document.querySelector('[data-mapview]');
     mapView.setAttribute('data-activate-layers', 'berichten');
     updateMap(mapView);
+
+    var infoPanel = document.querySelector('[data-infopanel]');
+
+    var dayEl = document.querySelector('[data-day]');
+    var day = dayEl.getAttribute('data-day');
+
+    infoPanel.setAttribute('data-infopanel-url', day + '?partial=panel');
+    loadInfopanel(infoPanel);
 }
 
 function navHaltesParkeren (el) {
     var currentNav = document.querySelector('[data-navigation-bar] .-active');
     currentNav.classList.remove('-active');
     el.classList.add('-active');
+    history.pushState(null, 'Haltes & Parkeren', '/haltes-parkeerplaatsen');
+
+    var pageContentOrder = document.querySelector('[data-page-content-order]');
+    pageContentOrder.classList.add('-reverse');
 
     var mapView = document.querySelector('[data-mapview]');
     mapView.setAttribute('data-activate-layers', 'haltes,parkeren');
     updateMap(mapView);
+
+    var infoPanel = document.querySelector('[data-infopanel]');
+    infoPanel.setAttribute('data-infopanel-url', '/haltes-parkeerplaatsen?partial=panel');
+    loadInfopanel(infoPanel);
 }
 
 function navRoutes (el) {
     var currentNav = document.querySelector('[data-navigation-bar] .-active');
     currentNav.classList.remove('-active');
     el.classList.add('-active');
+    history.pushState(null, 'Route informatie', '/routes');
+
+    var pageContentOrder = document.querySelector('[data-page-content-order]');
+    pageContentOrder.classList.add('-reverse');
 
     var mapView = document.querySelector('[data-mapview]');
     mapView.setAttribute('data-activate-layers', 'doorrijhoogtes,aanbevolenroutes,verplichteroutes,bestemmingsverkeer');
     updateMap(mapView);
+
+    var infoPanel = document.querySelector('[data-infopanel]');
+    infoPanel.setAttribute('data-infopanel-url', '/routes?partial=panel');
+    loadInfopanel(infoPanel);
 }
 
 /////////////////
@@ -437,9 +475,11 @@ function loadInfopanel (el) {
 function loadBericht (el) {
     var infoPanel = document.querySelector('[data-infopanel]');
     var bericht = el.getAttribute('data-bericht-id');
-    var day = el.getAttribute('data-day');
 
-    infoPanel.setAttribute('data-infopanel-url', '/partial/message-detail' + day + '/bericht/' + bericht);
+    var dayEl = document.querySelector('[data-day]');
+    var day = dayEl.getAttribute('data-day');
+
+    infoPanel.setAttribute('data-infopanel-url', '/bericht/' + bericht + day);
     loadInfopanel(infoPanel);
 }
 
@@ -511,6 +551,11 @@ function run () {
             }
         }
     });
+
+    // Refresh on back button
+    window.onpopstate = function(e) {
+        window.location = document.location;
+    };
 
 }
 

@@ -1,0 +1,18 @@
+.routes-overview {
+    padding: 15px;
+    //display: none;
+}
+
+.routes-overview-title {
+    @include text-title-lg;
+}
+
+.routes-overview-text {
+    @include text-body;
+    margin-top: 5px;
+}
+
+.routes-overview-hr {
+    @include hr;
+    margin-top: $spacing;
+}
