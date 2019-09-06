@@ -62,6 +62,22 @@ $app->get('/dump-translations', function () use ($app) {
 });
 
 /**
+ * Return translations
+ */
+$app->get('/json/translations.json', function () use ($app) {
+    header('Content-Type: application/json');
+    readfile(__DIR__."/../translations/translations.json");
+    die;
+    $translationsJson = file_get_contents("../app/translations/translations.json");
+
+    // Fixes UTF-8 conversion issues.
+    $translationsJson =  mb_convert_encoding($translationsJson, 'UTF-8', mb_detect_encoding($translationsJson, 'UTF-8, ISO-8859-1', true));
+
+    header("Content-type: application/json");
+    die($translationsJson);
+});
+
+/**
  * Returns days with message startDate in given month
  */
 $app->get('/calendar-highlights/:y/:m', function ($y, $m) use ($app) {

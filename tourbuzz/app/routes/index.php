@@ -202,6 +202,43 @@ $app->get('/json/message-overview/:y/:m/:d', function ($y, $m, $d) use ($app, $a
 
 });
 
+
+$app->get('/widget', function () use ($app, $analytics, $image_api) {
+
+    $y = date('Y');
+    $m = date('m');
+    $d = date('d');
+
+    $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
+
+    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
+
+    $loopIndex = 1;
+    foreach ($berichten as &$bericht) {
+        $bericht['sort_order'] = $loopIndex;
+        $loopIndex++;
+    }
+
+    $data = [
+        "berichten" => $berichten,
+        "lang" => $_SESSION['lang'],
+        "image_api" => $image_api,
+        "adamlogo" => true,
+        "analytics" => $analytics,
+        "date_picker" => [],
+        "template" => "web/message-widget.twig"
+    ];
+
+    render($data['template'], $data);
+
+});
+
 /**
  * Overview of routes for coaches
  */
