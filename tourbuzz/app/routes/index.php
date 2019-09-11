@@ -236,9 +236,8 @@ $app->get('/widget', function () use ($app, $analytics, $image_api) {
     ];
 
     $app->response->headers->set('X-Frame-Options', 'allow-from https://amsterdam.nl/');
-    $app->response->headers->set('Content-Security-Policy', 'frame-ancestors https://amsterdam.nl/');
+    $app->response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://*.amsterdam.nl/ https://*.bma-collective.com/");
     render($data['template'], $data);
-
 });
 
 /**
