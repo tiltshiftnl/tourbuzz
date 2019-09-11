@@ -235,8 +235,8 @@ $app->get('/widget', function () use ($app, $analytics, $image_api) {
         "template" => "web/message-widget.twig"
     ];
 
-    $app->response->headers->set('X-Frame-Options', 'allow-from https://amsterdam.nl');
-    $app->response->headers->set('Content-Security-Policy', 'frame-ancestors https://amsterdam.nl');
+    $app->response->headers->set('X-Frame-Options', 'allow-from https://amsterdam.nl/');
+    $app->response->headers->set('Content-Security-Policy', 'frame-ancestors https://amsterdam.nl/');
     render($data['template'], $data);
 
 });
