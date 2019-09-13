@@ -114,6 +114,8 @@ function addCurrentLocation (targetMap) {
 function addBerichten (targetMap) {
     var dayEl = document.querySelector('[data-day]');
     var day = dayEl.getAttribute('data-day');
+    var mapviewEl = document.querySelector('[data-mapview]');
+    var embedded = mapviewEl.getAttribute('data-embedded');
     var dataUrl = '/json/message-overview' + day;
 
     axios.get(dataUrl)
@@ -130,7 +132,11 @@ function addBerichten (targetMap) {
                         html: '<span>' + res.berichten[i].sort_order + '</span>'
                     });
                     popupHTML = "<h3 class='custom-marker-title'>" + res.berichten[i].title + "</h3>";
-                    popupHTML += "<a href='/bericht/" + res.berichten[i].id + "' data-js-click='loadBericht' data-bericht-id='"+ res.berichten[i].id + "' class='custom-marker-link'>details</a>";
+                    if (embedded == 1) {
+                        popupHTML += "<a href='https://www.tourbuzz.nl/bericht/" + res.berichten[i].id + "' class='custom-marker-link' target='_blank'>details</a>";
+                    } else {
+                        popupHTML += "<a href='/bericht/" + res.berichten[i].id + "' data-js-click='loadBericht' data-bericht-id='"+ res.berichten[i].id + "' class='custom-marker-link'>details</a>";
+                    }
                     markerArray.push(L.marker([res.berichten[i].location_lat, res.berichten[i].location_lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
                 }
             }
@@ -141,6 +147,8 @@ function addBerichten (targetMap) {
 
 function addHaltes (targetMap) {
     var dataUrl = 'https://api.tourbuzz.nl/haltes';
+    var mapviewEl = document.querySelector('[data-mapview]');
+    var embedded = mapviewEl.getAttribute('data-embedded');
     axios.get(dataUrl)
         .then(function (response) {
             res = response.data;
@@ -156,7 +164,11 @@ function addHaltes (targetMap) {
                 popupHTML = "<h3 class='custom-marker-title'>" + res.haltes[i].haltenummer + " " + res.haltes[i].straat + "</h3>";
                 popupHTML += "<div class='custom-marker-badge'>" + res.haltes[i].capaciteit + " plaatsen</div>";
                 popupHTML += "<p class='custom-marker-text'>" + res.haltes[i].locatie + "</p>";
-                popupHTML += "<a href='#' class='custom-marker-link' data-js-click='loadHalte' data-halte='"+ res.haltes[i].haltenummer +"'>details</a>";
+                if (embedded == 1) {
+                    popupHTML += "<a href='https://www.tourbuzz.nl/haltes/" + res.haltes[i].haltenummer + "' class='custom-marker-link' target='_blank'>details</a>";
+                } else {
+                    popupHTML += "<a href='#' class='custom-marker-link' data-js-click='loadHalte' data-halte='"+ res.haltes[i].haltenummer +"'>details</a>";
+                }
                 markerArray.push(L.marker([res.haltes[i].location.lat, res.haltes[i].location.lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
             }
             mapLayers['haltes'] = L.featureGroup(markerArray).addTo(targetMap);
@@ -166,6 +178,8 @@ function addHaltes (targetMap) {
 
 function addParkeren (targetMap) {
     var dataUrl = 'https://api.tourbuzz.nl/parkeerplaatsen';
+    var mapviewEl = document.querySelector('[data-mapview]');
+    var embedded = mapviewEl.getAttribute('data-embedded');
     axios.get(dataUrl)
         .then(function (response) {
             res = response.data;
@@ -181,7 +195,11 @@ function addParkeren (targetMap) {
                 popupHTML = "<h3 class='custom-marker-title'>" + res.parkeerplaatsen[i].nummer + " " + res.parkeerplaatsen[i].naam + "</h3>";
                 popupHTML += "<div class='custom-marker-badge'>" + res.parkeerplaatsen[i].capaciteit + " plaatsen</div>";
                 popupHTML += "<p class='custom-marker-text'>" + res.parkeerplaatsen[i]._origineel.Bijzonderheden + "</p>";
-                popupHTML += "<a href='#' class='custom-marker-link' data-js-click='loadParkeerplaats' data-parkeerplaats='"+ res.parkeerplaatsen[i].nummer +"'>details</a>";
+                if (embedded == 1) {
+                    popupHTML += "<a href='https://www.tourbuzz.nl/parkeerplaatsen/" + res.parkeerplaatsen[i].nummer + "' class='custom-marker-link' target='_blank'>details</a>";
+                } else {
+                    popupHTML += "<a href='#' class='custom-marker-link' data-js-click='loadParkeerplaats' data-parkeerplaats='"+ res.parkeerplaatsen[i].nummer +"'>details</a>";
+                }
                 markerArray.push(L.marker([res.parkeerplaatsen[i].location.lat, res.parkeerplaatsen[i].location.lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
             }
             mapLayers['parkeren'] = L.featureGroup(markerArray).addTo(targetMap);
@@ -508,15 +526,14 @@ function loadPanoThumbnail (el) {
         });
 }
 
-/////////////////////
-// Language switch //
-/////////////////////
+//////////////
+// Language //
+//////////////
 
 function toggleLanguageSwitch (el) {
     var langSwitch = document.querySelector('[data-lang-switch]');
     langSwitch.classList.toggle('-active');
 }
-
 
 //////////
 // Run //

@@ -28,7 +28,7 @@
                               data-center-lat="{{ center_lat }}"
                               data-center-lng="{{ center_lng }}"
                               data-zoom="{{ zoom }}"
-                              OLD-data-mapview-day="/{{ Y }}/{{ m }}/{{ d }}">
+                              data-embedded="{{ embedded|default(0) }}">
                         </div>
                         <div class="tourbuzz-map-container -layers-legend">
                             {% include 'web/partials/layers-legend.twig' with layers_legend %}

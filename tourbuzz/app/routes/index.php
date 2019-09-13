@@ -240,6 +240,54 @@ $app->get('/widget', function () use ($app, $analytics, $image_api) {
     render($data['template'], $data);
 });
 
+
+$app->get('/embed/map', function () use ($app, $analytics, $image_api) {
+
+    $y = date('Y');
+    $m = date('m');
+    $d = date('d');
+
+    $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
+
+    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
+
+    $loopIndex = 1;
+    foreach ($berichten as &$bericht) {
+        $bericht['sort_order'] = $loopIndex;
+        $loopIndex++;
+    }
+
+    $data = [
+        "berichten" => $berichten,
+        "lang" => $_SESSION['lang'],
+        "image_api" => $image_api,
+        "adamlogo" => true,
+        "analytics" => $analytics,
+        "date_picker" => [],
+        "layers_legend" => getData('layer_list.json'),
+        "infopanel_url" => "/{$y}/{$m}/{$d}?partial=panel",
+        "activatelayers" => "berichten",
+        "d" => $d,
+        "m" => $m,
+        "Y" => $y,
+        "embedded" => 1,
+        "center_lat" => 52.372981,
+        "center_lng" => 4.901327,
+        "zoom" => 16,
+        "template" => "web/embed-map.twig"
+    ];
+
+    $app->response->headers->set('X-Frame-Options', 'allow-from https://amsterdam.nl/');
+    $app->response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://*.amsterdam.nl/ https://*.bma-collective.com/");
+    render($data['template'], $data);
+});
+
 /**
  * Overview of routes for coaches
  */
