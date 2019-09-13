@@ -344,6 +344,19 @@ $app->get('/rss', function () use ($app) {
     render("rss.twig", $data, ["Content-type" => "application/xml"]);
 });
 
+/**
+ * Health check
+ */
+$app->get('/status/health', function () use ($app) {
+    die("Works!");
+});
+
+/**
+ * Health check - alternative
+ */
+$app->get('/haltes', function () use ($app) {
+    die("Works!");
+});
 
 /**
  * Offline version
