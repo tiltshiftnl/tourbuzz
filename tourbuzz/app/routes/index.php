@@ -348,6 +348,7 @@ $app->get('/rss', function () use ($app) {
  * Health check
  */
 $app->get('/status/health', function () use ($app) {
+    header("HTTP/1.1 200 OK");
     die("Works!");
 });
 
@@ -355,6 +356,7 @@ $app->get('/status/health', function () use ($app) {
  * Health check - alternative
  */
 $app->get('/haltes', function () use ($app) {
+    header("HTTP/1.1 200 OK");
     die("Works!");
 });
 
