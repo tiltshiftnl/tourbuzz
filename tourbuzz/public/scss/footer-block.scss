@@ -1,0 +1,65 @@
+.footer-block {
+}
+
+.footer-block-main {
+    padding-top: 2 * $spacing;
+    background: $Neutral-Grey1;
+    padding-bottom: 2 * $spacing;
+}
+
+.footer-block-wrapper {
+    @include grid-wrapper;
+    @media only screen and (min-width: 640px) {
+        flex-direction: row;
+    }
+}
+
+.footer-block-container {
+    margin-bottom: $spacing;
+    @media only screen and (min-width: 640px) {
+        width: 25%;
+        padding-right: 2 * $spacing;
+    }
+}
+
+.footer-block-title {
+    @include text-title;
+    margin-bottom: 3px;
+}
+
+.footer-block-text {
+    @include text-body;
+    margin-bottom: $spacing;
+}
+
+.footer-block-text-link {
+    text-decoration: underline;
+}
+
+.footer-block-link {
+    @include text-body;
+    display: block;
+    background-image: url(/img/icons/chevron-right.svg);
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: 5px;
+    padding-left: 12px;
+    margin-bottom: 3px;
+}
+
+.footer-block-arrow {
+    display: inline-block;
+    width: 5px;
+    margin-right: 5px;
+}
+
+.footer-block-sub {
+    padding-top: $spacing;
+    background: #fff;
+    padding-bottom: $spacing;
+}
+
+.footer-block-sub-link {
+    @include text-body;
+    margin-right: 15px;
+}

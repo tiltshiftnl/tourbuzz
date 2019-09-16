@@ -1,0 +1,19 @@
+.navigation-bar {
+    background: $Neutral-Grey1;
+    padding: $spacing;
+}
+
+.navigation-bar-wrapper {
+    //.grid-wrapper;
+    display: flex;
+}
+
+.navigation-bar-link {
+    @include text-body;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navigation-bar-link.-active {
+    border-bottom: 3px solid $Neutral-Grey3;
+}

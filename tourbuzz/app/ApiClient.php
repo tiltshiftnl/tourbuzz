@@ -6,15 +6,24 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Exception\BadResponseException;
+use Psr\Log\LoggerInterface;
 
 class ApiClient {
+    /**
+     * @var \GuzzleHttp\Client
+     */
     private $_guzzle;
     private $_apiRoot;
     private $_token;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
-    public function __construct($url) {
+    public function __construct($url, LoggerInterface $logger) {
         $this->_guzzle = new \GuzzleHttp\Client();
         $this->_apiRoot = $url;
+        $this->logger = $logger;
     }
 
     public function setToken($token) {
@@ -33,11 +42,21 @@ class ApiClient {
         }
 
         try {
+            /* @var $res \Psr\Http\Message\ResponseInterface */
             $res = $this->_guzzle->request('GET', $requestUri, [
                 'http_errors' => false
             ]);
-        } catch (BadResponseException $exception) {
-            return null;
+            if ($res->getStatusCode() >= 500) {
+                $this->logger->error('Error response from tourbuzz API', ['method' => 'GET', 'uri' => $uri, 'status_code' => $res->getStatusCode()]);
+            }
+        } catch (\Exception $e) {
+            $this->logger->error('Exception while loading info from tourbuzz API', [
+                'exception' => get_class($e),
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ]);
         }
 
         return new ApiResponse($res);
@@ -55,8 +74,17 @@ class ApiClient {
                 'form_params' => $fields,
                 'http_errors' => false
             ]);
-        } catch (BadResponseException $exception) {
-            return null;
+            if ($res->getStatusCode() >= 500) {
+                $this->logger->error('Error response from tourbuzz API', ['method' => 'POST', 'uri' => $uri, 'status_code' => $res->getStatusCode()]);
+            }
+        } catch (\Exception $e) {
+            $this->logger->error('Exception while loading info from tourbuzz API', [
+                'exception' => get_class($e),
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ]);
         }
 
         return new ApiResponse($res);
@@ -74,8 +102,17 @@ class ApiClient {
                 'form_params' => $fields,
                 'http_errors' => false
             ]);
-        } catch (BadResponseException $exception) {
-            return null;
+            if ($res->getStatusCode() >= 500) {
+                $this->logger->error('Error response from tourbuzz API', ['method' => 'PUT', 'uri' => $uri, 'status_code' => $res->getStatusCode()]);
+            }
+        } catch (\Exception $e) {
+            $this->logger->error('Exception while loading info from tourbuzz API', [
+                'exception' => get_class($e),
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ]);
         }
 
         return new ApiResponse($res);
@@ -93,8 +130,17 @@ class ApiClient {
                 'form_params' => $fields,
                 'http_errors' => false
             ]);
-        } catch (BadResponseException $exception) {
-            return null;
+            if ($res->getStatusCode() >= 500) {
+                $this->logger->error('Error response from tourbuzz API', ['method' => 'DELETE', 'uri' => $uri, 'status_code' => $res->getStatusCode()]);
+            }
+        } catch (\Exception $e) {
+            $this->logger->error('Exception while loading info from tourbuzz API', [
+                'exception' => get_class($e),
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ]);
         }
 
         return new ApiResponse($res);
@@ -119,9 +165,18 @@ class ApiClient {
         }
 
         try {
-            $this->_guzzle->request('DELETE', $requestUri);
-        } catch (BadResponseException $exception) {
-            return null;
+            $res = $this->_guzzle->request('DELETE', $requestUri);
+            if ($res->getStatusCode() >= 500) {
+                $this->logger->error('Error response from tourbuzz API', ['method' => 'DELETE', 'uri' => $uri, 'status_code' => $res->getStatusCode()]);
+            }
+        } catch (Exception $e) {
+            $this->logger->error('Exception while loading info from tourbuzz API', [
+                'exception' => get_class($e),
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ]);
         }
 
         return true;

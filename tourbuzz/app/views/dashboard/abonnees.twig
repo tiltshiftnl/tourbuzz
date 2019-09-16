@@ -32,6 +32,7 @@
                 <th>Naam</th>
                 <th>Organisatie</th>
                 {#<th>Taal</th>#}
+                <th>Datum aanmelding</th>
                 <th>Bevestigd</th>
             </tr>
             {% for record in abonnees %}
@@ -39,6 +40,7 @@
                 <td>{{ record.mail }}</td>
                 <td>{{ record.name }}</td>
                 <td>{{ record.organisation }}</td>
+                <td>{% if record.created is not null %}{{ record.created.date|date('d-m-Y') }} om {{ record.created.date|date('H:i') }}{% endif %}</td>
                 {#<td>{{ record.language }}</td>#}
                 <td>{% if record.confirmed is not null %}{{ record.confirmed.date|date('d-m-Y') }} om {{ record.confirmed.date|date('H:i') }}{% endif %}</td>
             </tr>

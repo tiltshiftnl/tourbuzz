@@ -1,0 +1,66 @@
+.sms-alerts {
+    min-height: 80vh;
+}
+
+.sms-alerts-container {
+    padding-top: $spacing;
+    padding-bottom: $spacing;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sms-alerts-wrapper {
+    @include grid-wrapper;
+    justify-content: center;
+}
+
+.sms-alerts-header {
+    padding-top:  $spacing;
+    padding-bottom: 2 * $spacing;
+}
+
+.sms-alerts-title {
+    @include text-title-lg;
+    margin-bottom: $mini-spacing;
+}
+
+.sms-alerts-intro {
+    @include text-body;
+   // margin-bottom: $spacing;
+}
+
+.sms-alerts-form {
+    @include form;
+    margin-bottom: $spacing;
+}
+
+.sms-alerts-form-row {
+    @include form-row;
+}
+
+.sms-alerts-label {
+    @include form-label;
+}
+
+.sms-alerts-input {
+    @include form-input-text;
+}
+
+.sms-alerts-button {
+    @include button-red;
+}
+
+.sms-alerts-note {
+    @include text-note;
+    margin-top: $spacing;
+}
+
+.sms-alerts-unsubscribe {
+    @include text-body;
+    padding-top: 2 * $spacing;
+}
+
+.sms-alerts-unsubscribe a {
+    text-decoration: underline;
+}

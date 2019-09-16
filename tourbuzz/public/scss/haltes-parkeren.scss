@@ -1,0 +1,21 @@
+.haltes-parkeren {
+    padding: 15px;
+}
+
+.haltes-parkeren-list {
+    margin-bottom: 4 * $spacing;
+}
+
+.haltes-parkeren-title {
+    @include text-title-lg;
+}
+
+.haltes-parkeren-text {
+    @include text-body;
+    margin-top: 5px;
+}
+
+.haltes-parkeren-hr {
+    @include hr;
+    margin-top: $spacing;
+}

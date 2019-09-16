@@ -100,6 +100,7 @@ $app->get('/dashboard/abonnees', function () use ($app) {
         "nummers" => $nummers,
         "username" => $_SESSION['username'],
         "activetab" => "abonnees",
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "dashboard/abonnees.twig",
     ];
 
@@ -131,6 +132,7 @@ $app->get('/dashboard/accounts', function () use ($app) {
         "accounts" => $accounts,
         "username" => $_SESSION['username'],
         "activetab" => "accounts",
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "dashboard/accounts.twig",
     ];
 
@@ -184,6 +186,7 @@ $app->get('/dashboard/accounts/:slug', function ($slug) use ($app) {
         "account" => $account,
         "username" => $_SESSION['username'],
         "activetab" => "accounts",
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "dashboard/account-bewerken.twig",
     ];
 
@@ -276,6 +279,7 @@ $app->get('/dashboard/berichten', function () use ($app, $image_api) {
         "username" => $_SESSION['username'],
         "activetab" => "berichten",
         "token" => $_SESSION['auth_token'],
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -312,7 +316,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
       	'sms_nl' => $app->request->post('sms_nl'),
       	'sms_en' => $app->request->post('sms_en'),
       	'sms_de' => $app->request->post('sms_de'),
-        'sms_es' => $app->request->post('sms_es'),        
+        'sms_es' => $app->request->post('sms_es'),
     );
 
     // If not "dupliceren", then use the available id (if set) to update existing message.
@@ -339,6 +343,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
             "bericht" => $fields,
             "image_api" => $image_api,
             "username" => $_SESSION['username'],
+            "apikey" => getenv('GOOGLEMAPS_API_KEY'),
             "template" => "dashboard/berichten.twig",
             "activetab" => "berichten",
             "show_form" => true,
@@ -403,6 +408,7 @@ $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
         "image_api" => $image_api,
         "username" => $_SESSION['username'],
         "activetab" => "berichten",
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "dashboard/berichten.twig",
     ];
 
@@ -434,7 +440,7 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
  * Mapping parkeerplaatsen.
  */
 $app->get('/dashboard/mapping-parkeren', function () use ($app) {
-   
+
    if ( empty($_SESSION['username']) ) {
         $_SESSION['redirect_url'] = "/dashboard/berichten/{$id}";
         $app->flash('error', 'Eerst inloggen');
@@ -453,6 +459,7 @@ $app->get('/dashboard/mapping-parkeren', function () use ($app) {
         "vialis" => $vialis,
         "username" => $_SESSION['username'],
         "activetab" => "mapping-parkeren",
+        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "template" => "dashboard/mapping-parkeren.twig",
     ];
 
@@ -464,7 +471,7 @@ $app->get('/dashboard/mapping-parkeren', function () use ($app) {
  * Mapping parkeerplaatsen post.
  */
 $app->post('/dashboard/mapping-parkeren', function () use ($app) {
-   
+
     $apiResponse = $app->api->get("parkeerplaatsen");
     $parkeerplaatsen = $apiResponse->body['parkeerplaatsen'];
 
@@ -474,7 +481,7 @@ $app->post('/dashboard/mapping-parkeren', function () use ($app) {
     $vialis = $apiResponse->body;
 
     foreach ($parkeerplaatsen as $parkeerplaats) {
-        
+
         if ( !empty($app->request->post($parkeerplaats['nummer'])) ) {
             $vialis_id = $app->request->post($parkeerplaats['nummer']);
         } else {
@@ -485,7 +492,7 @@ $app->post('/dashboard/mapping-parkeren', function () use ($app) {
             'parkeerplaats' => $parkeerplaats['nummer'],
             'id' => $vialis_id
         );
-        $app->api->setToken($token);        
+        $app->api->setToken($token);
         $apiResponse = $app->api->post("vialis", $fields);
     }
 

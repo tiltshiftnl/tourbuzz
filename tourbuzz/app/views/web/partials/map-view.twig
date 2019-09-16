@@ -1,0 +1,10 @@
+<section class="map-view" data-activate-layers="{{ layers|join(',') }}">
+    <div class="map-view-leaflet-zone">
+        <div class="map-view-leaflet-container" data-js-ready="startMap">
+            {% include 'web/partials/loading-indicator.twig' %}
+        </div>
+        <div class="map-view-container -layers-legend">
+            {% include 'web/partials/layers-legend.twig' with layers_legend %}
+        </div>
+    </div>
+</section>

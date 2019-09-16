@@ -24,15 +24,27 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
 
     list($d) = explode('?', $d);
 
+    $status = ''; // if api call fails, set message
     $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
-    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
-        return !empty($bericht['is_live']);
-    });
+    if ($apiResponse->statusCode == 200) {
+        $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
+            return !empty($bericht['is_live']);
+        });
+    } else {
+        $berichten = [];
+        $status = 'UNAVAILABLE';
+    }
 
     usort($berichten, function ($b1, $b2) {
         return $b1['important'] < $b2['important'];
     });
+
+    $loopIndex = 1;
+    foreach ($berichten as &$bericht) {
+        $bericht['sort_order'] = $loopIndex;
+        $loopIndex++;
+    }
 
     $N = date('N', strtotime("{$y}-{$m}-{$d}"));
     $j = date('j', strtotime("{$y}-{$m}-{$d}"));
@@ -49,20 +61,13 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "lng" => 4.901327,
     ];
 
-    $mapOptions = [
-        "width" => 420,
-        "height" => 350,
-        "zoom" => 12, // Google Maps zoom level.
-        "scale" => 2, // Double resolution for retina display.
-        "center" => $center,
-    ];
-
-    $berichten = locationItemsToMap($berichten, $mapOptions, false);
+    //$berichten = locationItemsToMap($berichten, $mapOptions, false);
 
     $data = [
         "activetab" => "berichten",
         "lang" => $_SESSION['lang'],
         "berichten" => $berichten,
+        "status" => $status,
         "datestring" => "{$y}-{$m}-{$d}",
         "dag" => $dag,
         "j" => $j,
@@ -70,21 +75,109 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "m" => $m,
         "Y" => $y,
         "image_api" => $image_api,
-        "map" => $mapOptions,
         "adamlogo" => true,
         "analytics" => $analytics,
-        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
-        "template" => "home.twig"
+        "date_picker" => [],
+        "layers_legend" => getData('layer_list.json'),
+        "infopanel_url" => "/{$y}/{$m}/{$d}?partial=panel",
+        "activatelayers" => "berichten",
+        "center_lat" => 52.372981,
+        "center_lng" => 4.901327,
+        "zoom" => 16,
+        "template" => "web/tourbuzz-map.twig"
     ];
+
+    if (isset($_REQUEST['partial'])) {
+        $data["template"] = "web/partials/message-overview.twig";
+    }
 
     render($data['template'], $data);
 });
 
 
 /**
- * Details slider of messages for a single day.
+ * Single message (bericht).
  */
-$app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $image_api) {
+$app->get('/bericht/:id(/:Y/:m/:d)', function ($id, $Y = NULL, $m = NULL, $d = NULL) use ($app, $analytics, $image_api) {
+
+    $apiResponse = $app->api->get("berichten/{$id}");
+    $bericht = $apiResponse->body;
+
+    if ($bericht['is_live']) {
+
+        // Use startdate of message to initialise messages on map
+        if (empty($Y)) {
+            $datestring = $bericht['startdate'];
+            $dateParts = explode("-", $datestring);
+            $Y = $dateParts[0];
+            $m = $dateParts[1];
+            $d = $dateParts[2];
+        } else {
+            $datestring = $Y."-".$m."-".$d;
+        }
+
+        // Determine the id corresponding to the messages on that day
+        $apiResponse = $app->api->get("berichten/{$Y}/{$m}/{$d}");
+
+        if ($apiResponse->statusCode == 200) {
+            $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
+                return !empty($bericht['is_live']);
+            });
+        } else {
+            $berichten = [];
+            $status = 'UNAVAILABLE';
+        }
+
+        usort($berichten, function ($b1, $b2) {
+            return $b1['important'] < $b2['important'];
+        });
+
+        $sortOrder = 1;
+        $loopIndex = 1;
+        foreach ($berichten as $item) {
+            if ($item['id'] == $bericht['id']) {
+                $sortOrder = $loopIndex;
+            }
+            $loopIndex++;
+        }
+
+        $data = [
+            "lang" => "nl",
+            "bericht" => $bericht,
+            "sort_order" => $sortOrder,
+            "analytics" => $analytics,
+            "datestring" => $datestring,
+            //"j" => date('j'),
+            "d" => $d,
+            "m" => $m,
+            "Y" => $Y,
+            "center_lat" => 52.372981,
+            "center_lng" => 4.901327,
+            "zoom" => 16,
+            "date_picker" => [],
+            "image_api" => $image_api,
+            "layers_legend" => getData('layer_list.json'),
+            "infopanel_url" => "/bericht/{$id}/{$Y}/{$m}/{$d}?partial=panel",
+            "activatelayers" => "berichten",
+            "template" => "web/tourbuzz-map.twig",
+        ];
+
+        if (isset($_REQUEST['partial'])) {
+            $data["template"] = "web/partials/message-detail.twig";
+        }
+
+    } else {
+        $app->flashNow('error', 'Dit bericht is niet gepubliceerd');
+        $data = [
+            "template" => "bericht-not-live.twig",
+        ];
+    }
+
+    render($data["template"], $data);
+});
+
+
+$app->get('/json/message-overview/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) {
 
     $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
@@ -96,85 +189,21 @@ $app->get('/:y/:m/:d/details', function ($y, $m, $d) use ($app, $analytics, $ima
         return $b1['important'] < $b2['important'];
     });
 
-    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
-
-    $day = array(
-        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
-    );
-
-    $dag = translate($day[(int)$N - 1]);
-
-    $mapOptions = [];
-
+    $loopIndex = 1;
     foreach ($berichten as &$bericht) {
-        if ( !empty($bericht['location']) ) {
-            $center = $bericht['location'];
-
-            $mapOptions = [
-                "width" => 420,
-                "height" => 350,
-                "zoom" => 15, // Googme Maps zoom level.
-                "scale" => 2, // Double resolution for retina display.
-                "center" => $center,
-            ];
-
-            $bericht['map'] = $mapOptions;
-            $bericht['rel_loc'] = array(
-                'dX' => 50,
-                'dY' => 50
-            );
-        }
+        $bericht['sort_order'] = $loopIndex;
+        $loopIndex++;
     }
 
-    $data = [
-        "activetab" => "berichten",
-        "lang" => $_SESSION['lang'],
-        "berichten" => $berichten,
-        "datestring" => "{$y}-{$m}-{$d}",
-        "dag" => $dag,
-        "j" => date('j'),
-        "d" => $d,
-        "m" => $m,
-        "Y" => $y,
-        "image_api" => $image_api,
-        "map" => $mapOptions,
-        "analytics" => $analytics,
-        "apikey" => getenv('GOOGLEMAPS_API_KEY'),
-        "template" => "details.twig",
-    ];
+    $output = [];
+    $output['berichten'] = $berichten;
+    header('Content-Type: application/json');
+    die(json_encode($output));
 
-    render($data['template'], $data);
 });
 
 
-/**
- * Single message (bericht).
- */
-$app->get('/bericht/:id', function ($id) use ($app, $analytics) {
-
-    $apiResponse = $app->api->get("berichten/{$id}");
-    $bericht = $apiResponse->body;
-
-    if ($bericht['is_live']) {
-        $data = [
-            "bericht" => $bericht,
-            "analytics" => $analytics,
-            "template" => "bericht.twig",
-        ];
-    } else {
-        $app->flashNow('error', 'Dit bericht is niet gepubliceerd');
-        $data = [
-            "template" => "bericht-not-live.twig",
-        ];
-    }
-
-    render($data["template"], $data);
-});
-
-/**
- * Widget
- */
-$app->get('/widget', function () use ($app) {
+$app->get('/widget', function () use ($app, $analytics, $image_api) {
 
     $y = date('Y');
     $m = date('m');
@@ -190,26 +219,97 @@ $app->get('/widget', function () use ($app) {
         return $b1['important'] < $b2['important'];
     });
 
-    $N = date('N', strtotime("{$y}-{$m}-{$d}"));
-    $j = date('j', strtotime("{$y}-{$m}-{$d}"));
-
-    $day = array(
-        'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'
-    );
-
-    $dag = translate($day[(int)$N - 1]);
+    $loopIndex = 1;
+    foreach ($berichten as &$bericht) {
+        $bericht['sort_order'] = $loopIndex;
+        $loopIndex++;
+    }
 
     $data = [
-        "lang" => $_SESSION['lang'],
         "berichten" => $berichten,
-        "datestring" => "{$y}-{$m}-{$d}",
-        "dag" => $dag,
-        "j" => $j,
+        "lang" => $_SESSION['lang'],
+        "image_api" => $image_api,
+        "adamlogo" => true,
+        "analytics" => $analytics,
+        "date_picker" => [],
+        "template" => "web/message-widget.twig"
+    ];
+
+    $app->response->headers->set('X-Frame-Options', 'allow-from https://amsterdam.nl/');
+    $app->response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://*.amsterdam.nl/ https://*.bma-collective.com/");
+    render($data['template'], $data);
+});
+
+
+$app->get('/embed/map', function () use ($app, $analytics, $image_api) {
+
+    $y = date('Y');
+    $m = date('m');
+    $d = date('d');
+
+    $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
+
+    $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
+        return !empty($bericht['is_live']);
+    });
+
+    usort($berichten, function ($b1, $b2) {
+        return $b1['important'] < $b2['important'];
+    });
+
+    $loopIndex = 1;
+    foreach ($berichten as &$bericht) {
+        $bericht['sort_order'] = $loopIndex;
+        $loopIndex++;
+    }
+
+    $data = [
+        "berichten" => $berichten,
+        "lang" => $_SESSION['lang'],
+        "image_api" => $image_api,
+        "adamlogo" => true,
+        "analytics" => $analytics,
+        "date_picker" => [],
+        "layers_legend" => getData('layer_list.json'),
+        "infopanel_url" => "/{$y}/{$m}/{$d}?partial=panel",
+        "activatelayers" => "berichten",
         "d" => $d,
         "m" => $m,
         "Y" => $y,
-        "template" => "widget.twig"
+        "embedded" => 1,
+        "center_lat" => 52.372981,
+        "center_lng" => 4.901327,
+        "zoom" => 16,
+        "template" => "web/embed-map.twig"
     ];
+
+    $app->response->headers->set('X-Frame-Options', 'allow-from https://amsterdam.nl/');
+    $app->response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://*.amsterdam.nl/ https://*.bma-collective.com/");
+    render($data['template'], $data);
+});
+
+/**
+ * Overview of routes for coaches
+ */
+$app->get('/routes', function () use ($app, $analytics, $image_api) {
+
+    $data = [
+        "activetab" => "routes",
+        "lang" => $_SESSION['lang'],
+        "image_api" => $image_api,
+        "adamlogo" => true,
+        "analytics" => $analytics,
+        "date_picker" => [],
+        "layers_legend" => getData('layer_list.json'),
+        "infopanel_url" => "/routes?partial=panel",
+        "activatelayers" => "doorrijhoogtes,aanbevolenroutes,verplichteroutes,bestemmingsverkeer",
+        "panel_reverse_order" => true,
+        "template" => "web/tourbuzz-map.twig"
+    ];
+
+    if (isset($_REQUEST['partial'])) {
+        $data["template"] = "web/partials/routes-overview.twig";
+    }
 
     render($data['template'], $data);
 });
@@ -244,6 +344,21 @@ $app->get('/rss', function () use ($app) {
     render("rss.twig", $data, ["Content-type" => "application/xml"]);
 });
 
+/**
+ * Health check
+ */
+$app->get('/status/health', function () use ($app) {
+    header("HTTP/1.1 200 OK");
+    die("Works!");
+});
+
+/**
+ * Health check - alternative
+ */
+$app->get('/haltes', function () use ($app) {
+    header("HTTP/1.1 200 OK");
+    die("Works!");
+});
 
 /**
  * Offline version

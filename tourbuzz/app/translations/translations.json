@@ -203,6 +203,11 @@
         "de" : "Plätze",
         "es" : "cursos"
     },
+    "plaats(en)" : {
+        "en" : "spot(s)",
+        "de" : "Plätz(e)",
+        "es" : "lugar(es)"
+    },
     "Meer informatie" : {
         "en" : "More info",
         "de" : "Mehr info",
@@ -372,6 +377,70 @@
         "en" : "unknown",
         "de" : "unbekannt",
         "es" : "ignoto"
+    },
+    "Routes": {
+        "en" : "Routes",
+        "de" : "Routen",
+        "es" : "Rutas"
+    },
+    "Route informatie": {
+        "en" : "Route information",
+        "de" : "Routeninformationen",
+        "es" : "Información de la ruta"
+    },
+    "U bevindt zich hier": {
+        "en" : "You are here",
+        "de" : "Du bist hier",
+        "es" : "Tu estas aqui"
+    },
+    "Legenda": {
+        "en" : "Legend",
+        "es" : "Leyenda",
+        "de" : "Legende"
+    },
+    "Max doorrijhoogtes": {
+        "en" : "Max vehicle height",
+        "es" : "altura libre",
+        "de" : "Fahrhöhe"
+    },
+    "Bestemmingsverkeer": {
+        "en" : "Destination traffic",
+        "es" : "Tráfico de destino",
+        "de" : "Zielverkehr"
+    },
+    "Aanbevolen routes": {
+        "en" : "Recommended routes",
+        "es" : "Rutas recomendadas",
+        "de" : "Empfohlene Routen"
+    },
+    "Verplichte route (> 7,5t)": {
+        "en" : "Mandatory route (> 7.5t)",
+        "es" : "Ruta obligatoria (> 7,5t)",
+        "de" : "Obligatorische Route (> 7,5t)"
+    },
+    "Milieuzone": {
+        "en" : "Environmental zone",
+        "es" : "Zona ambiental",
+        "de" : "Umweltzone"
+    },
+    "Route informatie": {
+        "en" : "Route information",
+        "es" : "Información de la ruta",
+        "de" : "Routeninformationen"
+    },
+    "Weergave van de aanbevolen en verplichte routes voor touringcars. Let op de doorrijhoogtes.": {
+        "en" : "Display of the recommended and mandatory routes for coaches. Note the vehicle heights.",
+        "es" : "Visualización de las rutas recomendadas y obligatorias para autocares. Tenga en cuenta las alturas del paseo.",
+        "de" : "Anzeige der empfohlenen und obligatorischen Routen für Reisebusse. Beachten Sie die Fahrhöhen."
+    },
+    "Dagelijks overzicht van verkeershinder en omleidingen voor touringcarchauffeurs.": {
+        "en" : "Daily overview of traffic disruptions and diversions for coach drivers.",
+        "es" : "Resumen diario de interrupciones de tráfico y desvíos para conductores de autocares.",
+        "de" : "Täglicher Überblick über Verkehrsstörungen und Umleitungen für Busfahrer."
+    },
+    "Vragen en opmerkingen kunt u sturen naar touringcar@amsterdam.nl": {
+        "en" : "Questions and comments can be sent to touringcar@amsterdam.nl",
+        "es" : "Preguntas y comentarios pueden ser enviados a touringcar@amsterdam.nl",
+        "de" : "Fragen und Kommentare können an touringcar@amsterdam.nl gesendet werden"
     }
-  }
-}
+}}

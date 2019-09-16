@@ -1,0 +1,51 @@
+<section class="message-overview -active">
+    <div class="message-overview-include -date-picker">
+        {% include 'web/partials/date-picker.twig' %}
+    </div>
+    <div class="message-overview-list">
+        {% if status == 'UNAVAILABLE' %}Berichten tijdelijk niet beschikbaar...{% endif %}
+        {% for record in berichten %}
+
+            {% set title %}
+                {% if lang == 'nl' %}{{ record.title }}{% endif %}
+
+                {% if lang == 'en' %}
+                    {% if record.title_en %}{{ record.title_en }}
+                    {% else %}{{ record.title }} <span class="meta">(translation unavailable)</span>
+                    {% endif %}
+                {% endif %}
+
+                {% if lang == 'de' %}
+                    {% if record.title_de %}{{ record.title_de }}
+                    {% else %}{{ record.title }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+                    {% endif %}
+                {% endif %}
+
+                {% if lang == 'es' %}
+                    {% if record.title_es %}{{ record.title_es }}
+                    {% else %}{{ record.title }} <span class="meta">(Traducción no está disponible)</span>
+                    {% endif %}
+                {% endif %}
+            {% endset %}
+
+            {#{% set body %}
+                {% if lang == 'nl' %}{{ insertlinks(record.body)|raw }}{% endif %}
+                {% if lang == 'en' %}{{ insertlinks(record.body_en)|raw }}{% endif %}
+                {% if lang == 'de' %}{{ insertlinks(record.body_de)|raw }}{% endif %}
+                {% if lang == 'es' %}{{ insertlinks(record.body_es)|raw }}{% endif %}
+            {% endset %}
+
+            {% set advice %}
+                {% if lang == 'nl' %}{{ insertlinks(record.advice)|raw }}{% endif %}
+                {% if lang == 'en' %}{{ insertlinks(record.advice_en)|raw }}{% endif %}
+                {% if lang == 'de' %}{{ insertlinks(record.body_de)|raw }}{% endif %}
+                {% if lang == 'es' %}{{ insertlinks(record.body_es)|raw }}{% endif %}
+            {% endset %}#}
+
+            <a href="/bericht/{{ record.id }}{% if Y %}/{{ Y }}/{{ m }}/{{ d }}{% endif %}" data-js-click="loadBericht" data-bericht-id="{{ record.id }}" class="message-overview-item">
+                <div class="message-overview-nr">{{ record.sort_order }}</div>
+                <h2 class="message-overview-item-title">{{ title }}</h2>
+            </a>
+        {% endfor %}
+    </div>
+</section>

@@ -1,0 +1,4 @@
+[2019-04-13 12:28:11] tourbuzz-frontend.ERROR: Error response from tourbuzz API {"method":"GET","uri":"berichten/js/locationpicker/locationpicker.jquery.min.js.map","status_code":500} []
+[2019-04-13 12:31:39] tourbuzz-frontend.ERROR: Error response from tourbuzz API {"method":"GET","uri":"haltes","status_code":500} []
+[2019-04-13 12:31:39] tourbuzz-frontend.ERROR: Error response from tourbuzz API {"method":"GET","uri":"parkeerplaatsen","status_code":500} []
+[2019-04-13 12:31:40] tourbuzz-frontend.ERROR: Error response from tourbuzz API {"method":"GET","uri":"berichten/js/locationpicker/locationpicker.jquery.min.js.map","status_code":500} []

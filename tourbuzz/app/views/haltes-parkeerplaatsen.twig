@@ -54,7 +54,7 @@
                             <span class="halte-link" style="position: absolute; left: 0; {% if not halte.beschikbaar %}opacity: 0.2{% endif %}">{{ halte.haltenummer }}</span>
                             <span>{{ halte.straat }}</span><br>
                             {% if halte.beschikbaar %}
-                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaats(en)') }}</span><br>
                             {% else %}
                                 <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
                             {% endif %}
@@ -74,7 +74,7 @@
                             <span class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</span>
                             <span>{{ parkeerplaats.naam }}</span><br>
                             {% if parkeerplaats.beschikbaar %}
-                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
+                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaats(en)') }}</span><br>
                             {% else %}
                               <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
                             {% endif %}

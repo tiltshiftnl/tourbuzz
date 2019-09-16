@@ -10,8 +10,14 @@ if (file_exists($localConfigFilePath)) {
 
 require_once(__DIR__ . "/ApiClient.php");
 
-$app->container->singleton('api', function () use ($apiRoot) {
-    return new ApiClient($apiRoot);
+$app->container->singleton('api', function ($ci) use ($apiRoot) {
+    return new ApiClient($apiRoot, $ci->get('logger'));
+});
+
+$app->container->singleton('logger', function ($c) {
+    $logger = new Monolog\Logger('tourbuzz-frontend');
+    $logger->pushHandler(new Monolog\Handler\StreamHandler(__DIR__ . '/../logs/app.log', \Monolog\Logger::DEBUG));
+    return $logger;
 });
 
 // Environment variables loading

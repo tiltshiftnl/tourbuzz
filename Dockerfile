@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.16.0
 MAINTAINER datapunt@amsterdam.nl
 
 EXPOSE 80

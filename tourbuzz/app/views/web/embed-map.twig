@@ -1,0 +1,23 @@
+{% extends 'base/base.web.twig' %}
+
+{% block main %}
+ <div class="tourbuzz-map-mapview-container" data-mapview-container>
+    <div class="tourbuzz-map-leaflet-zone">
+        <div class="tourbuzz-map-leaflet-container"
+              data-mapview
+              data-js-ready="updateMap"
+              data-activate-layers="{{ activatelayers }}"
+              data-center-lat="{{ center_lat }}"
+              data-center-lng="{{ center_lng }}"
+              data-zoom="{{ zoom }}"
+              data-day="/{{ Y }}/{{ m }}/{{ d }}"
+              data-embedded="{{ embedded|default(0) }}">
+        </div>
+        <div class="tourbuzz-map-container -layers-legend">
+            {% include 'web/partials/layers-legend.twig' with layers_legend %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

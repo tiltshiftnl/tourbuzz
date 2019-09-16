@@ -1,0 +1,86 @@
+.message-detail {
+
+}
+
+.message-detail-include.-date-picker {
+    padding-top: $spacing;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: $date-picker-width;
+}
+
+.message-detail-body {
+    padding: $spacing;
+}
+
+.message-detail-title-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $mini-spacing;
+}
+
+.message-detail-title {
+    @include text-title;
+    margin-bottom: $mini-spacing;
+    margin-top: 3px;
+    flex: 1;
+}
+
+.message-detail-nr {
+    background: $Primary-Red;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    @include avenir-demi;
+    text-align: center;
+    line-height: 32px;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.message-detail-article-zone {
+    a { text-decoration: underline }
+}
+
+.message-detail-text {
+    @include text-body;
+    margin-bottom: 2 * $spacing;
+}
+
+.message-detail-subtitle {
+    @include text-title;
+    margin-bottom: $mini-spacing;
+}
+
+.message-detail-hr {
+    @include hr;
+}
+
+.message-detail-img-container {
+    display: block;
+    > img {
+        display: block;
+    }
+    margin-bottom: 2 * $spacing;
+}
+
+.message-detail-section {
+    margin-bottom: 2 * $spacing;
+}
+
+.message-detail-share {
+    display: inline-block;
+    @include text-body;
+    padding: 2px 5px;
+    background: $Neutral-Grey1;
+    border: 1px solid $Neutral-Grey2;
+}
+
+.message-detail-wrapper {
+    @include grid-wrapper;
+}
+
+.message-detail-include.-message-nav {
+    margin-bottom: $mini-spacing;
+}

@@ -1,0 +1,56 @@
+{% extends 'base/base.web.twig' %}
+
+{% block main %}
+    <section class="sms-alerts">
+        {% include 'web/partials/main-header.twig' %}
+        {% include 'web/partials/navigation-bar.twig' %}
+        <div class="sms-alerts-wrapper">
+            <div class="sms-alerts-container">
+                {% if aanmelden %}
+                    <div class="sms-alerts-header">
+                        <h1 class="sms-alerts-title">SMS alerts</h1>
+                        <p class="sms-alerts-intro">{{ __('Vul hieronder uw mobiele nummer in om belangrijke Tour Buzz meldingen te ontvangen per SMS.') }}</p>
+                    </div>
+
+                    {% if flash is not empty %}
+                        {% include 'web/partials/flash-messages.twig' %}
+                    {% endif %}
+
+                    <form class="sms-alerts-form" method="post">
+                        <div class="sms-alerts-form-row">
+                            {#<label class="sms-alerts-label">Tel*</label>#}
+                            <input class="sms-alerts-input" id="phone" type="tel" name="number">
+                        </div>
+                        <input type="hidden" name="international" id="international">
+                        <input type="hidden" placeholder="taal" name="language" value="{{ lang }}">
+                        <button class="sms-alerts-button" type="submit">{{ __('Aanmelden') }}</button>
+                    </form>
+                    <p class="sms-alerts-note">* Verplicht veld</p>
+                    <p class="sms-alerts-unsubscribe">
+                        <a href="/sms-afmelden">{{ __('Afmelden voor sms alerts') }}</a>
+                    </p>
+                {% elseif afmelden %}
+                    <div class="sms-alerts-header">
+                        <h1 class="sms-alerts-title">SMS alerts</h1>
+                        <p class="sms-alerts-intro">{{ __('Vul hieronder het mobiele nummer in, dat u wilt afmelden.') }}</p>
+                    </div>
+
+                    {% if flash is not empty %}
+                        {% include 'web/partials/flash-messages.twig' %}
+                    {% endif %}
+
+                    <form class="sms-alerts-form" method="post">
+                        <div class="sms-alerts-form-row">
+                            {#<label class="sms-alerts-label">Tel*</label>#}
+                            <input class="sms-alerts-input" id="phone" type="tel" name="number">
+                        </div>
+                        <input type="hidden" name="international" id="international">
+                        <input type="hidden" placeholder="taal" name="language" value="{{ lang }}">
+                        <button class="sms-alerts-button" type="submit">{{ __('Aanmelden') }}</button>
+                    </form>
+                    <p class="sms-alerts-note">* Verplicht veld</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

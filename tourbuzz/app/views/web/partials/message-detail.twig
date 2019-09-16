@@ -1,0 +1,82 @@
+{# for bericht in berichten if bericht.current_message #}
+
+<section class="message-detail" data-message-detail data-message-lat="{{ bericht.location.lat }}" data-message-lon="{{ bericht.location.lng }}">
+    <div class="message-detail-include -date-picker">
+        {% include 'web/partials/date-picker.twig' with {'d': d, 'm': m, 'Y': Y} %}
+    </div>
+
+    <div class="message-detail-include -message-nav">
+        {% include 'web/partials/message-nav.twig' %}
+    </div>
+
+   {% set title %}
+        {% if lang == 'nl' %}{{ bericht.title }}{% endif %}
+
+        {% if lang == 'en' %}
+            {% if bericht.title_en %}{{ bericht.title_en }}
+            {% else %}{{ bericht.title }} <span class="meta">(translation unavailable)</span>
+            {% endif %}
+        {% endif %}
+
+        {% if lang == 'de' %}
+            {% if bericht.title_de %}{{ bericht.title_de }}
+            {% else %}{{ bericht.title }} <span class="meta">(Übersetzung nicht verfügbar)</span>
+            {% endif %}
+        {% endif %}
+
+        {% if lang == 'es' %}
+            {% if bericht.title_es %}{{ bericht.title_es }}
+            {% else %}{{ bericht.title }} <span class="meta">(Traducción no está disponible)</span>
+            {% endif %}
+        {% endif %}
+    {% endset %}
+
+    {% set body %}
+        {% if lang == 'nl' %}{{ insertlinks(bericht.body)|raw }}{% endif %}
+        {% if lang == 'en' %}{{ insertlinks(bericht.body_en)|raw }}{% endif %}
+        {% if lang == 'de' %}{{ insertlinks(bericht.body_de)|raw }}{% endif %}
+        {% if lang == 'es' %}{{ insertlinks(bericht.body_es)|raw }}{% endif %}
+    {% endset %}
+
+    {% set advice %}
+        {% if lang == 'nl' %}{{ insertlinks(bericht.advice)|raw }}{% endif %}
+        {% if lang == 'en' %}{{ insertlinks(bericht.advice_en)|raw }}{% endif %}
+        {% if lang == 'de' %}{{ insertlinks(bericht.body_de)|raw }}{% endif %}
+        {% if lang == 'es' %}{{ insertlinks(bericht.body_es)|raw }}{% endif %}
+    {% endset %}
+
+    <div class="message-detail-body">
+        <div class="message-detail-title-container">
+            <div class="message-detail-nr">{{ sort_order }}</div>
+            <h1 class="message-detail-title">{{ title }}</h1>
+        </div>
+        <div class="message-detail-article-zone">
+            <p class="message-detail-text">{{ body|raw }}</p>
+            {% if advice|trim is not empty %}
+                <section class="message-detail-section">
+                    <h2 class="message-detail-subtitle">Advies</h2>
+                    <p class="message-detail-text">{{ advice|raw }}</p>
+                </section>
+            {% endif %}
+
+            {% if bericht.link %}
+                <section class="message-detail-section">
+                    <h2 class="message-detail-subtitle">{{ __('Meer informatie') }}</h2>
+                    <a href="{{ bericht.link }}" class="message-detail-text" target="_blank">{{ bericht.link }}</a>
+                </section>
+            {% endif %}
+
+            {% if bericht.image_id is not empty %}
+                <div class="message-detail-img-container">
+                    <img src="{{ bericht.image_url }}/?width=800&method=fit">
+                </div>
+            {% endif %}
+
+
+        </div>
+        {#<div class="message-detail-section">
+            <a href="#" class="message-detail-share">bericht delen</a>
+        </div>#}
+    </div>
+</section>
+{# endfor #}

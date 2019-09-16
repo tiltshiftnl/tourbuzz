@@ -92,6 +92,15 @@ Class RouteDumper extends \Slim\Router {
     }
 }
 
+function getData($fileName) {
+    if (file_exists("../app/data/".$fileName)) {
+        $json = file_get_contents("../app/data/".$fileName);
+        $data = json_decode($json, true);
+        return $data;
+    }
+    return false;
+}
+
 require_once "../app/bootstrap.php"; // Bootstrap
 require_once "routes.php"; // System routes
 require_once "../app/routes/index.php"; // Project routes

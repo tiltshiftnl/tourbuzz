@@ -1,0 +1,22 @@
+<section class="layers-legend" data-layers-legend>
+    <a href="#" class="layers-legend-header" data-js-click="toggleLayersLegend">
+        <div class="layers-legend-title">
+            <img src="/img/icons/layers.svg" class="layers-legend-view-icon">
+            <h3 class="layers-legend-header-title-text">Kaartlagen en legenda</h3>
+        </div>
+        <i class="layers-legend-arrow-icon"></i>
+    </a>
+    <div class="layers-legend-list">
+        {% for item in layer_list %}
+            <a href="#" class="layers-legend-toggle" data-js-click="toggleLayer" data-layer="{{ item.id }}">
+                <div class="layers-legend-box -{{ item.color }}">
+                    <img src="/img/icons/tick-w.svg" class="layers-legend-tick">
+                </div>
+                <span class="layers-legend-name">{{ item.description }}</span>
+                {% if item.icon %}
+                    <span class="layers-legend-icon">{#<img src="{{ asset('img/markers/' ~ item.icon) }}">#}</span>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+</section>

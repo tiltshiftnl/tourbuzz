@@ -1,0 +1,44 @@
+{
+  "layer_list": [
+    {
+      "id": "berichten",
+      "description": "Berichten",
+      "color": "red"
+    },
+    {
+      "id": "haltes",
+      "description": "Haltes",
+      "color": "lightblue"
+    },
+    {
+      "id": "parkeren",
+      "description": "Parkeren",
+      "color": "black"
+    },
+    {
+      "id": "doorrijhoogtes",
+      "description": "Max doorrijhoogtes",
+      "color": "red"
+    },
+    {
+      "id": "bestemmingsverkeer",
+      "description": "Bestemmingsverkeer",
+      "color": "orange"
+    },
+    {
+      "id": "aanbevolenroutes",
+      "description": "Aanbevolen routes",
+      "color": "lightgreen"
+    },
+    {
+      "id": "verplichteroutes",
+      "description": "Verplichte route (> 7,5 ton)",
+      "color": "darkgreen"
+    },
+    {
+      "id": "milieuzone",
+      "description": "Milieuzone",
+      "color": "pink"
+    }
+  ]
+}

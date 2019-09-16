@@ -1,0 +1,22 @@
+.message-nav {
+    //background: @Neutral-Grey1;
+    border-top: 1px solid $Neutral-Grey2;
+    padding: $spacing;
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-nav-item {
+    @include text-body;
+    //color: @Supplement-Lightblue;
+}
+
+.message-nav-prev {
+    width: 5px;
+    margin-right: 5px;
+}
+
+.message-nav-next {
+    width: 5px;
+    margin-left: 5px;
+}

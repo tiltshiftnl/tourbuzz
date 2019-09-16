@@ -1,0 +1,44 @@
+.message-overview {
+    padding: 15px;
+    display: none;
+}
+
+.message-overview.-active {
+    display: block;
+}
+
+.message-overview-item {
+    padding-top: 15px;
+    border-top: 1px solid $Neutral-Grey1;
+    padding-bottom: 15px;
+    display: flex;
+}
+
+.message-overview-item > * {
+    pointer-events: none;
+}
+
+.message-overview-include.-date-picker {
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: $date-picker-width;
+}
+
+.message-overview-item-title {
+    @include text-body;
+    flex: 1;
+    padding-top: 5px;
+}
+
+.message-overview-nr {
+    background: $Primary-Red;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    @include avenir-demi;
+    text-align: center;
+    line-height: 32px;
+    color: #fff;
+    margin-right: 15px;
+}
