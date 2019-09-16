@@ -1,5 +1,12 @@
 #!groovy
 
+pipeline {
+    agent any
+    triggers {
+        cron('0 11 * * MON')
+    }
+
+
 def tryStep(String message, Closure block, Closure tearDown = null) {
     try {
         block();
