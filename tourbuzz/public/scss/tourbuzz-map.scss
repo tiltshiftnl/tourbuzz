@@ -122,6 +122,12 @@
     }
 }
 
+.tourbuzz-map-mapview-container.-no-padding {
+    @media only screen and (min-width: 640px) {
+        padding: 0;
+    }
+}
+
 .tourbuzz-map-page-container.-fade-out {
     animation: fade-out 0.3s linear;
     animation-iteration-count: 1;

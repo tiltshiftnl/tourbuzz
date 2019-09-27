@@ -32,7 +32,7 @@
     },
     {
       "id": "verplichteroutes",
-      "description": "Verplichte route (> 7,5 ton)",
+      "description": "Verplichte route (> 7,5t)",
       "color": "darkgreen"
     },
     {
