@@ -535,6 +535,16 @@ function toggleLanguageSwitch (el) {
     langSwitch.classList.toggle('-active');
 }
 
+/////////////////////////////////////
+// Prevent unformatted date input //
+////////////////////////////////////
+
+function preventUnformattedDateInput (el) {
+    el.addEventListener('keypress', function(e) {
+        e.preventDefault();
+    });
+}
+
 //////////
 // Run //
 //////////
