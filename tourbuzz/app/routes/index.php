@@ -247,6 +247,11 @@ $app->get('/embed/map', function () use ($app, $analytics, $image_api) {
     $m = date('m');
     $d = date('d');
 
+    $activatelayers = $app->request->get('activatelayers');
+    if(empty($activatelayers)) {
+        $activatelayers = 'berichten';
+    }
+
     $apiResponse = $app->api->get("berichten/{$y}/{$m}/{$d}");
 
     $berichten = array_filter($apiResponse->body['messages'], function ($bericht) {
@@ -272,7 +277,7 @@ $app->get('/embed/map', function () use ($app, $analytics, $image_api) {
         "date_picker" => [],
         "layers_legend" => getData('layer_list.json'),
         "infopanel_url" => "/{$y}/{$m}/{$d}?partial=panel",
-        "activatelayers" => "berichten",
+        "activatelayers" => $activatelayers,
         "d" => $d,
         "m" => $m,
         "Y" => $y,
