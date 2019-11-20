@@ -28,7 +28,7 @@
         {#<p class="haltes-parkeren-text">{{ __('Op deze locaties kunt u uw bus parkeren. Klik hier voor de tarieven.') }}</p>#}
         <hr class="haltes-parkeren-hr">
         {% for record in parkeerplaatsen %}
-            <a href="/parkeerplaats/{{ record.nummer }}" class="halte-detail-title-container">
+            <a href="/parkeerplaatsen/{{ record.nummer }}" class="halte-detail-title-container">
                 <div class="park-detail-header">
                     <div class="park-detail-nr">{{ record.nummer }}</div>
                     <h1 class="park-detail-title">{{ record.naam }}</h1>
