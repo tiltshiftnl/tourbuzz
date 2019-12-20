@@ -545,6 +545,20 @@ function preventUnformattedDateInput (el) {
     });
 }
 
+///////////////////////
+// Load availability //
+///////////////////////
+
+function loadAvailability (el) {
+    var parkID = el.getAttribute('data-park-id');
+    var dataUrl = '/async/parkeerplaats-status/' + parkID;
+    axios.get(dataUrl)
+        .then(function (response) {
+            res = response.data;
+            el.innerHTML = res;
+        });
+}
+
 //////////
 // Run //
 //////////
@@ -561,8 +575,6 @@ function run () {
         if (controller) {
             e.preventDefault();
             window[controller](el);
-        } else {
-            console.log(el);
         }
     });
 

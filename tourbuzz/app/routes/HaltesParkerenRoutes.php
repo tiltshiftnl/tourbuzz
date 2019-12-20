@@ -162,7 +162,7 @@ $app->get('/async/parkeerplaats-status/:slug', function ($slug) use ($app, $anal
     }
 
     $parkeerplaats["dynvialis"] = $vialis;
-    render("partials/parkeerplaats-status.twig", $parkeerplaats);
+    render("web/partials/spots-badge.twig", $parkeerplaats);
 });
 
 /**

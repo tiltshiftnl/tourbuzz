@@ -5,7 +5,9 @@
             <h1 class="park-detail-title">{{ record.naam }}</h1>
         </div>
         <div class="park-detail-spots">
-            {% if record.beschikbaar %}
+            {% if record.vialis %}
+                <span data-js-ready="loadAvailability" data-park-id="{{ record.nummer }}">...</span>
+            {% elseif record.beschikbaar %}
                 <div class="park-detail-spots-badge">{{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}</div>
             {% else %}
                 <div class="park-detail-spots-badge">{{ __('niet beschikbaar') }}</div>

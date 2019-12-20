@@ -1,0 +1,8 @@
+<div class="park-detail-spots-badge">
+    {% if dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.vacantSpaces is not empty %}
+        {{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.vacantSpaces }} / {{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.parkingCapacity }} {{ __('plaatsen') }} {{ __('vrij') }}
+    {% else %}
+        {{ __('onbekend') }}
+    {% endif %}
+    {#<p class="meta">{{ __('Laatste update') }}: {{ now|date('d-m-Y H:i:s') }}</p>#}
+</div>
