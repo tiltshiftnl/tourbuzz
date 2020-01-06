@@ -142,7 +142,7 @@ $app->get('/bericht/:id(/:Y/:m/:d)', function ($id, $Y = NULL, $m = NULL, $d = N
         }
 
         $data = [
-            "lang" => "nl",
+            "lang" => $_SESSION['lang'],
             "bericht" => $bericht,
             "sort_order" => $sortOrder,
             "analytics" => $analytics,

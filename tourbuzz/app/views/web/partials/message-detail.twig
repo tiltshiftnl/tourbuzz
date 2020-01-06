@@ -54,7 +54,7 @@
             <p class="message-detail-text">{{ body|raw }}</p>
             {% if advice|trim is not empty %}
                 <section class="message-detail-section">
-                    <h2 class="message-detail-subtitle">Advies</h2>
+                    <h2 class="message-detail-subtitle">{{ __('Advies') }}</h2>
                     <p class="message-detail-text">{{ advice|raw }}</p>
                 </section>
             {% endif %}

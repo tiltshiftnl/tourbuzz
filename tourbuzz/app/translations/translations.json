@@ -1,45 +1,45 @@
 {
 "translations" : {
     "maandag": {
-    	"en": "monday",
+        "en": "monday",
         "de": "montag",
-    	"fr": "Lu",
+        "fr": "Lu",
         "es": "lunes"
     },
     "dinsdag": {
-    	"en": "tuesday",
+        "en": "tuesday",
         "de": "dienstag",
-    	"fr": "Ma",
+        "fr": "Ma",
         "es": "martes"
     },
     "woensdag": {
-    	"en": "wednesday",
+        "en": "wednesday",
         "de": "mittwoch",
-    	"fr": "Me",
+        "fr": "Me",
         "es": "miércoles"
     },
     "donderdag": {
-    	"en": "thursday",
+        "en": "thursday",
         "de": "donnerstag",
-    	"fr": "Jeu",
+        "fr": "Jeu",
         "es": "jeuves"
     },
     "vrijdag": {
-    	"en": "friday",
+        "en": "friday",
         "de": "freitag",
-    	"fr": "Ve",
+        "fr": "Ve",
         "es": "viernes"
     },
     "zaterdag": {
-    	"en": "saturday",
+        "en": "saturday",
         "de": "samstag",
-    	"fr": "Sa",
+        "fr": "Sa",
         "es": "sábado"
     },
     "zondag": {
-    	"en": "sunday",
+        "en": "sunday",
         "de": "sonntag",
-    	"fr": "mD",
+        "fr": "mD",
         "es": "domingo"
     },
     "januari" : {
@@ -301,12 +301,12 @@
     "Aanmelden niet gelukt. Email is verplicht" : {
         "en" : "Email is required.",
         "de" : "E-Mail ist erforderlich.",
-        "es" : "Inicia sesión fallido. Se requiere email "
+        "es" : "Inicia sesión fallido. Se requiere email."
     },
     "Dit email adres is al aangemeld" : {
         "en" : "This email address is already subscribed",
         "de" : "Diese E-Mail-Adresse ist bereits abonniert",
-        "en" : "Este email ya está suscrito"
+        "es" : "Este email ya está suscrito"
     },
     "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail." : {
         "en" : "Enter your details below and you will receive every two weeks Tour Buzz posts by email.",
@@ -423,11 +423,6 @@
         "es" : "Zona ambiental",
         "de" : "Umweltzone"
     },
-    "Route informatie": {
-        "en" : "Route information",
-        "es" : "Información de la ruta",
-        "de" : "Routeninformationen"
-    },
     "Weergave van de aanbevolen en verplichte routes voor touringcars. Let op de doorrijhoogtes.": {
         "en" : "Display of the recommended and mandatory routes for coaches. Note the vehicle heights.",
         "es" : "Visualización de las rutas recomendadas y obligatorias para autocares. Tenga en cuenta las alturas del paseo.",
@@ -442,5 +437,10 @@
         "en" : "Questions and comments can be sent to touringcar@amsterdam.nl",
         "es" : "Preguntas y comentarios pueden ser enviados a touringcar@amsterdam.nl",
         "de" : "Fragen und Kommentare können an touringcar@amsterdam.nl gesendet werden"
+    },
+    "Terug naar overzicht": {
+        "en" : "Back to overview",
+        "es" : "Regresa",
+        "de" : "Zurück zur Übersicht"
     }
 }}
