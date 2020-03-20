@@ -83,7 +83,7 @@ $app->get('/dashboard/logout', function () use ($app) {
  */
 $app->get('/dashboard/abonnees', function () use ($app) {
 
-    if ( empty($_SESSION['username']) ) {
+    if ( empty($_SESSION['username']) || empty($_SESSION['auth_token']) ) {
         $_SESSION['redirect_url'] = "/dashboard/abonnees";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
@@ -118,7 +118,7 @@ $app->get('/dashboard/abonnees', function () use ($app) {
  */
 $app->get('/dashboard/accounts', function () use ($app) {
 
-    if ( empty($_SESSION['username']) ) {
+    if ( empty($_SESSION['username']) || empty($_SESSION['auth_token']) ) {
         $_SESSION['redirect_url'] = "/dashboard/accounts";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
@@ -173,7 +173,7 @@ $app->post('/dashboard/accounts', function () use ($app) {
  */
 $app->get('/dashboard/accounts/:slug', function ($slug) use ($app) {
 
-    if ( empty($_SESSION['username']) ) {
+    if ( empty($_SESSION['username']) || empty($_SESSION['auth_token']) ) {
         $_SESSION['redirect_url'] = "/dashboard/accounts";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
@@ -228,7 +228,7 @@ $app->post('/dashboard/accounts/:slug', function ($slug) use ($app) {
  */
 $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
 
-    if ( empty($_SESSION['username']) ) {
+    if ( empty($_SESSION['username']) || empty($_SESSION['auth_token']) ) {
         $_SESSION['redirect_url'] = "/dashboard/accounts";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
@@ -261,7 +261,7 @@ $app->get('/dashboard/accounts/:slug/verwijderen', function ($slug) use ($app) {
  */
 $app->get('/dashboard/berichten', function () use ($app, $image_api) {
 
-    if ( empty($_SESSION['username']) ) {
+    if ( empty($_SESSION['username']) || empty($_SESSION['auth_token']) ) {
         $_SESSION['redirect_url'] = "/dashboard/berichten";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
@@ -393,7 +393,7 @@ $app->post('/dashboard/berichten', function () use ($app, $image_api) {
  */
 $app->get('/dashboard/berichten/:id', function ($id) use ($app, $image_api) {
 
-    if ( empty($_SESSION['username']) ) {
+    if ( empty($_SESSION['username']) || empty($_SESSION['auth_token']) ) {
         $_SESSION['redirect_url'] = "/dashboard/berichten/{$id}";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
@@ -441,7 +441,7 @@ $app->post('/dashboard/berichten/verwijderen', function () use ($app) {
  */
 $app->get('/dashboard/mapping-parkeren', function () use ($app) {
 
-   if ( empty($_SESSION['username']) ) {
+    if ( empty($_SESSION['username']) || empty($_SESSION['auth_token']) ) {
         $_SESSION['redirect_url'] = "/dashboard/berichten/{$id}";
         $app->flash('error', 'Eerst inloggen');
         $app->redirect("/dashboard/login");
