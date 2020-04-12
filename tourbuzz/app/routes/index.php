@@ -349,6 +349,67 @@ $app->get('/rss', function () use ($app) {
     render("rss.twig", $data, ["Content-type" => "application/xml"]);
 });
 
+
+/**
+ * POI search
+ */
+$app->get('/async/poi-search', function () use ($app, $analytics) {
+
+    $searchString = $app->request->get('search');
+
+    $suggestions = [
+        'Centraal Station',
+        'Beurs van Berlage',
+        'Concertgebouw',
+        'Stedelijk Museum',
+        'Rijksmuseum',
+        'Van gogh museum',
+        'Lovers Rondvaart',
+        'Stromma Rondvaart',
+        'Rederij Kooij Rondvaart',
+        'Blue Boat Rondvaart',
+        'Riviercruise De Ruijterkade-oost',
+        'Riviercruise De Ruijterkade-west',
+        'Westermarkt/Anne Frankhuis/Jordaan',
+        'Amsterdams Museum',
+        'Nemo',
+        'Scheepsvaartmuseum',
+        'Passenger Terminal Amsterdam PTA',
+        'Bloemenmarkt',
+        'De Dam',
+        'Joods Historisch Museum',
+        'Gassan Diamonds',
+        'Coster Diamonds',
+        'Hermitage',
+        'Portugese Synagoge',
+        'Heineken Brouwerij',
+        'Albert Cuypmarkt',
+        'Red Light District',
+        'Vondelpark',
+        'ARTIS'
+    ];
+
+    $matches = [];
+    $variant = '';
+    if (strlen($searchString) > 2) {
+
+        foreach ($suggestions as $suggestion) {
+            if (strpos(strtolower($suggestion), strtolower($searchString)) !== false) {
+                $matches[] = $suggestion;
+            }
+        }
+        $variant = '-active';
+    }
+
+    $data = [
+        'search' => $searchString,
+        'suggestions' => $matches,
+        'variant' => $variant
+    ];
+    render("web/partials/suggestion-list.twig", $data);
+});
+
+
 /**
  * Health check
  */

@@ -1,0 +1,11 @@
+.poi-search-input {
+    @include text-body;
+    padding: $mini-spacing 2 * $mini-spacing;
+    border: 1px solid $Neutral-Grey4;
+    display: block;
+    width: 100%;
+}
+
+.poi-search-suggestion-list {
+    position: relative;
+}

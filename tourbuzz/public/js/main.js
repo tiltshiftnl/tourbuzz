@@ -559,6 +559,29 @@ function loadAvailability (el) {
         });
 }
 
+////////////////
+// POI search //
+////////////////
+
+function POISearch (el) {
+
+    var poiSearchSuggestions = document.querySelector('[data-poi-search-suggestion-list]');
+
+    el.addEventListener('input', function(e) {
+        console.log("input change...")
+
+        var dataUrl = '/async/poi-search?search=' + el.value;
+        console.log(dataUrl);
+        axios.get(dataUrl)
+            .then(function (response) {
+                res = response.data;
+                poiSearchSuggestions.innerHTML = res;
+            });
+
+    });
+
+}
+
 //////////
 // Run //
 //////////

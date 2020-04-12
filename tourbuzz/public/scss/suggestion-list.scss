@@ -1,0 +1,26 @@
+.suggestion-list {
+    display: none;
+}
+
+.suggestion-list.-active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+    border: 1px solid $Neutral-Grey4;
+    border-top: 0;
+    padding: $mini-spacing 2 * $mini-spacing;
+    z-index: 300000;
+    background: #fff;
+}
+
+.suggestion-list-item {
+    @include text-body;
+    display: block;
+}
+
+.suggestion-list-keyword-match {
+    @include text-body;
+    font-weight: bold;
+}
