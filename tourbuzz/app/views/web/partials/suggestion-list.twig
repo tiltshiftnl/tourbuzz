@@ -1,5 +1,5 @@
 <div class="suggestion-list {{ variant }}" data-suggestion-list>
     {% for item in suggestions %}
-        <a href="#" class="suggestion-list-item">{{ item }}</a>
+        <a href="#" class="suggestion-list-item">{{ item.prefix }}<span class="suggestion-list-match">{{ item.match }}</span>{{ item.suffix }}</a>
     {% endfor %}
 </div>

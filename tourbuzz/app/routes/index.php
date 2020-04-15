@@ -395,11 +395,39 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
 
         foreach ($suggestions as $suggestion) {
             if (strpos(strtolower($suggestion), strtolower($searchString)) !== false) {
-                $matches[] = $suggestion;
+                $prefixLength = 0;
+                $suffixLength = 0;
+                $prefixString = '';
+                $suffixString = '';
+
+                // Split string to higlight match
+                $split = explode(strtolower($searchString), strtolower($suggestion));
+                if (!empty($split[0])) {
+                    $prefixLength = strlen($split[0]);
+                }
+                if (!empty($split[1])) {
+                    $suffixLength = strlen($split[1]);
+                }
+
+                // Reconstruct string caps
+                $prefixString = substr($suggestion, 0, $prefixLength);
+                $searchString = substr($suggestion, $prefixLength, strlen($searchString));
+                $suffixString = substr($suggestion, $prefixLength + strlen($searchString));
+
+                $matches[] = [
+                    'prefix' => $prefixString,
+                    'match' => $searchString,
+                    'suffix' => $suffixString
+                ];
             }
         }
-        $variant = '-active';
+
+        if (!empty($matches)) {
+            $variant = '-active';
+        }
     }
+
+    //die(print_r($matches));
 
     $data = [
         'search' => $searchString,
