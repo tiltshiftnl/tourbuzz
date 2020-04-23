@@ -389,8 +389,21 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
         'ARTIS'
     ];
 
+    // Add matching straatnamen
+    $apiResponse = $app->api->get("typeahead/?q={$searchString}", "https://api.data.amsterdam.nl/");
+    $typeAheadResults = $apiResponse->body;
+
+    for ($i = 0; $i < count($typeAheadResults); $i++) {
+        if ($typeAheadResults[$i]['label'] == 'Straatnamen') {
+            foreach ($typeAheadResults[$i]['content'] as $straatnaam) {
+                $suggestions[] = $straatnaam['_display'];
+            }
+        }
+    }
+
     $matches = [];
     $variant = '';
+
     if (strlen($searchString) > 2) {
 
         foreach ($suggestions as $suggestion) {
@@ -426,8 +439,6 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
             $variant = '-active';
         }
     }
-
-    //die(print_r($matches));
 
     $data = [
         'search' => $searchString,

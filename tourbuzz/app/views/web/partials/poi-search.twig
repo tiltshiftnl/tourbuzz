@@ -1,6 +1,11 @@
 <form class="poi-search">
-    <input type="text" placeholder="Zoek op straatnaam of bestemming" class="poi-search-input" value="{{ search }}" data-js-ready="POISearch">
-    <div class="poi-search-suggestion-list" data-poi-search-suggestion-list>
-        {% include 'web/partials/suggestion-list.twig' %}
+    <div class="poi-search-wrapper">
+        <div class="poi-search-input-wrapper">
+            <input type="text" placeholder="Zoek op straatnaam of bestemming" class="poi-search-input" value="{{ search }}" data-js-ready="POISearch">
+            <div class="poi-search-suggestion-list" data-poi-search-suggestion-list>
+                {% include 'web/partials/suggestion-list.twig' %}
+            </div>
+        </div>
+        <i class="poi-search-icon"></i>
     </div>
 </form>

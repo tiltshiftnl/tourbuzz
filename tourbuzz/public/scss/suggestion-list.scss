@@ -9,7 +9,6 @@
     width: 100%;
     display: block;
     border: 1px solid $Neutral-Grey4;
-    border-top: 0;
     padding: $mini-spacing 2 * $mini-spacing;
     z-index: 300000;
     background: #fff;
@@ -18,6 +17,10 @@
 .suggestion-list-item {
     @include text-body;
     display: block;
+}
+
+.suggestion-list-item:hover {
+    background: $Neutral-Grey1;
 }
 
 .suggestion-list-match {

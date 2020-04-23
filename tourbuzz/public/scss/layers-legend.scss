@@ -50,7 +50,7 @@
 .layers-legend-arrow-icon {
     pointer-events: none;
     display: inline-block;
-    background-image: url('/img/icons/arrow-down.svg');
+    background-image: url('/img/icons/arrow-up.svg');
     width: 27px;
     height: 27px;
     opacity: 0.7;
@@ -58,7 +58,7 @@
 
 .layers-legend.-active .layers-legend-arrow-icon {
     display: inline-block;
-    background-image: url('/img/icons/arrow-up.svg');
+    background-image: url('/img/icons/arrow-down.svg');
     width: 27px;
     height: 27px;
     opacity: 0.7;

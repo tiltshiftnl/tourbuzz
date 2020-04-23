@@ -34,8 +34,13 @@ class ApiClient {
         return $this->_apiRoot;
     }
 
-    public function get($uri) {
-        $requestUri = "{$this->_apiRoot}{$uri}";
+    public function get($uri, $apiRoot = NULL) {
+
+        if (empty($apiRoot)) {
+            $requestUri = "{$this->_apiRoot}{$uri}";
+        } else {
+            $requestUri = "{$apiRoot}{$uri}";
+        }
 
         if (!empty($this->_token)) {
             $requestUri .= "?token={$this->_token}";

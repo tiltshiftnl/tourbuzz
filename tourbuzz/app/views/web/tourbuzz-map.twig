@@ -19,9 +19,6 @@
                     </div>
                     <div data-infopanel-content></div>
                 </div>
-                <div class="tourbuzz-map-container -poi-search" data-poi-search-container>
-                    {% include 'web/partials/poi-search.twig' %}
-                </div>
                 <div class="tourbuzz-map-mapview-container" data-mapview-container>
                     <div class="tourbuzz-map-leaflet-zone">
                         <div class="tourbuzz-map-leaflet-container"
@@ -32,6 +29,9 @@
                               data-center-lng="{{ center_lng }}"
                               data-zoom="{{ zoom }}"
                               data-embedded="{{ embedded|default(0) }}">
+                        </div>
+                        <div class="tourbuzz-map-container -poi-search" data-poi-search-container>
+                            {% include 'web/partials/poi-search.twig' %}
                         </div>
                         <div class="tourbuzz-map-container -layers-legend">
                             {% include 'web/partials/layers-legend.twig' with layers_legend %}
