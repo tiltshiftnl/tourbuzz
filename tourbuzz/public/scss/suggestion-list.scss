@@ -17,6 +17,8 @@
 .suggestion-list-item {
     @include text-body;
     display: block;
+    padding-top: $mini-spacing;
+    padding-bottom: $mini-spacing;
 }
 
 .suggestion-list-item:hover {

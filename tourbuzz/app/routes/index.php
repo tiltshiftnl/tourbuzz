@@ -358,35 +358,151 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
     $searchString = $app->request->get('search');
 
     $suggestions = [
-        'Centraal Station',
-        'Beurs van Berlage',
-        'Concertgebouw',
-        'Stedelijk Museum',
-        'Rijksmuseum',
-        'Van gogh museum',
-        'Lovers Rondvaart',
-        'Stromma Rondvaart',
-        'Rederij Kooij Rondvaart',
-        'Blue Boat Rondvaart',
-        'Riviercruise De Ruijterkade-oost',
-        'Riviercruise De Ruijterkade-west',
-        'Westermarkt/Anne Frankhuis/Jordaan',
-        'Amsterdams Museum',
-        'Nemo',
-        'Scheepsvaartmuseum',
-        'Passenger Terminal Amsterdam PTA',
-        'Bloemenmarkt',
-        'De Dam',
-        'Joods Historisch Museum',
-        'Gassan Diamonds',
-        'Coster Diamonds',
-        'Hermitage',
-        'Portugese Synagoge',
-        'Heineken Brouwerij',
-        'Albert Cuypmarkt',
-        'Red Light District',
-        'Vondelpark',
-        'ARTIS'
+       [
+            'title' => 'Centraal Station',
+            'lat' => '52.37833440',
+            'lon' => '4.90032257',
+        ],
+        [
+            'title' => 'Beurs van Berlage',
+            'lat' => '52.37502180',
+            'lon' => '4.89626468',
+        ],
+        [
+            'title' => 'Concertgebouw',
+            'lat' => '52.35619815',
+            'lon' => '4.87904479',
+        ],
+        [
+            'title' => 'Stedelijk Museum',
+            'lat' => '52.35790030',
+            'lon' => '4.87985982',
+        ],
+        [
+            'title' => 'Rijksmuseum',
+            'lat' => '52.35987590',
+            'lon' => '4.88505843',
+        ],
+        [
+            'title' => 'Van gogh museum',
+            'lat' => '52.35836725',
+            'lon' => '4.88108997',
+        ],
+        [
+            'title' => 'Lovers Rondvaart',
+            'lat' => '52.37866000',
+            'lon' => '4.89654300',
+        ],
+        [
+            'title' => 'Stromma Rondvaart',
+            'lat' => '52.36045200',
+            'lon' => '4.88649800',
+        ],
+        [
+            'title' => 'Rederij Kooij Rondvaart',
+            'lat' => '52.36905500',
+            'lon' => '4.89264600',
+        ],
+        [
+            'title' => 'Blue Boat Rondvaart',
+            'lat' => '52.35814600',
+            'lon' => '4.89207400',
+        ],
+        [
+            'title' => 'Riviercruise De Ruijterkade-oost',
+            'lat' => '52.37805000',
+            'lon' => '4.90810800',
+        ],
+        [
+            'title' => 'Riviercruise De Ruijterkade-west',
+            'lat' => '52.38181800',
+            'lon' => '4.89610700',
+        ],
+        [
+            'title' => 'Westermarkt/Anne Frankhuis/Jordaan',
+            'lat' => '52.37414000',
+            'lon' => '4.88354800',
+        ],
+        [
+            'title' => 'Amsterdams Museum',
+            'lat' => '52.36998600',
+            'lon' => '4.88991900',
+        ],
+        [
+            'title' => 'Nemo',
+            'lat' => '52.37167670',
+            'lon' => '4.91522301',
+        ],
+        [
+            'title' => 'Scheepsvaartmuseum',
+            'lat' => '52.37424460',
+            'lon' => '4.91232705',
+        ],
+        [
+            'title' => 'Passenger Terminal Amsterdam PTA',
+            'lat' => '52.37746000',
+            'lon' => '4.91617300',
+        ],
+        [
+            'title' => 'Bloemenmarkt',
+            'lat' => '52.36693075',
+            'lon' => '4.89076454',
+        ],
+        [
+            'title' => 'De Dam',
+            'lat' => '52.37307500',
+            'lon' => '4.89247900',
+        ],
+        [
+            'title' => 'Joods Historisch Museum',
+            'lat' => '52.36711100',
+            'lon' => '4.90383300',
+        ],
+        [
+            'title' => 'Gassan Diamonds',
+            'lat' => '52.36973200',
+            'lon' => '4.90388000',
+        ],
+        [
+            'title' => 'Coster Diamonds',
+            'lat' => '52.35958300',
+            'lon' => '4.88312900',
+        ],
+        [
+            'title' => 'Hermitage',
+            'lat' => '52.36543300',
+            'lon' => '4.90299100',
+        ],
+        [
+            'title' => 'Portugese Synagoge',
+            'lat' => '52.36770700',
+            'lon' => '4.90470800',
+        ],
+        [
+            'title' => 'Heineken Brouwerij',
+            'lat' => '52.35786000',
+            'lon' => '4.89175200',
+        ],
+        [
+            'title' => 'Albert Cuypmarkt',
+            'lat' => '52.35594100',
+            'lon' => '4.89519400',
+        ],
+        [
+            'title' => 'Red Light District',
+            'lat' => '52.37356300',
+            'lon' => '4.89830600',
+        ],
+        [
+            'title' => 'Vondelpark',
+            'lat' => '52.35937900',
+            'lon' => '4.87311700',
+        ],
+        [
+            'title' => 'ARTIS',
+            'lat' => '52.36675200',
+            'lon' => '4.91408600',
+        ],
     ];
 
     // Add matching straatnamen
@@ -396,7 +512,10 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
     for ($i = 0; $i < count($typeAheadResults); $i++) {
         if ($typeAheadResults[$i]['label'] == 'Straatnamen') {
             foreach ($typeAheadResults[$i]['content'] as $straatnaam) {
-                $suggestions[] = $straatnaam['_display'];
+                $suggestions[] = [
+                    'title' => $straatnaam['_display'],
+                    'bag_uri' => $straatnaam['uri']
+                ];
             }
         }
     }
@@ -407,14 +526,14 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
     if (strlen($searchString) > 2) {
 
         foreach ($suggestions as $suggestion) {
-            if (strpos(strtolower($suggestion), strtolower($searchString)) !== false) {
+            if (strpos(strtolower($suggestion['title']), strtolower($searchString)) !== false) {
                 $prefixLength = 0;
                 $suffixLength = 0;
                 $prefixString = '';
                 $suffixString = '';
 
                 // Split string to higlight match
-                $split = explode(strtolower($searchString), strtolower($suggestion));
+                $split = explode(strtolower($searchString), strtolower($suggestion['title']));
                 if (!empty($split[0])) {
                     $prefixLength = strlen($split[0]);
                 }
@@ -423,14 +542,34 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
                 }
 
                 // Reconstruct string caps
-                $prefixString = substr($suggestion, 0, $prefixLength);
-                $searchString = substr($suggestion, $prefixLength, strlen($searchString));
-                $suffixString = substr($suggestion, $prefixLength + strlen($searchString));
+                $prefixString = substr($suggestion['title'], 0, $prefixLength);
+                $searchString = substr($suggestion['title'], $prefixLength, strlen($searchString));
+                $suffixString = substr($suggestion['title'], $prefixLength + strlen($searchString));
+
+                // Set lat lon and bag uri if available
+                $lat = NULL;
+                $lon = NULL;
+                $bagUri = NULL;
+
+                if (!empty($suggestion['lat'])) {
+                    $lat = $suggestion['lat'];
+                }
+
+                if (!empty($suggestion['lon'])) {
+                    $lon = $suggestion['lon'];
+                }
+
+                if (!empty($suggestion['bag_uri'])) {
+                    $bagUri = $suggestion['bag_uri'];
+                }
 
                 $matches[] = [
                     'prefix' => $prefixString,
                     'match' => $searchString,
-                    'suffix' => $suffixString
+                    'suffix' => $suffixString,
+                    'lat' => $lat,
+                    'lon' => $lon,
+                    'bag_uri' => $bagUri
                 ];
             }
         }
@@ -445,6 +584,7 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
         'suggestions' => $matches,
         'variant' => $variant
     ];
+
     render("web/partials/suggestion-list.twig", $data);
 });
 

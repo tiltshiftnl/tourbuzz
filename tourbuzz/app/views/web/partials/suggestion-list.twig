@@ -1,5 +1,7 @@
-<div class="suggestion-list {{ variant }}" data-suggestion-list>
+<ul class="suggestion-list {{ variant }}" data-suggestion-list>
     {% for item in suggestions %}
-        <a href="#" class="suggestion-list-item">{{ item.prefix }}<span class="suggestion-list-match">{{ item.match }}</span>{{ item.suffix }}</a>
+        <li data-lat="{{ item.lat|default('') }}" data-lon="{{ item.lon|default('') }}" data-bag-uri="{{ item.bag_uri|default('') }}">
+            <a href="#" class="suggestion-list-item">{{ item.prefix }}<span class="suggestion-list-match">{{ item.match }}</span>{{ item.suffix }}</a>
+        </li>
     {% endfor %}
-</div>
+</ul>
