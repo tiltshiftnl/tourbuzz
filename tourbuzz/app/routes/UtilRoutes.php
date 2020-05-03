@@ -153,6 +153,41 @@ $app->get('/calendar/:y/:m/:d', function ($y, $m, $d) use ($app) {
 });
 
 /**
+ * Return geoJson for given BagID
+ */
+$app->get('/async/bag-geojson/:bagid', function ($bagid) use ($app) {
+
+    $apiResponse = $app->api->get("bag/v1.1/openbareruimte/{$bagid}?format=json", "https://api.data.amsterdam.nl/");
+    $bagApiResults = $apiResponse->body;
+
+    $WGS84coordinates = [];
+    $RDcoordinates = $bagApiResults['geometrie']['coordinates'][0][0];
+
+    foreach ($RDcoordinates as $RDcoordinate) {
+        $WGS84coordinates[0][] = RDtoWGS84($RDcoordinate[0],$RDcoordinate[1]);
+    }
+
+    $geoJsonArray = [
+        "type" => "FeatureCollection",
+        "features" => [
+            [
+                "type" => "Feature",
+                "properties" => [
+                    "title" => "BAG object"
+                ],
+                "geometry" =>  [
+                    "type" => "Polygon",
+                    "coordinates" => $WGS84coordinates
+                ]
+            ]
+        ]
+    ];
+
+    header("Content-type: application/json");
+    die(json_encode($geoJsonArray));
+});
+
+/**
  * Styleguide
  */
 $app->get('/styleguide', function () use ($app) {

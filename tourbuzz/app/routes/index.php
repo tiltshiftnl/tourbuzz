@@ -560,7 +560,7 @@ $app->get('/async/poi-search', function () use ($app, $analytics) {
                 }
 
                 if (!empty($suggestion['bag_uri'])) {
-                    $bagUri = 'https://api.data.amsterdam.nl/'.$suggestion['bag_uri'].'?format=json';
+                    $bagUri = 'https://api.data.amsterdam.nl/'.$suggestion['bag_uri'];
                 }
 
                 $matches[] = [

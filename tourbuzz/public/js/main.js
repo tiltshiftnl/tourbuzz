@@ -332,7 +332,6 @@ function updateMap (el) {
     var zoom = el.getAttribute('data-zoom');
 
     if (!tbmap) {
-        console.log('create map...');
         tbmap = createMap(el, centerLat, centerLng, zoom);
         tbmap.scrollWheelZoom.disable();
         addCurrentLocation(tbmap);
@@ -354,10 +353,7 @@ function updateMap (el) {
             }
         }
     } else {
-        console.log('updating map...');
         tbmap.setView([centerLat, centerLng], zoom);
-        console.log(centerLat);
-        console.log(centerLng);
     }
 }
 
@@ -588,25 +584,27 @@ function gotoSearchResult (el) {
     var bagUri = el.getAttribute('data-bag-uri');
     var poiSuggestions = document.querySelector('[data-suggestion-list]');
 
+    poiSuggestions.classList.remove('-active');
+
     if (bagUri !== '') {
-        axios.get(bagUri)
+        var bagId = bagUri.split('/');
+        bagId = bagId[6];
+        axios.get('/async/bag-geojson/'+ bagId)
             .then(function (response) {
                 res = response.data;
-                //alert(res.geometrie);
-                console.log(res.geometrie);
                 var styles = {
-                    weight: 6,
+                    weight: 2,
                     opacity: 1,
-                    color: '#00FF00'
+                    color: '#0000FF'
                 };
-                var popupHTML = '<p>Resultaat</p>';
-                //mapLayers['searchresult'] = L.geoJSON(res.geometrie, {style: styles} ).bindPopup(popupHTML).addTo(tbmap);
-                //tbmap.fitBounds(mapLayers['searchresult'].getBounds());
+                var popupHTML = '<p>'+ el.getAttribute('data-search-string') +'</p>';
+
+                removeLayer('searchresult');
+                mapLayers['searchresult'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(tbmap);
+                tbmap.fitBounds(mapLayers['searchresult'].getBounds());
             });
     } else {
-        poiSuggestions.classList.remove('-active');
-        // TODO: add browse through arrow keys
-        //
+
         var customIcon = new L.divIcon({
             iconSize: [36, 39],
             iconAnchor: [18, 39],

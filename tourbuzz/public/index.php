@@ -101,6 +101,40 @@ function getData($fileName) {
     return false;
 }
 
+function RDtoWGS84( $x, $y ) {
+    $x = floatval($x);
+    $y = floatval($y);
+    $u = 1* ($x - 155000) * 0.00001;
+    $v = 1* ($y - 463000) * 0.00001;
+    $NB = 3235.65389 * $v                    +
+           -32.58297 * pow($u,2)             +
+            -0.24750 * pow($v,2)             +
+            -0.84978 * pow($u,2) * $v        +
+            -0.06550 * pow($v,3)             +
+            -0.01709 * pow($u,2) * pow($v,2) +
+            -0.00738 * $u                    +
+             0.00530 * pow($u,4)             +
+            -0.00039 * pow($u,2) * pow($v,3) +
+             0.00033 * pow($u,4) * $v        +
+            -0.00012 * $u * $v;
+    $NB = ($NB / 3600) + 52.15517440;
+    $OL = 5260.52916 * $u                    +
+           105.94684 * $u * $v               +
+             2.45656 * $u * pow($v,2)        +
+            -0.81885 * pow($u,3)             +
+             0.05594 * $u * pow($v,3)        +
+            -0.05607 * pow($u,3) * $v        +
+             0.01199 * $v                    +
+            -0.00256 * pow($u,3) * pow($v,2) +
+             0.00128 * $u * pow($v,4)        +
+             0.00022 * pow($v,2)             +
+            -0.00022 * pow($u,2)             +
+             0.00026 * pow($u,5);
+    $OL = ($OL / 3600) + 5.38720621;
+    //return array('lat'=>$NB, 'lng'=>$OL);
+    return array($OL,$NB);
+}
+
 require_once "../app/bootstrap.php"; // Bootstrap
 require_once "routes.php"; // System routes
 require_once "../app/routes/index.php"; // Project routes
