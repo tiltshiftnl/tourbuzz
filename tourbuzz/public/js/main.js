@@ -52,6 +52,9 @@ function addLayer (layerId) {
         case 'milieuzone':
             addMilieuzone(tbmap);
             break;
+        case 'searchresult':
+            addSearchResult(tbmap);
+            break;
         default:
     }
 }
@@ -72,6 +75,7 @@ function removeAllLayers () {
     removeLayer('verplichteroutes');
     removeLayer('verkeersdrukte');
     removeLayer('milieuzone');
+    removeLayer('searchresult');
 }
 
 //////////////////////
@@ -321,11 +325,6 @@ function createMap (el, lat, lon, zoom) {
     return newMap;
 }
 
-function repositionMap (lat, lng) {
-    var markerBounds = L.latLngBounds( [ lat, lng ]);
-    tbmap.fitBounds(markerBounds);
-}
-
 function updateMap (el) {
 
     var centerLat = el.getAttribute('data-center-lat');
@@ -333,28 +332,32 @@ function updateMap (el) {
     var zoom = el.getAttribute('data-zoom');
 
     if (!tbmap) {
+        console.log('create map...');
         tbmap = createMap(el, centerLat, centerLng, zoom);
         tbmap.scrollWheelZoom.disable();
         addCurrentLocation(tbmap);
-    }
 
-    var activateLayersString = el.getAttribute('data-activate-layers');
+        var activateLayersString = el.getAttribute('data-activate-layers');
 
-    if ( activateLayersString ) {
-        var activateLayers = activateLayersString.split(",");
-
-        //mapLayers = []; // reset all layers
-        var layers = document.querySelectorAll('[data-layer]');
-        for (var i = 0; i < layers.length; i++) {
-            currentLayerId = layers[i].getAttribute('data-layer');
-            if (activateLayers.indexOf(currentLayerId) !== -1) {
-                layers[i].classList.add('-active');
-                addLayer(currentLayerId);
-            } else {
-                layers[i].classList.remove('-active');
-                removeLayer(currentLayerId);
+        if ( activateLayersString ) {
+            var activateLayers = activateLayersString.split(",");
+            var layers = document.querySelectorAll('[data-layer]');
+            for (var i = 0; i < layers.length; i++) {
+                currentLayerId = layers[i].getAttribute('data-layer');
+                if (activateLayers.indexOf(currentLayerId) !== -1) {
+                    layers[i].classList.add('-active');
+                    addLayer(currentLayerId);
+                } else {
+                    layers[i].classList.remove('-active');
+                    removeLayer(currentLayerId);
+                }
             }
         }
+    } else {
+        console.log('updating map...');
+        tbmap.setView([centerLat, centerLng], zoom);
+        console.log(centerLat);
+        console.log(centerLng);
     }
 }
 
@@ -580,6 +583,51 @@ function POISearch (el) {
 
 }
 
+function gotoSearchResult (el) {
+    var mapView = document.querySelector('[data-mapview]');
+    var bagUri = el.getAttribute('data-bag-uri');
+    var poiSuggestions = document.querySelector('[data-suggestion-list]');
+
+    if (bagUri !== '') {
+        axios.get(bagUri)
+            .then(function (response) {
+                res = response.data;
+                //alert(res.geometrie);
+                console.log(res.geometrie);
+                var styles = {
+                    weight: 6,
+                    opacity: 1,
+                    color: '#00FF00'
+                };
+                var popupHTML = '<p>Resultaat</p>';
+                //mapLayers['searchresult'] = L.geoJSON(res.geometrie, {style: styles} ).bindPopup(popupHTML).addTo(tbmap);
+                //tbmap.fitBounds(mapLayers['searchresult'].getBounds());
+            });
+    } else {
+        poiSuggestions.classList.remove('-active');
+        // TODO: add browse through arrow keys
+        //
+        var customIcon = new L.divIcon({
+            iconSize: [36, 39],
+            iconAnchor: [18, 39],
+            popupAnchor: [0, -40],
+            className: 'custom-icon-whereami'
+        });
+
+        var popupHTML = '<p>'+ el.getAttribute('data-search-string') +'</p>';
+        var latSearchResult = el.getAttribute('data-lat');
+        var lonSearchResult = el.getAttribute('data-lon');
+
+        removeLayer('searchresult');
+        mapLayers['searchresult'] = L.marker([latSearchResult, lonSearchResult]).bindPopup(popupHTML).addTo(tbmap);
+
+        mapView.setAttribute('data-center-lat', latSearchResult);
+        mapView.setAttribute('data-center-lng', lonSearchResult);
+        mapView.setAttribute('data-zoom', 16);
+        updateMap(mapView);
+    }
+}
+
 //////////
 // Run //
 //////////
@@ -614,8 +662,7 @@ function run () {
 
     // Refresh on back button
     window.onpopstate = function(e) {
-        console.log('popstate');
-        window.location = document.location;
+        location.reload();
     };
 
 }

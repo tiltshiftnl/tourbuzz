@@ -1,7 +1,13 @@
 <ul class="suggestion-list {{ variant }}" data-suggestion-list>
-    {% for item in suggestions %}
-        <li data-lat="{{ item.lat|default('') }}" data-lon="{{ item.lon|default('') }}" data-bag-uri="{{ item.bag_uri|default('') }}">
-            <a href="#" class="suggestion-list-item">{{ item.prefix }}<span class="suggestion-list-match">{{ item.match }}</span>{{ item.suffix }}</a>
-        </li>
-    {% endfor %}
+    {% if suggestions is empty %}
+        <li class="suggestions-list-no-results">Geen resultaten gevonden</li>
+    {% else %}
+        {% for item in suggestions %}
+            <li>
+                <a href="#" class="suggestion-list-item" data-js-click="gotoSearchResult" data-lat="{{ item.lat|default('') }}" data-lon="{{ item.lon|default('') }}" data-bag-uri="{{ item.bag_uri|default('') }}" data-search-string="{{ item.prefix }}{{ item.match }}{{ item.suffix }}">
+                    {{ item.prefix }}<span class="suggestion-list-match">{{ item.match }}</span>{{ item.suffix }}
+                </a>
+            </li>
+        {% endfor %}
+    {% endif %}
 </ul>
