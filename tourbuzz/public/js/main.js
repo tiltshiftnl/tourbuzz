@@ -52,8 +52,8 @@ function addLayer (layerId) {
         case 'milieuzone':
             addMilieuzone(tbmap);
             break;
-        case 'searchresult':
-            addSearchResult(tbmap);
+        case 'bestemmingen':
+            addBestemmingen(tbmap);
             break;
         default:
     }
@@ -75,7 +75,7 @@ function removeAllLayers () {
     removeLayer('verplichteroutes');
     removeLayer('verkeersdrukte');
     removeLayer('milieuzone');
-    removeLayer('searchresult');
+    removeLayer('bestemmingen');
 }
 
 //////////////////////
@@ -304,6 +304,28 @@ function addMilieuzone (targetMap) {
             targetMap.fitBounds(mapLayers['milieuzone'].getBounds());
         });
     return true;
+}
+
+function addBestemmingen (targetMap) {
+    var dataUrl = '/json/bestemmingen';
+    axios.get(dataUrl)
+        .then(function (response) {
+            res = response.data;
+            var markerArray = [];
+            for (var i in res) {
+                var customIcon = new L.divIcon({
+                    iconSize: [36, 39],
+                    iconAnchor: [18, 39],
+                    popupAnchor: [0, -40],
+                    className: 'custom-icon-bestemming',
+                    //html: '<span>'+ res[i].title +'</span>'
+                });
+                popupHTML = "<h3 class='custom-marker-title -text-center'>" + res[i].title +"</h3>";
+                markerArray.push(L.marker([res[i].lat, res[i].lon], {icon: customIcon}).bindPopup(popupHTML));
+            }
+            mapLayers['bestemmingen'] = L.featureGroup(markerArray).addTo(targetMap);
+            targetMap.fitBounds(mapLayers['bestemmingen'].getBounds());
+        });
 }
 
 
@@ -562,6 +584,22 @@ function loadAvailability (el) {
 // POI search //
 ////////////////
 
+function POISearchForm (el) {
+    el.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var poiSearchInput = document.querySelector('[data-poi-search-input]');
+        console.log(poiSearchInput);
+        poiSearchInput.value = '';
+
+        var dataUrl = '/async/poi-search?search=' + el.value;
+        axios.get(dataUrl)
+            .then(function (response) {
+                res = response.data;
+                poiSearchSuggestions.innerHTML = res;
+            });
+    })
+}
+
 function POISearch (el) {
 
     var poiSearchSuggestions = document.querySelector('[data-poi-search-suggestion-list]');
@@ -595,7 +633,7 @@ function gotoSearchResult (el) {
                 var styles = {
                     weight: 2,
                     opacity: 1,
-                    color: '#0000FF'
+                    color: '#A00078'
                 };
                 var popupHTML = '<p>'+ el.getAttribute('data-search-string') +'</p>';
 

@@ -1,7 +1,7 @@
-<form class="poi-search">
+<form class="poi-search" data-poi-search-form data-js-ready="POISearchForm">
     <div class="poi-search-wrapper">
         <div class="poi-search-input-wrapper">
-            <input type="text" placeholder="Zoek op straatnaam of bestemming" class="poi-search-input" value="{{ search }}" data-js-ready="POISearch">
+            <input type="text" placeholder="Zoek op straatnaam of bestemming" class="poi-search-input" value="{{ search }}" data-poi-search-input data-js-ready="POISearch">
             <div class="poi-search-suggestion-list" data-poi-search-suggestion-list>
                 {% include 'web/partials/suggestion-list.twig' %}
             </div>

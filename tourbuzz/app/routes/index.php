@@ -349,161 +349,173 @@ $app->get('/rss', function () use ($app) {
     render("rss.twig", $data, ["Content-type" => "application/xml"]);
 });
 
+/* Bestemmingen */
+$bestemmingen = [
+   [
+        'title' => 'Centraal Station',
+        'lat' => '52.37833440',
+        'lon' => '4.90032257',
+    ],
+    [
+        'title' => 'Beurs van Berlage',
+        'lat' => '52.37502180',
+        'lon' => '4.89626468',
+    ],
+    [
+        'title' => 'Concertgebouw',
+        'lat' => '52.35619815',
+        'lon' => '4.87904479',
+    ],
+    [
+        'title' => 'Stedelijk Museum',
+        'lat' => '52.35790030',
+        'lon' => '4.87985982',
+    ],
+    [
+        'title' => 'Rijksmuseum',
+        'lat' => '52.35987590',
+        'lon' => '4.88505843',
+    ],
+    [
+        'title' => 'Van gogh museum',
+        'lat' => '52.35836725',
+        'lon' => '4.88108997',
+    ],
+    [
+        'title' => 'Lovers Rondvaart',
+        'lat' => '52.37866000',
+        'lon' => '4.89654300',
+    ],
+    [
+        'title' => 'Stromma Rondvaart',
+        'lat' => '52.36045200',
+        'lon' => '4.88649800',
+    ],
+    [
+        'title' => 'Rederij Kooij Rondvaart',
+        'lat' => '52.36905500',
+        'lon' => '4.89264600',
+    ],
+    [
+        'title' => 'Blue Boat Rondvaart',
+        'lat' => '52.35814600',
+        'lon' => '4.89207400',
+    ],
+    [
+        'title' => 'Riviercruise De Ruijterkade-oost',
+        'lat' => '52.37805000',
+        'lon' => '4.90810800',
+    ],
+    [
+        'title' => 'Riviercruise De Ruijterkade-west',
+        'lat' => '52.38181800',
+        'lon' => '4.89610700',
+    ],
+    [
+        'title' => 'Westermarkt/Anne Frankhuis/Jordaan',
+        'lat' => '52.37414000',
+        'lon' => '4.88354800',
+    ],
+    [
+        'title' => 'Amsterdams Museum',
+        'lat' => '52.36998600',
+        'lon' => '4.88991900',
+    ],
+    [
+        'title' => 'Nemo',
+        'lat' => '52.37424460',
+        'lon' => '4.91232705',
+    ],
+    [
+        'title' => 'Scheepsvaartmuseum',
+        'lat' => '52.37167670',
+        'lon' => '4.91522301',
+    ],
+    [
+        'title' => 'Passenger Terminal Amsterdam PTA',
+        'lat' => '52.37746000',
+        'lon' => '4.91617300',
+    ],
+    [
+        'title' => 'Bloemenmarkt',
+        'lat' => '52.36693075',
+        'lon' => '4.89076454',
+    ],
+    [
+        'title' => 'De Dam',
+        'lat' => '52.37307500',
+        'lon' => '4.89247900',
+    ],
+    [
+        'title' => 'Joods Historisch Museum',
+        'lat' => '52.36711100',
+        'lon' => '4.90383300',
+    ],
+    [
+        'title' => 'Gassan Diamonds',
+        'lat' => '52.36973200',
+        'lon' => '4.90388000',
+    ],
+    [
+        'title' => 'Coster Diamonds',
+        'lat' => '52.35958300',
+        'lon' => '4.88312900',
+    ],
+    [
+        'title' => 'Hermitage',
+        'lat' => '52.36543300',
+        'lon' => '4.90299100',
+    ],
+    [
+        'title' => 'Portugese Synagoge',
+        'lat' => '52.36770700',
+        'lon' => '4.90470800',
+    ],
+    [
+        'title' => 'Heineken Brouwerij',
+        'lat' => '52.35786000',
+        'lon' => '4.89175200',
+    ],
+    [
+        'title' => 'Albert Cuypmarkt',
+        'lat' => '52.35594100',
+        'lon' => '4.89519400',
+    ],
+    [
+        'title' => 'Red Light District',
+        'lat' => '52.37356300',
+        'lon' => '4.89830600',
+    ],
+    [
+        'title' => 'Vondelpark',
+        'lat' => '52.35937900',
+        'lon' => '4.87311700',
+    ],
+    [
+        'title' => 'ARTIS',
+        'lat' => '52.36675200',
+        'lon' => '4.91408600',
+    ],
+];
+
+
+/**
+ * Bestemmingen json
+ */
+$app->get('/json/bestemmingen', function () use ($app, $analytics, $bestemmingen) {
+    header("Content-type: application/json");
+    die(json_encode($bestemmingen));
+});
+
 
 /**
  * POI search
  */
-$app->get('/async/poi-search', function () use ($app, $analytics) {
+$app->get('/async/poi-search', function () use ($app, $analytics, $bestemmingen) {
 
     $searchString = $app->request->get('search');
 
-    $suggestions = [
-       [
-            'title' => 'Centraal Station',
-            'lat' => '52.37833440',
-            'lon' => '4.90032257',
-        ],
-        [
-            'title' => 'Beurs van Berlage',
-            'lat' => '52.37502180',
-            'lon' => '4.89626468',
-        ],
-        [
-            'title' => 'Concertgebouw',
-            'lat' => '52.35619815',
-            'lon' => '4.87904479',
-        ],
-        [
-            'title' => 'Stedelijk Museum',
-            'lat' => '52.35790030',
-            'lon' => '4.87985982',
-        ],
-        [
-            'title' => 'Rijksmuseum',
-            'lat' => '52.35987590',
-            'lon' => '4.88505843',
-        ],
-        [
-            'title' => 'Van gogh museum',
-            'lat' => '52.35836725',
-            'lon' => '4.88108997',
-        ],
-        [
-            'title' => 'Lovers Rondvaart',
-            'lat' => '52.37866000',
-            'lon' => '4.89654300',
-        ],
-        [
-            'title' => 'Stromma Rondvaart',
-            'lat' => '52.36045200',
-            'lon' => '4.88649800',
-        ],
-        [
-            'title' => 'Rederij Kooij Rondvaart',
-            'lat' => '52.36905500',
-            'lon' => '4.89264600',
-        ],
-        [
-            'title' => 'Blue Boat Rondvaart',
-            'lat' => '52.35814600',
-            'lon' => '4.89207400',
-        ],
-        [
-            'title' => 'Riviercruise De Ruijterkade-oost',
-            'lat' => '52.37805000',
-            'lon' => '4.90810800',
-        ],
-        [
-            'title' => 'Riviercruise De Ruijterkade-west',
-            'lat' => '52.38181800',
-            'lon' => '4.89610700',
-        ],
-        [
-            'title' => 'Westermarkt/Anne Frankhuis/Jordaan',
-            'lat' => '52.37414000',
-            'lon' => '4.88354800',
-        ],
-        [
-            'title' => 'Amsterdams Museum',
-            'lat' => '52.36998600',
-            'lon' => '4.88991900',
-        ],
-        [
-            'title' => 'Nemo',
-            'lat' => '52.37167670',
-            'lon' => '4.91522301',
-        ],
-        [
-            'title' => 'Scheepsvaartmuseum',
-            'lat' => '52.37424460',
-            'lon' => '4.91232705',
-        ],
-        [
-            'title' => 'Passenger Terminal Amsterdam PTA',
-            'lat' => '52.37746000',
-            'lon' => '4.91617300',
-        ],
-        [
-            'title' => 'Bloemenmarkt',
-            'lat' => '52.36693075',
-            'lon' => '4.89076454',
-        ],
-        [
-            'title' => 'De Dam',
-            'lat' => '52.37307500',
-            'lon' => '4.89247900',
-        ],
-        [
-            'title' => 'Joods Historisch Museum',
-            'lat' => '52.36711100',
-            'lon' => '4.90383300',
-        ],
-        [
-            'title' => 'Gassan Diamonds',
-            'lat' => '52.36973200',
-            'lon' => '4.90388000',
-        ],
-        [
-            'title' => 'Coster Diamonds',
-            'lat' => '52.35958300',
-            'lon' => '4.88312900',
-        ],
-        [
-            'title' => 'Hermitage',
-            'lat' => '52.36543300',
-            'lon' => '4.90299100',
-        ],
-        [
-            'title' => 'Portugese Synagoge',
-            'lat' => '52.36770700',
-            'lon' => '4.90470800',
-        ],
-        [
-            'title' => 'Heineken Brouwerij',
-            'lat' => '52.35786000',
-            'lon' => '4.89175200',
-        ],
-        [
-            'title' => 'Albert Cuypmarkt',
-            'lat' => '52.35594100',
-            'lon' => '4.89519400',
-        ],
-        [
-            'title' => 'Red Light District',
-            'lat' => '52.37356300',
-            'lon' => '4.89830600',
-        ],
-        [
-            'title' => 'Vondelpark',
-            'lat' => '52.35937900',
-            'lon' => '4.87311700',
-        ],
-        [
-            'title' => 'ARTIS',
-            'lat' => '52.36675200',
-            'lon' => '4.91408600',
-        ],
-    ];
+    $suggestions = $bestemmingen;
 
     // Add matching straatnamen
     $apiResponse = $app->api->get("typeahead/?q={$searchString}", "https://api.data.amsterdam.nl/");

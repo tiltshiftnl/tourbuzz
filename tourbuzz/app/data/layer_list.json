@@ -39,6 +39,11 @@
       "id": "milieuzone",
       "description": "Milieuzone",
       "color": "pink"
+    },
+    {
+      "id": "bestemmingen",
+      "description": "Bestemmingen",
+      "color": "purple"
     }
   ]
 }
