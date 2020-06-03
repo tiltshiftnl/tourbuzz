@@ -1,11 +1,17 @@
-FROM nginx:1.16.0
+FROM nginx:1.18.0
 MAINTAINER datapunt@amsterdam.nl
 
 EXPOSE 80
 
 # install php packages
-RUN apt-get update && apt-get install -y git vim wget cron rsync php7.0-fpm php7.0-intl php7.0-pgsql php7.0-curl php7.0-cli php7.0-gd php7.0-intl php7.0-mbstring php7.0-mcrypt php7.0-opcache php7.0-sqlite3 php7.0-xml php7.0-xsl php7.0-zip php7.0-igbinary php7.0-json php7.0-memcached php7.0-msgpack php7.0-xmlrpc \
-  && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get autoremove && apt-get check && apt-get clean
+RUN apt-get update \
+ && apt-get install -y git vim wget curl cron rsync unzip apt-transport-https lsb-release ca-certificates \
+ && wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
+ && sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' \
+ && apt-get update \
+ && apt-get -y install php7.0-fpm php7.0-intl php7.0-pgsql php7.0-curl php7.0-cli php7.0-gd php7.0-intl php7.0-mbstring php7.0-mcrypt php7.0-opcache php7.0-sqlite3 php7.0-xml php7.0-xsl php7.0-zip php7.0-igbinary php7.0-json php7.0-memcached php7.0-msgpack php7.0-xmlrpc \
+ && apt-get -y upgrade \
+ && apt-get clean
 
 # project setup
 COPY . /srv/web/tourbuzz
