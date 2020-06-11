@@ -1,6 +1,8 @@
 FROM nginx:1.18.0
 MAINTAINER datapunt@amsterdam.nl
 
+ENV GOOGLEMAPS_API_KEY insecure
+
 EXPOSE 80
 
 # install php packages
