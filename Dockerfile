@@ -60,6 +60,7 @@ RUN rm /etc/nginx/conf.d/default.conf \
   && echo "client_max_body_size 20m;" >> /etc/nginx/conf.d/extra.conf \
   && sed -i '/upload_max_filesize \= 2M/c\upload_max_filesize \= 20M' /etc/php/7.3/fpm/php.ini \
   && sed -i '/post_max_size \= 8M/c\post_max_size \= 21M' /etc/php/7.3/fpm/php.ini \
+  && sed -i "/variables_order \=/c\variables_order = \"EGPCS\"" /etc/php/7.3/fpm/php.ini \
   && sed -i '/\;date\.timezone \=/c\date.timezone = Europe\/Amsterdam' /etc/php/7.3/fpm/php.ini \
   && sed -i '/\;security\.limit_extensions \= \.php \.php3 \.php4 \.php5 \.php7/c\security\.limit_extensions \= \.php' /etc/php/7.3/fpm/pool.d/www.conf \
   && sed -e 's/;clear_env = no/clear_env = no/' -i /etc/php/7.3/fpm/pool.d/www.conf
@@ -72,4 +73,5 @@ RUN php composer.phar install -d tourbuzz/tourbuzz/ --prefer-dist --no-progress 
 COPY Docker/docker-entrypoint.sh /docker-entrypoint.sh
 COPY Docker/config.php /srv/web/tourbuzz/tourbuzz/app/config/
 RUN chmod +x /docker-entrypoint.sh
+# RUN cat /etc/php/7.3/fpm/php.ini | grep variables_order
 CMD /docker-entrypoint.sh
