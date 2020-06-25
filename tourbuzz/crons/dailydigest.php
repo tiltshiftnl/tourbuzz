@@ -1,9 +1,9 @@
 <?php
 
-$apiUri = "http://api.tourbuzz.nl";
-$buzzProc = "http://";
-$buzzUri = "www.tourbuzz.nl";
-$mailTo = "m.sloothaak@amsterdam.nl, thartevelt@amsterdam.nl, j.groenen@amsterdam.nl, a.zwiers@amsterdam.nl, johan.groenen@gmail.com";
+$apiUri = getenv('TOURBUZZ_API_URI_PROTOCOL') . getenv('TOURBUZZ_API_URI');
+$buzzProc = getenv('TOURBUZZ_URI_PROTOCOL');
+$buzzUri = getenv('TOURBUZZ_URI');
+$mailTo = getenv('TOURBUZZ_RECIPIENTS');
 
 $res = json_decode(file_get_contents($apiUri . "/berichten/" . date("Y/m/d")));
 $messages = (array) $res->messages;

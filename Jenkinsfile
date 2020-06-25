@@ -24,7 +24,7 @@ node {
 
     stage("Build image") {
         tryStep "build", {
-            def image = docker.build("build.app.amsterdam.nl:5000/fixxx/tourbuzz:${env.BUILD_NUMBER}")
+            def image = docker.build("${env.BUILD_URL}:${env.BUILD_NUMBER}")
             image.push()
         }
     }
@@ -39,7 +39,7 @@ if (BRANCH == "master") {
     node {
         stage('Push acceptance image') {
             tryStep "image tagging", {
-                def image = docker.image("build.app.amsterdam.nl:5000/fixxx/tourbuzz:${env.BUILD_NUMBER}")
+                def image = docker.image("${env.BUILD_URL}:${env.BUILD_NUMBER}")
                 image.pull()
                 image.push("acceptance")
                 image.push("production")
@@ -68,7 +68,7 @@ if (BRANCH == "master") {
     node {
         stage('Push production image') {
             tryStep "image tagging", {
-                def image = docker.image("build.app.amsterdam.nl:5000/fixxx/tourbuzz:${env.BUILD_NUMBER}")
+                def image = docker.image("${env.BUILD_URL}:${env.BUILD_NUMBER}")
                 image.pull()
                 image.push("production")
                 image.push("latest")

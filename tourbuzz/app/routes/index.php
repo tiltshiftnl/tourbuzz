@@ -12,7 +12,7 @@ require "WachtwoordVergetenRoutes.php";
 /**
  * Home redirects to current date.
  */
-$app->get('/', function () use ($app, $apiRoot) {
+$app->get('/', function () use ($app) {
     $app->redirect(date('/Y/m/d'));
 });
 

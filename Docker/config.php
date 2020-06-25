@@ -1,8 +1,8 @@
 <?php
 
-$apiRoot = "https://api.tourbuzz.nl/";
+$apiRoot = "https://tourbuzz-api.tiltshiftapps.nl/";
 $analytics = true;
-$image_api = "https://api.tourbuzz.nl/afbeeldingen";
-$mailTo = "datapunt@amsterdam.nl";
+$image_api = "https://tourbuzz-api.tiltshiftapps.nl/afbeeldingen";
+$mailTo = "tourbuzz@tiltshift.nl";
 $buzzProc = "https://";
-$buzzUri = "www.tourbuzz.nl";
+$buzzUri = "tourbuzz.tiltshiftapps.nl";

@@ -71,8 +71,15 @@
             <footer>
                 <div class="wrapper">
                     <div class="col-1-1">
-                        <p>{{ __('Meer info') }}: <a href="//www.amsterdam.nl/touringcars" target="_blank">www.amsterdam.nl/touringcars</a></p>
-                        <p style="font-weight: normal">{{ __('Feedback of vragen kunt u sturen naar') }}<br> <a href="mailto:touringcar@amsterdam.nl">touringcar@amsterdam.nl</a></p>
+                        <p>{{ __('Meer info') }}: <a href="{{ TOURINGCAR_URI_PROTOCOL }}{{ TOURINGCAR_URI }}" target="_blank">{{ TOURINGCAR_URI }}</a></p>
+                        <p style="font-weight: normal">
+                            {{ __('Feedback of vragen kunt u sturen naar') }}
+                            <br>
+                            {{ TOURINGCAR_CONTACT_NAME }}:
+                            <a href="mailto:{{ TOURINGCAR_CONTACT_EMAIL }}">
+                                {{ TOURINGCAR_CONTACT_NAME }}
+                            </a>
+                        </p>
 
                         {% if timestamp is not empty %}
                             <p>{{ __('Laatste wijziging') }}: {{ timestamp|date('d-m-Y') }}</p>

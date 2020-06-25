@@ -1,7 +1,17 @@
 FROM nginx:1.18.0
-MAINTAINER datapunt@amsterdam.nl
+MAINTAINER tourbuzz@tiltshift.nl
 
 ENV GOOGLEMAPS_API_KEY insecure
+
+ENV TOURBUZZ_URI_PROTOCOL https://
+ENV TOURBUZZ_URI tourbuzz.tiltshiftapps.nl
+ENV TOURBUZZ_API_URI_PROTOCOL https://
+ENV TOURBUZZ_API_URI tourbuzz-api.tiltshiftapps.nl
+ENV TOURBUZZ_RECIPIENTS mike@example.com, jane@example.com
+ENV TOURINGCAR_PROTOCOL https://
+ENV TOURINGCAR_URI www.example.com/touringcars
+ENV TOURINGCAR_CONTACT_NAME Mike Doe
+ENV TOURINGCAR_CONTACT_EMAIL mike@example.com
 
 EXPOSE 80
 

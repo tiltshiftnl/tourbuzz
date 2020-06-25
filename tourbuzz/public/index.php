@@ -78,6 +78,10 @@ function insertLinks($text) {
 }
 
 $twig = $app->view()->getEnvironment();
+$twig->addGlobal('TOURINGCAR_URI_PROTOCOL', getenv('TOURINGCAR_URI_PROTOCOL'));
+$twig->addGlobal('TOURINGCAR_URI', getenv('TOURINGCAR_URI'));
+$twig->addGlobal('TOURINGCAR_CONTACT_EMAIL', getenv('TOURINGCAR_CONTACT_EMAIL'));
+$twig->addGlobal('TOURINGCAR_CONTACT_NAME', getenv('TOURINGCAR_CONTACT_NAME'));
 $twig->addFunction('__', new Twig_Function_Function('translate'));
 $twig->addFunction('maand', new Twig_Function_Function('month'));
 $twig->addFunction('insertlinks', new Twig_Function_Function('insertLinks'));
