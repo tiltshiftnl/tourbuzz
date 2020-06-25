@@ -25,5 +25,4 @@ touch /srv/web/tourbuzz/tourbuzz/logs/app.log
 chown -R www-data:www-data /srv/web/tourbuzz/tourbuzz/logs
 tail -f /srv/web/tourbuzz/tourbuzz/logs/app.log &
 
-service php7.3-fpm start 
-nginx -g "daemon off;"
+/etc/init.d/php7.3-fpm start && nginx -g "daemon off;"
