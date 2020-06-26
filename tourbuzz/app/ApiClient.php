@@ -22,6 +22,7 @@ class ApiClient {
 
     public function __construct($url, LoggerInterface $logger) {
         $this->_guzzle = new \GuzzleHttp\Client();
+        // TODO: Make sure the apiRoot always ends with a /
         $this->_apiRoot = $url;
         $this->logger = $logger;
     }
@@ -47,7 +48,7 @@ class ApiClient {
                 'http_errors' => false
             ]);
             if ($res->getStatusCode() >= 500) {
-                $this->logger->error('Error response from tourbuzz API', ['method' => 'GET', 'uri' => $uri, 'status_code' => $res->getStatusCode()]);
+                $this->logger->error('Error response from tourbuzz API', ['method' => 'GET', 'uri' => $requestUri, 'status_code' => $res->getStatusCode()]);
             }
         } catch (\Exception $e) {
             $this->logger->error('Exception while loading info from tourbuzz API', [
