@@ -78,6 +78,9 @@ function insertLinks($text) {
 }
 
 $twig = $app->view()->getEnvironment();
+$twig->addGlobal('TOURBUZZ_API_URI_PROTOCOL', getenv('TOURBUZZ_API_URI_PROTOCOL'));
+$twig->addGlobal('TOURBUZZ_API_URI', getenv('TOURBUZZ_API_URI'));
+$twig->addGlobal('TOURINGCAR_URI_PROTOCOL', getenv('TOURINGCAR_URI_PROTOCOL'));
 $twig->addGlobal('TOURINGCAR_URI_PROTOCOL', getenv('TOURINGCAR_URI_PROTOCOL'));
 $twig->addGlobal('TOURINGCAR_URI', getenv('TOURINGCAR_URI'));
 $twig->addGlobal('TOURINGCAR_CONTACT_EMAIL', getenv('TOURINGCAR_CONTACT_EMAIL'));

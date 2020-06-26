@@ -146,7 +146,7 @@ function addBerichten (targetMap) {
 }
 
 function addHaltes (targetMap) {
-    var dataUrl = 'https://api.tourbuzz.nl/haltes';
+    var dataUrl = tourbuzz_api_base_uri + '/haltes';
     var mapviewEl = document.querySelector('[data-mapview]');
     var embedded = mapviewEl.getAttribute('data-embedded');
     axios.get(dataUrl)
@@ -177,7 +177,7 @@ function addHaltes (targetMap) {
 }
 
 function addParkeren (targetMap) {
-    var dataUrl = 'https://api.tourbuzz.nl/parkeerplaatsen';
+    var dataUrl = tourbuzz_api_base_uri + '/parkeerplaatsen';
     var mapviewEl = document.querySelector('[data-mapview]');
     var embedded = mapviewEl.getAttribute('data-embedded');
     axios.get(dataUrl)
@@ -232,7 +232,7 @@ function addDoorrijhoogtes (targetMap) {
 }
 
 function addBestemmingsverkeer (targetMap) {
-    var dataUrl = 'https://api.tourbuzz.nl/routes/roadwork/geojson';
+    var dataUrl = tourbuzz_api_base_uri + '/routes/roadwork/geojson';
     axios.get(dataUrl)
         .then(function (response) {
             res = response.data;
@@ -248,7 +248,7 @@ function addBestemmingsverkeer (targetMap) {
 }
 
 function addAanbevolenroutes (targetMap) {
-    var dataUrl = 'https://api.tourbuzz.nl/routes/recommended/geojson';
+    var dataUrl = tourbuzz_api_base_uri + '/routes/recommended/geojson';
     axios.get(dataUrl)
         .then(function (response) {
             res = response.data;
@@ -264,7 +264,7 @@ function addAanbevolenroutes (targetMap) {
 }
 
 function addVerplichteroutes(targetMap) {
-    var dataUrl = 'https://api.tourbuzz.nl/routes/mandatory/geojson';
+    var dataUrl = tourbuzz_api_base_uri + '/routes/mandatory/geojson';
     axios.get(dataUrl)
         .then(function (response) {
             res = response.data;
