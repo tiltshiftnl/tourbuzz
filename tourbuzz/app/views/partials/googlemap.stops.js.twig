@@ -23,7 +23,7 @@ function initMap() {
 
     {% for halte in haltes %}
         image = {
-            url: 'https://www.tourbuzz.nl/img/haltes/{{ halte.haltenummer|lower }}.png',
+            url: '{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/img/haltes/{{ halte.haltenummer|lower }}.png',
         };
 
         marker = new google.maps.Marker({
@@ -44,7 +44,7 @@ function initMap() {
 
     {% for parkeerplaats in parkeerplaatsen %}
         image = {
-            url: 'https://www.tourbuzz.nl/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png',
+            url: '{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/img/parkeerplaatsen/{{ parkeerplaats.nummer|lower }}.png',
         };
 
         marker = new google.maps.Marker({

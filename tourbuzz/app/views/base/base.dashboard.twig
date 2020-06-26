@@ -10,7 +10,7 @@
 
         {% block meta %}
         <link rel="image_src" href="/img/tourbuzz_fb_preview.png">
-        <link rel="canonical" href="http://www.tourbuzz.nl">
+        <link rel="canonical" href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">
 
         <title>Tour Buzz</title>
         <meta name="title" content="Tour Buzz">
@@ -18,10 +18,10 @@
         <meta name="keywords" content="amsterdam, touringcar, nieuws">
 
         <meta property="og:title" content="Tour Buzz">
-        <meta property="og:url" content="http://www.tourbuzz.nl">
+        <meta property="og:url" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">
         <meta property="og:description" content="Tour Buzz - Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
         <meta property="og:site_name" content="Tour Buzz">
-        <meta property="og:image" content="http://www.tourbuzz.nl/img/tourbuzz_fb_preview.png">
+        <meta property="og:image" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/img/tourbuzz_fb_preview.png">
         {% endblock %}
 
 		<script type="text/javascript" src="//fast.fonts.net/jsapi/7cd4c080-5246-49b1-8f48-530e9d1829a6.js"></script>

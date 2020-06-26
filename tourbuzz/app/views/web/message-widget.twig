@@ -42,7 +42,7 @@
                 {% if lang == 'es' %}{{ insertlinks(record.body_es)|raw }}{% endif %}
             {% endset %}#}
 
-            <a href="https://www.tourbuzz.nl/bericht/{{ record.id }}{% if Y %}/{{ Y }}/{{ m }}/{{ d }}{% endif %}" target="_blank" class="message-overview-item">
+            <a href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/bericht/{{ record.id }}{% if Y %}/{{ Y }}/{{ m }}/{{ d }}{% endif %}" target="_blank" class="message-overview-item">
                 <div class="message-overview-nr">{{ record.sort_order }}</div>
                 <h2 class="message-overview-item-title">{{ title }}</h2>
             </a>

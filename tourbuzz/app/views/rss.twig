@@ -1,14 +1,14 @@
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Tour Buzz</title>
-        <link>http://www.tourbuzz.nl</link>
+        <link>{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}</link>
         <description>Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.</description>
         <language>nl-nl</language>
         <lastBuildDate>{{ datetime }}</lastBuildDate>
         {% for bericht in berichten %}
         <item>
             <title>{{ bericht.title }}</title>
-            <link>http://www.tourbuzz.nl/bericht/{{ bericht.id }}#{{ dateCode }}</link>
+            <link>{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/bericht/{{ bericht.id }}#{{ dateCode }}</link>
             <guid>{{ bericht.id }}{{ dateCode }}</guid>
             <pubDate>{{ pubDate }}</pubDate>
             <author>Tour Buzz</author>
@@ -19,7 +19,7 @@
                     <html lang="nl" prefix="op: http://media.facebook.com/op#">
                         <head>
                             <meta charset="utf-8">
-                            <link rel="canonical" href="http://www.tourbuzz.nl/bericht/{{ bericht.id }}#{{ dateCode }}">
+                            <link rel="canonical" href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/bericht/{{ bericht.id }}#{{ dateCode }}">
                             <meta property="op:markup_version" content="v1.0">
                         </head>
                         <body>
@@ -54,9 +54,9 @@
                                         <a href="{{ bericht.link }}">{{ bericht.link}}</a>
                                     </p>
                                 {% endif %}
-                                <p>Voor meer touringcarnieuws uit Amsterdam kijk je op <a href="http://www.tourbuzz.nl">www.tourbuzz.nl</a>.</p>
+                                <p>Voor meer touringcarnieuws uit Amsterdam kijk je op <a href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">{{ TOURBUZZ_URI }}</a>.</p>
                                 <footer>
-                                    <p>Voor meer touringcarnieuws uit Amsterdam kijk je op <a href="http://www.tourbuzz.nl">www.tourbuzz.nl</a>.</p>
+                                    <p>Voor meer touringcarnieuws uit Amsterdam kijk je op <a href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">{{ TOURBUZZ_URI }}</a>.</p>
                                 </footer>
                             </article>
                         </body>

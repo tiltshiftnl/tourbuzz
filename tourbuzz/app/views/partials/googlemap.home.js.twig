@@ -23,7 +23,7 @@ function initMap() {
 
     {% for record in berichten %}
         image = {
-            url: 'https://www.tourbuzz.nl/img/markers/{{ loop.index }}.png',
+            url: '{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/img/markers/{{ loop.index }}.png',
             //size: new google.maps.Size(49,45), // the orignal size
             //scaledSize: new google.maps.Size(24,22), // the new size you want to use
             //origin: new google.maps.Point(0,22) // position in the sprite
