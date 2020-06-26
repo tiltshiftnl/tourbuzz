@@ -14,7 +14,7 @@ ENV TOURINGCAR_PROTOCOL https://
 ENV TOURINGCAR_URI www.example.com/touringcars
 ENV TOURINGCAR_CONTACT_NAME Mike Doe
 ENV TOURINGCAR_CONTACT_EMAIL mike@example.com
-
+ENV MAPBOX_ACCESS_TOKEN insecure
 EXPOSE 80
 
 # install php packages

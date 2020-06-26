@@ -18,7 +18,11 @@
         {% block main %}{% endblock %}
         {% block footer %}{% include 'web/partials/footer-block.twig' %}{% endblock %}
         {% block scripts %}
-            <script>var tourbuzz_api_base_uri = "{{ TOURBUZZ_API_URI_PROTOCOL }}{{ TOURBUZZ_API_URI }}";</script>
+
+            <script>
+                var tourbuzz_api_base_uri = "{{ TOURBUZZ_API_URI_PROTOCOL }}{{ TOURBUZZ_API_URI }}";
+                var mapbox_access_token = "{{ MAPBOX_ACCESS_TOKEN }}";
+            </script>
             <script src="/js/main.js"></script>
         {% endblock %}
     </body>

@@ -86,6 +86,7 @@ $twig->addGlobal('TOURINGCAR_URI', getenv('TOURINGCAR_URI'));
 $twig->addGlobal('TOURINGCAR_CONTACT_EMAIL', getenv('TOURINGCAR_CONTACT_EMAIL'));
 $twig->addGlobal('TOURINGCAR_CONTACT_NAME', getenv('TOURINGCAR_CONTACT_NAME'));
 $twig->addGlobal('TOURBUZZ_ORGANISATION', getenv('TOURBUZZ_ORGANISATION'));
+$twig->addGlobal('MAPBOX_ACCESS_TOKEN', getenv('MAPBOX_ACCESS_TOKEN'));
 $twig->addFunction('__', new Twig_Function_Function('translate'));
 $twig->addFunction('maand', new Twig_Function_Function('month'));
 $twig->addFunction('insertlinks', new Twig_Function_Function('insertLinks'));

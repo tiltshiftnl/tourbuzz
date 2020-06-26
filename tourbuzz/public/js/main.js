@@ -141,7 +141,9 @@ function addBerichten (targetMap) {
                 }
             }
             mapLayers['berichten'] = L.featureGroup(markerArray).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['berichten'].getBounds(), {padding: [50,50]});
+            if(markerArray.length > 0){
+                targetMap.fitBounds(mapLayers['berichten'].getBounds(), {padding: [50,50]});
+            }
         });
 }
 
@@ -310,14 +312,12 @@ function addMilieuzone (targetMap) {
 function createMap (el, lat, lon, zoom) {
     var newMap = L.map(el).setView([lat, lon], zoom);
     newMap.zoomControl.setPosition('topright');
-
-    L.tileLayer('https://t1.data.amsterdam.nl/topo_wm/{z}/{x}/{y}.png', {
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=' + mapbox_access_token, {
         tms: false,
-        minZoom: 11,
+        minZoom: 3,
         maxZoom: 18,
-        attribution: 'Kaartgegevens CC-BY-4.0 Gemeente Amsterdam'
+        attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(newMap);
-
     return newMap;
 }
 
@@ -334,8 +334,8 @@ function updateMap (el) {
 
     if (!tbmap) {
         tbmap = createMap(el, centerLat, centerLng, zoom);
-        tbmap.scrollWheelZoom.disable();
-        addCurrentLocation(tbmap);
+        //tbmap.scrollWheelZoom.disable();
+        //addCurrentLocation(tbmap);
     }
 
     var activateLayersString = el.getAttribute('data-activate-layers');

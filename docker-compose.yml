@@ -7,3 +7,5 @@ services:
             - "80:80"
         environment:
           GOOGLEMAPS_API_KEY: "insecure"
+        volumes:
+          - ./tourbuzz/public:/srv/web/tourbuzz/tourbuzz/public
