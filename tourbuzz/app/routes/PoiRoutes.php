@@ -103,14 +103,14 @@ $app->get('/gpx', function () use ($app) {
 
     $gpxRoot = $dom->createElement('gpx');
     $gpxRoot->setAttribute('version', '1.0');
-    $gpxRoot->setAttribute('creator', 'Tourbuzz.nl, Gemeente Amsterdam');
+    $gpxRoot->setAttribute('creator', getenv('TOURBUZZ_URI') . ', ' . getenv('TOURBUZZ_ORGANISATION'));
     $gpxRoot->setAttribute('xmlns', 'http://www.topografix.com/GPX/1/0');
     $gpxRoot->setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
     $gpxRoot->setAttribute('xsi:schemaLocation', 'http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd');
     $dom->appendChild($gpxRoot);
 
     $name = $dom->createElement('name');
-    $name->appendChild($dom->createTextNode('Gemeente Amsterdam - Tourbuzz - Haltes'));
+    $name->appendChild($dom->createTextNode(getenv('TOURBUZZ_ORGANISATION') . ' - ' . getenv('TOURBUZZ_URI') . ' - Haltes'));
     $gpxRoot->appendChild($name);
 
     /**

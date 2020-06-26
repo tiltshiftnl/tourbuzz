@@ -18,7 +18,7 @@ $app->get('/token', function () use ($app) {
  */
 $app->get('/robots.txt', function () use ($app) {
     header("Content-type: text/plain");
-    if ( $_SERVER['HTTP_HOST'] == 'www.tourbuzz.nl' ) {
+    if ( $_SERVER['HTTP_HOST'] == getenv('TOURBUZZ_URI') ) {
         readfile(__DIR__.'/../../public/robots.live.txt');
     } else {
         readfile(__DIR__.'/../../public/robots.dev.txt');

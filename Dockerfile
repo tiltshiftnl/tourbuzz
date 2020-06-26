@@ -4,6 +4,7 @@ MAINTAINER apps@tiltshift.nl
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV GOOGLEMAPS_API_KEY insecure
+ENV TOURBUZZ_ORGANISATION Your City Here
 ENV TOURBUZZ_URI_PROTOCOL https://
 ENV TOURBUZZ_URI tourbuzz.tiltshiftapps.nl
 ENV TOURBUZZ_API_URI_PROTOCOL https://
