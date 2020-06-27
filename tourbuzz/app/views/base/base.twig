@@ -12,15 +12,15 @@
         <link rel="image_src" href="/img/tourbuzz_fb_preview.png">
         <link rel="canonical" href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">
 
-        <title>Tour Buzz</title>
-        <meta name="title" content="Tour Buzz">
-        <meta name="description" content="Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
-        <meta name="keywords" content="amsterdam, touringcar, nieuws">
+        <title>{{ __('application.title') }}</title>
+        <meta name="title" content="{{ __('application.title') }}">
+        <meta name="description" content="{{ __('application.description') }}">
+        <meta name="keywords" content="{{ __('application.keywords') }}">
 
-        <meta property="og:title" content="Tour Buzz">
+        <meta property="og:title" content="{{ __('application.title') }}">
         <meta property="og:url" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">
-        <meta property="og:description" content="Tour Buzz - Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
-        <meta property="og:site_name" content="Tour Buzz">
+        <meta property="og:description" content="{{ __('application.description') }}">
+        <meta property="og:site_name" content="{{ __('application.title') }}">
         <meta property="og:image" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/img/tourbuzz_fb_preview.png">
         {% endblock %}
 
@@ -115,11 +115,11 @@
         {% block topselectie %}
             <nav class="main-nav">
                 <div class="wrapper">
-                        <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{#<img src="/img/buzz-icon-g.png" class="buzz-icon">#}{{ __('Berichten') }}</a>
-                        {#<a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('Haltes') }}</a>
-                        <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('Parkeren') }}</a>#}
-                        <a href="/haltes-parkeerplaatsen" class="{% if activetab == 'haltes-parkeerplaatsen' %}active{% endif %}">{{ __('Haltes') }} & {{ __('Parkeren') }}</a>
-                        {#<a href="/abonneren" class="{% if activetab == 'abonneren' %}active{% endif %}">{{ __('Abonneren') }}</a>#}
+                        <a href="/{{ Y }}/{{ m }}/{{ d }}" class="{% if activetab == 'berichten' %}active{% endif %}">{#<img src="/img/buzz-icon-g.png" class="buzz-icon">#}{{ __('messages.title') }}</a>
+                        {#<a href="/haltes" class="{% if activetab == 'haltes' %}active{% endif %}">{{ __('stops.title') }}</a>
+                        <a href="/parkeren" class="{% if activetab == 'parkeren' %}active{% endif %}">{{ __('parking.title') }}</a>#}
+                        <a href="/haltes-parkeerplaatsen" class="{% if activetab == 'haltes-parkeerplaatsen' %}active{% endif %}">{{ __('stops.title') }} & {{ __('parking.title') }}</a>
+                        {#<a href="/abonneren" class="{% if activetab == 'abonneren' %}active{% endif %}">{{ __('messages.subscribe') }}</a>#}
                 </div>
             </nav>
         {% endblock %}

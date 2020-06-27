@@ -1,13 +1,14 @@
 {
 	"require": {
-		"slim/slim": "~2.0",
-		"slim/views": "0.1.*",
-		"twig/twig": "1.18.*",
-		"intervention/image": "^2.3",
-		"leafo/scssphp": "0.0.*",
-		"guzzlehttp/guzzle": "^6.1",
-        "vlucas/phpdotenv": "^2.5",
-		"monolog/monolog": "^1.24"
+		"slim/slim": "2.6.3",
+		"slim/views": "0.1.3",
+		"twig/twig": "1.42.5",
+		"intervention/image": "2.5.1",
+		"scssphp/scssphp": "1.1.1",
+		"guzzlehttp/guzzle": "6.5.5",
+		"vlucas/phpdotenv": "5.0.0",
+		"monolog/monolog": "2.1.0",
+		"dflydev/dot-access-data": "2.0.0"
 	},
 	"autoload": {
 		"psr-4": {

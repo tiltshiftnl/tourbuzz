@@ -7,7 +7,7 @@ session_cache_limiter(false);
 session_start();
 
 require "../vendor/autoload.php";
-
+use Dflydev\DotAccessData\Data;
 
 /**
  * Load Twig plugin.
@@ -17,17 +17,35 @@ $view = $app->view();
 $view->setTemplatesDirectory("../app/views");
 $view->parserExtensions = [new \Slim\Views\TwigExtension()];
 
-function translate($msg, $lang = null) {
+function translate($msg, $options = null, $lang = null) {
     $lang = $lang === null ? $_SESSION['lang'] : $lang;
-    $translationsJson = file_get_contents("../app/translations/translations.json");
+    // Default language
+    $lang = $lang === null ? 'en' : $lang;
+
+    if (file_exists("../app/translations/messages_{$lang}.json")) {
+        $translationsJson = file_get_contents("../app/translations/messages_{$lang}.json");
+    } else {
+        $translationsJson = file_get_contents("../app/translations/messages_en.json");
+    }
 
     // Fixes UTF-8 conversion issues.
     $translationsJson =  mb_convert_encoding($translationsJson, 'UTF-8', mb_detect_encoding($translationsJson, 'UTF-8, ISO-8859-1', true));
 
-    $translations = json_decode($translationsJson);
-    return !empty($translations->translations->$msg) && !empty($translations->translations->$msg->{$lang}) ?
-        $translations->translations->$msg->{$lang} :
-        $msg;
+    $translations = json_decode($translationsJson, TRUE);
+    $data = new Data($translations);
+
+    if(gettype($msg) == 'string'){
+        $hit = $data->get($msg);
+
+        // Translation with string replace
+        if(is_array($options)){
+            return !empty($hit) && !is_array($hit) ? vsprintf($hit, $options) : "[i18n.{$lang}]: " .$msg;
+        }
+
+        // Todo implement pluralization
+        return !empty($hit) && !is_array($hit) ? $hit : "[i18n.{$lang}]: " .$msg;
+        
+    }
 }
 
 
@@ -37,24 +55,24 @@ function translate($msg, $lang = null) {
 function month($m) {
 
     if ( empty($m) ) {
-        return "Geen datum";
+        return "no_date";
     }
     $month = array (
-        'januari',
-        'februari',
-        'maart',
+        'january',
+        'february',
+        'march',
         'april',
-        'mei',
-        'juni',
-        'juli',
-        'augustus',
+        'may',
+        'june',
+        'july',
+        'august',
         'september',
-        'oktober',
+        'october',
         'november',
         'december'
     );
 
-    return translate($month[(int)$m - 1]);
+    return translate("months." . $month[(int)$m - 1]);
 }
 
 
@@ -78,6 +96,8 @@ function insertLinks($text) {
 }
 
 $twig = $app->view()->getEnvironment();
+$twig->addGlobal('TOURBUZZ_URI_PROTOCOL', getenv('TOURBUZZ_URI_PROTOCOL'));
+$twig->addGlobal('TOURBUZZ_URI', getenv('TOURBUZZ_URI'));
 $twig->addGlobal('TOURBUZZ_API_URI_PROTOCOL', getenv('TOURBUZZ_API_URI_PROTOCOL'));
 $twig->addGlobal('TOURBUZZ_API_URI', getenv('TOURBUZZ_API_URI'));
 $twig->addGlobal('TOURINGCAR_URI_PROTOCOL', getenv('TOURINGCAR_URI_PROTOCOL'));

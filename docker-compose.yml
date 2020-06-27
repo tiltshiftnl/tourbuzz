@@ -9,3 +9,5 @@ services:
           GOOGLEMAPS_API_KEY: "insecure"
         volumes:
           - ./tourbuzz/public:/srv/web/tourbuzz/tourbuzz/public
+          - ./tourbuzz/app/translations:/srv/web/tourbuzz/tourbuzz/app/translations
+          - ./tourbuzz/app/views:/srv/web/tourbuzz/tourbuzz/app/views

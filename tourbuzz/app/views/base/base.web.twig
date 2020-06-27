@@ -2,7 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{{ title }}</title>
+        {% block meta %}
+        <link rel="image_src" href="/img/tourbuzz_fb_preview.png">
+        <link rel="canonical" href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">
+
+        <title>{{ __('application.title') }}</title>
+        <meta name="title" content="{{ __('application.title') }}">
+        <meta name="description" content="{{ __('application.description') }}">
+        <meta name="keywords" content="{{ __('application.keywords') }}">
+
+        <meta property="og:title" content="{{ __('application.title') }}">
+        <meta property="og:url" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">
+        <meta property="og:description" content="{{ __('application.description') }}">
+        <meta property="og:site_name" content="{{ __('application.title') }}">
+        <meta property="og:image" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/img/tourbuzz_fb_preview.png">
+        {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/base.web.css">
         <link rel="stylesheet" href="/css/scss/web.scss">

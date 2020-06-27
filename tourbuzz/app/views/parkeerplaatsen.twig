@@ -44,9 +44,9 @@
                             <span class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</span>
                             <span>{{ parkeerplaats.naam }}</span><br>
                             {% if parkeerplaats.beschikbaar %}
-                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaatsen') }}</span><br>
+                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('stops.spots') }}</span><br>
                             {% else %}
-                              <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                              <span class="capaciteit nietbeschikbaar">{{ __('stops.unavailable') }}</span><br>
                             {% endif %}
                             <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span>
                         </div>

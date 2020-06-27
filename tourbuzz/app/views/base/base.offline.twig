@@ -12,15 +12,15 @@
         <link rel="image_src" href="/img/tourbuzz_fb_preview.png">
         <link rel="canonical" href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">
 
-        <title>Tour Buzz</title>
-        <meta name="title" content="Tour Buzz">
-        <meta name="description" content="Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
-        <meta name="keywords" content="amsterdam, touringcar, nieuws">
+        <title>{{ __('application.title') }}</title>
+        <meta name="title" content="{{ __('application.title') }}">
+        <meta name="description" content="{{ __('application.description') }}">
+        <meta name="keywords" content="{{ __('application.keywords') }}">
 
-        <meta property="og:title" content="Tour Buzz">
+        <meta property="og:title" content="{{ __('application.title') }}">
         <meta property="og:url" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}">
-        <meta property="og:description" content="Tour Buzz - Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.">
-        <meta property="og:site_name" content="Tour Buzz">
+        <meta property="og:description" content="{{ __('application.description') }}">
+        <meta property="og:site_name" content="{{ __('application.title') }}">
         <meta property="og:image" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/img/tourbuzz_fb_preview.png">
         {% endblock %}
 
@@ -58,7 +58,7 @@
         {% block topselectie %}
         <section class="notice">
            <div class="wrapper">
-                <p class="error">LET OP: U bent offline en ziet een aangepaste versie van Tour Buzz.</p>
+                <p class="error">{{ __('errors.offline') }}</p>
            </div>
         </section>
         {% endblock %}
@@ -73,7 +73,7 @@
                     <div class="col-1-1">
                         <p>{{ __('Meer info') }}: <a href="{{ TOURINGCAR_URI_PROTOCOL }}{{ TOURINGCAR_URI }}" target="_blank">{{ TOURINGCAR_URI }}</a></p>
                         <p style="font-weight: normal">
-                            {{ __('Feedback of vragen kunt u sturen naar') }}
+                            {{ __('about.feedback') }}
                             <br>
                             {{ TOURINGCAR_CONTACT_NAME }}:
                             <a href="mailto:{{ TOURINGCAR_CONTACT_EMAIL }}">
@@ -82,7 +82,7 @@
                         </p>
 
                         {% if timestamp is not empty %}
-                            <p>{{ __('Laatste wijziging') }}: {{ timestamp|date('d-m-Y') }}</p>
+                            <p>{{ __('updated') }}: {{ timestamp|date('d-m-Y') }}</p>
                         {% endif %}
 
                         <center style="margin-top: 10px"><div class="fb-like" data-share="false" data-width="240" data-show-faces="false"></div></center>

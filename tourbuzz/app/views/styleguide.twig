@@ -2,7 +2,7 @@
 
 {% block main %}
     <main class="wrapper">
-        <h1>styleguide</h1>
-        <p>{% for i in 1..300 %}Lange tekst. {% endfor %}</p>
+        <h1>{{ __('application.styleguide') }}</h1>
+        <p>{% for i in 1..300 %}{{ __('application.long_text') }} {% endfor %}</p>
     </main>
 {% endblock %}

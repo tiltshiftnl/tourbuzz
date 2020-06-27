@@ -1,6 +1,6 @@
 <div class="park-detail-spots-badge">
     {% if dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.vacantSpaces is not empty %}
-        {{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.vacantSpaces }} / {{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.parkingCapacity }} {{ __('plaatsen') }} {{ __('vrij') }}
+        {{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.vacantSpaces }} / {{ dynvialis.parkingFacilityDynamicInformation.facilityActualStatus.parkingCapacity }} {{ __('stops.spots') }} {{ __('stops.available') }}
     {% else %}
         {{ __('onbekend') }}
     {% endif %}

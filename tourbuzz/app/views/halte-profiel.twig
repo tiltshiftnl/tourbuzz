@@ -6,9 +6,9 @@
 
 <div style="position: relative">
             {% if record.beschikbaar %}
-                <span class="capaciteit" style="position: absolute; background: #fff; top: 10px; right: 10px; border: 0">{{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}</span>
+                <span class="capaciteit" style="position: absolute; background: #fff; top: 10px; right: 10px; border: 0">{{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}</span>
             {% else %}
-                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span>
+                <span class="capaciteit nietbeschikbaar">{{ __('stops.unavailable') }}</span>
             {% endif %}
             </div>
             <div style="background: #f8f8f8; padding: 10px 10px 0">
@@ -60,7 +60,7 @@
 
             {#<img src="/img/haltefoto.png" style="width: 100%; display: block; margin-bottom: 20px">#}
 
-            <a href="{{ record.mapsUrl }}" class="kaart-link">Google Maps</a>
+            <a href="{{ record.mapsUrl }}" class="kaart-link">{{ __('stops.maps') }}</a>
 
             {#{% include 'partials/mockup-bars.twig' %}#}
 

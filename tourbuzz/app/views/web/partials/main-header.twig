@@ -1,9 +1,9 @@
 <section class="main-header">
     <a href="/" class="main-header-logo-link">
-        <img src="/img/icons/andreas.svg" class="main-header-logo-img">
-        <span class="main-header-logo-text">Gemeente<br>Amsterdam</span>
+        <img src="/img/icons/{{ __('application.logo.img') }}" class="main-header-logo-img">
+        <span class="main-header-logo-text">{{ __('application.logo.text') }}</span>
     </a>
-    <h1 class="main-header-title"><a href="/">Tour Buzz</a></h1>
+    <h1 class="main-header-title"><a href="/">{{ __('application.title')}}</a></h1>
     <div class="main-header-include -lang-switch">
         {% include 'web/partials/lang-switch.twig' %}
     </div>

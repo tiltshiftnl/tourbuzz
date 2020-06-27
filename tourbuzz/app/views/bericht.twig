@@ -63,13 +63,13 @@
 
             {% if bericht.advice|trim is not empty %}
                 <section class="advies">
-                    <h4>{{ __('Advies') }}</h4>
+                    <h4>{{ __('messages.advice') }}</h4>
                     <p>{{ bericht.advice|raw }}</p>
                 </section>
             {% endif %}
 
             {% if bericht.link %}
-                <h4>{{ __('Meer informatie') }}</h4>
+                <h4>{{ __('messages.more') }}</h4>
                 <a href="{{ bericht.link }}" class="extern" target="_blank">{{ bericht.link }}</a>
             {% endif %}
 
@@ -77,7 +77,7 @@
                 <img src="{{ bericht.image_url }}/?width=800&method=resize">
             {% endif %}
 
-            <p><a href="/">{{ __('Meer nieuws') }}</a></p>
+            <p><a href="/">{{ __('news.more') }}</a></p>
     </section>
 </main>
 {% endblock %}

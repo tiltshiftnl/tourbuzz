@@ -1,0 +1,140 @@
+{
+    "application": {
+        "logo": {
+            "img": "andreas.svg",
+            "text": "Gemeente Amsterdam"
+        },
+        "title": "Tourbuzz",
+        "dashboard": "Tableau",
+        "keywords": "amsterda, voiture de tourisme, nouvelles",
+        "description": "Nouvelles quotidiennes pour les opérateurs de voitures de tourisme.",
+        "styleguide": "Guide de style",
+        "long_text": "Texte long."
+    },
+    "home": "Accueil",
+    "updated": "Dernière mise à jour",
+    "beta": "Beta",
+    "errors": {
+        "404": "404 - Page non trouvée",
+        "offline": "ATTENTION: vous êtes hors ligne et consultez une version alternative de Tourbuzz",
+        "no_translation": "Traduction non disponible"
+    },
+    "form": {
+        "email": "Email",
+        "name": "Nom",
+        "organisation": "Organisation",
+        "subscribe": "Souscrire",
+        "required": "* Obligatoire",
+        "unsubscribe": "Se désabonner",
+        "password": "Mot de passe",
+        "forgot_password": "Mot de passe oublié?",
+        "set_password": "Définir le mot de passe",
+        "username": "Nom d'utilisateur",
+        "enter_username": "Entrez votre nom d'utilisateur",
+        "submit": "Soumettre",
+        "previous": "Précédent",
+        "next": "Suivant"
+    },
+    "about": {
+        "title": "Sur Tourbuzz",
+        "description": "Aperçu du trafic, des détours et des travaux routiers pour les opérateurs de voitures de tourisme.",
+        "feedback": "Vos commentaires ou questions peuvent être adressés à",
+        "feedback_question": "Cette rétroaction est-elle utile?",
+        "thanks": "Merci pour votre avis",
+        "more": "Plus d'information"
+    },
+    "messages": {
+        "menu_item": "Messages",
+        "title": "Messages",
+        "message_service": "Service de messagerie Tourbuzz",
+        "text_service": "Alertes texte",
+        "unavailable": "Service temporairement indisponible...",
+        "advice": "Conseil",
+        "more": "Plus d'information",
+        "none": "Aucun message, nous vous souhaitons une conduite sûre!",
+        "not_Public": "Message - non public",
+        "newsletter": {
+            "description": "Abonnez-vous à la newsletter",
+            "subscribe": "Entrez vos coordonnées et recevez une newsletter bihebdomadaire avec des messages Tourbuzz dans votre email.",
+            "unsubscribe": "Saisissez l'adresse e-mail pour vous désinscrire du service Tourbuzz.",
+            "composed": "Want to stay automatically informed about Tour Buzz messages? Subscribe to the <a href=\"/berichtenservice\">message service</a> or <a href=\"/sms-aanmelden\">text alerts</a>."
+        },
+        "textservice": {
+            "description": "Subscribe to the newsletter",
+            "subscribe": "Enter your mobile number to receive important Tourbuzz text messages.",
+            "unsubscribe": "Enter the mobile number that should unsubscribe from the text message service.",
+            "unsubscribe_click": "Unsubscribe? Click <a href=\"/sms-afmelden\">here</a>"
+        }
+    },
+    "news": {
+        "more": "More news"
+    },
+    "stops": {
+        "title": "Stops",
+        "description": "All touringcar stops",
+        "spot": "spot",
+        "spots": "spot(s)",
+        "occupied": "occupied",
+        "available": "available",
+        "status": "Stop state",
+        "unavailable": "unavailable",
+        "maps": "Google Maps",
+        "exit_only": "Passenger get in/get off only. Attention: 10 minutes maximum stay.",
+        "max_10": "(max. 10 min)",
+        "instruction": "À ces endroits, les passagers peuvent monter ou descendre. Si un arrêt est occupé, veuillez vous rendre à l'arrêt le plus proche sur l'itinéraire désigné. Attention: 10 minutes maximum de séjour."
+    },
+    "parking": {
+        "title": "Parking",
+        "description": "À ces endroits, les voitures de tourisme peuvent être garées. Cliquez ici pour les prix.",
+        "live": "Live status"
+    },
+    "routes": {
+        "menu_item": "Routes",
+        "title": "Routes",
+        "information": "Route information",
+        "information_description": "Designated and advised routes for touringcars. Be aware of clearance heights.",
+        "methods": "Methods",
+        "pattern": "Modèle"
+    },
+    "downloads": {
+        "title": "Téléchargements",
+        "description": "Télécharger des fichiers pour la navigation GPS",
+        "poi": "Fichier POI - format Google Maps",
+        "csv": "Fichier CSV - format Garmin/Mio/Navman",
+        "ov2": "Fichier OV2 - format TomTom",
+        "gpx": "Fichier GPX - format GPX"
+    },
+    "contact": {
+        "title": "Contact",
+        "description": "Les questions et commentaires peuvent être adressés à"
+    },
+    "days": {
+        "today": "toujour",
+        "select": "Choisissez un jour",
+        "no_date": "Pas de date",
+        "abbreviated": {
+            "mo": "lu",
+            "tu": "ma",
+            "we": "me",
+            "th": "je",
+            "fr": "ve",
+            "sa": "sa",
+            "su": "md"
+        }
+    },
+    "months": {
+        "january": "janvier",
+        "february": "février",
+        "march": "mars",
+        "april": "avril",
+        "may": "mai",
+        "june": "uin",
+        "july": "juillet",
+        "august": "août",
+        "september": "septembre",
+        "october": "octobre",
+        "november": "novembre",
+        "december": "décembre"
+    }
+
+}

@@ -3,7 +3,7 @@
         {% include 'web/partials/date-picker.twig' %}
     </div>
     <div class="message-overview-list">
-        {% if status == 'UNAVAILABLE' %}Berichten tijdelijk niet beschikbaar...{% endif %}
+        {% if status == 'UNAVAILABLE' %}{{ __('messages.unavailable') }}{% endif %}
         {% for record in berichten %}
 
             {% set title %}

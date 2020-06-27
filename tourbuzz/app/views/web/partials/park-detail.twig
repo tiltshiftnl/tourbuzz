@@ -8,9 +8,9 @@
             {% if record.vialis %}
                 <span data-js-ready="loadAvailability" data-park-id="{{ record.nummer }}">...</span>
             {% elseif record.beschikbaar %}
-                <div class="park-detail-spots-badge">{{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}</div>
+                <div class="park-detail-spots-badge">{{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}</div>
             {% else %}
-                <div class="park-detail-spots-badge">{{ __('niet beschikbaar') }}</div>
+                <div class="park-detail-spots-badge">{{ __('stops.unavailable') }}</div>
             {% endif %}
         </div>
     </div>
@@ -23,5 +23,5 @@
         </div>
     </div>
     <hr class="park-detail-hr">
-    <a href="https://maps.google.com/?q={{ record.location.lat }},{{ record.location.lng }}" target="_blank" class="halte-detail-text-link">Google maps</a>
+    <a href="https://maps.google.com/?q={{ record.location.lat }},{{ record.location.lng }}" target="_blank" class="halte-detail-text-link">{{ __('stops.maps') }}</a>
 </div>

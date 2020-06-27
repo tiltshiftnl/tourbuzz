@@ -23,7 +23,8 @@ $app->container->singleton('logger', function ($c) {
 // Environment variables loading
 $envFile = __DIR__."/../.env";
 if (file_exists($envFile)) {
-    (new Dotenv\Dotenv(dirname($envFile)))->load();
+    $dotenv = Dotenv\Dotenv::createImmutable(dirname($envFile));
+    $dotenv->load();
 }
 
 /**
@@ -94,7 +95,9 @@ $app->hook('slim.before', function() use ($app) {
         $_SESSION['lang'] = 'nl';
     }
     $lang = $app->request()->params('lang');
-    if (isset($lang) && in_array($lang, array('nl','de','en','es'))) {
+    if (isset($lang) && in_array($lang, array('nl','de','en','es','fr'))) {
         $_SESSION['lang'] = $lang;
+    } else {
+        $_SESSION['lang'] = 'en';
     }
 });

@@ -1,9 +1,9 @@
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Tour Buzz</title>
+        <title>{{ __('application.title')}}</title>
         <link>{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}</link>
-        <description>Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.</description>
-        <language>nl-nl</language>
+        <description>{{ __('application.description')}}</description>
+        <language>{{ lang }}</language>
         <lastBuildDate>{{ datetime }}</lastBuildDate>
         {% for bericht in berichten %}
         <item>
@@ -11,7 +11,7 @@
             <link>{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/bericht/{{ bericht.id }}#{{ dateCode }}</link>
             <guid>{{ bericht.id }}{{ dateCode }}</guid>
             <pubDate>{{ pubDate }}</pubDate>
-            <author>Tour Buzz</author>
+            <author>{{ __('application.title')}}</author>
             <description>{{ bericht.body }}</description>
             <content:encoded>
                 <![CDATA[

@@ -1,5 +1,5 @@
 <?php
-
+use ScssPhp\ScssPhp\Compiler;
 
 /**
  * Custom 404 page.
@@ -97,9 +97,7 @@ $app->get('/css/:path+', function ($filepath) {
         die;
     }
 
-    $scssCompiler = new scssc();
-    $scssCompiler->setFormatter("scss_formatter");
-
+    $scssCompiler = new Compiler();
     header("Content-type: text/css");
     exit($scssCompiler->compile("@import '{$filepath}'"));
 });

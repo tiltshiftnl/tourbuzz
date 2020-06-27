@@ -1,0 +1,10 @@
+[main]
+host = https://www.transifex.com
+
+[tourbuzz.messages]
+file_filter = tourbuzz/app/translations/messages_<lang>.json
+minimum_perc = 0
+source_file = tourbuzz/app/translations/messages_en.json
+source_lang = en
+type = KEYVALUEJSON
+

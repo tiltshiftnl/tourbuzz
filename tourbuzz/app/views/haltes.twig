@@ -22,8 +22,8 @@
         <section class="buzz">
 
             <article>
-                <p>{{ __('Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan.') }}</p>
-                <p><a href="/downloads">{{ __('Download bestanden voor GPS navigatie') }}</a></p>
+                <p>{{ __('stops.instruction') }}</p>
+                <p><a href="/downloads">{{ __('downloads.description') }}</a></p>
             </article>
 
             <section class="kaartmap wrapper">
@@ -61,9 +61,9 @@
                             <span class="halte-link" style="position: absolute; left: 0; {% if not halte.beschikbaar %}opacity: 0.2{% endif %}">{{ halte.haltenummer }}</span>
                             <span>{{ halte.straat }}</span><br>
                             {% if halte.beschikbaar %}
-                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaatsen') }}</span><br>
+                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('stops.spots') }}</span><br>
                             {% else %}
-                                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                                <span class="capaciteit nietbeschikbaar">{{ __('stops.unavailable') }}</span><br>
                             {% endif %}
                             <span class="meta">{{ halte.locatie }}</span>
                         </div>

@@ -26,12 +26,12 @@ $(document).ready(function() {
     <main class="wrapper">
         <form class="form-styles" method="post">
             <article>
-                <h2>SMS alerts</h2>
-                <p>{{ __('Vul hieronder het mobiele nummer in, dat u wilt afmelden.') }}</p>
+                <h2>{{ __('messages.text_service') }}</h2>
+                <p>{{ __('messages.textservice.unsubscribe') }}</p>
             </article>
             <input id="phone" type="tel" name="number">
             <input type="hidden" name="international" id="international">
-            <button type="submit">{{ __('Afmelden') }}</button>
+            <button type="submit">{{ __('form.unsubscribe') }}</button>
         </form>
     </main>
 {% endblock %}

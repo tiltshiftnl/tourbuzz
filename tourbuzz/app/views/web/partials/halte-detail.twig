@@ -7,9 +7,9 @@
         <div class="park-detail-spots">
             <div class="park-detail-spots-badge {% if not record.beschikbaar %}-unavailable{% endif %}">
                 {% if record.beschikbaar %}
-                    {{ record.capaciteit }}&nbsp;{{ __('plaatsen') }}
+                    {{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}
                 {% else %}
-                    {{ __('niet beschikbaar') }}
+                    {{ __('stops.unavailable') }}
                 {% endif %}
             </div>
         </div>
@@ -23,5 +23,5 @@
         </div>
     </div>
     <hr class="halte-detail-hr">
-    <a href="https://maps.google.com/?q={{ record.location.lat }},{{ record.location.lng }}" target="_blank" class="halte-detail-text-link">Google maps</a>
+    <a href="https://maps.google.com/?q={{ record.location.lat }},{{ record.location.lng }}" target="_blank" class="halte-detail-text-link">{{ __('stops.maps')}}</a>
 </div>

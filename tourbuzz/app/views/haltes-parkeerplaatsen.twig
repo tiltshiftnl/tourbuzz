@@ -4,15 +4,15 @@
     <link rel="image_src" href="/img/haltes_fb_preview.png">
     <link rel="canonical" href="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/haltes">
 
-    <title>Tour Buzz Haltes</title>
+    <title>{{ __('application.title') }} - {{ __('stops.title')}}</title>
     <meta name="title" content="Tour Buzz Haltes">
     <meta name="description" content="Alle touringcar haltes in Amsterdam.">
     <meta name="keywords" content="amsterdam, touringcar, haltes">
 
-    <meta property="og:title" content="Tour Buzz Haltes">
+    <meta property="og:title" content="{{ __('application.title') }} - {{ __('stops.title')}}">
     <meta property="og:url" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/haltes">
-    <meta property="og:description" content="Tour Buzz Haltes - Alle touringcar haltes in Amsterdam.">
-    <meta property="og:site_name" content="Tour Buzz Haltes">
+    <meta property="og:description" content="{{ __('stops.description') }}">
+    <meta property="og:site_name" content="{{ __('application.title') }}">
     <meta property="og:image" content="{{ TOURBUZZ_URI_PROTOCOL }}{{ TOURBUZZ_URI }}/img/haltes_fb_preview.png">
 {% endblock %}
 
@@ -28,13 +28,13 @@
             <section class="legenda">
                 <a href="#haltes" class="type">
                     <img src="/img/haltes/h.png">
-                    <h3>{{ __('Haltes') }}</h3>
-                    <p>{{ __('Alleen passagiers in- en uit laten stappen. Let op: max 10 min.') }}</p>
+                    <h3>{{ __('stops.title') }}</h3>
+                    <p>{{ __('stops.exit_only') }}</p>
                 </a>
                 <a href="#parkeerplaatsen" class="type">
                     <img src="/img/parkeerplaatsen/p.png">
-                    <h3>{{ __('Parkeren') }}</h3>
-                    <p>{{ __('Op deze locaties kunt u uw bus parkeren. Klik hier voor de tarieven.') }}</p>
+                    <h3>{{ __('parking.title') }}</h3>
+                    <p>{{ __('parking.description') }}</p>
                 </a>
             </section>
 
@@ -43,9 +43,9 @@
                 {% include 'partials/googlemap.stops.js.twig' %}
             </section>
 
-            <a href="/downloads" class="link"><i class="fa fa-location-arrow"></i> {{ __('Downloads voor navigatiesystemen') }}</a>
+            <a href="/downloads" class="link"><i class="fa fa-location-arrow"></i> {{ __('downloads.description') }}</a>
 
-            <h2><a name="haltes">{{ __('Haltes') }} (max. 10 min)</a></h2>
+            <h2><a name="haltes">{{ __('stops.title') }} {{ __('stops.max_10') }}</a></h2>
             <ol>
             {% for halte in haltes %}
                 <li style="position: relative; padding-left: 45px">
@@ -54,9 +54,9 @@
                             <span class="halte-link" style="position: absolute; left: 0; {% if not halte.beschikbaar %}opacity: 0.2{% endif %}">{{ halte.haltenummer }}</span>
                             <span>{{ halte.straat }}</span><br>
                             {% if halte.beschikbaar %}
-                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('plaats(en)') }}</span><br>
+                                <span class="capaciteit">{{ halte.capaciteit }} {{ __('stops.spots') }}</span><br>
                             {% else %}
-                                <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                                <span class="capaciteit nietbeschikbaar">{{ __('stops.unavailabe') }}</span><br>
                             {% endif %}
                             <span class="meta">{{ halte.locatie }}</span>
                         </div>
@@ -65,7 +65,7 @@
             {% endfor %}
             </ol>
 
-            <h2><a name="parkeerplaatsen">{{ __('Parkeren') }}</a></h2>
+            <h2><a name="parkeerplaatsen">{{ __('parking.title') }}</a></h2>
             <ol>
             {% for parkeerplaats in parkeerplaatsen %}
                 <li style="position: relative; padding-left: 45px">
@@ -74,9 +74,9 @@
                             <span class="parkeerplaats-link" style="position: absolute; left: 0; {% if not parkeerplaats.beschikbaar %}opacity: 0.2{% endif %}">{{ parkeerplaats.nummer }}</span>
                             <span>{{ parkeerplaats.naam }}</span><br>
                             {% if parkeerplaats.beschikbaar %}
-                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('plaats(en)') }}</span><br>
+                                <span class="capaciteit">{{ parkeerplaats.capaciteit }} {{ __('stops.spots') }}</span><br>
                             {% else %}
-                              <span class="capaciteit nietbeschikbaar">{{ __('niet beschikbaar') }}</span><br>
+                              <span class="capaciteit nietbeschikbaar">{{ __('stops.unavailabe') }}</span><br>
                             {% endif %}
                             <span class="meta">{{ parkeerplaats._origineel.Bijzonderheden }}</span>
                         </div>

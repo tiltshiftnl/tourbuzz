@@ -7,11 +7,9 @@
 4 - truck in violation
 #}
 
-{% set haltestatus %}{% if haltestatus > 0 %}bezet{% else %}vrij{% endif %}{% endset %}
+{% set haltestatus %}{% if haltestatus > 0 %}{{ __('stops.occupied') }}{% else %}{{ __('stops.available')}}{% endif %}{% endset %}
 
 <section class="halte-vrij" style="margin: 10px 0; padding: 10px 10px; background: #f8f8f8">
-    beta
-
-    <p>{{ __('Halte status') }}: <b>{{ haltestatus }}</b></p>
-    <p class="meta">{{ __('Laatste update') }}: {{ now|date('d-m-Y H:i:s') }}
+    <p>{{ __('stops.status') }}: <b>{{ haltestatus }}</b></p>
+    <p class="meta">{{ __('updated') }}: {{ now|date('d-m-Y H:i:s') }}
 </section>

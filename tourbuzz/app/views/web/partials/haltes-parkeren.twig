@@ -1,8 +1,7 @@
 <section class="haltes-parkeren">
 
     <div class="haltes-parkeren-list">
-        <h3 class="haltes-parkeren-title">{{ __('Haltes') }}</h3>
-        {#<p class="haltes-parkeren-text">{{ __('Alleen passagiers in- en uit laten stappen. Let op: max 10 min.') }}</p>#}
+        <h3 class="haltes-parkeren-title">{{ __('stops.title') }}</h3>
         <hr class="haltes-parkeren-hr">
         {% for record in haltes %}
             <a href="/haltes/{{ record.haltenummer }}" class="halte-detail-title-container">
@@ -13,9 +12,9 @@
                 <div class="park-detail-spots">
                     <div class="park-detail-spots-badge {% if not record.beschikbaar %}-unavailable{% endif %}">
                         {% if record.beschikbaar %}
-                            {{ record.capaciteit }}&nbsp;{{ __('plaats(en)') }}
+                            {{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}
                         {% else %}
-                            {{ __('niet beschikbaar') }}
+                            {{ __('stops.unavailable') }}
                         {% endif %}
                     </div>
                 </div>
@@ -24,8 +23,7 @@
     </div>
 
     <div class="haltes-parkeren-list">
-        <h3 class="haltes-parkeren-title">{{ __('Parkeren') }}</h3>
-        {#<p class="haltes-parkeren-text">{{ __('Op deze locaties kunt u uw bus parkeren. Klik hier voor de tarieven.') }}</p>#}
+        <h3 class="haltes-parkeren-title">{{ __('parking.title') }}</h3>
         <hr class="haltes-parkeren-hr">
         {% for record in parkeerplaatsen %}
             <a href="/parkeerplaatsen/{{ record.nummer }}" class="halte-detail-title-container">
@@ -36,9 +34,9 @@
                 <div class="park-detail-spots">
                     <div class="park-detail-spots-badge {% if not record.beschikbaar %}-unavailable{% endif %}">
                         {% if record.beschikbaar %}
-                            {{ record.capaciteit }}&nbsp;{{ __('plaats(en)') }}
+                            {{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}
                         {% else %}
-                            {{ __('niet beschikbaar') }}
+                            {{ __('stops.unavailable') }}
                         {% endif %}
                     </div>
                 </div>

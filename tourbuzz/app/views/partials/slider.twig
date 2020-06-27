@@ -51,7 +51,7 @@
             {% endif %}
 
             {% if record.link %}
-                <h4>{{ __('Meer informatie') }}</h4>
+                <h4>{{ __('about.more') }}</h4>
                 <a href="{{ record.link }}" class="extern" target="_blank">{{ record.link }}</a>
             {% endif %}
 
@@ -69,12 +69,12 @@
                             </a>
                         {% endif %}
                     </section>
-                    <a href="https://maps.google.com?q={{ record.location.lat }},{{ record.location.lng }}" class="kaartlink">{{ __('Bekijk op Google maps') }}</a>
+                    <a href="https://maps.google.com?q={{ record.location.lat }},{{ record.location.lng }}" class="kaartlink">{{ __('stops.maps') }}</a>
                 {% endif %}
             {% endif %}
 
             <section class="feedback">
-                <h4>{{ __('Is deze informatie nuttig?') }}</h4>
+                <h4>{{ __('about.feedback_question') }}</h4>
                 <a href="#" class="ja"><i class="icon thumbs-up"></i>{{ __('Ja') }}</a>
                 <a href="#" class="nee"><i class="icon thumbs-down"></i>{{ __('Nee') }}</a>
             </section>
@@ -97,7 +97,7 @@
               eventAction: nuttig ? 'positief' : 'negatief',
               eventLabel: titel + ' (id: ' + id + ')'
             });
-            $(this).closest(".feedback").html("<h4>{{ __("Bedankt voor uw feedback.") }}</h4>");
+            $(this).closest(".feedback").html("<h4>{{ __("about.thanks") }}</h4>");
         });
     </script>
 </section>

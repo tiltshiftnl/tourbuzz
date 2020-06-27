@@ -6,35 +6,29 @@
     <main class="wrapper">
         <form class="form-styles" method="post">
             <article>
-                <h2>{{ __('Tourbuzz Berichtenservice') }}</h2>
-                <p>{{ __('Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.') }}</p>
+                <h2>{{ __('messages.message_service') }}</h2>
+                <p>{{ __('messages.newsletter.subscribe') }}</p>
             </article>
             <div class="form-row {% if errors.mail %}error{% endif %}">
-                <h3>E-mail*</h3>
+                <h3>{{ __('form.email') }}*</h3>
                 <input type="text" name="mail" value="{{ form.mail }}">
                 {% if errors.mail %}<p class="note">{{ errors.mail }}</p>{% endif %}
             </div>
             <div class="form-row">
-                <h3>{{ __('Naam') }}</h3>
+                <h3>{{ __('form.name') }}</h3>
                 <input type="text" name="name" value="{{ form.name }}">
             </div>
             <div class="form-row">
-                <h3>{{ __('Organisatie') }}</h3>
+                <h3>{{ __('form.organisation') }}</h3>
                 <input type="text" name="organisation" value="{{ form.organisation }}">
             </div>
             <input type="hidden" placeholder="taal" name="language" value="{{ lang }}">
-            <button type="submit">{{ __('Aanmelden') }}</button>
-            <p style="margin-top: 10px; font-size: 12px">* Verplicht veld</p>
+            <button type="submit">{{ __('form.subscribe') }}</button>
+            <p style="margin-top: 10px; font-size: 12px">{{ __('form.required') }}</p>
         </form>
         <article>
             <p>
-            {% if lang == 'nl' %}
-                Afmelden? Klik <a href="/berichtenservice-afmelden">hier</a>
-            {% elseif lang == 'en' %}
-                Unsubscribe? Click <a href="/berichtenservice-afmelden">here</a>
-            {% elseif lang == 'de' %}
-                Abmelden? <a href="/berichtenservice-afmelden">Hier</a> klicken
-            {% endif %}
+                <a href="/berichtenservice-afmelden">{{ __('form.unsubscribe') }}</a>
             </p>
         </article>
     </main>

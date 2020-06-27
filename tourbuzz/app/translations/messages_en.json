@@ -1,0 +1,140 @@
+{
+    "application": {
+        "logo": {
+            "img": "andreas.svg",
+            "text": "Gemeente Amsterdam"
+        },
+        "title": "Tourbuzz",
+        "dashboard": "Dashboard",
+        "keywords": "amsterdam, touringcar, news",
+        "description": "Daily news for touringcar operators.",
+        "styleguide": "Styleguide",
+        "long_text": "Long text."
+    },
+    "home": "Home",
+    "updated": "Latest update",
+    "beta": "Beta",
+    "errors": {
+        "404": "404 - Page not found",
+        "offline": "ATTENTION: You are offline, viewing an alternative version of Tourbuzz",
+        "no_translation": "Translation not available"
+    },
+    "form": {
+        "email": "Email",
+        "name": "Name",
+        "organisation": "Organisation",
+        "subscribe": "Subscribe",
+        "required": "* Required",
+        "unsubscribe": "Unsubscribe",
+        "password": "Password",
+        "forgot_password": "Forgot password?",
+        "set_password": "Set password",
+        "username": "Username",
+        "enter_username": "Enter your username",
+        "submit": "Submit",
+        "previous": "Previous",
+        "next": "Next"
+    },
+    "about": {
+        "title": "About Tourbuzz",
+        "description": "Insight in traffic, detours and roadwork for touringcar operators.",
+        "feedback": "Feedback or questions can be addressed to",
+        "feedback_question": "Is this feedback usefull?",
+        "thanks": "Thank you for your feedback",
+        "more": "More information"
+    },
+    "messages": {
+        "menu_item": "Messages",
+        "title": "Messages",
+        "message_service": "Tourbuzz Message service",
+        "text_service": "Text Alerts",
+        "unavailable": "Service temporarily unavailable...",
+        "advice": "Advice",
+        "more": "More information",
+        "none": "No messages, we wish you safe driving!",
+        "not_Public": "Message - not public",
+        "newsletter": {
+            "description": "Subscribe to the newsletter",
+            "subscribe": "Enter your contactdetails and receive a biweekly newsletter with Tourbuzz messages in your email.",
+            "unsubscribe": "Enter the emailaddress to unsubscribe from the Tourbuzz service.",
+            "composed": "Want to stay automatically informed about Tour Buzz messages? Subscribe to the <a href=\"/berichtenservice\">message service</a> or <a href=\"/sms-aanmelden\">text alerts</a>."
+        },
+        "textservice": {
+            "description": "Subscribe to the newsletter",
+            "subscribe": "Enter your mobile number to receive important Tourbuzz text messages.",
+            "unsubscribe": "Enter the mobile number that should unsubscribe from the text message service.",
+            "unsubscribe_click": "Unsubscribe? Click <a href=\"/sms-afmelden\">here</a>"
+        }
+    },
+    "news": {
+        "more": "More news"
+    },
+    "stops": {
+        "title": "Stops",
+        "description": "All touringcar stops",
+        "spot": "spot",
+        "spots": "spot(s)",
+        "occupied": "occupied",
+        "available": "available",
+        "status": "Stop state",
+        "unavailable": "unavailable",
+        "maps": "Google Maps",
+        "exit_only": "Passenger get in/get off only. Attention: 10 minutes maximum stay.",
+        "max_10": "(max. 10 min)",
+        "instruction": "At these locations passenger can get in or get off. If a stop is occupied, please proceed to the nearest stop on the designated route. Attention: 10 minutes maximum stay."
+    },
+    "parking": {
+        "title": "Parking",
+        "description": "At these locations touringcars can be parked. Click here for prices.",
+        "live": "Live status"
+    },
+    "routes": {
+        "menu_item": "Routes",
+        "title": "Routes",
+        "information": "Route information",
+        "information_description": "Designated and advised routes for touringcars. Be aware of clearance heights.",
+        "methods": "Methods",
+        "pattern": "Pattern"
+    },
+    "downloads": {
+        "title": "Downloads",
+        "description": "Download files for GPS navigation",
+        "poi": "POI file - Google Maps format",
+        "csv": "CSV file - Garmin/Mio/Navman format",
+        "ov2": "OV2 file - TomTom format",
+        "gpx": "GPX file - GPX format"
+    },
+    "contact": {
+        "title": "Contact",
+        "description": "Questions and feedback can be directed to"
+    },
+    "days": {
+        "today": "today",
+        "select": "Select a day",
+        "no_date": "No date",
+        "abbreviated": {
+            "mo": "mo",
+            "tu": "tu",
+            "we": "we",
+            "th": "th",
+            "fr": "fr",
+            "sa": "sa",
+            "su": "su"
+        }
+    },
+    "months": {
+        "january": "january",
+        "february": "february",
+        "march": "march",
+        "april": "april",
+        "may": "may",
+        "june": "june",
+        "july": "july",
+        "august": "august",
+        "september": "september",
+        "october": "october",
+        "november": "november",
+        "december": "december"
+    }
+
+}

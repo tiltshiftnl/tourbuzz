@@ -7,7 +7,7 @@
         <div class="wrapper">
             <a href="/" class="home"><img src="/img/buzzlogo-w.png" class="buzz-logo"></a>
             <h2>
-                <a href="/dashboard/berichten">Tour Buzz <span>Dashboard</span></a>
+                <a href="/dashboard/berichten">{{ __('application.title') }} <span>{{ __('application.dashboard') }}</span></a>
             </h2>
         </div>
     </header>
@@ -17,11 +17,11 @@
     <main class="wrapper">
         <form class="form-styles" method="post">
             <article>
-                <h2>Wachtwoord vergeten?</h2>
-                <p>Vul hieronder je gebruikersnaam in.</p>
+                <h2>{{ __('form.forgot_password') }}</h2>
+                <p>{{ __('form.enter_username') }}</p>
             </article>
-            <input type="text" placeholder="Gebruikersnaam" name="username">
-            <button type="submit">Verstuur</button>
+            <input type="text" placeholder="{{ __('form.username') }}" name="username">
+            <button type="submit">{{ __('form.submit') }}</button>
         </form>
     </main>
 {% endblock %}

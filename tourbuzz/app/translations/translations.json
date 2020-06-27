@@ -335,7 +335,7 @@
     },
     "Geen berichten. Goede rit toegewenst!" : {
         "en" : "No messages. Have a good trip!",
-        "de" : "Keine Posts. Gute Reise! ",
+        "de" : "Keine Posts. Gute Reise!",
         "es" : "No hay mensajes. Buen viaje a todos!"
     },
     "404 - Pagina niet gevonden!" : {
@@ -371,7 +371,7 @@
     "bezet" : {
         "en" : "occupied",
         "de" : "besetzt",
-        "es" : "ocupado "
+        "es" : "ocupado"
     },
     "onbekend" : {
         "en" : "unknown",
@@ -437,10 +437,5 @@
         "en" : "Questions and comments can be sent to touringcar@amsterdam.nl",
         "es" : "Preguntas y comentarios pueden ser enviados a touringcar@amsterdam.nl",
         "de" : "Fragen und Kommentare können an touringcar@amsterdam.nl gesendet werden"
-    },
-    "Terug naar overzicht": {
-        "en" : "Back to overview",
-        "es" : "Regresa",
-        "de" : "Zurück zur Übersicht"
     }
 }}

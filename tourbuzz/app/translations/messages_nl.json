@@ -1,0 +1,140 @@
+{
+    "application": {
+        "logo": {
+            "img": "andreas.svg",
+            "text": "Gemeente Amsterdam"
+        },
+        "title": "Tourbuzz",
+        "dashboard": "Dashboard",
+        "keywords": "amsterdam, touringcar, nieuws",
+        "description": "Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.",
+        "styleguide": "Styleguide",
+        "long_text": "Lange tekst."
+    },
+    "home": "Home",
+    "updated": "Laatste wijziging",
+    "beta": "Beta",
+    "errors": {
+        "404": "404 - Pagina niet gevonden",
+        "offline": "LET OP: U bent offline en ziet een aangepaste versie van Tourbuzz.",
+        "no_translation": "Vertaling niet beschikbaar"
+    },
+    "form": {
+        "email": "Email",
+        "name": "Naam",
+        "organisation": "Organisatie",
+        "subscribe": "Aanmelden",
+        "required": "* Verplicht veld",
+        "unsubscribe": "Afmelden",
+        "password": "Wachtwoord",
+        "forgot_password": "Wachtwoord vergeten?",
+        "set_password": "Wachtwoord instellen",
+        "username": "Gebruikersnaam",
+        "enter_username": "Geef uw gebruikersnaam",
+        "submit": "Verzenden",
+        "previous": "Vorige",
+        "next": "Volgende"
+    },
+    "about": {
+        "title": "Over Tourbuzz",
+        "description": "Dagelijks overzicht van verkeershinder en omleidingen voor touringcarchauffeurs.",
+        "feedback": "Feedback of vragen kunt u sturen naar",
+        "feedback_question": "Is deze feedback nuttig?",
+        "thanks": "Bedankt voor de feedback",
+        "more": "Meer informatie"
+    },
+    "messages": {
+        "menu_item": "Berichten",
+        "title": "Berichten",
+        "message_service": "Tourbuzz Berichtenservice",
+        "text_service": "SMS Alert",
+        "unavailable": "Berichten tijdelijk niet beschikbaar...",
+        "advice": "Advies",
+        "more": "Meer informatie",
+        "none": "Geen berichten. Goede rit toegewenst!",
+        "not_Public": "Berichten- niet publiek",
+        "newsletter": {
+            "description": "Meld u aan voor de nieuwsbrief",
+            "subscribe": "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.",
+            "unsubscribe": "Vul hieronder uw email adres in om af te melden bij de Tour Buzz berichtenservice.",
+            "composed": "Wilt u automatisch op de hoogte blijven van Tour Buzz berichten? Meld u aan voor de <a href=\"/berichtenservice\">berichtenservice</a> of <a href=\"/sms-aanmelden\">SMS alerts.</a>"
+        },
+        "textservice": {
+            "description": "Aanmelden voor de nieuwsbrief",
+            "subscribe": "Geef een mobiel telefoonnummer om belangrijke SMS berichten te ontvangen.",
+            "unsubscribe": "Geef het mobiel telefoonnummer dat dient te worden uitgeschreven van de berichtenservice.",
+            "unsubscribe_click": "Uitschrijven? Klik <a href=\"/sms-afmelden\">hier</a>"
+        }
+    },
+    "news": {
+        "more": "Meer nieuws"
+    },
+    "stops": {
+        "title": "Haltes",
+        "description": "Alle haltes",
+        "spot": "plaats",
+        "spots": "plaats(en)",
+        "occupied": "bezet",
+        "available": "vrij",
+        "status": "Halte status",
+        "unavailable": "niet beschikbaar",
+        "maps": "Google Maps",
+        "exit_only": "Alleen passagiers in- en uit laten stappen. Let op: max 10 min.",
+        "max_10": "(max. 10 min)",
+        "instruction": "Op onderstaande locaties kunt u uw passagiers in- en uit laten stappen. Rij bij een bezette halte, indien mogelijk door naar de eerstvolgende op de route. Let op: maximaal 10 min stilstaan."
+    },
+    "parking": {
+        "title": "Parkeren",
+        "description": "Op deze locaties kunt u uw bus parkeren. Klik hier voor de tarieven.",
+        "live": "Live status"
+    },
+    "routes": {
+        "menu_item": "Routes",
+        "title": "Routes",
+        "information": "Route informatie",
+        "information_description": "Weergave van de aanbevolen en verplichte routes voor touringcars. Let op de doorrijhoogtes.",
+        "methods": "Methodes",
+        "pattern": "Patroon"
+    },
+    "downloads": {
+        "title": "Downloads",
+        "description": "Download bestanden voor GPS navigatie",
+        "poi": "POI file - Google Maps format",
+        "csv": "CSV file - Garmin/Mio/Navman format",
+        "ov2": "OV2 file - TomTom format",
+        "gpx": "GPX file - GPX format"
+    },
+    "contact": {
+        "title": "Contact",
+        "description": "Vragen en opmerkingen kunt u sturen naar"
+    },
+    "days": {
+        "today": "vandaag",
+        "select": "Selecteer een dag",
+        "no_date": "Geen datum",
+        "abbreviated": {
+            "mo": "ma",
+            "tu": "di",
+            "we": "wo",
+            "th": "do",
+            "fr": "vr",
+            "sa": "za",
+            "su": "zo"
+        }
+    },
+    "months": {
+        "january": "januari",
+        "february": "februari",
+        "march": "maart",
+        "april": "april",
+        "may": "mei",
+        "june": "juni",
+        "july": "juli",
+        "august": "augustus",
+        "september": "september",
+        "october": "oktober",
+        "november": "november",
+        "december": "december"
+    }
+
+}
