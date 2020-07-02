@@ -295,7 +295,7 @@
     },
     "Tourbuzz Berichtenservice" : {
         "en" : "Tourbuzz message service",
-        "de" : "Tour Buzz nachrichten",
+        "de" : "Tourbuzz nachrichten",
         "es" : "Tourbuzz mensajería"
     },
     "Aanmelden niet gelukt. Email is verplicht" : {
@@ -308,23 +308,23 @@
         "de" : "Diese E-Mail-Adresse ist bereits abonniert",
         "es" : "Este email ya está suscrito"
     },
-    "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail." : {
-        "en" : "Enter your details below and you will receive every two weeks Tour Buzz posts by email.",
-        "de" : "Geben Sie Ihre details unten und Sie bekommen jedes zwei wochen Tour Buzz nachrichten per E-Mail.",
+    "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tourbuzz berichten per mail." : {
+        "en" : "Enter your details below and you will receive every two weeks Tourbuzz posts by email.",
+        "de" : "Geben Sie Ihre details unten und Sie bekommen jedes zwei wochen Tourbuzz nachrichten per E-Mail.",
         "es" : "Rellene sus datos a continuación y recibirá mensajes quincenales Información del zumbido por correo electrónico."
     },
-    "Vul hieronder uw email adres in om af te melden bij de Tour Buzz berichtenservice." : {
-        "en" : "Enter your email below to unsubscribe for  the Tour Buzz messages service.",
-        "de" : "Geben Sie Ihre e-Mail für abmelden von der Tour Buzz nachrichten.",
-        "es" : "Introduzca su dirección de correo electrónico para cerrar la sesión del servicio de mensajería tour Buzz."
+    "Vul hieronder uw email adres in om af te melden bij de Tourbuzz berichtenservice." : {
+        "en" : "Enter your email below to unsubscribe for  the Tourbuzz messages service.",
+        "de" : "Geben Sie Ihre e-Mail für abmelden von der Tourbuzz nachrichten.",
+        "es" : "Introduzca su dirección de correo electrónico para cerrar la sesión del servicio de mensajería Tourbuzz."
     },
     "We hebben u een mail gestuurd. Klik op de link in het mailbericht." : {
         "en" : "We've sent you an email. Click on the link in this message.",
         "de" : "Wir haben Ihnen eine E-Mail gesendet. Klicken Sie auf den link in das email",
         "es" : "Te hemos enviado un correo electrónico. Haga clic en el enlace del correo electrónico."
     },
-    "Vul hieronder uw mobiele nummer in om belangrijke Tour Buzz meldingen te ontvangen per SMS." : {
-        "en" : "Enter your mobile number to receive important Tour Buzz notifications by SMS.",
+    "Vul hieronder uw mobiele nummer in om belangrijke Tourbuzz meldingen te ontvangen per SMS." : {
+        "en" : "Enter your mobile number to receive important Tourbuzz notifications by SMS.",
         "de" : "Geben Sie Ihre handynummer ein um wichtige Tour-Buzz- nachrichten zu erhalten per SMS.",
         "es" : "Introduzca su número de móvil para recibir notificaciones importantes tour zumbido por SMS."
     },

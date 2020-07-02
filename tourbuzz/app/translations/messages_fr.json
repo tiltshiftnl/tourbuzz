@@ -57,7 +57,7 @@
             "description": "Abonnez-vous à la newsletter",
             "subscribe": "Entrez vos coordonnées et recevez une newsletter bihebdomadaire avec des messages Tourbuzz dans votre email.",
             "unsubscribe": "Saisissez l'adresse e-mail pour vous désinscrire du service Tourbuzz.",
-            "composed": "Want to stay automatically informed about Tour Buzz messages? Subscribe to the <a href=\"/berichtenservice\">message service</a> or <a href=\"/sms-aanmelden\">text alerts</a>."
+            "composed": "Want to stay automatically informed about Tourbuzz messages? Subscribe to the <a href=\"/berichtenservice\">message service</a> or <a href=\"/sms-aanmelden\">text alerts</a>."
         },
         "textservice": {
             "description": "Subscribe to the newsletter",

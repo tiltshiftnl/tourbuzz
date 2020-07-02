@@ -1,4 +1,4 @@
-Tour Buzz
+Tourbuzz
 
 
 For testing with the service worker use the following command on mac:

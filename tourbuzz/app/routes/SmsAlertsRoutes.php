@@ -34,7 +34,7 @@ $app->post('/sms-aanmelden', function () use ($app) {
 
     switch ($apiResponse->statusCode) {
         case '200':
-            $app->flash('success', 'U bent nu aangemeld voor SMS berichten van Tour Buzz');
+            $app->flash('success', 'U bent nu aangemeld voor SMS berichten van Tourbuzz');
             break;
 
         default:

@@ -7,8 +7,8 @@ $mailTo = getenv('TOURBUZZ_RECIPIENTS');
 
 $res = json_decode(file_get_contents($apiUri . "/berichten/" . date("Y/m/d")));
 $messages = (array) $res->messages;
-$title = "Overzicht van tour buzz berichten voor " . date("d-m-Y");
-$content = "Overzicht van tour buzz berichten voor " . date("d-m-Y") . ":\r\n\r\n";
+$title = "Overzicht van Tourbuzz berichten voor " . date("d-m-Y");
+$content = "Overzicht van Tourbuzz berichten voor " . date("d-m-Y") . ":\r\n\r\n";
 $messages = array_filter($messages, function ($message) {
     return $message->is_live === "is_live";
 });

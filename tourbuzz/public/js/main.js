@@ -563,7 +563,7 @@ function loadAvailability (el) {
 // Run //
 //////////
 
-var tbmap = false; // Tour buzz map
+var tbmap = false; // Tourbuzz map
 var mapLayers = {};
 
 function run () {

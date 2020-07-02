@@ -1,4 +1,4 @@
-# Tour Buzz
+# Tourbuzz
 
 Dagelijks het laatste nieuws voor touringcar chauffeurs.
 

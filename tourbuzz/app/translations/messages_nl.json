@@ -55,9 +55,9 @@
         "not_Public": "Berichten- niet publiek",
         "newsletter": {
             "description": "Meld u aan voor de nieuwsbrief",
-            "subscribe": "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tour Buzz berichten per mail.",
-            "unsubscribe": "Vul hieronder uw email adres in om af te melden bij de Tour Buzz berichtenservice.",
-            "composed": "Wilt u automatisch op de hoogte blijven van Tour Buzz berichten? Meld u aan voor de <a href=\"/berichtenservice\">berichtenservice</a> of <a href=\"/sms-aanmelden\">SMS alerts.</a>"
+            "subscribe": "Vul hieronder uw gegevens in en u ontvangt tweewekelijks de Tourbuzz berichten per mail.",
+            "unsubscribe": "Vul hieronder uw email adres in om af te melden bij de Tourbuzz berichtenservice.",
+            "composed": "Wilt u automatisch op de hoogte blijven van Tourbuzz berichten? Meld u aan voor de <a href=\"/berichtenservice\">berichtenservice</a> of <a href=\"/sms-aanmelden\">SMS alerts.</a>"
         },
         "textservice": {
             "description": "Aanmelden voor de nieuwsbrief",

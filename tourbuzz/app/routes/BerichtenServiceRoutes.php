@@ -87,7 +87,7 @@ $app->get('/mailbevestigen/:token', function ($token) use ($app) {
 
     switch ($apiResponse->statusCode) {
         case '200':
-            $app->flash('success', 'Dank voor uw bevestiging. U ontvangt nu tweewekelijks Tour Buzz berichten.');
+            $app->flash('success', 'Dank voor uw bevestiging. U ontvangt nu tweewekelijks Tourbuzz berichten.');
             $app->redirect(date('/Y/m/d'));
             break;
 
