@@ -381,7 +381,7 @@ function navBerichten (el) {
     var dayEl = document.querySelector('[data-day]');
     var day = dayEl.getAttribute('data-day');
 
-    infoPanel.setAttribute('data-infopanel-url', day + '?partial=panel');
+    infoPanel.setAttribute('data-infopanel-url', day + '?partial=panel&lang=' + language);
     loadInfopanel(infoPanel);
 }
 
@@ -399,7 +399,7 @@ function navHaltesParkeren (el) {
     updateMap(mapView);
 
     var infoPanel = document.querySelector('[data-infopanel]');
-    infoPanel.setAttribute('data-infopanel-url', '/haltes-parkeerplaatsen?partial=panel');
+    infoPanel.setAttribute('data-infopanel-url', '/haltes-parkeerplaatsen?partial=panel&lang=' + language);
     loadInfopanel(infoPanel);
 }
 
@@ -417,7 +417,7 @@ function navRoutes (el) {
     updateMap(mapView);
 
     var infoPanel = document.querySelector('[data-infopanel]');
-    infoPanel.setAttribute('data-infopanel-url', '/routes?partial=panel');
+    infoPanel.setAttribute('data-infopanel-url', '/routes?partial=panel&lang=' + language);
     loadInfopanel(infoPanel);
 }
 

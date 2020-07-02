@@ -1,8 +1,8 @@
 {
     "application": {
         "logo": {
-            "img": "andreas.svg",
-            "text": "Gemeente Amsterdam"
+            "img": "tourbuzz.svg",
+            "text": "Tourbuzz"
         },
         "title": "Tourbuzz",
         "dashboard": "Dashboard",

@@ -14,7 +14,6 @@
 
 .main-header-logo-img {
     display: inline-block;
-    width: 12px;
     height: 41px;
     vertical-align: top;
 }
@@ -23,7 +22,7 @@
     display: inline-block;
     @include avenir-demi;
     font-size: 14px;
-    color: #EC0000;
+    color: $Primary-Red;
     letter-spacing: 0;
     line-height: 14px;
     text-align: left;

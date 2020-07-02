@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ lang }}">
     <head>
         <meta charset="utf-8">
         {% block meta %}
@@ -36,6 +36,7 @@
             <script>
                 var tourbuzz_api_base_uri = "{{ TOURBUZZ_API_URI_PROTOCOL }}{{ TOURBUZZ_API_URI }}";
                 var mapbox_access_token = "{{ MAPBOX_ACCESS_TOKEN }}";
+                var language = "{{ lang }}";
             </script>
             <script src="/js/main.js"></script>
         {% endblock %}
