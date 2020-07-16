@@ -4,43 +4,53 @@
             <div class="lang-switch-container" data-js-click="toggleLanguageSwitch">
                 {% if lang == 'nl' %}
                     <a href="#" class="lang-switch-toggle">
-                        <span>Nederlands</span><!--<img src="/img/taal/nl.png" class="lang-switch-flag">-->
+                        <span>Nederlands</span>
                     </a>
                 {% elseif lang == 'en' %}
                     <a href="#" class="lang-switch-toggle">
-                        <span>en</span><img src="/img/taal/en.png" class="lang-switch-flag">
+                        <span>English</span>
                     </a>
                 {% elseif lang == 'de' %}
                     <a href="#" class="lang-switch-toggle">
-                        <span>de</span><img src="/img/taal/de.png" class="lang-switch-flag">
+                        <span>Deutsch</span>
                     </a>
                 {% elseif lang == 'es' %}
                     <a href="#" class="lang-switch-toggle">
-                        <span>es</span><img src="/img/taal/es.png" class="lang-switch-flag">
+                        <span>Español</span>
+                    </a>
+                {% elseif lang == 'fr' %}
+                    <a href="#" class="lang-switch-toggle">
+                        <span>Français</span>
                     </a>
                 {% endif %}
             </div>
             <div class="lang-switch-choices">
                 {% if lang != 'nl' %}
-                    <a href="?lang=nl" class="lang-switch-toggle" data-js-click="langRedirect">
+                    <a href="?lang=nl" class="lang-switch-toggle">
                         Nederlands
                     </a>
                 {% endif %}
                 {% if lang != 'en' %}
-                    <a href="?lang=en" class="lang-switch-toggle" data-js-click="langRedirect">
+                    <a href="?lang=en" class="lang-switch-toggle">
                         English
                     </a>
                 {% endif %}
                 {% if lang != 'de' %}
-                    <a href="?lang=de" class="lang-switch-toggle" data-js-click="langRedirect">
+                    <a href="?lang=de" class="lang-switch-toggle">
                         Deutsch
                     </a>
                 {% endif %}
                 {% if lang != 'es' %}
-                    <a href="?lang=es" class="lang-switch-toggle" data-js-click="langRedirect">
+                    <a href="?lang=es" class="lang-switch-toggle">
                         Español
                     </a>
                 {% endif %}
+                {% if lang != 'fr' %}
+                    <a href="?lang=fr" class="lang-switch-toggle">
+                        Français
+                    </a>
+                {% endif %}
+                
             </div>
         </div>
         <img src="/img/icons/arrow-down.svg" class="lang-switch-arrow"  data-js-click="toggleLanguageSwitch">

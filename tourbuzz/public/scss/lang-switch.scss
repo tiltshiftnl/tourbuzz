@@ -1,6 +1,7 @@
 .lang-switch {
-    display: block;
-    position: relative;
+    position: absolute;
+    right: 10px;
+    z-index: 101;
 }
 
 .lang-switch-container img  {
@@ -27,7 +28,10 @@
 */
 
 .lang-switch-toggle {
-
+    padding: 0.5em;
+}
+.lang-switch-toggle:hover {
+    color: #ec0000;
 }
 
 .lang-switch-flag {
@@ -47,6 +51,7 @@
     display: flex;
     align-items: flex-start;
     cursor: pointer;
+    background: #fff;
 }
 
 .lang-switch.-active .lang-switch-box {
@@ -55,10 +60,11 @@
 
 .lang-switch-choices {
     display: none;
+    flex-direction: column;
 }
 
 .lang-switch.-active .lang-switch-choices {
-    display: block;
+    display: flex;
 }
 
 .lang-switch-container {

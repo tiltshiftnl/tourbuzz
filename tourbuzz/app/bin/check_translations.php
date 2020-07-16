@@ -2,7 +2,7 @@
 
 $translations = json_decode(file_get_contents('translations/translations.json'), true);
 
-$languages = ['en', 'de', 'es'];
+$languages = ['en', 'de', 'es', 'fr'];
 
 foreach ($translations['translations'] as $key => $arr) {
     $missing = [];
