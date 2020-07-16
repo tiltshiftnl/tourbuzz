@@ -328,7 +328,7 @@ ol.berichten {
     font-size: 12px;
     &.nietbeschikbaar {
        color: red;
-       border-color: red;
+       border-color: $Border-color;
     }
 }
 
@@ -602,7 +602,7 @@ ol.berichten {
 }
 
 input.disabled {
-    border-color: #ccc;
+    border-color: $Border-color;
     color: #ccc;
 }
 

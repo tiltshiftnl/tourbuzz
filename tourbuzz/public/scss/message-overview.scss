@@ -32,13 +32,13 @@
 }
 
 .message-overview-nr {
-    background: $Primary-Red;
+    background: $Secondary-background;
     border-radius: 50%;
     width: 32px;
     height: 32px;
     @include avenir-demi;
     text-align: center;
     line-height: 32px;
-    color: #fff;
+    color: $Secondary-color;
     margin-right: 15px;
 }

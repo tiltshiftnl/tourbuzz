@@ -9,7 +9,8 @@
         "keywords": "amsterdam, touringcar, news",
         "description": "Daily news for touringcar operators.",
         "styleguide": "Styleguide",
-        "long_text": "Long text."
+        "long_text": "Long text.",
+        "legend": "Legend"
     },
     "home": "Home",
     "updated": "Latest update",
@@ -135,6 +136,16 @@
         "october": "october",
         "november": "november",
         "december": "december"
+    },
+    "layer": {
+        "messages": "Messages",
+        "stops": "Stops",
+        "parking": "Parking",
+        "clearance_height": "Maximum height",
+        "destination_traffic": "Destination traffic",
+        "recommended_routes": "Recommended routes",
+        "mandatory_routes": "Mandatory route (> 7,5t)",
+        "environmental_zone": "Environmental zone"
     }
 
 }

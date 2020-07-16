@@ -2,7 +2,7 @@
     <a href="#" class="layers-legend-header" data-js-click="toggleLayersLegend">
         <div class="layers-legend-title">
             <img src="/img/icons/layers.svg" class="layers-legend-view-icon">
-            <h3 class="layers-legend-header-title-text">{{ __('Legenda') }}</h3>
+            <h3 class="layers-legend-header-title-text">{{ __('application.legend') }}</h3>
         </div>
         <i class="layers-legend-arrow-icon"></i>
     </a>
@@ -12,7 +12,7 @@
                 <div class="layers-legend-box -{{ item.color }}">
                     <img src="/img/icons/tick-w.svg" class="layers-legend-tick">
                 </div>
-                <span class="layers-legend-name">{{ __(item.description) }}</span>
+                <span class="layers-legend-name">{{ __(item.id) }}</span>
                 {% if item.icon %}
                     <span class="layers-legend-icon">{#<img src="{{ asset('img/markers/' ~ item.icon) }}">#}</span>
                 {% endif %}

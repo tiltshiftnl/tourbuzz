@@ -1,12 +1,8 @@
-.flash-messages {
-
-}
-
 .flash-messages-box {
     margin-bottom: $spacing;
 }
 
 .flash-messages-text {
     @include text-body;
-    color: $Primary-Red;
+    color: $Warning-color;
 }

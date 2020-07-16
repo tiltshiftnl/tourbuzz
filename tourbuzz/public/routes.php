@@ -91,14 +91,22 @@ $app->get('/image/:operation/:width/:height', function ($operation, $width, $hei
  * Compile scss files to css format.
  */
 $app->get('/css/:path+', function ($filepath) {
-
-    $filepath = implode("/", $filepath);
-    if (!file_exists($filepath)) {
-        die;
-    }
-
     $scssCompiler = new Compiler();
     header("Content-type: text/css");
-    exit($scssCompiler->compile("@import '{$filepath}'"));
+
+    $scssCompiler->setFormatter('ScssPhp\ScssPhp\Formatter\Compressed');
+    if($filepath[0] == 'tourbuzz.css') {
+        if (file_exists('scss/theme/theme.scss')) {
+            exit($scssCompiler->compile("@import 'scss/themed.scss'"));
+        } else {
+            exit($scssCompiler->compile("@import 'scss/web.scss'"));
+        }
+    } else {
+        $filepath = implode("/", $filepath);
+        if (!file_exists($filepath)) {
+            die;
+        }
+        exit($scssCompiler->compile("@import '{$filepath}'"));
+    }
 });
 

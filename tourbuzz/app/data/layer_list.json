@@ -1,43 +1,35 @@
 {
   "layer_list": [
     {
-      "id": "berichten",
-      "description": "Berichten",
+      "id": "layer.messages",
       "color": "red"
     },
     {
-      "id": "haltes",
-      "description": "Haltes",
+      "id": "layer.stops",
       "color": "lightblue"
     },
     {
-      "id": "parkeren",
-      "description": "Parkeren",
+      "id": "layer.parking",
       "color": "black"
     },
     {
-      "id": "doorrijhoogtes",
-      "description": "Max doorrijhoogtes",
+      "id": "layer.clearance_height",
       "color": "red"
     },
     {
-      "id": "bestemmingsverkeer",
-      "description": "Bestemmingsverkeer",
+      "id": "layer.destination_traffic",
       "color": "orange"
     },
     {
-      "id": "aanbevolenroutes",
-      "description": "Aanbevolen routes",
+      "id": "layer.recommended_routes",
       "color": "lightgreen"
     },
     {
-      "id": "verplichteroutes",
-      "description": "Verplichte route (> 7,5t)",
+      "id": "layer.mandatory_routes",
       "color": "darkgreen"
     },
     {
-      "id": "milieuzone",
-      "description": "Milieuzone",
+      "id": "layer.environmental_zone",
       "color": "pink"
     }
   ]
