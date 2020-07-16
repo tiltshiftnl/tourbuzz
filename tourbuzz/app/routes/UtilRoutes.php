@@ -139,6 +139,7 @@ $app->get('/calendar/:y/:m/:d', function ($y, $m, $d) use ($app) {
     $next_month = $m == 12 ? 1 : $m + 1;
 
     $data = [
+        "lang" => $_SESSION['lang'],
         "d" => $d,
         "m" => $m,
         "y" => $y,

@@ -4,10 +4,6 @@
     z-index: 101;
 }
 
-.lang-switch-container img  {
-    pointer-events: none;
-}
-
 /*
 .lang-switch-link {
     .text-body;
@@ -52,6 +48,7 @@
     align-items: flex-start;
     cursor: pointer;
     background: #fff;
+    padding: 0.5em;
 }
 
 .lang-switch.-active .lang-switch-box {
@@ -61,6 +58,7 @@
 .lang-switch-choices {
     display: none;
     flex-direction: column;
+    padding-top: 0.5em;
 }
 
 .lang-switch.-active .lang-switch-choices {
@@ -69,4 +67,8 @@
 
 .lang-switch-container {
     flex: 1;
+    span {
+        padding: 0.5em;
+        color: #ec0000;
+    }
 }

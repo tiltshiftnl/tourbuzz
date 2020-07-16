@@ -1,31 +1,31 @@
 <div class="calendar-block">
     <nav class="date-picker-month-select">
-        <a href="#" class="date-picker-nav-link" data-js-click="monthSelect" data-month="/calendar/{{ prev_month }}/01">
+        <a class="date-picker-nav-link" data-js-click="monthSelect" data-month="/calendar/{{ prev_month }}/01?lang={{ lang }}">
             <img src="/img/icons/chevron-left.svg" class="date-picker-icon">
         </a>
         <div class="date-picker-month">{{ maand(m) }} {{ y }}</div>
-        <a href="#" class="date-picker-nav-link" data-js-click="monthSelect" data-month="/calendar/{{ next_month }}/01">
+        <a class="date-picker-nav-link" data-js-click="monthSelect" data-month="/calendar/{{ next_month }}/01?lang={{ lang }}">
             <img src="/img/icons/chevron-right.svg" class="date-picker-icon">
         </a>
     </nav>
     <div class="date-picker-today">
-        <a href="/{{ now|date('Y') }}/{{ now|date('m') }}/{{ now|date('d') }}" class="date-picker-today-link">{{ __('days.today') }}</a>
+        <a href="/{{ now|date('Y') }}/{{ now|date('m') }}/{{ now|date('d') }}?lang={{ lang }}" class="date-picker-today-link">{{ __('days.today') }}</a>
     </div>
     <table class="date-picker-calendar-zone">
         <tr>
-            <th>ma</th>
-            <th>di</th>
-            <th>wo</th>
-            <th>do</th>
-            <th>vr</th>
-            <th>za</th>
-            <th>zo</th>
+            <th>{{ __('days.abbreviated.mo')}}</th>
+            <th>{{ __('days.abbreviated.tu')}}</th>
+            <th>{{ __('days.abbreviated.we')}}</th>
+            <th>{{ __('days.abbreviated.th')}}</th>
+            <th>{{ __('days.abbreviated.fr')}}</th>
+            <th>{{ __('days.abbreviated.sa')}}</th>
+            <th>{{ __('days.abbreviated.su')}}</th>
         </tr>
         {% for week in week_list %}
             <tr>
                 {% for item in week %}
                     <td class="{{ item.class|default("") }} {{ item.today|default("") }} {{ item.selected|default("") }}">
-                        <a href="/{{ y }}/{{ m }}/{{ item.day }}">{{ item.day }}</a>
+                        <a href="/{{ y }}/{{ m }}/{{ item.day }}?lang={{ lang }}">{{ item.day }}</a>
                     </td>
                 {% endfor %}
             </tr>
