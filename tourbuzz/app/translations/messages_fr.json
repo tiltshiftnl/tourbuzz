@@ -57,43 +57,43 @@
             "description": "Abonnez-vous à la newsletter",
             "subscribe": "Entrez vos coordonnées et recevez une newsletter bihebdomadaire avec des messages Tourbuzz dans votre email.",
             "unsubscribe": "Saisissez l'adresse e-mail pour vous désinscrire du service Tourbuzz.",
-            "composed": "Want to stay automatically informed about Tourbuzz messages? Subscribe to the <a href=\"/berichtenservice\">message service</a> or <a href=\"/sms-aanmelden\">text alerts</a>."
+            "composed": "Vous souhaitez rester automatiquement informé des messages de TourBuzz? Abonnez-vous au  <a href=\"/berichtenservice\">service de messagerie</a> ou aux <a href=\"/sms-aanmelden\">alertes texte</a>."
         },
         "textservice": {
-            "description": "Subscribe to the newsletter",
-            "subscribe": "Enter your mobile number to receive important Tourbuzz text messages.",
-            "unsubscribe": "Enter the mobile number that should unsubscribe from the text message service.",
-            "unsubscribe_click": "Unsubscribe? Click <a href=\"/sms-afmelden\">here</a>"
+            "description": "Abonnez-vous à la newsletter",
+            "subscribe": "Entrez votre numéro de téléphone mobile pour recevoir les SMS importants de Tourbuzz.",
+            "unsubscribe": "Entrez le numéro de mobile qui doit se désinscrire du service de SMS.",
+            "unsubscribe_click": "Se désabonner? Cliquez <a href=\"/sms-afmelden\">ici</a>"
         }
     },
     "news": {
-        "more": "More news"
+        "more": "Plus de nouvelles"
     },
     "stops": {
-        "title": "Stops",
-        "description": "All touringcar stops",
-        "spot": "spot",
-        "spots": "spot(s)",
-        "occupied": "occupied",
-        "available": "available",
-        "status": "Stop state",
-        "unavailable": "unavailable",
+        "title": "Arrêts",
+        "description": "Tous les arrêts",
+        "spot": "tache",
+        "spots": "tache(s)",
+        "occupied": "occupé",
+        "available": "disponible",
+        "status": "état d'arrêt",
+        "unavailable": "indisponible",
         "maps": "Google Maps",
-        "exit_only": "Passenger get in/get off only. Attention: 10 minutes maximum stay.",
+        "exit_only": "Les passagers montent / descendent uniquement. Attention: 10 minutes maximum de séjour.",
         "max_10": "(max. 10 min)",
         "instruction": "À ces endroits, les passagers peuvent monter ou descendre. Si un arrêt est occupé, veuillez vous rendre à l'arrêt le plus proche sur l'itinéraire désigné. Attention: 10 minutes maximum de séjour."
     },
     "parking": {
-        "title": "Parking",
+        "title": "Stationnement",
         "description": "À ces endroits, les voitures de tourisme peuvent être garées. Cliquez ici pour les prix.",
-        "live": "Live status"
+        "live": "Statut en direct"
     },
     "routes": {
-        "menu_item": "Routes",
-        "title": "Routes",
-        "information": "Route information",
-        "information_description": "Designated and advised routes for touringcars. Be aware of clearance heights.",
-        "methods": "Methods",
+        "menu_item": "Itinéraires",
+        "title": "Itinéraires",
+        "information": "Informations sur l'itinéraire",
+        "information_description": "Itinéraires désignés et conseillés pour les voitures de tourisme. Soyez conscient des hauteurs de dégagement.",
+        "methods": "Méthodes",
         "pattern": "Modèle"
     },
     "downloads": {
