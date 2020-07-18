@@ -145,7 +145,8 @@
         "destination_traffic": "Destination traffic",
         "recommended_routes": "Recommended routes",
         "mandatory_routes": "Mandatory route (> 7,5t)",
-        "environmental_zone": "Environmental zone"
+        "environmental_zone": "Environmental zone",
+        "traffic": "Traffic"
     }
 
 }

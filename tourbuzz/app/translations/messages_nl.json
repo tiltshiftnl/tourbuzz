@@ -145,7 +145,8 @@
         "destination_traffic": "Bestemmingsverkeer",
         "recommended_routes": "Aanbevolen routes",
         "mandatory_routes": "Verplichte route (> 7,5t)",
-        "environmental_zone": "Milieuzone"
+        "environmental_zone": "Milieuzone",
+        "traffic": "Verkeer"
     }
 
 }

@@ -25,31 +25,31 @@ function toggleLayer (el) {
 
 function addLayer (layerId) {
     switch (layerId) {
-        case 'berichten':
+        case 'layer.messages':
             addBerichten(tbmap);
             break;
-        case 'haltes':
+        case 'layer.stops':
             addHaltes(tbmap);
             break;
-        case 'parkeren':
+        case 'layer.parking':
             addParkeren(tbmap);
             break;
-        case 'doorrijhoogtes':
+        case 'layer.clearance_height':
             addDoorrijhoogtes(tbmap);
             break;
-        case 'bestemmingsverkeer':
+        case 'layer.destination_traffic':
             addBestemmingsverkeer(tbmap);
             break;
-        case 'aanbevolenroutes':
+        case 'layer.recommended_routes':
             addAanbevolenroutes(tbmap);
             break;
-        case 'verplichteroutes':
+        case 'layer.mandatory_routes':
             addVerplichteroutes(tbmap);
             break;
-        case 'verkeersdrukte':
+        case 'layer.traffic':
             //addVerkeersdrukte(tbmap);
             break;
-        case 'milieuzone':
+        case 'layer.environmental_zone':
             addMilieuzone(tbmap);
             break;
         default:
@@ -63,15 +63,15 @@ function removeLayer (layerId) {
 }
 
 function removeAllLayers () {
-    removeLayer('berichten');
-    removeLayer('haltes');
-    removeLayer('parkeren');
-    removeLayer('doorrijhoogtes');
-    removeLayer('bestemmingsverkeer');
-    removeLayer('aanbevolenroutes');
-    removeLayer('verplichteroutes');
-    removeLayer('verkeersdrukte');
-    removeLayer('milieuzone');
+    removeLayer('layer.messages');
+    removeLayer('layer.stops');
+    removeLayer('layer.parking');
+    removeLayer('layer.clearance_height');
+    removeLayer('layer.destination_traffic');
+    removeLayer('layer.recommended_routes');
+    removeLayer('layer.mandatory_routes');
+    removeLayer('layer.traffic');
+    removeLayer('layer.environmental_zone');
 }
 
 //////////////////////
@@ -140,9 +140,9 @@ function addBerichten (targetMap) {
                     markerArray.push(L.marker([res.berichten[i].location_lat, res.berichten[i].location_lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
                 }
             }
-            mapLayers['berichten'] = L.featureGroup(markerArray).addTo(targetMap);
+            mapLayers['layer.messages'] = L.featureGroup(markerArray).addTo(targetMap);
             if(markerArray.length > 0){
-                targetMap.fitBounds(mapLayers['berichten'].getBounds(), {padding: [50,50]});
+                targetMap.fitBounds(mapLayers['layer.messages'].getBounds(), {padding: [50,50]});
             }
         });
 }
@@ -173,8 +173,8 @@ function addHaltes (targetMap) {
                 }
                 markerArray.push(L.marker([res.haltes[i].location.lat, res.haltes[i].location.lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
             }
-            mapLayers['haltes'] = L.featureGroup(markerArray).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['haltes'].getBounds());
+            mapLayers['layer.stops'] = L.featureGroup(markerArray).addTo(targetMap);
+            targetMap.fitBounds(mapLayers['layer.stops'].getBounds());
         });
 }
 
@@ -204,8 +204,8 @@ function addParkeren (targetMap) {
                 }
                 markerArray.push(L.marker([res.parkeerplaatsen[i].location.lat, res.parkeerplaatsen[i].location.lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
             }
-            mapLayers['parkeren'] = L.featureGroup(markerArray).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['parkeren'].getBounds());
+            mapLayers['layer.parking'] = L.featureGroup(markerArray).addTo(targetMap);
+            targetMap.fitBounds(mapLayers['layer.parking'].getBounds());
         });
 }
 
@@ -228,8 +228,8 @@ function addDoorrijhoogtes (targetMap) {
                 var locationJSON = JSON.parse(locationString);
                 markerArray.push(L.marker([locationJSON.coordinates[1], locationJSON.coordinates[0]], {icon: customIcon}).bindPopup(popupHTML));
             }
-            mapLayers['doorrijhoogtes'] = L.featureGroup(markerArray).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['doorrijhoogtes'].getBounds());
+            mapLayers['layer.clearance_height'] = L.featureGroup(markerArray).addTo(targetMap);
+            targetMap.fitBounds(mapLayers['layer.clearance_height'].getBounds());
         });
 }
 
@@ -244,8 +244,8 @@ function addBestemmingsverkeer (targetMap) {
                 color: '#FF9100'
             };
             var popupHTML = '<p>Bestemmingsverkeer</p>';
-            mapLayers['bestemmingsverkeer'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['bestemmingsverkeer'].getBounds());
+            mapLayers['layer.destination_traffic'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
+            targetMap.fitBounds(mapLayers['layer.destination_traffic'].getBounds());
         });
 }
 
@@ -260,8 +260,8 @@ function addAanbevolenroutes (targetMap) {
                 color: '#BED200'
             };
             var popupHTML = '<p>Aanbevolen route</p>';
-            mapLayers['aanbevolenroutes'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['aanbevolenroutes'].getBounds());
+            mapLayers['layer.recommended_routes'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
+            targetMap.fitBounds(mapLayers['layer.recommended_routes'].getBounds());
         });
 }
 
@@ -277,8 +277,8 @@ function addVerplichteroutes(targetMap) {
             };
 
             var popupHTML = '<p>Verplichte route</p>';
-            mapLayers['verplichteroutes'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['verplichteroutes'].getBounds());
+            mapLayers['layer.mandatory_routes'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
+            targetMap.fitBounds(mapLayers['layer.mandatory_routes'].getBounds());
         });
 }
 
@@ -298,8 +298,8 @@ function addMilieuzone (targetMap) {
                 fillOpacity: .2,
                 color: '#E50082',  //Outline color
             };
-            mapLayers['milieuzone'] = L.geoJSON(res, {style: styles} ).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['milieuzone'].getBounds());
+            mapLayers['layer.environmental_zone'] = L.geoJSON(res, {style: styles} ).addTo(targetMap);
+            targetMap.fitBounds(mapLayers['layer.environmental_zone'].getBounds());
         });
     return true;
 }
@@ -373,7 +373,7 @@ function navBerichten (el) {
     pageContentOrder.classList.remove('-reverse');
 
     var mapView = document.querySelector('[data-mapview]');
-    mapView.setAttribute('data-activate-layers', 'berichten');
+    mapView.setAttribute('data-activate-layers', 'layer.messages');
     updateMap(mapView);
 
     var infoPanel = document.querySelector('[data-infopanel]');
@@ -395,7 +395,7 @@ function navHaltesParkeren (el) {
     pageContentOrder.classList.add('-reverse');
 
     var mapView = document.querySelector('[data-mapview]');
-    mapView.setAttribute('data-activate-layers', 'haltes,parkeren');
+    mapView.setAttribute('data-activate-layers', 'layer.stops,layer.parking');
     updateMap(mapView);
 
     var infoPanel = document.querySelector('[data-infopanel]');
@@ -413,7 +413,7 @@ function navRoutes (el) {
     pageContentOrder.classList.add('-reverse');
 
     var mapView = document.querySelector('[data-mapview]');
-    mapView.setAttribute('data-activate-layers', 'doorrijhoogtes,aanbevolenroutes,verplichteroutes,bestemmingsverkeer');
+    mapView.setAttribute('data-activate-layers', 'ayer.clearance_height,layer.recommended_routes,layer.mandatory_routes,layer.destination_traffic');
     updateMap(mapView);
 
     var infoPanel = document.querySelector('[data-infopanel]');
