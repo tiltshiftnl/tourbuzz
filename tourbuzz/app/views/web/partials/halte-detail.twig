@@ -1,27 +1,18 @@
-<div class="halte-detail-body">
-    <div class="halte-detail-title-container">
-        <div class="park-detail-header">
-            <div class="halte-detail-nr">{{ record.haltenummer }}</div>
-            <h1 class="halte-detail-title">{{ record.straat }}</h1>
-        </div>
-        <div class="park-detail-spots">
-            <div class="park-detail-spots-badge {% if not record.beschikbaar %}-unavailable{% endif %}">
-                {% if record.beschikbaar %}
-                    {{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}
-                {% else %}
-                    {{ __('stops.unavailable') }}
-                {% endif %}
-            </div>
-        </div>
+<div class="card">
+    <div class="card-image">
+        <img src="" class="responsive-img" data-js-ready="loadPanoThumbnail" data-lat="{{ record.location.lat }}" data-lon="{{ record.location.lng }}">
+        <a class="btn-floating halfway-fab waves-effect waves-light blue"><i>{{ record.haltenummer }}</i></a>
     </div>
-    <div class="halte-detail-img-container">
-        <div class="halte-detail-img-frame">
-            <img src="" class="halte-detail-img" data-js-ready="loadPanoThumbnail" data-lat="{{ record.location.lat }}" data-lon="{{ record.location.lng }}">
-        </div>
-        <div class="halte-detail-info">
-            <p class="halte-detail-description">{{ record.locatie }}</p>
-        </div>
+    <div class="card-content">
+        <span class="card-title">{{ record.straat }}</span>
+        <p class="halte-detail-description">{{ record.locatie }}</p>          
+        <p>
+            {% if record.beschikbaar %}
+                <span class="green-text">{{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}</span>
+            {% else %}
+                <span class="grey-text">{{ __('stops.unavailable') }}</span>
+            {% endif %}
+        </p>
+            <a href="https://maps.google.com/?q={{ record.location.lat }},{{ record.location.lng }}" target="_blank" class="halte-detail-text-link">{{ __('stops.maps')}}</a>
     </div>
-    <hr class="halte-detail-hr">
-    <a href="https://maps.google.com/?q={{ record.location.lat }},{{ record.location.lng }}" target="_blank" class="halte-detail-text-link">{{ __('stops.maps')}}</a>
 </div>

@@ -1,22 +1,23 @@
-<section class="layers-legend" data-layers-legend>
-    <a href="#" class="layers-legend-header" data-js-click="toggleLayersLegend">
+<section class="layers-legend" style="background: #fff;" data-layers-legend>
+    {# <a href="#" class="layers-legend-header" data-js-click="toggleLayersLegend">
         <div class="layers-legend-title">
             <img src="/img/icons/layers.svg" class="layers-legend-view-icon">
             <h3 class="layers-legend-header-title-text">{{ __('application.legend') }}</h3>
         </div>
         <i class="layers-legend-arrow-icon"></i>
-    </a>
-    <div class="layers-legend-list">
+    </a> #}
+    <div class="layers-legend-list" style="display:none;">
+        <ul>
         {% for item in layer_list %}
-            <a href="#" class="layers-legend-toggle" data-js-click="toggleLayer" data-layer="{{ item.id }}">
-                <div class="layers-legend-box -{{ item.color }}">
-                    <img src="/img/icons/tick-w.svg" class="layers-legend-tick">
-                </div>
-                <span class="layers-legend-name">{{ __(item.id) }}</span>
-                {% if item.icon %}
-                    <span class="layers-legend-icon">{#<img src="{{ asset('img/markers/' ~ item.icon) }}">#}</span>
-                {% endif %}
-            </a>
+            <li>
+                <a href="#" class="layers-legend-toggle" data-js-click="toggleLayer" data-layer="{{ item.id }}">
+                    <label>
+                        <input type="checkbox" class="filled-in {{ item.color }}" checked="checked" />
+                        <span class="layers-legend-name">{{ __(item.id) }}</span>
+                    </label>
+                </a>
+            </li>
         {% endfor %}
+        </ul>
     </div>
 </section>

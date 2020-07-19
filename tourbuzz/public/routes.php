@@ -99,7 +99,7 @@ $app->get('/css/:path+', function ($filepath) {
         if (file_exists('scss/theme/theme.scss')) {
             exit($scssCompiler->compile("@import 'scss/themed.scss'"));
         } else {
-            exit($scssCompiler->compile("@import 'scss/web.scss'"));
+            exit($scssCompiler->compile("@import 'scss/index.scss'"));
         }
     } else {
         $filepath = implode("/", $filepath);

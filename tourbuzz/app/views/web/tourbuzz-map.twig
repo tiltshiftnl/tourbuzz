@@ -1,41 +1,46 @@
 {% extends 'base/base.web.twig' %}
 
 {% block main %}
-    <section class="tourbuzz-map" data-lang="{{ lang }}" data-day="/{{ Y|default(now|date("Y")) }}/{{ m|default(now|date("m")) }}/{{ d|default(now|date("d")) }}">
-        {% include 'web/partials/main-header.twig' %}
-        {% include 'web/partials/navigation-bar.twig' %}
-
-        <div class="tourbuzz-map-page-container" data-page-container>
-            <div class="tourbuzz-map-page-loading" data-page-loading>
-                {% include 'web/partials/loading-indicator.twig' %}
-            </div>
-            <div class="tourbuzz-map-page-content {% if panel_reverse_order %}-reverse{% endif %}" data-page-content-order>
-                <div class="tourbuzz-map-infopanel-container"
-                     data-infopanel
-                     data-js-ready="loadInfopanel"
-                     data-infopanel-url="{{ infopanel_url }}">
-                    <div class="tourbuzz-map-infopanel-loading -active" data-infopanel-loading>
-                        {% include 'web/partials/loading-indicator.twig' %}
-                    </div>
-                    <div data-infopanel-content></div>
+    {% include 'web/partials/main-header.twig' %}
+    <main id="content" role="main">
+    <div class="left-panel" style="z-index:1002;">
+        <div class="container">
+            <div class="row">
+                <div class="input-field col">
+                    <input type="text" id="location-from" class="autocomplete" placeholder="from" value=""/>
                 </div>
-                <div class="tourbuzz-map-mapview-container" data-mapview-container>
-                    <div class="tourbuzz-map-leaflet-zone">
-                        <div class="tourbuzz-map-leaflet-container"
-                              data-mapview
-                              data-js-ready="updateMap"
-                              data-activate-layers="{{ activatelayers }}"
-                              data-center-lat="{{ center_lat }}"
-                              data-center-lng="{{ center_lng }}"
-                              data-zoom="{{ zoom }}"
-                              data-embedded="{{ embedded|default(0) }}">
-                        </div>
-                        <div class="tourbuzz-map-container -layers-legend">
-                            {% include 'web/partials/layers-legend.twig' with layers_legend %}
-                        </div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="input-field col">
+                    <input type="text" id="location-to" class="autocomplete" placeholder="to" value=""/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col">
+                    <input id="message-date" type="text" class="datepicker" placeholder="date"/>
+                </div>
+            </div>
+            <div class="row">
+                <div id="infopanel col">
+                 {% include 'web/partials/message-overview.twig' %}
                 </div>
             </div>
         </div>
+    </div>
+        
+    <section class="tourbuzz-map" data-lang="{{ lang }}" data-day="/{{ Y|default(now|date("Y")) }}/{{ m|default(now|date("m")) }}/{{ d|default(now|date("d")) }}" data-page-content-order>
+        <div class="tourbuzz-map-leaflet-container"
+                data-js-ready="updateMap"
+                data-activate-layers="{{ activatelayers }}"
+                data-center-lat="{{ center_lat }}"
+                data-center-lng="{{ center_lng }}"
+                data-zoom="{{ zoom }}"
+                data-embedded="{{ embedded|default(0) }}" data-mapview>
+        </div>
     </section>
+
+    <div class="tourbuzz-map-container -layers-legend">
+                    {% include 'web/partials/layers-legend.twig' with layers_legend %}
+                </div>
+    </main>
 {% endblock %}

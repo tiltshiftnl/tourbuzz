@@ -7,6 +7,7 @@ services:
             - "80:80"
         environment:
           GOOGLEMAPS_API_KEY: "insecure"
+          MAPBOX_ACCESS_TOKEN: "pk.eyJ1IjoibWlsby10aWx0c2hpZnQiLCJhIjoiY2tidzBmZTF2MGI5dDJxdGJwcGh0NWQ3diJ9.m8DCKUbmhlsmp_IIBotRnw"
         volumes:
           - ./tourbuzz/public:/srv/web/tourbuzz/tourbuzz/public
           - ./tourbuzz/app/translations:/srv/web/tourbuzz/tourbuzz/app/translations

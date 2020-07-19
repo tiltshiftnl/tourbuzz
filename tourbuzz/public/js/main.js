@@ -1,77 +1,57 @@
-////////////
-// Legend //
-////////////
+// Globals
+var leafletMap;
+var leafletLayers = {};
+var leafletLayerControl;
 
-function toggleLayersLegend (el) {
-    var layersLegend = document.querySelector('[data-layers-legend]');
-    layersLegend.classList.toggle('-active');
-}
-
-function toggleLayer (el) {
-    var currentLayerId = el.getAttribute('data-layer');
-    if (el.classList.contains('-active')) {
-        el.classList.remove('-active');
-        removeLayer(currentLayerId);
-    } else {
-        el.classList.add('-active');
-        addLayer(currentLayerId);
-    }
-}
-
-
-//////////////////////
-// Layer activation //
-//////////////////////
-
-function addLayer (layerId) {
-    switch (layerId) {
-        case 'layer.messages':
-            addBerichten(tbmap);
-            break;
-        case 'layer.stops':
-            addHaltes(tbmap);
-            break;
-        case 'layer.parking':
-            addParkeren(tbmap);
-            break;
-        case 'layer.clearance_height':
-            addDoorrijhoogtes(tbmap);
-            break;
-        case 'layer.destination_traffic':
-            addBestemmingsverkeer(tbmap);
-            break;
-        case 'layer.recommended_routes':
-            addAanbevolenroutes(tbmap);
-            break;
-        case 'layer.mandatory_routes':
-            addVerplichteroutes(tbmap);
-            break;
-        case 'layer.traffic':
-            //addVerkeersdrukte(tbmap);
-            break;
-        case 'layer.environmental_zone':
-            addMilieuzone(tbmap);
-            break;
-        default:
-    }
-}
-
-function removeLayer (layerId) {
-    if (undefined !== mapLayers[layerId]) {
-        mapLayers[layerId].remove();
-    }
+function initLayers() {
+    // removeAllLayers();
+    Object.keys(layers).forEach(function(key){
+        console.log(key, layers[key]);
+        switch (key) {
+            case 'layer.messages':
+                addBerichten(layers[key]);
+                break;
+            case 'layer.stops':
+                addHaltes(layers[key]);
+                break;
+            case 'layer.parking':
+                addParkeren(layers[key]);
+                break;
+            case 'layer.clearance_height':
+                addDoorrijhoogtes(layers[key]);
+                break;
+            case 'layer.destination_traffic':
+                addBestemmingsverkeer(layers[key]);
+                break;
+            case 'layer.recommended_routes':
+                addAanbevolenroutes(layers[key]);
+                break;
+            case 'layer.mandatory_routes':
+                addVerplichteroutes(layers[key]);
+                break;
+            case 'layer.traffic':
+                //addVerkeersdrukte(tbmap);
+                break;
+            case 'layer.environmental_zone':
+                addMilieuzone(layers[key]);
+                break;
+            default:
+        }
+    });
+    
+    
 }
 
 function removeAllLayers () {
-    removeLayer('layer.messages');
-    removeLayer('layer.stops');
-    removeLayer('layer.parking');
-    removeLayer('layer.clearance_height');
-    removeLayer('layer.destination_traffic');
-    removeLayer('layer.recommended_routes');
-    removeLayer('layer.mandatory_routes');
-    removeLayer('layer.traffic');
-    removeLayer('layer.environmental_zone');
+    leafletLayerControl.removeLayer('layer.messages');
+    leafletLayerControl.removeLayer('layer.stops');
+    leafletLayerControl.removeLayer('layer.parking');
+    leafletLayerControl.removeLayer('layer.clearance_height');
+    leafletLayerControl.removeLayer('layer.destination_traffic');
+    leafletLayerControl.removeLayer('layer.recommended_routes');
+    leafletLayerControl.removeLayer('layer.mandatory_routes');
+    leafletLayerControl.removeLayer('layer.traffic');
+    leafletLayerControl.removeLayer('layer.environmental_zone');
 }
 
 //////////////////////
@@ -91,7 +71,7 @@ function getLocation(callback) {
 // Layer data //
 ////////////////
 
-function addCurrentLocation (targetMap) {
+function addCurrentLocation () {
     var lat = 52.3616339;
     var lon = 4.905583;
 
@@ -107,11 +87,12 @@ function addCurrentLocation (targetMap) {
 
         var popupHTML = '<p>U bent hier</p>';
 
-        L.marker([lat, lng], {icon: customIcon}).bindPopup(popupHTML).addTo(targetMap);
+        L.marker([lat, lng], {icon: customIcon}).bindPopup(popupHTML).addTo(leafletMap);
     });
 }
 
-function addBerichten (targetMap) {
+function addBerichten (layer) {
+    console.log("addBerichten");
     var dayEl = document.querySelector('[data-day]');
     var day = dayEl.getAttribute('data-day');
     var mapviewEl = document.querySelector('[data-mapview]');
@@ -140,14 +121,16 @@ function addBerichten (targetMap) {
                     markerArray.push(L.marker([res.berichten[i].location_lat, res.berichten[i].location_lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
                 }
             }
-            mapLayers['layer.messages'] = L.featureGroup(markerArray).addTo(targetMap);
-            if(markerArray.length > 0){
-                targetMap.fitBounds(mapLayers['layer.messages'].getBounds(), {padding: [50,50]});
+            leafletLayers[layer.id] = L.featureGroup(markerArray);
+            if (layer.visible){
+                leafletLayers[layer.id].addTo(leafletMap);
             }
+
+            leafletLayerControl.addOverlay(leafletLayers[layer.id], layer.name);
         });
 }
 
-function addHaltes (targetMap) {
+function addHaltes (layer) {
     var dataUrl = tourbuzz_api_base_uri + '/haltes';
     var mapviewEl = document.querySelector('[data-mapview]');
     var embedded = mapviewEl.getAttribute('data-embedded');
@@ -160,7 +143,7 @@ function addHaltes (targetMap) {
                     iconSize: [36, 39],
                     iconAnchor: [18, 39],
                     popupAnchor: [0, -40],
-                    className: 'custom-icon-halte',
+                    className: 'custom-icon-halte blue',
                     html: '<span>'+ res.haltes[i].haltenummer +'</span>'
                 });
                 popupHTML = "<h3 class='custom-marker-title'>" + res.haltes[i].haltenummer + " " + res.haltes[i].straat + "</h3>";
@@ -173,12 +156,18 @@ function addHaltes (targetMap) {
                 }
                 markerArray.push(L.marker([res.haltes[i].location.lat, res.haltes[i].location.lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
             }
-            mapLayers['layer.stops'] = L.featureGroup(markerArray).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['layer.stops'].getBounds());
+
+            leafletLayers[layer.id] = L.featureGroup(markerArray);
+            
+            if (layer.visible){
+                leafletLayers[layer.id].addTo(leafletMap);
+            }
+
+            leafletLayerControl.addOverlay(leafletLayers[layer.id], layer.name);
         });
 }
 
-function addParkeren (targetMap) {
+function addParkeren (layer) {
     var dataUrl = tourbuzz_api_base_uri + '/parkeerplaatsen';
     var mapviewEl = document.querySelector('[data-mapview]');
     var embedded = mapviewEl.getAttribute('data-embedded');
@@ -191,7 +180,7 @@ function addParkeren (targetMap) {
                     iconSize: [36, 39],
                     iconAnchor: [18, 39],
                     popupAnchor: [0, -40],
-                    className: 'custom-icon-parkeren',
+                    className: 'custom-icon-parkeren black',
                     html: '<span>'+ res.parkeerplaatsen[i].nummer +'</span>'
                 });
                 popupHTML = "<h3 class='custom-marker-title'>" + res.parkeerplaatsen[i].nummer + " " + res.parkeerplaatsen[i].naam + "</h3>";
@@ -204,12 +193,16 @@ function addParkeren (targetMap) {
                 }
                 markerArray.push(L.marker([res.parkeerplaatsen[i].location.lat, res.parkeerplaatsen[i].location.lng], {icon: customIcon}).bindPopup(popupHTML, {minWidth: 240, maxWidth: 240}));
             }
-            mapLayers['layer.parking'] = L.featureGroup(markerArray).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['layer.parking'].getBounds());
+            leafletLayers[layer.id] = L.featureGroup(markerArray);
+            
+            if (layer.visible){
+                leafletLayers[layer.id].addTo(leafletMap);
+            }
+            leafletLayerControl.addOverlay(leafletLayers[layer.id], layer.name);
         });
 }
 
-function addDoorrijhoogtes (targetMap) {
+function addDoorrijhoogtes (layer) {
     var dataUrl = 'https://open.data.amsterdam.nl/ivv/touringcar/max_doorrijhoogte.json';
     axios.get(dataUrl)
         .then(function (response) {
@@ -228,12 +221,17 @@ function addDoorrijhoogtes (targetMap) {
                 var locationJSON = JSON.parse(locationString);
                 markerArray.push(L.marker([locationJSON.coordinates[1], locationJSON.coordinates[0]], {icon: customIcon}).bindPopup(popupHTML));
             }
-            mapLayers['layer.clearance_height'] = L.featureGroup(markerArray).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['layer.clearance_height'].getBounds());
+            leafletLayers[layer.id] = L.featureGroup(markerArray);
+            
+            if (layer.visible){
+                leafletLayers[layer.id].addTo(leafletMap);
+            }
+
+            leafletLayerControl.addOverlay(leafletLayers[layer.id], layer.name);
         });
 }
 
-function addBestemmingsverkeer (targetMap) {
+function addBestemmingsverkeer (layer) {
     var dataUrl = tourbuzz_api_base_uri + '/routes/roadwork/geojson';
     axios.get(dataUrl)
         .then(function (response) {
@@ -243,13 +241,18 @@ function addBestemmingsverkeer (targetMap) {
                 opacity: 1,
                 color: '#FF9100'
             };
-            var popupHTML = '<p>Bestemmingsverkeer</p>';
-            mapLayers['layer.destination_traffic'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['layer.destination_traffic'].getBounds());
+            var popupHTML = '<p>' + layer.name + '</p>';
+            leafletLayers[layer.id] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML);
+            
+            if (layer.visible){
+                leafletLayers[layer.id].addTo(leafletMap);
+            }
+
+            leafletLayerControl.addOverlay(leafletLayers[layer.id], layer.name);
         });
 }
 
-function addAanbevolenroutes (targetMap) {
+function addAanbevolenroutes (layer) {
     var dataUrl = tourbuzz_api_base_uri + '/routes/recommended/geojson';
     axios.get(dataUrl)
         .then(function (response) {
@@ -259,13 +262,18 @@ function addAanbevolenroutes (targetMap) {
                 opacity: 1,
                 color: '#BED200'
             };
-            var popupHTML = '<p>Aanbevolen route</p>';
-            mapLayers['layer.recommended_routes'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['layer.recommended_routes'].getBounds());
+            var popupHTML = '<p>' + layer.name + '</p>';
+            leafletLayers[layer.id] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML);
+            
+            if (layer.visible){
+                leafletLayers[layer.id].addTo(leafletMap);
+            }
+
+            leafletLayerControl.addOverlay(leafletLayers[layer.id], layer.name);
         });
 }
 
-function addVerplichteroutes(targetMap) {
+function addVerplichteroutes(layer) {
     var dataUrl = tourbuzz_api_base_uri + '/routes/mandatory/geojson';
     axios.get(dataUrl)
         .then(function (response) {
@@ -276,17 +284,22 @@ function addVerplichteroutes(targetMap) {
                 color: '#00A03C'
             };
 
-            var popupHTML = '<p>Verplichte route</p>';
-            mapLayers['layer.mandatory_routes'] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['layer.mandatory_routes'].getBounds());
+            var popupHTML = '<p>' + layer.name + '</p>';
+            leafletLayers[layer.id] = L.geoJSON(res, {style: styles} ).bindPopup(popupHTML);
+            
+            if (layer.visible){
+                leafletLayers[layer.id].addTo(leafletMap);
+            }
+
+            leafletLayerControl.addOverlay(leafletLayers[layer.id], layer.name);
         });
 }
 
-function addVerkeersdrukte (targetMap) {
+function addVerkeersdrukte () {
     return true;
 }
 
-function addMilieuzone (targetMap) {
+function addMilieuzone (layer) {
     var dataUrl = 'https://api.data.amsterdam.nl/dcatd/datasets/ot28M5SZu0h9PA/purls/1';
     axios.get(dataUrl)
         .then(function (response) {
@@ -298,8 +311,12 @@ function addMilieuzone (targetMap) {
                 fillOpacity: .2,
                 color: '#E50082',  //Outline color
             };
-            mapLayers['layer.environmental_zone'] = L.geoJSON(res, {style: styles} ).addTo(targetMap);
-            targetMap.fitBounds(mapLayers['layer.environmental_zone'].getBounds());
+            leafletLayers[layer.id] = L.geoJSON(res, {style: styles} );
+            
+            if (layer.visible){
+                leafletLayers[layer.id].addTo(leafletMap);
+            }
+            leafletLayerControl.addOverlay(leafletLayers[layer.id], layer.name);
         });
     return true;
 }
@@ -310,20 +327,28 @@ function addMilieuzone (targetMap) {
 /////////
 
 function createMap (el, lat, lon, zoom) {
-    var newMap = L.map(el).setView([lat, lon], zoom);
-    newMap.zoomControl.setPosition('topright');
-    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=' + mapbox_access_token, {
+    leafletMap = L.map(el).setView([lat, lon], zoom);
+    leafletMap.zoomControl.setPosition('bottomright');
+    var mapboxstreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + mapbox_access_token, {
         tms: false,
         minZoom: 3,
         maxZoom: 18,
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(newMap);
-    return newMap;
+    }).addTo(leafletMap);
+    var mapboxgrayscale = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/{z}/{x}/{y}?access_token=' + mapbox_access_token, {
+        tms: false,
+        minZoom: 3,
+        maxZoom: 18,
+        attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    leafletLayerControl = L.control.layers({"Streets": mapboxstreets, "Grayscale": mapboxgrayscale}).addTo(leafletMap);
+    leafletLayerControl.setPosition('bottomright');
 }
 
 function repositionMap (lat, lng) {
     var markerBounds = L.latLngBounds( [ lat, lng ]);
-    tbmap.fitBounds(markerBounds);
+    leafletMap.fitBounds(markerBounds);
 }
 
 function updateMap (el) {
@@ -332,30 +357,18 @@ function updateMap (el) {
     var centerLng = el.getAttribute('data-center-lng');
     var zoom = el.getAttribute('data-zoom');
 
-    if (!tbmap) {
-        tbmap = createMap(el, centerLat, centerLng, zoom);
-        //tbmap.scrollWheelZoom.disable();
-        //addCurrentLocation(tbmap);
+    if (!leafletMap) {
+        createMap(el, centerLat, centerLng, zoom);
     }
 
     var activateLayersString = el.getAttribute('data-activate-layers');
-
     if ( activateLayersString ) {
         var activateLayers = activateLayersString.split(",");
-
-        //mapLayers = []; // reset all layers
-        var layers = document.querySelectorAll('[data-layer]');
-        for (var i = 0; i < layers.length; i++) {
-            currentLayerId = layers[i].getAttribute('data-layer');
-            if (activateLayers.indexOf(currentLayerId) !== -1) {
-                layers[i].classList.add('-active');
-                addLayer(currentLayerId);
-            } else {
-                layers[i].classList.remove('-active');
-                removeLayer(currentLayerId);
-            }
+        for (var i = 0; i < activateLayers.length; i++) {
+            layers[activateLayers[i]].visible = true;
         }
     }
+    initLayers();
 }
 
 
@@ -364,9 +377,10 @@ function updateMap (el) {
 /////////////////////
 
 function navBerichten (el) {
-    var currentNav = document.querySelector('[data-navigation-bar] .-active');
-    currentNav.classList.remove('-active');
-    el.classList.add('-active');
+    console.log("navBerichten");
+    var currentNav = document.querySelector('[data-navigation-bar] .active');
+    currentNav.classList.remove('active');
+    el.classList.add('active');
     history.pushState(null, 'Berichten', '/');
 
     var pageContentOrder = document.querySelector('[data-page-content-order]');
@@ -386,16 +400,15 @@ function navBerichten (el) {
 }
 
 function navHaltesParkeren (el) {
-    var currentNav = document.querySelector('[data-navigation-bar] .-active');
-    currentNav.classList.remove('-active');
-    el.classList.add('-active');
+    console.log("navHaltesParkeren")
+    var currentNav = document.querySelector('[data-navigation-bar] .active');
+    currentNav.classList.remove('active');
+    el.classList.add('active');
     history.pushState(null, 'Haltes & Parkeren', '/haltes-parkeerplaatsen');
-
-    var pageContentOrder = document.querySelector('[data-page-content-order]');
-    pageContentOrder.classList.add('-reverse');
 
     var mapView = document.querySelector('[data-mapview]');
     mapView.setAttribute('data-activate-layers', 'layer.stops,layer.parking');
+    console.log(mapView);
     updateMap(mapView);
 
     var infoPanel = document.querySelector('[data-infopanel]');
@@ -404,56 +417,21 @@ function navHaltesParkeren (el) {
 }
 
 function navRoutes (el) {
-    var currentNav = document.querySelector('[data-navigation-bar] .-active');
-    currentNav.classList.remove('-active');
-    el.classList.add('-active');
+    var currentNav = document.querySelector('[data-navigation-bar] .active');
+    currentNav.classList.remove('active');
+    el.classList.add('active');
     history.pushState(null, 'Route informatie', '/routes');
 
     var pageContentOrder = document.querySelector('[data-page-content-order]');
     pageContentOrder.classList.add('-reverse');
 
     var mapView = document.querySelector('[data-mapview]');
-    mapView.setAttribute('data-activate-layers', 'ayer.clearance_height,layer.recommended_routes,layer.mandatory_routes,layer.destination_traffic');
+    mapView.setAttribute('data-activate-layers', 'layer.clearance_height,layer.recommended_routes,layer.mandatory_routes,layer.destination_traffic');
     updateMap(mapView);
 
     var infoPanel = document.querySelector('[data-infopanel]');
     infoPanel.setAttribute('data-infopanel-url', '/routes?partial=panel&lang=' + language);
     loadInfopanel(infoPanel);
-}
-
-/////////////////
-// Date picker //
-/////////////////
-
-// Date picker Input
-function datePickerInput (el) {
-    var datePickerInput = el;
-    var datePicker = document.querySelector('[data-date-picker]');
-    var calendarUrl = el.getAttribute('data-calendar-url');
-    var calendarContainer = document.querySelector('[data-calendar-container]');
-    datePicker.classList.toggle('-active');
-
-    axios.get(calendarUrl)
-        .then(function (response) {
-            var htmlString = response.data;
-            calendarContainer.innerHTML = htmlString;
-            var calendarLoading = document.querySelector('[data-loading-calendar-block]');
-            calendarLoading.parentNode.removeChild(calendarLoading);
-        });
-}
-
-// Month select
-function monthSelect (el) {
-    var calendarUrl = el.getAttribute('data-month');
-    var calendarContainer = document.querySelector('[data-calendar-container]');
-
-    axios.get(calendarUrl)
-        .then(function (response) {
-            var htmlString = response.data;
-            calendarContainer.innerHTML = htmlString;
-            var calendarLoading = document.querySelector('[data-loading-calendar-block]');
-            calendarLoading.parentNode.removeChild(calendarLoading);
-        });
 }
 
 ////////////////
@@ -466,13 +444,13 @@ function loadInfopanel (el) {
     contentContainer.innerHTML = '';
 
     var loading = document.querySelector('[data-infopanel-loading]');
-    loading.classList.add('-active');
+    loading.classList.add('active');
 
     axios.get(dataUrl)
         .then(function (response) {
             res = response.data;
             var loading = document.querySelector('[data-infopanel-loading]');
-            loading.classList.remove('-active');
+            loading.classList.remove('active');
             var contentContainer =  document.querySelector('[data-infopanel-content]');
             contentContainer.innerHTML = res;
 
@@ -532,7 +510,7 @@ function loadPanoThumbnail (el) {
 
 function toggleLanguageSwitch (el) {
     var langSwitch = document.querySelector('[data-lang-switch]');
-    langSwitch.classList.toggle('-active');
+    langSwitch.classList.toggle('active');
 }
 
 /////////////////////////////////////
@@ -563,9 +541,6 @@ function loadAvailability (el) {
 // Run //
 //////////
 
-var tbmap = false; // Tourbuzz map
-var mapLayers = {};
-
 function run () {
 
     // Catch all clicks
@@ -580,6 +555,18 @@ function run () {
 
     // DOM ready
     document.addEventListener('DOMContentLoaded', function(e) {
+        var options = {
+            defaultDate: new Date(),
+            setDefaultDate: true
+        };
+
+        var dropdowns = document.querySelectorAll('.dropdown-trigger');
+        var modals = document.querySelectorAll('.modal');
+        var datepickers = document.querySelector('.datepicker');
+        var datepicker = M.Datepicker.init(datepickers, options);
+        datepicker.setDate(new Date());
+        M.Dropdown.init(dropdowns, {});
+        M.Modal.init(modals, {});
         var hooks = document.querySelectorAll('[data-js-ready]');
         for(i = 0; i < hooks.length; i++) {
             controller = hooks[i].getAttribute('data-js-ready');

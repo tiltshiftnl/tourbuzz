@@ -1,36 +1,55 @@
-<section class="footer-block">
-    <div class="footer-block-main" data-js="test" data-test-value="15">
-        <div class="footer-block-wrapper">
-            <div class="footer-block-container">
-                <h3 class="footer-block-title">{{ __('about.title')}}</h3>
-                <p class="footer-block-text">{{ __('about.description')}}</p>
-                <p class="footer-block-text">{{ __('about.more')}}: <a href="{{ TOURINGCAR_URI_PROTOCOL }}{{ TOURINGCAR_URI }}" target="_blank" class="footer-block-text-link">{{ TOURINGCAR_URI }}</a></p>
+<div id="menu-modal" class="modal">
+    <div class="modal-content">
+    <div class="container" data-js="test" data-test-value="15">
+        <div class="row">
+            <div class="col m4">
+                <h6>{{ __('about.title')}}</h6>
+                <p>{{ __('about.description')}}</p>
+                <p>
+                    <span>{{ __('about.more')}}: </span>
+                    <a href="{{ TOURINGCAR_URI_PROTOCOL }}{{ TOURINGCAR_URI }}" target="_blank">{{ TOURINGCAR_URI }}</a>
+                </p>
             </div>
-            <div class="footer-block-container">
-                <h3 class="footer-block-title">{{ __('messages.title') }}</h3>
-                <a href="/berichtenservice" class="footer-block-link">{{ __('messages.message_service') }}</a>
-                <a href="/sms-aanmelden" class="footer-block-link">{{ __('messages.text_service') }}</a>
+            <div class="col m4">
+                <h6>{{ __('messages.title') }}</h6>
+                <ul>
+                    <li>
+                        <a href="/berichtenservice">{{ __('messages.message_service') }}</a>
+                    </li>
+                    <li>
+                        <a href="/sms-aanmelden">{{ __('messages.text_service') }}</a>
+                    </li>
+                </ul>
             </div>
-            <div class="footer-block-container">
-                <h3 class="footer-block-title">{{ __('downloads.title') }}</h3>
-                <a href="/poi" class="footer-block-link">{{ __('downloads.poi') }}</a>
-                <a href="/poi" class="footer-block-link">{{ __('downloads.csv') }}</a>
-                <a href="/ov2" class="footer-block-link">{{ __('downloads.ov2') }}</a>
-                <a href="/gpx" class="footer-block-link">{{ __('downloads.gpx') }}</a>
-            </div>
-            <div class="footer-block-container">
-                <h3 class="footer-block-title">{{ __('contact.title') }}</h3>
-                <p class="footer-block-text">{{ __('contact.description') }} <a href="mailto:{{ TOURINGCAR_CONTACT_EMAIL }}" class="footer-block-text-link">{{ TOURINGCAR_CONTACT_EMAIL }}</a></p>
+            <div class="col m4">
+                <h6>{{ __('downloads.title') }}</h6>
+                <ul>
+                    <li>
+                        <a href="/poi">{{ __('downloads.poi') }}</a>
+                    </li>
+                    <li>
+                        <a href="/poi">{{ __('downloads.csv') }}</a>
+                    </li>
+                    <li>
+                        <a href="/ov2">{{ __('downloads.ov2') }}</a>
+                    </li>
+                    <li>
+                        <a href="/gpx">{{ __('downloads.gpx') }}</a>
+                    </li>
+                <ul>
             </div>
         </div>
     </div>
-    {#<div class="footer-block-sub">
-        <div class="footer-block-wrapper">
-            <div class="footer-block-container-sub">
-                <a href="#" class="footer-block-sub-link"><img src="/img/icons/chevron-right.svg" class="footer-block-arrow">Over Tourbuzz</a>
-                <a href="#" class="footer-block-sub-link"><img src="/img/icons/chevron-right.svg" class="footer-block-arrow">Privacy</a>
-                <a href="#" class="footer-block-sub-link"><img src="/img/icons/chevron-right.svg" class="footer-block-arrow">Cookies</a>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col m6">© 2020 TiltShift</div>
+                <div class="col m6">
+                    <span>{{ __('contact.description') }} </span>
+                    <a href="mailto:{{ TOURINGCAR_CONTACT_EMAIL }}">{{ TOURINGCAR_CONTACT_EMAIL }}</a>
+                </div>
             </div>
         </div>
-    </div>#}
-</section>
+    </div>
+    </div>
+</div>

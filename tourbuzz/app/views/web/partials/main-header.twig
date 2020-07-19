@@ -1,10 +1,57 @@
-<section class="main-header">
-    <a href="/" class="main-header-logo-link">
-        <img src="/img/icons/{{ __('application.logo.img') }}" class="main-header-logo-img">
-        <span class="main-header-logo-text">{{ __('application.logo.text') }}</span>
-    </a>
-    <h1 class="main-header-title"><a href="/">{{ __('application.title')}}</a></h1>
-    <div class="main-header-include -lang-switch">
-        {% include 'web/partials/lang-switch.twig' %}
+<header class="app-header is-sticky">
+  <nav class="nav-extended">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">{{ __('application.title')}}</a>
+      <ul id="nav-mobile" class="right" data-navigation-bar>
+        <li>
+          <a class="dropdown-trigger" href="#" data-target="lang-dropdown">
+            <i class="material-icons left">language</i>
+            {% if lang == 'nl' %}
+                <span>NL</span>
+            {% elseif lang == 'en' %}
+                <span>EN</span>
+            {% elseif lang == 'de' %}
+                <span>DE</span>
+            {% elseif lang == 'es' %}
+                <span>ES</span>
+            {% elseif lang == 'fr' %}
+                <span>FR</span>
+            {% endif %}
+          </a>
+          <ul id='lang-dropdown' class='dropdown-content'>
+            {% if lang != 'nl' %}
+                <li><a href="?lang=nl" class="lang-switch-toggle">
+                    Nederlands
+                </a></li>
+            {% endif %}
+            {% if lang != 'en' %}
+                <li><a href="?lang=en" class="lang-switch-toggle">
+                    English
+                </a></li>
+            {% endif %}
+            {% if lang != 'de' %}
+                <li><a href="?lang=de" class="lang-switch-toggle">
+                    Deutsch
+                </a></li>
+            {% endif %}
+            {% if lang != 'es' %}
+                <li><a href="?lang=es" class="lang-switch-toggle">
+                    Español
+                </a></li>
+            {% endif %}
+            {% if lang != 'fr' %}
+                <li><a href="?lang=fr" class="lang-switch-toggle">
+                    Français
+                </a></li>
+            {% endif %}
+          </ul>
+        </li>
+        <li>
+            <a href="#menu-modal" class="modal-trigger">
+                <i class="material-icons left">more_vert</i><!--{{ __('application.menu') }}-->
+            </a>
+        </li>
+      </ul>
     </div>
-</section>
+  </nav>
+</header>

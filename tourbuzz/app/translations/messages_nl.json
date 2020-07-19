@@ -10,7 +10,8 @@
         "description": "Dagelijks het belangrijkste touringcarnieuws uit Amsterdam.",
         "styleguide": "Styleguide",
         "long_text": "Lange tekst.",
-        "legend": "Legenda"
+        "legend": "Legenda",
+        "menu": "Menu"
     },
     "home": "Home",
     "updated": "Laatste wijziging",

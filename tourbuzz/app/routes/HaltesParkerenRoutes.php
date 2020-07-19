@@ -35,7 +35,7 @@ $app->get('/haltes-parkeerplaatsen', function () use ($app, $analytics) {
         "date_picker" => [],
         "layers_legend" => getData('layer_list.json'),
         "infopanel_url" => "/haltes-parkeerplaatsen?partial=panel&lang=". $_SESSION['lang'],
-        "activatelayers" => "haltes,parkeren",
+        "activatelayers" => "layer.stops,layer.parking",
         "panel_reverse_order" => true,
         "template" => "web/tourbuzz-map.twig"
     ];
@@ -82,7 +82,7 @@ $app->get('/haltes/:slug', function ($slug) use ($app, $analytics) {
         "apikey" => getenv('GOOGLEMAPS_API_KEY'),
         "layers_legend" => getData('layer_list.json'),
         "infopanel_url" => "/haltes/{$slug}?partial=panel&lang=" . $_SESSION['lang'],
-        "activatelayers" => "haltes,parkeren",
+        "activatelayers" => "layers.stop,layers.parking",
         "template" => "web/tourbuzz-map.twig",
     ];
 
@@ -127,7 +127,7 @@ $app->get('/parkeerplaatsen/:slug', function ($slug) use ($app, $analytics) {
         "analytics" => $analytics,
         "layers_legend" => getData('layer_list.json'),
         "infopanel_url" => "/parkeerplaatsen/{$slug}?partial=panel&lang=" . $_SESSION['lang'],
-        "activatelayers" => "haltes,parkeren",
+        "activatelayers" => "layers.stops,layers.parking",
         "template" => "web/tourbuzz-map.twig",
     ];
 

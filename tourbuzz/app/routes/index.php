@@ -80,7 +80,7 @@ $app->get('/:y/:m/:d', function ($y, $m, $d) use ($app, $analytics, $image_api) 
         "date_picker" => [],
         "layers_legend" => getData('layer_list.json'),
         "infopanel_url" => "/{$y}/{$m}/{$d}?partial=panel&lang=" . $_SESSION['lang'],
-        "activatelayers" => "berichten",
+        "activatelayers" => "layer.messages",
         "center_lat" => 52.372981,
         "center_lng" => 4.901327,
         "zoom" => 16,
@@ -307,7 +307,7 @@ $app->get('/routes', function () use ($app, $analytics, $image_api) {
         "date_picker" => [],
         "layers_legend" => getData('layer_list.json'),
         "infopanel_url" => "/routes?partial=panel&lang=" . $_SESSION['lang'],
-        "activatelayers" => "doorrijhoogtes,aanbevolenroutes,verplichteroutes,bestemmingsverkeer",
+        "activatelayers" => "layer.clearance_height,layer.recommended_routes,layer.mandatory_routes,layer.destination_traffic",
         "panel_reverse_order" => true,
         "template" => "web/tourbuzz-map.twig"
     ];

@@ -1,4 +1,34 @@
-<section class="haltes-parkeren">
+<div class="collection stops-list">
+    {% for record in haltes %}
+        <a href="/haltes/{{ record.haltenummer }}" class="collection-item avatar">
+            <i class="circle blue">{{ record.haltenummer }}</i>
+            <p class="black-text">{{ record.straat }}</p>
+            <p>
+                {% if record.beschikbaar %}
+                    <span class="green-text">{{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}</span>
+                {% else %}
+                    <span class="grey-text">{{ __('stops.unavailable') }}</span>
+                {% endif %}
+            </p>
+        </a>
+    {% endfor %}
+    {% for record in parkeerplaatsen %}
+        <a href="/parkeerplaatsen/{{ record.nummer }}" class="collection-item avatar">
+            <i class="circle black">{{ record.nummer }}</i>
+            <p class="black-text">{{ record.naam }}</p>
+            <p>
+                {% if record.beschikbaar %}
+                    <span class="green-text">{{ record.capaciteit }}&nbsp;{{ __('stops.spots') }}</span>
+                {% else %}
+                    <span class="grey-text">{{ __('stops.unavailable') }}</span>
+                {% endif %}
+            </p>
+        </a>
+    {% endfor %}
+</div>
+           
+
+<!--<section class="haltes-parkeren">
 
     <div class="haltes-parkeren-list">
         <h3 class="haltes-parkeren-title">{{ __('stops.title') }}</h3>
@@ -44,4 +74,4 @@
         {% endfor %}
     </div>
 
-</section>
+</section>-->

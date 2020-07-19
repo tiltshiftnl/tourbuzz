@@ -10,7 +10,8 @@
         "description": "Daily news for touringcar operators.",
         "styleguide": "Styleguide",
         "long_text": "Long text.",
-        "legend": "Legend"
+        "legend": "Legend",
+        "menu": "Menu"
     },
     "home": "Home",
     "updated": "Latest update",

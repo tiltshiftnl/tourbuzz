@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+// Color
+@import "materialize/materialize";
+@import "variables";
+@import "mixins";
+@import "map.scss";
+
+.app-header.is-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+main {
+    margin-top: 64px;
+    display: block;
+    width: 100%;
+}
+.left-panel {
+    padding: 0 1em 1em;
+    display: flex;
+    position: static;
+    width: 300px;
+}
+
+.tourbuzz-map {
+    position: fixed;
+    top: 64px;
+    left: 300px;
+    width: auto;
+    right: 0; 
+}
+
+.tourbuzz-map-leaflet-container {
+    width: 100%;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    height: calc(100vh - 64px);
+}
