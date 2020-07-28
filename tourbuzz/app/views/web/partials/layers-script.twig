@@ -1,9 +1,0 @@
-var layers = {
-{% for item in layer_list %}
-    {% if loop.last %}
-    "{{ item.id}}": {"name": "{{ __(item.id) }}","id": "{{ item.id }}","visible": false}
-    {% else %}
-    "{{ item.id }}": {"name": "{{ __(item.id) }}","id": "{{ item.id }}","visible": false},
-    {% endif %}
-{% endfor %}
-};
